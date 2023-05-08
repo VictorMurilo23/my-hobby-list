@@ -1,0 +1,25 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-AccessingDataMysqlApplication<my-hobby-list-backend>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.example.accessingdatamysql.AccessingDataMysqlApplication",
+      "projectName": "my-hobby-list-backend",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env",
+      "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=44575 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=my-hobby-list-backend"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-MyHobbyListBackendApplication<my-hobby-list-backend>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.myhobbylistlmtd.springboot.MyHobbyListBackendApplication",
+      "projectName": "my-hobby-list-backend",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
