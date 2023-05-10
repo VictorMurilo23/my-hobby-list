@@ -22,6 +22,8 @@ public class Users {
   @Column(name="password", length=100, nullable=false)
   private String password;
 
+  public Users(){}
+
   public Users(String username, String email, String password) {
     this.username = username;
     this.email = email;
