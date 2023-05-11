@@ -1,4 +1,4 @@
-package com.myhobbylistlmtd.springboot.Users;
+package com.myhobbylistlmtd.springboot.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,9 +11,9 @@ import com.myhobbylistlmtd.springboot.RequestBodys.RequestLoginBody;
 import com.myhobbylistlmtd.springboot.ResponseBodys.ResponseLoginBody;
 
 @RestController
-public class UsersController {
+public class UserController {
   @Autowired
-  private UsersService service;
+  private UserService service;
 
   @GetMapping("/login")
   ResponseLoginBody validateLogin(@RequestBody RequestLoginBody body) {

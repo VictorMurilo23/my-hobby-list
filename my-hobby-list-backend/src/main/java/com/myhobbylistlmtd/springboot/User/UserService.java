@@ -1,4 +1,4 @@
-package com.myhobbylistlmtd.springboot.Users;
+package com.myhobbylistlmtd.springboot.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,12 +6,12 @@ import org.springframework.stereotype.Service;
 import com.myhobbylistlmtd.springboot.Exceptions.InvalidLoginException;
 
 @Service
-public class UsersService {
+public class UserService {
   @Autowired
-  private UsersRepository repository;
+  private UserRepository repository;
 
   public String validateLogin(String email, String password) throws InvalidLoginException {
-    Users currentUser = repository.findByEmail(email);
+    User currentUser = repository.findByEmail(email);
     if (currentUser == null || !password.equals(currentUser.getPassword())) {
       throw new InvalidLoginException("Senha ou email incorretos");
     }
