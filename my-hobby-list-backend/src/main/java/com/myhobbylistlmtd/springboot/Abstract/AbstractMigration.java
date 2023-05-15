@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 // import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * Abstração de uma migration.
+ * Abstração de uma migration, uma forma de popular o DB.
  * @param <T> Deve receber um repository que irá ser utilizado para popular
  * o banco de dados.
  */
