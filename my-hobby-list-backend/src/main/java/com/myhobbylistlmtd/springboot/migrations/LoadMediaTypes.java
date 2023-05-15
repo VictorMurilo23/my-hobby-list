@@ -8,8 +8,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 import com.myhobbylistlmtd.springboot.abc.AbstractMigration;
-import com.myhobbylistlmtd.springboot.media.mediatype.MediaType;
-import com.myhobbylistlmtd.springboot.media.mediatype.MediaTypeRepository;
+import com.myhobbylistlmtd.springboot.media.type.MediaType;
+import com.myhobbylistlmtd.springboot.media.type.MediaTypeRepository;
 
 @Configuration
 public class LoadMediaTypes extends AbstractMigration<MediaTypeRepository> {

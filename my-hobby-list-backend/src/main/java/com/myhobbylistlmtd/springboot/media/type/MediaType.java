@@ -1,4 +1,4 @@
-package com.myhobbylistlmtd.springboot.media.mediatype;
+package com.myhobbylistlmtd.springboot.media.type;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
