@@ -1,4 +1,4 @@
-package com.myhobbylistlmtd.springboot.Exceptions;
+package com.myhobbylistlmtd.springboot.exceptions;
 
 public class InvalidLoginException extends RuntimeException {
   /**.

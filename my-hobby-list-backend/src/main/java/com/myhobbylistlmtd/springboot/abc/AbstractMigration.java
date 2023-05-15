@@ -1,8 +1,7 @@
-package com.myhobbylistlmtd.springboot.Abstract;
+package com.myhobbylistlmtd.springboot.abc;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
-// import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * Abstração de uma migration, uma forma de popular o DB.

@@ -5,4 +5,4 @@
 * @author Victor Murilo
 * @version 1.0
 */
-package com.myhobbylistlmtd.springboot.Exceptions;
+package com.myhobbylistlmtd.springboot.exceptions;
