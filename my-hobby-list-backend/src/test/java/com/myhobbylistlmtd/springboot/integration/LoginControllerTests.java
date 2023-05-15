@@ -16,7 +16,7 @@ import com.myhobbylistlmtd.springboot.utils.LoginTestConfiguration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myhobbylistlmtd.springboot.MyHobbyListBackendApplication;
-import com.myhobbylistlmtd.springboot.RequestBodys.RequestLoginBody;
+import com.myhobbylistlmtd.springboot.request.body.RequestLoginBody;
 
 import static org.junit.jupiter.api.Assertions.*;
 

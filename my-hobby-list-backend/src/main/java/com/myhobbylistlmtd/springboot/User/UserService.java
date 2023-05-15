@@ -3,7 +3,7 @@ package com.myhobbylistlmtd.springboot.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.myhobbylistlmtd.springboot.Exceptions.InvalidLoginException;
+import com.myhobbylistlmtd.springboot.exceptions.InvalidLoginException;
 
 @Service
 public class UserService {

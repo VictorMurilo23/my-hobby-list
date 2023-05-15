@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.myhobbylistlmtd.springboot.Exceptions.InvalidLoginException;
-import com.myhobbylistlmtd.springboot.RequestBodys.RequestLoginBody;
-import com.myhobbylistlmtd.springboot.ResponseBodys.ResponseLoginBody;
+import com.myhobbylistlmtd.springboot.exceptions.InvalidLoginException;
+import com.myhobbylistlmtd.springboot.request.body.RequestLoginBody;
+import com.myhobbylistlmtd.springboot.response.body.ResponseLoginBody;
 
 @RestController
 public final class UserController {
@@ -37,8 +37,10 @@ public final class UserController {
   @GetMapping("/login")
   ResponseLoginBody validateLogin(@RequestBody final RequestLoginBody body) {
     try {
-      String token = service.validateLogin(body.email, body.password);
-      return new ResponseLoginBody(token);
+      String token = service.validateLogin(body.getEmail(), body.getPassword());
+      ResponseLoginBody response = new ResponseLoginBody();
+      response.setToken(token);
+      return response;
     } catch (InvalidLoginException exc) {
       throw new ResponseStatusException(
         HttpStatus.UNAUTHORIZED, exc.getMessage()
