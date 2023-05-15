@@ -1,4 +1,4 @@
-package com.myhobbylistlmtd.springboot.RequestBodys;
+package com.myhobbylistlmtd.springboot.request.body;
 
 public class RequestLoginBody {
   public String email;
