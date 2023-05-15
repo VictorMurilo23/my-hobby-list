@@ -8,30 +8,77 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="media_type")
+@Table(name = "media_type")
 public class MediaType {
+  /** Length máxima permitida para o nome do tipo de midia.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  private static final int TYPE_LENGTH = 45;
+
+  /** Id gerado automaticamente.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
   @Id
-  @GeneratedValue(strategy=GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @Column(name="type", length=45, nullable=false, unique=true)
+  /** Coluna com o nome do tipo de
+  midia, pode ser jogo, livro, anime, manga etc.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @Column(name = "type", length = TYPE_LENGTH, nullable = false, unique = true)
   private String type;
 
-  public MediaType(){}
+  /** Default constructor.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  public MediaType() { }
 
-  public MediaType(String type) {
+  /** Objeto de tipo de midia.
+  * @param type Nome do tipo de midia.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  public MediaType(final String type) {
     this.type = type;
   }
 
-  public Long getId() {
+  /** Getter do atributo id.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  * @return Retorna o id do tipo de midia.
+  */
+  public final Long getId() {
     return id;
   }
 
-  public String getType() {
+  /** Getter do atributo type.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  * @return Retorna o nome do tipo da midia.
+  */
+  public final String getType() {
     return type;
   }
 
-  public void setType(String type) {
-    this.type = type;
+  /** Setter do atributo type.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  * @param mediaType Novo nome do tipo de midia.
+  */
+  public final void setType(final String mediaType) {
+    this.type = mediaType;
   }
 }
