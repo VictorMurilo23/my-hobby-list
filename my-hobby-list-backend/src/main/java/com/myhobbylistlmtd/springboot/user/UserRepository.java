@@ -1,4 +1,4 @@
-package com.myhobbylistlmtd.springboot.User;
+package com.myhobbylistlmtd.springboot.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

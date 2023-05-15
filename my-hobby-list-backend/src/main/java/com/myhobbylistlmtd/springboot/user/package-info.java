@@ -8,4 +8,4 @@
   * @author Victor Murilo
   * @version 1.0
 */
-package com.myhobbylistlmtd.springboot.User;
+package com.myhobbylistlmtd.springboot.user;

@@ -1,4 +1,4 @@
-package com.myhobbylistlmtd.springboot.User;
+package com.myhobbylistlmtd.springboot.user;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
