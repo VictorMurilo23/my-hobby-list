@@ -1,4 +1,4 @@
-package com.myhobbylistlmtd.springboot.Migrations;
+package com.myhobbylistlmtd.springboot.migrations;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,9 +7,9 @@ import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
-import com.myhobbylistlmtd.springboot.Abstract.AbstractMigration;
-import com.myhobbylistlmtd.springboot.MediaType.MediaType;
-import com.myhobbylistlmtd.springboot.MediaType.MediaTypeRepository;
+import com.myhobbylistlmtd.springboot.abc.AbstractMigration;
+import com.myhobbylistlmtd.springboot.media.mediatype.MediaType;
+import com.myhobbylistlmtd.springboot.media.mediatype.MediaTypeRepository;
 
 @Configuration
 public class LoadMediaTypes extends AbstractMigration<MediaTypeRepository> {

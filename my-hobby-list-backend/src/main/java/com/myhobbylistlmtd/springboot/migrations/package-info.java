@@ -7,4 +7,4 @@ ao iniciar a aplicação.
 * @version 1.0
 */
 
-package com.myhobbylistlmtd.springboot.Migrations;
+package com.myhobbylistlmtd.springboot.migrations;
