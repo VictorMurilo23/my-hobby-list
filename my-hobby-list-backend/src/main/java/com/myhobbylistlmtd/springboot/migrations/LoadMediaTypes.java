@@ -5,18 +5,23 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.myhobbylistlmtd.springboot.abc.AbstractMigration;
 import com.myhobbylistlmtd.springboot.media.type.MediaType;
 import com.myhobbylistlmtd.springboot.media.type.MediaTypeRepository;
 
 @Configuration
-public class LoadMediaTypes extends AbstractMigration<MediaTypeRepository> {
-  @Override
-  public final CommandLineRunner initDatabase(
+public class LoadMediaTypes {
+  /**
+   * Popula o banco com todos os tipos de midias.
+   * @param repository
+   * @return void
+   */
+  @Bean
+  public CommandLineRunner runLoadMediaTypes(
     final MediaTypeRepository repository
-  ) {
+    ) {
     return args -> {
       MediaType[] typesArray = {
         new MediaType("Jogo"),
