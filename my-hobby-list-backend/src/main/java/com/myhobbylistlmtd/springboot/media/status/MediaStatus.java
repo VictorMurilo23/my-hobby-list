@@ -1,10 +1,13 @@
 package com.myhobbylistlmtd.springboot.media.status;
 
+import com.myhobbylistlmtd.springboot.media.media.Media;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,6 +29,14 @@ public class MediaStatus {
   */
   @Column(name = "status_name", nullable = false)
   private String status;
+
+  /** Associação com tabela media.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @OneToOne(mappedBy = "status")
+  private Media media;
 
   /** Default constructor.
   * @since 1.0
