@@ -70,9 +70,9 @@ public class LoadMedia {
 
   /**
    * Popula o banco com todos os status de midias.
-   * @param statusRepo fafdw
-   * @param mediaRepo Teste
-   * @param typeRepo test
+   * @param statusRepo Repository de MediaStatus
+   * @param mediaRepo Repository de Media
+   * @param typeRepo Repository de MediaType
    * @return void
    */
   @Bean("runLoadMediaAndStatus")
