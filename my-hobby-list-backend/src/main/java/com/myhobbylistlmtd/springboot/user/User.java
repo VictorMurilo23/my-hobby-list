@@ -17,13 +17,6 @@ public class User {
   */
   private static final int USERNAME_LENGTH = 20;
 
-  /** Length máxima permitida para o email do usuário.
-  * @since 1.0
-  * @author Victor Murilo
-  * @version 1.0
-  */
-  private static final int EMAIL_LENGTH = 20;
-
   /** Length máxima permitida para a senha do usuário.
   * @since 1.0
   * @author Victor Murilo
@@ -46,7 +39,7 @@ public class User {
   * @version 1.0
   */
   @Column(
-    name = "username", length = USERNAME_LENGTH, nullable = false, unique = true
+    name = "username", length = USERNAME_LENGTH, nullable = false
   )
   private String username;
 
@@ -56,7 +49,7 @@ public class User {
   * @version 1.0
   */
   @Column(
-    name = "email", length = EMAIL_LENGTH, nullable = false, unique = true
+    name = "email", nullable = false
   )
   private String email;
 

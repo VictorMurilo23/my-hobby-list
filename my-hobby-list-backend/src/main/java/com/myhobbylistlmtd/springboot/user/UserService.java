@@ -3,7 +3,9 @@ package com.myhobbylistlmtd.springboot.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.myhobbylistlmtd.springboot.exceptions.AlreadyTakenException;
 import com.myhobbylistlmtd.springboot.exceptions.InvalidLoginException;
+import com.myhobbylistlmtd.springboot.request.body.RequestRegisterUserBody;
 
 @Service
 public class UserService {
@@ -18,6 +20,32 @@ public class UserService {
 
   /**
   * Repositório utilizado para fazer as interações com o banco de dados.
+  * @param body Body da requisição com atributo email e username
+  * @throws AlreadyTakenException Ocorre quando é passada
+  ou um email ou nome de usuário que já está sendo usado
+  * @since 1.0
+  * @version 1.0
+  * @author Victor Murilo
+  */
+  private void validateIfUserExists(
+    final RequestRegisterUserBody body
+  ) throws AlreadyTakenException {
+    User findEmail = this.repository.findByEmail(body.getEmail());
+    User findUsername = this.repository.findByUsername(body.getUsername());
+    if (findEmail != null) {
+      throw new AlreadyTakenException(
+        String.format("O email %s já está em uso.", body.getEmail())
+      );
+    }
+    if (findUsername != null) {
+      throw new AlreadyTakenException(
+        String.format("O nome %s já está em uso.", body.getUsername())
+      );
+    }
+  }
+
+  /**
+  * Valida o ato de Login.
   * @param email Email utilizado para buscar os dados do usuário
   no banco de dados.
   * @param password Senha utilizada para saber se é permitido o usuário
@@ -36,6 +64,30 @@ public class UserService {
     if (currentUser == null || !password.equals(currentUser.getPassword())) {
       throw new InvalidLoginException("Senha ou email incorretos");
     }
+    String token = "TBA";
+    return token;
+  }
+
+  /**
+  * Faz o registro de um usuário.
+  * @param body Contendo senha, nome de usuário e email.
+  no banco de dados.
+  fazer login com sucesso.
+  * @return Retorna um token com as informações do usuário
+  * @throws AlreadyTakenException Ocorre quando é passada
+  um email ou nome de usuário que já está sendo usado.
+  * @since 1.0
+  * @version 1.0
+  * @author Victor Murilo
+  */
+  public String registerUser(final RequestRegisterUserBody body) {
+    this.validateIfUserExists(body);
+
+    User userToBeInserted = new User(
+      body.getUsername(), body.getEmail(), body.getPassword()
+    );
+
+    repository.save(userToBeInserted);
     String token = "TBA";
     return token;
   }

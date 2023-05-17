@@ -1,6 +1,5 @@
 package com.myhobbylistlmtd.springboot.request.body;
 
-// TODO Usar essa classe quando for fazer o body de cadastro.
 public class RequestLoginBody {
   /** Atributo email do body.
   * @since 1.0

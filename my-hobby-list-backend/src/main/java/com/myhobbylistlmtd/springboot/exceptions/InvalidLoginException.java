@@ -2,7 +2,7 @@ package com.myhobbylistlmtd.springboot.exceptions;
 
 public class InvalidLoginException extends RuntimeException {
   /**.
-  * Recebe uma mensagem que irá ser exibida no response de erro
+  * Exceção lançada ao falhar em fazer Login, seja por senha ou email incorretos
   * @param message
   * @since 1.0
   * @version 1.0
