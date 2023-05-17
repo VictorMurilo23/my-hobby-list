@@ -4,11 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
-import com.myhobbylistlmtd.springboot.migrations.LoadMediaStatus;
-import com.myhobbylistlmtd.springboot.migrations.LoadMediaTypes;
+import com.myhobbylistlmtd.springboot.migrations.LoadMedia;
 
 @SpringBootApplication
-@Import({LoadMediaStatus.class, LoadMediaTypes.class})
+@Import({LoadMedia.class})
 public class MyHobbyListBackendApplication {
 
 	public static void main(String[] args) {

@@ -1,10 +1,13 @@
 package com.myhobbylistlmtd.springboot.media.type;
 
+import com.myhobbylistlmtd.springboot.media.media.Media;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -34,6 +37,14 @@ public class MediaType {
   */
   @Column(name = "type", length = TYPE_LENGTH, nullable = false, unique = true)
   private String type;
+
+  /** Associação com tabela media.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @OneToOne(mappedBy = "type")
+  private Media media;
 
   /** Default constructor.
   * @since 1.0
