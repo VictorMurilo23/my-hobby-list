@@ -39,7 +39,7 @@ public class User {
   * @version 1.0
   */
   @Column(
-    name = "username", length = USERNAME_LENGTH, nullable = false, unique = true
+    name = "username", length = USERNAME_LENGTH, nullable = false
   )
   private String username;
 
@@ -49,7 +49,7 @@ public class User {
   * @version 1.0
   */
   @Column(
-    name = "email", nullable = false, unique = true
+    name = "email", nullable = false
   )
   private String email;
 
