@@ -1,9 +1,12 @@
 package com.myhobbylistlmtd.springboot.user;
 
+import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myhobbylistlmtd.springboot.exceptions.AlreadyTakenException;
+import com.myhobbylistlmtd.springboot.exceptions.BadRequestException;
 import com.myhobbylistlmtd.springboot.exceptions.InvalidLoginException;
 import com.myhobbylistlmtd.springboot.request.body.RequestRegisterUserBody;
 
@@ -17,6 +20,16 @@ public class UserService {
   */
   @Autowired
   private UserRepository repository;
+
+
+  private void validateEmail(final String email) {
+    String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+    + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+    boolean validate = Pattern.compile(regexPattern).matcher(email).matches();
+    if (!validate) {
+      throw new BadRequestException("Insira um email com o formato válido!");
+    }
+  }
 
   /**
   * Repositório utilizado para fazer as interações com o banco de dados.
@@ -60,6 +73,7 @@ public class UserService {
   public String validateLogin(
     final String email, final String password
   ) throws InvalidLoginException {
+    this.validateEmail(email);
     User currentUser = repository.findByEmail(email);
     if (currentUser == null || !password.equals(currentUser.getPassword())) {
       throw new InvalidLoginException("Senha ou email incorretos");
@@ -81,6 +95,7 @@ public class UserService {
   * @author Victor Murilo
   */
   public String registerUser(final RequestRegisterUserBody body) {
+    this.validateEmail(body.getEmail());
     this.validateIfUserExists(body);
 
     User userToBeInserted = new User(
