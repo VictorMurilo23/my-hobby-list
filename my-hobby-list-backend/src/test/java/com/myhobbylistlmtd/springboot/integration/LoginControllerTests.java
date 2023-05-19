@@ -33,9 +33,27 @@ public class LoginControllerTests {
   private MockMvc mockMvc;
 
   @Test
+  public void throwsExceptionWhenInvalidEmailFormat() throws Exception {
+    RequestLoginBody body = new RequestLoginBody();
+    body.setEmail("emaildwadad.com");
+    body.setPassword("1224");
+    ObjectMapper objectMapper = new ObjectMapper();
+    String json = objectMapper.writeValueAsString(body);
+
+    ResultActions response = mockMvc.perform(get("/user/login")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(json));
+
+    response.andExpect(status().isBadRequest())
+        .andExpect(result -> assertEquals("Insira um email com o formato válido!",
+            result.getResolvedException().getMessage()))
+        .andExpect(result -> assertTrue(result.getResolvedException() instanceof RuntimeException));
+  }
+
+  @Test
   public void throwsExceptionWhenDoesntFoundEmailOnDb() throws Exception {
     RequestLoginBody body = new RequestLoginBody();
-    body.setEmail("email@.com");
+    body.setEmail("email@dwadad.com");
     body.setPassword("1224");
     ObjectMapper objectMapper = new ObjectMapper();
     String json = objectMapper.writeValueAsString(body);
@@ -45,7 +63,7 @@ public class LoginControllerTests {
         .content(json));
 
     response.andExpect(status().isUnauthorized())
-        .andExpect(result -> assertEquals("401 UNAUTHORIZED \"Senha ou email incorretos\"",
+        .andExpect(result -> assertEquals("Senha ou email incorretos",
             result.getResolvedException().getMessage()))
         .andExpect(result -> assertTrue(result.getResolvedException() instanceof RuntimeException));
   }
@@ -64,7 +82,7 @@ public class LoginControllerTests {
         .content(json));
 
     response.andExpect(status().isUnauthorized())
-        .andExpect(result -> assertEquals("401 UNAUTHORIZED \"Senha ou email incorretos\"",
+        .andExpect(result -> assertEquals("Senha ou email incorretos",
             result.getResolvedException().getMessage()))
         .andExpect(result -> assertTrue(result.getResolvedException() instanceof RuntimeException));
   }

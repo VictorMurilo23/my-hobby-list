@@ -31,9 +31,28 @@ public class RegisterControllerTests {
   private MockMvc mockMvc;
 
   @Test
+  public void registerInvalidEmailFormat() throws Exception {
+    RequestRegisterUserBody body = new RequestRegisterUserBody();
+    body.setEmail("emailte.com");
+    body.setUsername("Teste1");
+    body.setPassword("1224");
+    ObjectMapper objectMapper = new ObjectMapper();
+    String json = objectMapper.writeValueAsString(body);
+
+    ResultActions response = mockMvc.perform(post("/user/register")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(json));
+
+    response.andExpect(status().isBadRequest())
+        .andExpect(result -> assertEquals("Insira um email com o formato válido!",
+            result.getResolvedException().getMessage()))
+        .andExpect(result -> assertTrue(result.getResolvedException() instanceof RuntimeException));
+  }
+
+  @Test
   public void registerSucess() throws Exception {
     RequestRegisterUserBody body = new RequestRegisterUserBody();
-    body.setEmail("email@.com");
+    body.setEmail("email@teste.com");
     body.setUsername("Teste1");
     body.setPassword("1224");
     ObjectMapper objectMapper = new ObjectMapper();
@@ -51,7 +70,7 @@ public class RegisterControllerTests {
   @Test
   public void registerFailWhenEmailAlreadyInDB() throws Exception {
     RequestRegisterUserBody body = new RequestRegisterUserBody();
-    body.setEmail("email@.com");
+    body.setEmail("email@teste.com");
     body.setUsername("fawfa");
     body.setPassword("1224");
     ObjectMapper objectMapper = new ObjectMapper();
@@ -62,7 +81,7 @@ public class RegisterControllerTests {
         .content(json));
 
     response.andExpect(status().isConflict())
-        .andExpect(result -> assertEquals("409 CONFLICT \"O email email@.com já está em uso.\"",
+        .andExpect(result -> assertEquals("O email email@teste.com já está em uso.",
             result.getResolvedException().getMessage()))
         .andExpect(result -> assertTrue(result.getResolvedException() instanceof RuntimeException));
   }
@@ -81,7 +100,7 @@ public class RegisterControllerTests {
         .content(json));
 
     response.andExpect(status().isConflict())
-        .andExpect(result -> assertEquals("409 CONFLICT \"O nome Teste1 já está em uso.\"",
+        .andExpect(result -> assertEquals("O nome Teste1 já está em uso.",
             result.getResolvedException().getMessage()))
         .andExpect(result -> assertTrue(result.getResolvedException() instanceof RuntimeException));
   }
