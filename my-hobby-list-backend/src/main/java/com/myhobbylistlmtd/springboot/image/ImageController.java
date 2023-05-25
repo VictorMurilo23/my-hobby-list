@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.myhobbylistlmtd.springboot.exceptions.ImageNotFoundException;
+import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
 
 @RestController
 @RequestMapping(value = "/images")
@@ -29,7 +29,7 @@ public class ImageController {
    * Rota estática de imagens.
    * @param imageName Recebe um body contendo a senha, nome do usuário e o email
    * @return Uma imagem png ou jpg.
-   * @throws ImageNotFoundException Ocorre quando a imagem não é encontrada.
+   * @throws NotFoundException Ocorre quando a imagem não é encontrada.
    * @since 1.0
    * @version 1.0
    * @author Victor Murilo
@@ -37,14 +37,14 @@ public class ImageController {
   @GetMapping("{imageName}")
   public ResponseEntity<byte[]> getImage(
       @PathVariable("imageName") final String imageName)
-    throws ImageNotFoundException {
+    throws NotFoundException {
     byte[] image = new byte[0];
     try {
       image = FileUtils.readFileToByteArray(
         new File(imagePathRoot + imageName)
       );
     } catch (IOException e) {
-      throw new ImageNotFoundException("Imagem não encontrada");
+      throw new NotFoundException("Imagem não encontrada");
     }
     MediaType type = imageName.endsWith(".jpg")
     ? MediaType.IMAGE_JPEG : MediaType.IMAGE_PNG;
