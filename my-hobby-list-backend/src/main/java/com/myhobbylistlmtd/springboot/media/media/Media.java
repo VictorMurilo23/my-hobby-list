@@ -2,6 +2,7 @@ package com.myhobbylistlmtd.springboot.media.media;
 
 import com.myhobbylistlmtd.springboot.media.status.MediaStatus;
 import com.myhobbylistlmtd.springboot.media.type.MediaType;
+import com.myhobbylistlmtd.springboot.objs.MediaParams;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -50,6 +51,14 @@ public class Media {
   @Column(name = "volumes", nullable = true)
   private Integer volumes = null;
 
+  /** Coluna com a url da capa da media.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @Column(name = "image_url", nullable = false)
+  private String image;
+
   /** Chave estrangeira do id do status atual.
   * @since 1.0
   * @author Victor Murilo
@@ -76,47 +85,20 @@ public class Media {
   public Media() { }
 
   /** Cria uma nova midia.
-  * @param name Nome da midia
-  * @param length Duração da midia
-  * @param volumes Quantidade de volumes se a midia
-  for livro ou manga
-  * @param status Status da midia, relacionado a tabela media_status.
-  * @param type Tipo de midia, relacionado a tabela media_type
+  * @param params Um objeto contendo as informações de nome,
+  duração, quantidade de volumes, url da capa, tipo e status da media.
   * @since 1.0
   * @author Victor Murilo
   * @version 1.0
   */
-  public Media(
-    final String name, final Integer length,
-    final Integer volumes, final MediaStatus status, final MediaType type
-  ) {
-    this.name = name;
-    this.length = length;
-    this.volumes = volumes;
-    this.status = status;
-    this.type = type;
+  public Media(final MediaParams params) {
+    this.name = params.getName();
+    this.length = params.getLength();
+    this.volumes = params.getVolumes();
+    this.status = params.getStatus();
+    this.type = params.getType();
+    this.image = params.getImageUrl();
   }
-
-  /** Cria uma nova midia sem o parâmetro volumes.
-  * @param name Nome da midia
-  * @param length Duração da midia
-  for livro ou manga
-  * @param status Status da midia, relacionado a tabela media_status.
-  * @param type Tipo de midia, relacionado a tabela media_type
-  * @since 1.0
-  * @author Victor Murilo
-  * @version 1.0
-  */
-  public Media(
-    final String name, final Integer length,
-    final MediaStatus status, final MediaType type
-  ) {
-    this.name = name;
-    this.length = length;
-    this.status = status;
-    this.type = type;
-  }
-
 
   /** Getter do atributo id.
   * @return Retorna um id único da midia.
@@ -226,5 +208,25 @@ public class Media {
   */
   public void setType(final MediaType newType) {
     this.type = newType;
+  }
+
+  /** Getter do atributo image.
+  * @return Retorna a url da imagem da capa.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  public String getImage() {
+    return image;
+  }
+
+  /** Setter do atributo image.
+  * @param imageUrl Nova url da capa da media.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  public void setImage(final String imageUrl) {
+    this.image = imageUrl;
   }
 }
