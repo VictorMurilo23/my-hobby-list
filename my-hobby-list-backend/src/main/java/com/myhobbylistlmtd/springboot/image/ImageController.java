@@ -17,6 +17,7 @@ import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
 @RequestMapping(value = "/images")
 public class ImageController {
   // TODO Fazer duas rotas de imagens, uma de capas e outra pra personagens
+  // TODO Reaproveitar a função de pegar imagem na rota dos personagens
   /**
    * Caminho base para o diretório de imagens.
    * @since 1.0
@@ -24,6 +25,27 @@ public class ImageController {
    * @author Victor Murilo
    */
   private String imagePathRoot = "src/main/resources/images/";
+
+  /**
+   * Procura a imagem baseado no caminho passado por parâmetro e, se não achar, joga uma exceção.
+   * @param path Caminho utilizado na busca da imagem.
+   * @return Retorna a imagem em formato de bytes pronta para ser enviada
+   * @throws NotFoundException Ocorre quando a imagem não é encontrada e retorna um http 404.
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  private byte[] findImage(final String path) throws NotFoundException {
+    try {
+      byte[] image = new byte[0];
+      image = FileUtils.readFileToByteArray(
+        new File(path)
+      );
+      return image;
+    } catch (IOException e) {
+      throw new NotFoundException("Imagem não encontrada");
+    }
+  }
 
   /**
    * Rota estática de imagens.
@@ -34,18 +56,9 @@ public class ImageController {
    * @version 1.0
    * @author Victor Murilo
    */
-  @GetMapping("{imageName}")
-  public ResponseEntity<byte[]> getImage(
-      @PathVariable("imageName") final String imageName)
-    throws NotFoundException {
-    byte[] image = new byte[0];
-    try {
-      image = FileUtils.readFileToByteArray(
-        new File(imagePathRoot + imageName)
-      );
-    } catch (IOException e) {
-      throw new NotFoundException("Imagem não encontrada");
-    }
+  @GetMapping("/covers/{imageName}")
+  public ResponseEntity<byte[]> getCoverImage(@PathVariable("imageName") final String imageName) {
+    byte[] image = this.findImage(this.imagePathRoot + "covers/" + imageName);
     MediaType type = imageName.endsWith(".jpg")
     ? MediaType.IMAGE_JPEG : MediaType.IMAGE_PNG;
     return ResponseEntity.ok().contentType(type).body(image);
