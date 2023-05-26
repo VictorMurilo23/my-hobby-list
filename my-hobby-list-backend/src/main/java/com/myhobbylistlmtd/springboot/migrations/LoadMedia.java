@@ -89,38 +89,44 @@ public class LoadMedia {
                   .setVolumes(25)
                   .setStatus(statusRepo.findByStatus("Completo"))
                   .setType(typeRepo.findByType("Manga"))
-                  .setImageUrl("/gto-capa")),
+                  .setImageUrl("images/covers/gto-manga-capa.jpg")),
           new Media(
               new MediaParams("Final Fantasy Tactics: The War of the Lions")
                   .setLength(42)
                   .setStatus(statusRepo.findByStatus("Completo"))
                   .setType(typeRepo.findByType("Jogo"))
-                  .setImageUrl("/fft-twotl-capa")),
+                  .setImageUrl("images/covers/fft-twotl-capa.jpg")),
           new Media(
               new MediaParams("Neon Genesis Evangelion: The End of Evangelion")
                   .setLength(1)
                   .setStatus(statusRepo.findByStatus("Completo"))
                   .setType(typeRepo.findByType("Filme"))
-                  .setImageUrl("/the-end-of-evangelion-capa")),
+                  .setImageUrl("images/covers/the-end-of-evangelion-capa.jpg")),
           new Media(
               new MediaParams("Gyakkyou Burai Kaiji: Ultimate Survivor")
                   .setLength(26)
                   .setStatus(statusRepo.findByStatus("Completo"))
                   .setType(typeRepo.findByType("Anime"))
-                  .setImageUrl("/kaiji-1-temporada-anime-capa")),
+                  .setImageUrl(
+                    "images/covers/kaiji-1-temporada-anime-capa.jpg"
+                  )),
           new Media(
               new MediaParams("Breaking Bad - 1° Temporada")
                   .setLength(7)
                   .setStatus(statusRepo.findByStatus("Completo"))
                   .setType(typeRepo.findByType("Série"))
-                  .setImageUrl("/breaking-bad-1-temporada-capa")),
+                  .setImageUrl(
+                    "images/covers/breaking-bad-1-temporada-capa.jpg"
+                  )),
           new Media(
               new MediaParams("The Legendary Mechanic (Novel)")
                   .setLength(1463)
                   .setVolumes(15)
                   .setStatus(statusRepo.findByStatus("Completo"))
                   .setType(typeRepo.findByType("Livro"))
-                  .setImageUrl("/novel-the-legendary-mechanic-capa"))
+                  .setImageUrl(
+                    "images/covers/novel-the-legendary-mechanic-capa.jpg"
+                  ))
       };
       List<Media> mediaList = new ArrayList<>();
       Collections.addAll(mediaList, mediaArray);
