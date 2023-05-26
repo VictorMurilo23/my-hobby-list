@@ -5,6 +5,12 @@ import com.myhobbylistlmtd.springboot.media.type.MediaType;
 import com.myhobbylistlmtd.springboot.request.body.RequestMediaBody;
 
 public class MediaParams extends RequestMediaBody {
+  /** Duração da media, podem ser horas, capítulos ou episódios.
+  * @param mediaName Nome da media
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
   public MediaParams(final String mediaName) {
     setName(mediaName);
   }
@@ -57,6 +63,7 @@ public class MediaParams extends RequestMediaBody {
 
   /** Setter de length.
   * @param newLength Um int com a nova duração da media.
+  * @return Retorna o próprio objeto, assim é possível encadear vários setters
   * @since 1.0
   * @author Victor Murilo
   * @version 1.0
@@ -78,6 +85,7 @@ public class MediaParams extends RequestMediaBody {
 
   /** Setter de volumes.
   * @param volumesQuant Um int com a nova quantidade de volumes da media.
+  * @return Retorna o próprio objeto, assim é possível encadear vários setters
   * @since 1.0
   * @author Victor Murilo
   * @version 1.0
@@ -99,6 +107,7 @@ public class MediaParams extends RequestMediaBody {
 
   /** Setter de imageUrl.
   * @param newImageUrl Uma string com a nova url da capa da media.
+  * @return Retorna o próprio objeto, assim é possível encadear vários setters
   * @since 1.0
   * @author Victor Murilo
   * @version 1.0
@@ -120,6 +129,7 @@ public class MediaParams extends RequestMediaBody {
 
   /** Setter de status.
   * @param newStatus Um objeto com novas informações de MediaStatus.
+  * @return Retorna o próprio objeto, assim é possível encadear vários setters
   * @since 1.0
   * @author Victor Murilo
   * @version 1.0
@@ -141,6 +151,7 @@ public class MediaParams extends RequestMediaBody {
 
     /** Setter de Type.
   * @param newType Um objeto com novas informações de MediaType.
+  * @return Retorna o próprio objeto, assim é possível encadear vários setters
   * @since 1.0
   * @author Victor Murilo
   * @version 1.0

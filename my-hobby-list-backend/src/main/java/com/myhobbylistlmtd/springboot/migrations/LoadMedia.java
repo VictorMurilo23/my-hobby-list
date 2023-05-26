@@ -24,7 +24,6 @@ public class LoadMedia {
 
   /**
    * Popula o banco com todos os tipos de midias.
-   * 
    * @param repository
    * @return void
    */
@@ -50,7 +49,6 @@ public class LoadMedia {
 
   /**
    * Popula o banco com todos os status de midias.
-   * 
    * @param repository
    * @return void
    */
@@ -71,7 +69,6 @@ public class LoadMedia {
 
   /**
    * Popula o banco com todos os status de midias.
-   * 
    * @param mediaRepo  Repository de Media
    * @param statusRepo Repository de MediaStatus.
    * @param typeRepo   Repository de MediaType
