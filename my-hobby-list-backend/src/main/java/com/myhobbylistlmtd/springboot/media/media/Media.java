@@ -1,5 +1,7 @@
 package com.myhobbylistlmtd.springboot.media.media;
 
+import java.time.LocalDateTime;
+
 import com.myhobbylistlmtd.springboot.media.status.MediaStatus;
 import com.myhobbylistlmtd.springboot.media.type.MediaType;
 import com.myhobbylistlmtd.springboot.objs.MediaParams;
@@ -77,6 +79,14 @@ public class Media {
   @JoinColumn(name = "type_id", nullable = false)
   private MediaType type;
 
+  /** Data e horário de inserção da media atual.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @Column(name = "insertion_date", nullable = false)
+  private LocalDateTime insertionDate;
+
   /** Default constructor.
   * @since 1.0
   * @author Victor Murilo
@@ -98,6 +108,7 @@ public class Media {
     this.status = params.getStatus();
     this.type = params.getType();
     this.image = params.getImageUrl();
+    this.insertionDate = params.getInsertionDate();
   }
 
   /** Getter do atributo id.
@@ -228,5 +239,27 @@ public class Media {
   */
   public void setImage(final String imageUrl) {
     this.image = imageUrl;
+  }
+
+  /** Getter do atributo insertionDate.
+  * @return Um objeto LocalDateTime
+  com a data e horário em que a media foi inserida no DB.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  public LocalDateTime getInsertionDate() {
+    return insertionDate;
+  }
+
+  /** Setter do atributo insertionDate.
+  * @param newInsertionDate Data e horário de inserção da media, deve ser
+  um objeto do tipo LocalDateTime.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  public void setInsertionDate(final LocalDateTime newInsertionDate) {
+    this.insertionDate = newInsertionDate;
   }
 }
