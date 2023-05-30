@@ -21,12 +21,12 @@ public class MediaService {
   /**
   * Retorna as 10 medias recém-adicionadas.
   * @return Retorna um token com as informações do usuário
-  * @throws InternalErrorException Ocorre quando da pau em alguma coisa.
+  * @throws InternalErrorException Ocorre quando dar pau em alguma coisa.
   * @since 1.0
   * @version 1.0
   * @author Victor Murilo
   */
-  public List<Media> mostRecentMedias() throws InternalErrorException {
+  public List<Media> getMostRecentMedias() throws InternalErrorException {
     try {
       return mediaRepo.findFirst10ByOrderByInsertionDateDesc();
     } catch (Exception e) {
