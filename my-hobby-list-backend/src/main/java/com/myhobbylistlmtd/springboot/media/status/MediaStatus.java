@@ -1,5 +1,7 @@
 package com.myhobbylistlmtd.springboot.media.status;
 
+import java.util.Set;
+
 import com.myhobbylistlmtd.springboot.media.media.Media;
 
 import jakarta.persistence.Column;
@@ -7,7 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -35,8 +37,8 @@ public class MediaStatus {
   * @author Victor Murilo
   * @version 1.0
   */
-  @OneToOne(mappedBy = "status")
-  private Media media;
+  @OneToMany(mappedBy = "status")
+  private Set<Media> media;
 
   /** Default constructor.
   * @since 1.0

@@ -12,7 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -66,8 +66,8 @@ public class Media {
   * @author Victor Murilo
   * @version 1.0
   */
-  @OneToOne
-  @JoinColumn(name = "status_id", nullable = false)
+  @ManyToOne
+  @JoinColumn(name = "status_id", nullable = false, referencedColumnName = "id")
   private MediaStatus status;
 
   /** Chave estrangeira do id do status atual.
@@ -75,8 +75,8 @@ public class Media {
   * @author Victor Murilo
   * @version 1.0
   */
-  @OneToOne
-  @JoinColumn(name = "type_id", nullable = false)
+  @ManyToOne
+  @JoinColumn(name = "type_id", nullable = false, referencedColumnName = "id")
   private MediaType type;
 
   /** Data e horário de inserção da media atual.
