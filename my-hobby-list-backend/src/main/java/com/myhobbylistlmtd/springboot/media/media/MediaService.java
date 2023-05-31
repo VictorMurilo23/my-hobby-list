@@ -64,7 +64,8 @@ public class MediaService {
    * Procura uma media por id, como o próprio nome diz...
    * @param id Um id do tipo do Long.
    * @return Retorna um objeto do tipo media.
-   * @throws NotFoundException Ocorre quando o id passado não existe no banco de dados.
+   * @throws NotFoundException Ocorre quando o id
+   passado não existe no banco de dados.
    * @since 1.0
    * @version 1.0
    * @author Victor Murilo
@@ -73,7 +74,7 @@ public class MediaService {
     try {
       Media media = mediaRepo.findById(id).get();
       return media;
-    } catch(NoSuchElementException e) {
+    } catch (NoSuchElementException e) {
       throw new NotFoundException("Media não encontrada!");
     }
   }
