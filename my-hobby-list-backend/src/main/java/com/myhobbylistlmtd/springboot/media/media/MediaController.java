@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myhobbylistlmtd.springboot.exceptions.BadRequestException;
 import com.myhobbylistlmtd.springboot.response.body.ResponseMediasList;
 
 @RestController
@@ -39,8 +40,7 @@ public class MediaController {
   }
 
   /**
-  * Rota de medias recém-adicionadas, não recebe nenhum parâmetro e
-  só retorna uma lista de 10 medias.
+  * Rota de procurar medias por nome.
   * @param mediaName O nome passado na url, utilizado na busca de medias.
   * @return Retorna uma lista de objetos Media.
   * @since 1.0
@@ -49,9 +49,32 @@ public class MediaController {
   */
   @GetMapping("/search-by-name/{mediaName}")
   ResponseMediasList findMediaByName(final @PathVariable String mediaName) {
-    List<Media> recentMedias = mediaService.findByName(mediaName);
+    List<Media> mediasList = mediaService.findByName(mediaName);
     ResponseMediasList response = new ResponseMediasList();
-    response.setMedias(recentMedias);
+    response.setMedias(mediasList);
     return response;
+  }
+
+  /**
+  * Rota de procurar uma media por id.
+  * @param id Id passado na url, utilizado na busca de uma media.
+  * @return Um objeto de Media.
+  * @throws BadRequestException Ocorre quando é passado um id
+  que não pode ser transformado em número
+  * @since 1.0
+  * @version 1.0
+  * @author Victor Murilo
+  */
+  @GetMapping("/search-by-id/{id}")
+  Media findMediaById(
+    final @PathVariable String id
+  ) throws BadRequestException {
+    try {
+      Long idLong = Long.parseLong(id);
+      Media media = mediaService.findById(idLong);
+      return media;
+    } catch (NumberFormatException e) {
+      throw new BadRequestException("Insira um id no formato de número");
+    }
   }
 }
