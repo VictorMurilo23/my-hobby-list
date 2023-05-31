@@ -15,4 +15,14 @@ public interface MediaRepository extends JpaRepository<Media, Long> {
   * @author Victor Murilo
   */
   List<Media> findFirst10ByOrderByInsertionDateDesc();
+
+  /**
+  * Busca as medias que incluem a string passado como parâmetro em seu nome.
+  * @param name Nome a ser buscado, pode ser passado em caixa alta ou baixa.
+  * @return Uma lista de medias que se encaixam no critério de busca.
+  * @since 1.0
+  * @version 1.0
+  * @author Victor Murilo
+  */
+  List<Media> findByNameContainingIgnoreCase(String name);
 }
