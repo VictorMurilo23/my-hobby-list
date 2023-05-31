@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.Profile;
 
 import com.myhobbylistlmtd.springboot.media.media.Media;
 import com.myhobbylistlmtd.springboot.media.media.MediaRepository;
@@ -21,6 +22,7 @@ import com.myhobbylistlmtd.springboot.objs.MediaParams;
 
 @Configuration
 @ComponentScan("com.myhobbylistlmtd.springboot.migrations")
+@Profile({ "production" })
 public class LoadMedia {
 
   /**
