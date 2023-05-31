@@ -30,7 +30,7 @@ public class MediaController {
   * @author Victor Murilo
   */
   @GetMapping("/recent-add")
-  ResponseMediasList validateLogin() {
+  ResponseMediasList findRecentMedias() {
     List<Media> recentMedias = mediaService.getMostRecentMedias();
     ResponseMediasList response = new ResponseMediasList();
     response.setMedias(recentMedias);
