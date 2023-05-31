@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.myhobbylistlmtd.springboot.media.media.Media;
 
-public class ResponseRecentMedias {
+public class ResponseMediasList {
   /**
    * Lista com todas as medias.
    * @since 1.0

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.myhobbylistlmtd.springboot.response.body.ResponseRecentMedias;
+import com.myhobbylistlmtd.springboot.response.body.ResponseMediasList;
 
 @RestController
 @RequestMapping("/media")
@@ -30,9 +30,9 @@ public class MediaController {
   * @author Victor Murilo
   */
   @GetMapping("/recent-add")
-  ResponseRecentMedias validateLogin() {
+  ResponseMediasList validateLogin() {
     List<Media> recentMedias = mediaService.getMostRecentMedias();
-    ResponseRecentMedias response = new ResponseRecentMedias();
+    ResponseMediasList response = new ResponseMediasList();
     response.setMedias(recentMedias);
     return response;
   }
