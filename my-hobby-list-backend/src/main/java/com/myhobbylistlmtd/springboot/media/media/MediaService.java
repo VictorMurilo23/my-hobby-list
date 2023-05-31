@@ -35,4 +35,26 @@ public class MediaService {
       );
     }
   }
+
+  /**
+   * Busca medias que contém a string passada como parâmetro no nome.
+   * @param mediaName Nome a ser buscado.
+   * @return Retorna ou uma lista com objetos de Media
+   * ou retorna uma lista vazia.
+   * @throws InternalErrorException
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  public List<Media> findByName(
+    final String mediaName
+  ) throws InternalErrorException {
+    try {
+      return mediaRepo.findByNameContainingIgnoreCase(mediaName);
+    } catch (Exception e) {
+      throw new InternalErrorException(
+        "Erro do servidor!"
+      );
+    }
+  }
 }
