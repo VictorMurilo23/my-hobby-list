@@ -14,9 +14,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.myhobbylistlmtd.springboot.media.media.Media;
 import com.myhobbylistlmtd.springboot.media.media.MediaRepository;
-import com.myhobbylistlmtd.springboot.media.status.MediaStatus;
 import com.myhobbylistlmtd.springboot.media.status.MediaStatusRepository;
-import com.myhobbylistlmtd.springboot.media.type.MediaType;
 import com.myhobbylistlmtd.springboot.media.type.MediaTypeRepository;
 import com.myhobbylistlmtd.springboot.objs.MediaParams;
 
@@ -24,52 +22,6 @@ import com.myhobbylistlmtd.springboot.objs.MediaParams;
 @ComponentScan("com.myhobbylistlmtd.springboot.migrations")
 @Profile({ "production" })
 public class LoadMedia {
-
-  /**
-   * Popula o banco com todos os tipos de midias.
-   * @param repository
-   * @return void
-   */
-  @Bean("loadMediaTypes")
-  public CommandLineRunner loadMediaTypes(
-      final MediaTypeRepository repository) {
-    return args -> {
-      MediaType[] typesArray = {
-          new MediaType("Jogo"),
-          new MediaType("Manga"),
-          new MediaType("Livro"),
-          new MediaType("Anime"),
-          new MediaType("Filme"),
-          new MediaType("Série")
-      };
-      List<MediaType> typesList = new ArrayList<>();
-
-      Collections.addAll(typesList, typesArray);
-
-      repository.saveAll(typesList);
-    };
-  }
-
-  /**
-   * Popula o banco com todos os status de midias.
-   * @param repository
-   * @return void
-   */
-  @Bean("loadMediaStatus")
-  public CommandLineRunner loadMediaStatus(
-      final MediaStatusRepository repository) {
-    return args -> {
-      MediaStatus[] statusArray = {
-          new MediaStatus("Completo"),
-          new MediaStatus("Em andamento"),
-          new MediaStatus("Descontinuado")
-      };
-      List<MediaStatus> statusList = new ArrayList<>();
-      Collections.addAll(statusList, statusArray);
-      repository.saveAll(statusList);
-    };
-  }
-
   /**
    * Popula o banco com todos os status de midias.
    * @param mediaRepo  Repository de Media
@@ -77,8 +29,8 @@ public class LoadMedia {
    * @param typeRepo   Repository de MediaType
    * @return void
    */
-  @Bean("runLoadMediaAndStatus")
-  @DependsOn("loadMediaTypes")
+  @Bean
+  @DependsOn("runLoadMediaTypes")
   public CommandLineRunner runLoadMediaAndStatus(
       final MediaRepository mediaRepo,
       final MediaStatusRepository statusRepo,
