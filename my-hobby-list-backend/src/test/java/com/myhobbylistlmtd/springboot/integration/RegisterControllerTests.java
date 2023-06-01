@@ -5,8 +5,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -15,7 +15,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myhobbylistlmtd.springboot.MyHobbyListBackendApplication;
 import com.myhobbylistlmtd.springboot.request.body.RequestRegisterUserBody;
-import com.myhobbylistlmtd.springboot.utils.LoginTestConfiguration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = MyHobbyListBackendApplication.class)
 @AutoConfigureMockMvc
-@Import(LoginTestConfiguration.class)
+@ActiveProfiles({ "test" })
 public class RegisterControllerTests {
   @Autowired
   private MockMvc mockMvc;

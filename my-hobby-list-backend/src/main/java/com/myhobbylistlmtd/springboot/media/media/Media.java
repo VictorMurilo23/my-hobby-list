@@ -1,5 +1,7 @@
 package com.myhobbylistlmtd.springboot.media.media;
 
+import java.time.LocalDateTime;
+
 import com.myhobbylistlmtd.springboot.media.status.MediaStatus;
 import com.myhobbylistlmtd.springboot.media.type.MediaType;
 import com.myhobbylistlmtd.springboot.objs.MediaParams;
@@ -10,7 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -64,8 +66,8 @@ public class Media {
   * @author Victor Murilo
   * @version 1.0
   */
-  @OneToOne
-  @JoinColumn(name = "status_id", nullable = false)
+  @ManyToOne
+  @JoinColumn(name = "status_id", nullable = false, referencedColumnName = "id")
   private MediaStatus status;
 
   /** Chave estrangeira do id do status atual.
@@ -73,9 +75,17 @@ public class Media {
   * @author Victor Murilo
   * @version 1.0
   */
-  @OneToOne
-  @JoinColumn(name = "type_id", nullable = false)
+  @ManyToOne
+  @JoinColumn(name = "type_id", nullable = false, referencedColumnName = "id")
   private MediaType type;
+
+  /** Data e horário de inserção da media atual.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @Column(name = "insertion_date", nullable = false)
+  private LocalDateTime insertionDate;
 
   /** Default constructor.
   * @since 1.0
@@ -98,6 +108,7 @@ public class Media {
     this.status = params.getStatus();
     this.type = params.getType();
     this.image = params.getImageUrl();
+    this.insertionDate = params.getInsertionDate();
   }
 
   /** Getter do atributo id.
@@ -228,5 +239,27 @@ public class Media {
   */
   public void setImage(final String imageUrl) {
     this.image = imageUrl;
+  }
+
+  /** Getter do atributo insertionDate.
+  * @return Um objeto LocalDateTime
+  com a data e horário em que a media foi inserida no DB.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  public LocalDateTime getInsertionDate() {
+    return insertionDate;
+  }
+
+  /** Setter do atributo insertionDate.
+  * @param newInsertionDate Data e horário de inserção da media, deve ser
+  um objeto do tipo LocalDateTime.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  public void setInsertionDate(final LocalDateTime newInsertionDate) {
+    this.insertionDate = newInsertionDate;
   }
 }

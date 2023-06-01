@@ -27,10 +27,12 @@ public class ImageController {
   private String imagePathRoot = "src/main/resources/images/";
 
   /**
-   * Procura a imagem baseado no caminho passado por parâmetro e, se não achar, joga uma exceção.
+   * Procura a imagem baseado no caminho passado por
+   parâmetro e, se não achar, joga uma exceção.
    * @param path Caminho utilizado na busca da imagem.
    * @return Retorna a imagem em formato de bytes pronta para ser enviada
-   * @throws NotFoundException Ocorre quando a imagem não é encontrada e retorna um http 404.
+   * @throws NotFoundException Ocorre quando a imagem não
+   é encontrada e retorna um http 404.
    * @since 1.0
    * @version 1.0
    * @author Victor Murilo
@@ -57,7 +59,9 @@ public class ImageController {
    * @author Victor Murilo
    */
   @GetMapping("/covers/{imageName}")
-  public ResponseEntity<byte[]> getCoverImage(@PathVariable("imageName") final String imageName) {
+  public ResponseEntity<byte[]> getCoverImage(
+    @PathVariable("imageName") final String imageName
+  ) {
     byte[] image = this.findImage(this.imagePathRoot + "covers/" + imageName);
     MediaType type = imageName.endsWith(".jpg")
     ? MediaType.IMAGE_JPEG : MediaType.IMAGE_PNG;

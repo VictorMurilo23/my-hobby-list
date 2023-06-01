@@ -1,5 +1,7 @@
 package com.myhobbylistlmtd.springboot.objs;
 
+import java.time.LocalDateTime;
+
 import com.myhobbylistlmtd.springboot.media.status.MediaStatus;
 import com.myhobbylistlmtd.springboot.media.type.MediaType;
 import com.myhobbylistlmtd.springboot.request.body.RequestMediaBody;
@@ -50,6 +52,13 @@ public class MediaParams extends RequestMediaBody {
   * @version 1.0
   */
   private MediaType type;
+
+  /** Date de inserção da media.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  private LocalDateTime insertionDate;
 
   /** Getter de length.
   * @return Um int com a duração da media.
@@ -158,6 +167,29 @@ public class MediaParams extends RequestMediaBody {
   */
   public MediaParams setType(final MediaType newType) {
     this.type = newType;
+    return this;
+  }
+
+  /** Getter de insertionDate.
+  * @return Um objeto de LocalDateTime.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  public LocalDateTime getInsertionDate() {
+    return insertionDate;
+  }
+
+  /** Setter de insertionDate.
+  * @param newInsertionDate Um objeto do tipo LocalDateTime
+  com as novas informações de data e hora.
+  * @return Retorna o próprio objeto, assim é possível encadear vários setters
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  public MediaParams setInsertionDate(final LocalDateTime newInsertionDate) {
+    this.insertionDate = newInsertionDate;
     return this;
   }
 }
