@@ -16,5 +16,5 @@ ItemStatus, Long
   * @version 1.0
   * @author Victor Murilo
   */
-  ItemStatus findByStatus(String status);
+  ItemStatus findByStatusName(String status);
 }
