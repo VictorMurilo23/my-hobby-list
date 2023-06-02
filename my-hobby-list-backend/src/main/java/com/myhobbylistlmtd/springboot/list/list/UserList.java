@@ -1,7 +1,11 @@
 package com.myhobbylistlmtd.springboot.list.list;
 
+import com.myhobbylistlmtd.springboot.list.status.ItemStatus;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -38,4 +42,17 @@ public class UserList {
   */
   @Column(name = "notes", nullable = true, length = NOTES_LENGTH)
   private String notes;
+
+  /** Chave estrangeira referente ao status do item.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @ManyToOne
+  @JoinColumn(
+    name = "list_item_status_id",
+    nullable = false,
+    referencedColumnName = "id"
+  )
+  private ItemStatus status;
 }

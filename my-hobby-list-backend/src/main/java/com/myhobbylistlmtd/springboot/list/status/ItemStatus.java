@@ -1,10 +1,15 @@
 package com.myhobbylistlmtd.springboot.list.status;
 
+import java.util.Set;
+
+import com.myhobbylistlmtd.springboot.list.list.UserList;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -27,6 +32,14 @@ public class ItemStatus {
   */
   @Column(name = "list_status_name", nullable = false)
   private String statusName;
+
+  /** Associação com tabela user_list.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @OneToMany(mappedBy = "status")
+  private Set<UserList> media;
 
   /** Default constructor.
   * @since 1.0
