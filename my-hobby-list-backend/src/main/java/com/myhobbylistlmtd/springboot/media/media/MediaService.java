@@ -8,9 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.myhobbylistlmtd.springboot.exceptions.InternalErrorException;
 import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
+import com.myhobbylistlmtd.springboot.interfaces.IBasicService;
 
 @Service
-public class MediaService {
+public class MediaService implements IBasicService<Media, Long> {
   /**
   * Repositório de media.
   * @since 1.0
@@ -60,17 +61,8 @@ public class MediaService {
     }
   }
 
-  /**
-   * Procura uma media por id, como o próprio nome diz...
-   * @param id Um id do tipo do Long.
-   * @return Retorna um objeto do tipo media.
-   * @throws NotFoundException Ocorre quando o id
-   passado não existe no banco de dados.
-   * @since 1.0
-   * @version 1.0
-   * @author Victor Murilo
-   */
-  public Media findById(final Long id) throws NotFoundException {
+  @Override
+  public final Media findById(final Long id) throws NotFoundException {
     try {
       Media media = mediaRepo.findById(id).get();
       return media;
