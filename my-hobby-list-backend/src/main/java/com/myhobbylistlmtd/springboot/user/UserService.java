@@ -1,5 +1,6 @@
 package com.myhobbylistlmtd.springboot.user;
 
+import java.util.NoSuchElementException;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +9,12 @@ import org.springframework.stereotype.Service;
 import com.myhobbylistlmtd.springboot.exceptions.AlreadyTakenException;
 import com.myhobbylistlmtd.springboot.exceptions.BadRequestException;
 import com.myhobbylistlmtd.springboot.exceptions.InvalidLoginException;
+import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
+import com.myhobbylistlmtd.springboot.interfaces.IBasicService;
 import com.myhobbylistlmtd.springboot.request.body.RequestRegisterUserBody;
 
 @Service
-public class UserService {
+public class UserService implements IBasicService<User, Long> {
   /**
   * Repositório utilizado para fazer as interações com o banco de dados.
   * @since 1.0
@@ -21,13 +24,22 @@ public class UserService {
   @Autowired
   private UserRepository repository;
 
-
   private void validateEmail(final String email) {
     String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
     + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
     boolean validate = Pattern.compile(regexPattern).matcher(email).matches();
     if (!validate) {
       throw new BadRequestException("Insira um email com o formato válido!");
+    }
+  }
+
+  @Override
+  public final User findById(final Long id) throws NotFoundException {
+    try {
+      User media = repository.findById(id).get();
+      return media;
+    } catch (NoSuchElementException e) {
+      throw new NotFoundException("Media não encontrada!");
     }
   }
 
