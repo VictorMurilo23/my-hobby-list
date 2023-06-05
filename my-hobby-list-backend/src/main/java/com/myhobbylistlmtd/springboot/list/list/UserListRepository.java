@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserListRepository extends JpaRepository<
-UserList, Long
+UserList, UserListId
 > {
 }
