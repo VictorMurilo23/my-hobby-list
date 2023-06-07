@@ -1,11 +1,14 @@
 package com.myhobbylistlmtd.springboot.request.body;
 
+import jakarta.validation.constraints.NotNull;
+
 public class RequestMediaBody {
   /** Atributo com o nome da media.
   * @since 1.0
   * @author Victor Murilo
   * @version 1.0
   */
+  @NotNull(message = "O campo name é obrigatório")
   private String name;
 
   /** Getter de name.

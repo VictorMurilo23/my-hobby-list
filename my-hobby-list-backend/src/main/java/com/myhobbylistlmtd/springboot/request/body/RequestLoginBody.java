@@ -1,11 +1,16 @@
 package com.myhobbylistlmtd.springboot.request.body;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+
 public class RequestLoginBody {
   /** Atributo email do body.
   * @since 1.0
   * @author Victor Murilo
   * @version 1.0
   */
+  @Email(message = "Insira um email com o formato válido!")
+  @NotNull(message = "email é obrigatório")
   private String email;
 
   /** Atributo password do body.
@@ -13,6 +18,7 @@ public class RequestLoginBody {
   * @author Victor Murilo
   * @version 1.0
   */
+  @NotNull(message = "password é obrigatório")
   private String password;
 
   /** Getter do atributo email.
