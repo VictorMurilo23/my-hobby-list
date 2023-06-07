@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.myhobbylistlmtd.springboot.exceptions.AlreadyTakenException;
 import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
 
 @RestControllerAdvice
@@ -80,10 +81,29 @@ public class ErrorExceptionHandler {
   @ResponseBody
   @ResponseStatus(HttpStatus.NOT_FOUND)
   public Error handleNotFoundErrors(
-    final MethodArgumentNotValidException ex
+    final NotFoundException ex
   ) {
     return new Error(
       HttpStatus.NOT_FOUND.value(), ex.getMessage()
+    );
+  }
+
+  /**
+   * Tratamento de erros relacionados a valores já presentes no banco de dados.
+   * @param ex Exceção de AlreadyTaken
+   * @return Um objeto de Error contendo o status code e a mensagem do erro.
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  @ExceptionHandler(AlreadyTakenException.class)
+  @ResponseBody
+  @ResponseStatus(HttpStatus.CONFLICT)
+  public Error handleAlreadyTakenErrors(
+    final AlreadyTakenException ex
+  ) {
+    return new Error(
+      HttpStatus.CONFLICT.value(), ex.getMessage()
     );
   }
 }
