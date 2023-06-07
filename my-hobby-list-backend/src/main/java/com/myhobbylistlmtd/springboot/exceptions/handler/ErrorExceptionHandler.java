@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.myhobbylistlmtd.springboot.exceptions.AlreadyTakenException;
+import com.myhobbylistlmtd.springboot.exceptions.BadRequestException;
 import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
 
 @RestControllerAdvice
@@ -104,6 +105,25 @@ public class ErrorExceptionHandler {
   ) {
     return new Error(
       HttpStatus.CONFLICT.value(), ex.getMessage()
+    );
+  }
+
+    /**
+   * Tratamento de erros relacionados a erros no request do user.
+   * @param ex Exceção de BadRequestException
+   * @return Um objeto de Error contendo o status code e a mensagem do erro.
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  @ExceptionHandler(BadRequestException.class)
+  @ResponseBody
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  public Error handleBadRequestErrors(
+    final BadRequestException ex
+  ) {
+    return new Error(
+      HttpStatus.BAD_REQUEST.value(), ex.getMessage()
     );
   }
 }
