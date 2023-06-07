@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.myhobbylistlmtd.springboot.exceptions.AlreadyTakenException;
 import com.myhobbylistlmtd.springboot.exceptions.BadRequestException;
+import com.myhobbylistlmtd.springboot.exceptions.InvalidLoginException;
 import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
 
 @RestControllerAdvice
@@ -124,6 +125,25 @@ public class ErrorExceptionHandler {
   ) {
     return new Error(
       HttpStatus.BAD_REQUEST.value(), ex.getMessage()
+    );
+  }
+
+  /**
+   * Tratamento de erros relacionados a erros no login do user.
+   * @param ex Exceção de InvalidLoginException
+   * @return Um objeto de Error contendo o status code e a mensagem do erro.
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  @ExceptionHandler(InvalidLoginException.class)
+  @ResponseBody
+  @ResponseStatus(HttpStatus.UNAUTHORIZED)
+  public Error handleBadRequestErrors(
+    final InvalidLoginException ex
+  ) {
+    return new Error(
+      HttpStatus.UNAUTHORIZED.value(), ex.getMessage()
     );
   }
 }
