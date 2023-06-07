@@ -52,6 +52,15 @@ public class RequestUserListBody {
   private Integer score = null;
 
   /**
+   * Progresso feito pelo usuário.
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  @Min(value = 0)
+  private Integer progress = 0;
+
+  /**
    * Getter do atributo mediaId.
    * @return Um id de uma media que pode ou não existir no banco de dados.
    * @since 1.0
@@ -59,6 +68,7 @@ public class RequestUserListBody {
    * @author Victor Murilo
    */
   public Long getMediaId() {
+    System.out.print(mediaId);
     return mediaId;
   }
 
@@ -159,5 +169,27 @@ public class RequestUserListBody {
    */
   public final void setScore(final Integer scoreNum) {
     this.score = scoreNum;
+  }
+
+  /**
+   * Getter de progress.
+   * @return Um Integer contendo o progresso feito pelo usuário.
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  public Integer getProgress() {
+    return progress;
+  }
+
+  /**
+   * Setter de progress.
+   * @param newProgress Um Integer contendo o novo progresso do usuário
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  public void setProgress(final Integer newProgress) {
+    this.progress = newProgress;
   }
 }

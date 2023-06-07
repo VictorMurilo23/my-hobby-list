@@ -103,6 +103,7 @@ public class UserListService implements IBasicService<UserList, UserListId> {
     list.setStatus(findStatus);
     list.setScore(body.getScore());
     list.setNotes(body.getNotes());
+    list.setProgress(body.getProgress());
 
     listRepo.save(list);
 
