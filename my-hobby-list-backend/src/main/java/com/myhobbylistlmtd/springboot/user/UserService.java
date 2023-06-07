@@ -40,7 +40,7 @@ public class UserService implements IBasicService<User, Long> {
       return user;
     } catch (NoSuchElementException e) {
       System.out.print("Teste");
-      throw new NotFoundException("Media não encontrada!");
+      throw new NotFoundException("User não encontrada!");
     }
   }
 
