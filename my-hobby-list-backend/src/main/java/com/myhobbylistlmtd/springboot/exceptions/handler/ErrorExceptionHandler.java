@@ -3,6 +3,7 @@ package com.myhobbylistlmtd.springboot.exceptions.handler;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.myhobbylistlmtd.springboot.exceptions.AlreadyTakenException;
 import com.myhobbylistlmtd.springboot.exceptions.BadRequestException;
 import com.myhobbylistlmtd.springboot.exceptions.InvalidLoginException;
@@ -147,6 +149,31 @@ public class ErrorExceptionHandler {
     );
   }
 
+  /**
+   * Tratamento de erros relacionados a conversão de valores
+   na validação do body.
+   * @param ex Exceção de HttpMessageNotReadableException
+   * @return Um objeto de Error contendo o status code e a mensagem do erro.
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  @ExceptionHandler(HttpMessageNotReadableException.class)
+  @ResponseBody
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  public Error handleHttpConversionErrorErrors(
+    final HttpMessageNotReadableException ex
+  ) {
+    InvalidFormatException iex = (InvalidFormatException) ex.getCause();
+    String message =  String.format(
+      "%s deve ser um campo válido",
+      iex.getPath().get(0).getFieldName()
+    );
+    return new Error(
+      HttpStatus.BAD_REQUEST.value(), message
+    );
+  }
+
     /**
    * Tratamento de erros a qualquer exceção não tratada.
    * @param ex Exceção de Runtime
@@ -181,7 +208,8 @@ public class ErrorExceptionHandler {
     final Exception ex
   ) {
     return new Error(
-      HttpStatus.INTERNAL_SERVER_ERROR.value(), "Erro interno!"
+      HttpStatus.INTERNAL_SERVER_ERROR.value(),
+      String.format("Erro interno! %s", ex.getClass().getSimpleName())
     );
   }
 }
