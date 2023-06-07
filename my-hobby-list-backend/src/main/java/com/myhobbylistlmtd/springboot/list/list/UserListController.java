@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.myhobbylistlmtd.springboot.request.body.RequestUserListBody;
 import com.myhobbylistlmtd.springboot.response.body.ResponseMessage;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/list")
 public class UserListController {
@@ -31,7 +33,7 @@ public class UserListController {
    */
   @PostMapping("/insert")
   ResponseMessage findRecentMedias(
-    @RequestBody final RequestUserListBody body
+    @RequestBody @Valid final RequestUserListBody body
   ) {
     String insertListItem = listService.insertItemInList(body);
     ResponseMessage response = new ResponseMessage();
