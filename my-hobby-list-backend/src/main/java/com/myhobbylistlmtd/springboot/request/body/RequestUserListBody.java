@@ -3,6 +3,7 @@ package com.myhobbylistlmtd.springboot.request.body;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class RequestUserListBody {
   /**
@@ -11,7 +12,7 @@ public class RequestUserListBody {
    * @version 1.0
    * @author Victor Murilo
    */
-  @NotBlank(message = "mediaId é obrigatório")
+  @NotNull(message = "mediaId é obrigatório")
   private Long mediaId;
 
   /**
@@ -20,7 +21,7 @@ public class RequestUserListBody {
    * @version 1.0
    * @author Victor Murilo
    */
-  @NotBlank(message = "userId é obrigatório")
+  @NotNull(message = "userId é obrigatório")
   private Long userId;
 
   /**
@@ -29,6 +30,7 @@ public class RequestUserListBody {
    * @version 1.0
    * @author Victor Murilo
    */
+  @NotBlank
   private String status = "Em andamento";
 
   /**
@@ -45,8 +47,8 @@ public class RequestUserListBody {
    * @version 1.0
    * @author Victor Murilo
    */
-  @Min(value = 1, message = "Insira um valor acima de 0")
-  @Max(value = 10, message = "Insira um valor abaixo de 11")
+  @Min(value = 1, message = "Insira a nota deve ser um valor acima de 0")
+  @Max(value = 10, message = "Insira a nota deve ser um valor abaixo de 11")
   private Integer score = null;
 
   /**

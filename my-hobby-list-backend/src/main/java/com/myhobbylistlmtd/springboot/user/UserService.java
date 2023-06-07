@@ -36,9 +36,10 @@ public class UserService implements IBasicService<User, Long> {
   @Override
   public final User findById(final Long id) throws NotFoundException {
     try {
-      User media = repository.findById(id).get();
-      return media;
+      User user = repository.findById(id).get();
+      return user;
     } catch (NoSuchElementException e) {
+      System.out.print("Teste");
       throw new NotFoundException("Media não encontrada!");
     }
   }
