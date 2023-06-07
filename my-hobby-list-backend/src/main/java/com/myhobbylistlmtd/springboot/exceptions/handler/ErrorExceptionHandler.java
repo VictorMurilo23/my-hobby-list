@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
+
 @RestControllerAdvice
 public class ErrorExceptionHandler {
   static class Error {
@@ -63,6 +65,25 @@ public class ErrorExceptionHandler {
 
     return new Error(
       HttpStatus.BAD_REQUEST.value(), fieldErrors.get(0).getDefaultMessage()
+    );
+  }
+
+  /**
+   * Tratamento de erros relacionados ao não encontrar valores.
+   * @param ex Exceção de NotFound
+   * @return Um objeto de Error contendo o status code e a mensagem do erro.
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  @ExceptionHandler(NotFoundException.class)
+  @ResponseBody
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  public Error handleNotFoundErrors(
+    final MethodArgumentNotValidException ex
+  ) {
+    return new Error(
+      HttpStatus.NOT_FOUND.value(), ex.getMessage()
     );
   }
 }
