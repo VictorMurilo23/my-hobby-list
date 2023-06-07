@@ -6,7 +6,6 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.myhobbylistlmtd.springboot.exceptions.InternalErrorException;
 import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
 import com.myhobbylistlmtd.springboot.interfaces.IBasicService;
 
@@ -24,19 +23,12 @@ public class MediaService implements IBasicService<Media, Long> {
   /**
   * Retorna as 10 medias recém-adicionadas.
   * @return Retorna um token com as informações do usuário
-  * @throws InternalErrorException Ocorre quando dar pau em alguma coisa.
   * @since 1.0
   * @version 1.0
   * @author Victor Murilo
   */
-  public List<Media> getMostRecentMedias() throws InternalErrorException {
-    try {
-      return mediaRepo.findFirst10ByOrderByInsertionDateDesc();
-    } catch (Exception e) {
-      throw new InternalErrorException(
-        "Erro ao tentar pegar os recém-adicionados"
-      );
-    }
+  public List<Media> getMostRecentMedias() {
+    return mediaRepo.findFirst10ByOrderByInsertionDateDesc();
   }
 
   /**
@@ -44,21 +36,12 @@ public class MediaService implements IBasicService<Media, Long> {
    * @param mediaName Nome a ser buscado.
    * @return Retorna ou uma lista com objetos de Media
    * ou retorna uma lista vazia.
-   * @throws InternalErrorException
    * @since 1.0
    * @version 1.0
    * @author Victor Murilo
    */
-  public List<Media> findByName(
-    final String mediaName
-  ) throws InternalErrorException {
-    try {
-      return mediaRepo.findByNameContainingIgnoreCase(mediaName);
-    } catch (Exception e) {
-      throw new InternalErrorException(
-        "Erro do servidor!"
-      );
-    }
+  public List<Media> findByName(final String mediaName) {
+    return mediaRepo.findByNameContainingIgnoreCase(mediaName);
   }
 
   @Override

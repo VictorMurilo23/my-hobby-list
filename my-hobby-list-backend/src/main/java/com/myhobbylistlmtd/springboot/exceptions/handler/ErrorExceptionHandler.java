@@ -146,4 +146,42 @@ public class ErrorExceptionHandler {
       HttpStatus.UNAUTHORIZED.value(), ex.getMessage()
     );
   }
+
+    /**
+   * Tratamento de erros a qualquer exceção não tratada.
+   * @param ex Exceção de Runtime
+   * @return Um objeto de Error contendo o status code e a mensagem do erro.
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  @ExceptionHandler(RuntimeException.class)
+  @ResponseBody
+  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+  public Error handleRuntimeErrors(
+    final RuntimeException ex
+  ) {
+    return new Error(
+      HttpStatus.INTERNAL_SERVER_ERROR.value(), "Erro interno!"
+    );
+  }
+
+      /**
+   * Tratamento de erros a qualquer exceção não tratada.
+   * @param ex Exceção de Exception
+   * @return Um objeto de Error contendo o status code e a mensagem do erro.
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  @ExceptionHandler(Exception.class)
+  @ResponseBody
+  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+  public Error handleGeneralErrors(
+    final Exception ex
+  ) {
+    return new Error(
+      HttpStatus.INTERNAL_SERVER_ERROR.value(), "Erro interno!"
+    );
+  }
 }
