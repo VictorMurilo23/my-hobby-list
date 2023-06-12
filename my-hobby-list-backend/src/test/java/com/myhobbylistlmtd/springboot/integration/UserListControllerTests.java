@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myhobbylistlmtd.springboot.MyHobbyListBackendApplication;
+import com.myhobbylistlmtd.springboot.request.body.RequestUserId;
 import com.myhobbylistlmtd.springboot.request.body.RequestUserListBody;
 import com.myhobbylistlmtd.springboot.utils.LoginTestConfiguration;
 import com.myhobbylistlmtd.springboot.utils.MediaTestConfiguration;
@@ -24,6 +25,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import static org.hamcrest.Matchers.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = MyHobbyListBackendApplication.class)
@@ -119,5 +122,60 @@ public class UserListControllerTests {
 
     response.andExpect(status().isCreated())
         .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Item inserido com sucesso"));
+  }
+
+  @Test
+  public void testSucessGetUserList() throws Exception {
+    Long userId = Long.valueOf(1);
+    RequestUserId body = new RequestUserId();
+    body.setUserId(userId);
+    ObjectMapper objectMapper = new ObjectMapper();
+    String json = objectMapper.writeValueAsString(body);
+
+    ResultActions response = mockMvc.perform(get("/list/find")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(json));
+    response.andExpect(status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.list").isArray());
+  }
+
+  @Test
+  public void errorWhenUserIdNotFound() throws Exception {
+    Long userId = Long.valueOf(1212121212);
+    RequestUserId body = new RequestUserId();
+    body.setUserId(userId);
+    ObjectMapper objectMapper = new ObjectMapper();
+    String json = objectMapper.writeValueAsString(body);
+
+    ResultActions response = mockMvc.perform(get("/list/find")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(json));
+    response.andExpect(status().isNotFound())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(404))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User não encontrada!"));
+  }
+
+  @Test
+  public void errorWhenNotPassingUserId() throws Exception {
+    String json = "{}";
+
+    ResultActions response = mockMvc.perform(get("/list/find")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(json));
+    response.andExpect(status().isBadRequest())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("userId é obrigatório"));
+  }
+
+  @Test
+  public void errorWhenUserIdDiffFromNumber() throws Exception {
+    String json = "{\"userId\": \"hdsujawhidwha\"}";
+
+    ResultActions response = mockMvc.perform(get("/list/find")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(json));
+    response.andExpect(status().isBadRequest())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("userId deve ser um campo válido"));
   }
 }
