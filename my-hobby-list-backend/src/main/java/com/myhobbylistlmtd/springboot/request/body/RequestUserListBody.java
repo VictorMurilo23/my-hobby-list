@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class RequestUserListBody {
+public class RequestUserListBody extends RequestUserId {
   /**
    * Id de uma media.
    * @since 1.0
@@ -15,15 +15,6 @@ public class RequestUserListBody {
    */
   @NotNull(message = "mediaId é obrigatório")
   private Long mediaId;
-
-  /**
-   * Id do usuário.
-   * @since 1.0
-   * @version 1.0
-   * @author Victor Murilo
-   */
-  @NotNull(message = "userId é obrigatório")
-  private Long userId;
 
   /**
    * Nome do status.
@@ -36,7 +27,7 @@ public class RequestUserListBody {
     max = 100,
     message = "status deve ser uma string de 1 a 100 caracteres"
   )
-  private String status = "Em andamento";
+  private String status = null;
 
   /**
    * Comentário sobre a media.
@@ -77,7 +68,7 @@ public class RequestUserListBody {
     fraction = 0,
     message = "progress deve ter no máximo 7 digitos e deve ser um inteiro"
   )
-  private Integer progress = 0;
+  private Integer progress = null;
 
   /**
    * Getter do atributo mediaId.
@@ -100,28 +91,6 @@ public class RequestUserListBody {
    */
   public void setMediaId(final Long id) {
     this.mediaId = id;
-  }
-
-  /**
-   * Getter do atributo userId.
-   * @return Retorna um id de usuário do tipo Long.
-   * @since 1.0
-   * @version 1.0
-   * @author Victor Murilo
-   */
-  public Long getUserId() {
-    return userId;
-  }
-
-  /**
-   * Setter do atributo userId.
-   * @param id Um userId do tipo Long.
-   * @since 1.0
-   * @version 1.0
-   * @author Victor Murilo
-   */
-  public void setUserId(final Long id) {
-    this.userId = id;
   }
 
   /**
