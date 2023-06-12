@@ -27,7 +27,7 @@ public class UserListId implements Serializable {
   */
   @ManyToOne
   @JoinColumn(name = "media_id")
-  private Media media;
+  private Media mediaId;
 
   /**
   * Chave referente ao usuário.
@@ -37,7 +37,7 @@ public class UserListId implements Serializable {
   */
   @ManyToOne
   @JoinColumn(name = "user_id")
-  private User user;
+  private User userId;
 
     /**
   * Default constructor.
@@ -57,8 +57,8 @@ public class UserListId implements Serializable {
   * @version 1.0
   */
   public UserListId(final User userId, final Media mediaId) {
-    this.user = userId;
-    this.media = mediaId;
+    this.userId = userId;
+    this.mediaId = mediaId;
   }
 
   /**
@@ -68,8 +68,8 @@ public class UserListId implements Serializable {
    * @author Victor Murilo
    * @version 1.0
    */
-  public Media getMedia() {
-    return media;
+  public Media getMediaId() {
+    return mediaId;
   }
 
     /**
@@ -79,8 +79,8 @@ public class UserListId implements Serializable {
    * @author Victor Murilo
    * @version 1.0
    */
-  public User getUser() {
-    return user;
+  public User getUserId() {
+    return userId;
   }
 
   /**
@@ -92,7 +92,7 @@ public class UserListId implements Serializable {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(user, media);
+    return Objects.hash(userId, mediaId);
   }
 
     /**
@@ -114,7 +114,7 @@ public class UserListId implements Serializable {
       return false;
     }
     UserListId other = (UserListId) obj;
-    return Objects.equals(user, other.user)
-    && Objects.equals(media, other.media);
+    return Objects.equals(userId, other.userId)
+    && Objects.equals(mediaId, other.mediaId);
   }
 }
