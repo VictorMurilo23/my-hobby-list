@@ -13,6 +13,8 @@ import com.myhobbylistlmtd.springboot.request.body.RequestLoginBody;
 import com.myhobbylistlmtd.springboot.request.body.RequestRegisterUserBody;
 import com.myhobbylistlmtd.springboot.response.body.ResponseLoginBody;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/user")
 public final class UserController {
@@ -35,7 +37,9 @@ public final class UserController {
   * @author Victor Murilo
   */
   @GetMapping("/login")
-  ResponseLoginBody validateLogin(@RequestBody final RequestLoginBody body) {
+  ResponseLoginBody validateLogin(
+    @Valid @RequestBody final RequestLoginBody body
+  ) {
     String token = service.validateLogin(body.getEmail(), body.getPassword());
     ResponseLoginBody response = new ResponseLoginBody();
     response.setToken(token);
@@ -54,7 +58,7 @@ public final class UserController {
   @PostMapping("/register")
   @ResponseStatus(HttpStatus.CREATED)
   ResponseLoginBody registerUser(
-    @RequestBody final RequestRegisterUserBody body
+    @Valid @RequestBody final RequestRegisterUserBody body
   ) {
     String token = service.registerUser(body);
     ResponseLoginBody response = new ResponseLoginBody();

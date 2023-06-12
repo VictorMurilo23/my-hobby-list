@@ -43,9 +43,8 @@ public class RegisterControllerTests {
         .content(json));
 
     response.andExpect(status().isBadRequest())
-        .andExpect(result -> assertEquals("Insira um email com o formato válido!",
-            result.getResolvedException().getMessage()))
-        .andExpect(result -> assertTrue(result.getResolvedException() instanceof RuntimeException));
+        .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Insira um email com o formato válido!"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400));
   }
 
   @Test

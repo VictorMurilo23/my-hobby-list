@@ -9,7 +9,11 @@ public class RequestLoginBody {
   * @author Victor Murilo
   * @version 1.0
   */
-  @Email(message = "Insira um email com o formato válido!")
+  @Email(
+    message = "Insira um email com o formato válido!",
+    regexp = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+    + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$"
+  )
   @NotNull(message = "email é obrigatório")
   private String email;
 
