@@ -1,4 +1,4 @@
-package com.myhobbylistlmtd.springboot.exceptions.handler;
+package com.myhobbylistlmtd.springboot.exceptions;
 
 import java.util.List;
 
@@ -13,10 +13,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import com.myhobbylistlmtd.springboot.exceptions.AlreadyTakenException;
-import com.myhobbylistlmtd.springboot.exceptions.BadRequestException;
-import com.myhobbylistlmtd.springboot.exceptions.InvalidLoginException;
-import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
 
 @RestControllerAdvice
 public class ErrorExceptionHandler {

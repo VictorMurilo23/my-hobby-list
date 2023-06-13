@@ -1,5 +1,6 @@
 package com.myhobbylistlmtd.springboot.list.list;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,7 +94,9 @@ public class UserListService implements IBasicService<UserList, UserListId> {
   public String insertItemInList(final RequestUserListBody body) {
     User findUser = userService.findById(body.getUserId());
     Media findMedia = mediaService.findById(body.getMediaId());
-    ItemStatus findStatus = findItemStatusByName(body.getStatus());
+    ItemStatus findStatus = findItemStatusByName(
+      body.getStatus() == null ? "Em andamento" : body.getStatus()
+    );
 
     UserListId id = new UserListId(findUser, findMedia);
 
@@ -103,10 +106,21 @@ public class UserListService implements IBasicService<UserList, UserListId> {
     list.setStatus(findStatus);
     list.setScore(body.getScore());
     list.setNotes(body.getNotes());
-    list.setProgress(body.getProgress());
+    list.setProgress(body.getProgress() == null ? 0 : body.getProgress());
 
     listRepo.save(list);
 
     return "Item inserido com sucesso";
+  }
+
+  /**
+   * Encontra a lista de itens de um usuário.
+   * @param userId Id do usuário a ser buscado
+   * @return Uma lista de objetos UserList
+   */
+  public List<UserList> findListByUserId(final Long userId) {
+    User user = userService.findById(userId);
+    List<UserList> list = listRepo.findAllById_UserId(user);
+    return list;
   }
 }
