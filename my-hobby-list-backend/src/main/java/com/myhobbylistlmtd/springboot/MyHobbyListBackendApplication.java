@@ -7,11 +7,10 @@ import org.springframework.context.annotation.Import;
 import com.myhobbylistlmtd.springboot.migrations.LoadMedia;
 
 @SpringBootApplication
-@Import({LoadMedia.class})
+@Import({ LoadMedia.class })
 public class MyHobbyListBackendApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MyHobbyListBackendApplication.class, args);
-	}
-
+  public static void main(String[] args) {
+    SpringApplication.run(MyHobbyListBackendApplication.class, args);
+  }
 }

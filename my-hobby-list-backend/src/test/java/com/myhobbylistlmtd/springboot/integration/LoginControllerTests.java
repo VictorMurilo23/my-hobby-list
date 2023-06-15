@@ -41,7 +41,7 @@ public class LoginControllerTests {
     ObjectMapper objectMapper = new ObjectMapper();
     String json = objectMapper.writeValueAsString(body);
 
-    ResultActions response = mockMvc.perform(get("/user/login")
+    ResultActions response = mockMvc.perform(post("/user/login")
         .contentType(MediaType.APPLICATION_JSON)
         .content(json));
 
@@ -58,7 +58,7 @@ public class LoginControllerTests {
     ObjectMapper objectMapper = new ObjectMapper();
     String json = objectMapper.writeValueAsString(body);
 
-    ResultActions response = mockMvc.perform(get("/user/login")
+    ResultActions response = mockMvc.perform(post("/user/login")
         .contentType(MediaType.APPLICATION_JSON)
         .content(json));
 
@@ -77,7 +77,7 @@ public class LoginControllerTests {
     ObjectMapper objectMapper = new ObjectMapper();
     String json = objectMapper.writeValueAsString(body);
 
-    ResultActions response = mockMvc.perform(get("/user/login")
+    ResultActions response = mockMvc.perform(post("/user/login")
         .contentType(MediaType.APPLICATION_JSON)
         .content(json));
 
@@ -96,7 +96,7 @@ public class LoginControllerTests {
     ObjectMapper objectMapper = new ObjectMapper();
     String json = objectMapper.writeValueAsString(body);
 
-    ResultActions response = mockMvc.perform(get("/user/login")
+    ResultActions response = mockMvc.perform(post("/user/login")
         .contentType(MediaType.APPLICATION_JSON)
         .content(json));
 
