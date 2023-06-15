@@ -7,3 +7,4 @@
   </label>
   <button (click)="login()">Login</button>
 </div>
+<app-error-message *ngIf="getErrorMessage() !== ''" [message]=getErrorMessage() (setErrorMessage)="setErrorMessage()"></app-error-message>

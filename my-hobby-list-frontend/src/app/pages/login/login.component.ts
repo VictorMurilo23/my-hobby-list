@@ -1,4 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -8,8 +10,9 @@ import { Component } from '@angular/core';
 export class LoginComponent {
   private email: string = "";
   private password: string = "";
+  private errorMessage: string = "";
 
-  constructor()  {}
+  constructor(private service: LoginService) { }
 
   saveEmail(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -22,5 +25,21 @@ export class LoginComponent {
   }
 
   login(): void {
+    try {
+      const token = this.service.reqLogin(this.email, this.password).subscribe({
+        next: (data) => data.token,
+        error: (error: HttpErrorResponse) => this.errorMessage = error.error.message
+      });
+    } catch(error: unknown) {
+      if (error instanceof Error) this.setErrorMessage(error.message);
+    }
+  }
+
+  getErrorMessage(): string {
+    return this.errorMessage;
+  }
+
+  setErrorMessage(message: string = ""): void {
+    this.errorMessage = message;
   }
 }
