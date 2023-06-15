@@ -1,0 +1,9 @@
+<div class="login-container">
+  <label><span>Email</span>
+    <input (keyup)="saveEmail($event)" class="login-input" name="email" type="text" />
+  </label>
+  <label><span>Senha</span>
+    <input (keyup)="savePassword($event)" class="login-input" name="password" type="password" />
+  </label>
+  <button (click)="login()">Login</button>
+</div>

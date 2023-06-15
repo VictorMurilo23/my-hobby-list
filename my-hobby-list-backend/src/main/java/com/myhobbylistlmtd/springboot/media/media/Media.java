@@ -2,6 +2,7 @@ package com.myhobbylistlmtd.springboot.media.media;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.myhobbylistlmtd.springboot.media.status.MediaStatus;
 import com.myhobbylistlmtd.springboot.media.type.MediaType;
 import com.myhobbylistlmtd.springboot.objs.MediaParams;
@@ -85,6 +86,7 @@ public class Media {
   * @version 1.0
   */
   @Column(name = "insertion_date", nullable = false)
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
   private LocalDateTime insertionDate;
 
   /** Default constructor.
