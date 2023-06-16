@@ -2,6 +2,8 @@
 <div *ngIf="getRecentAdd().length !== 0" class="recent-add-container">
   <app-media-card 
     *ngFor="let media of getRecentAdd();" 
-    [mediaName]=media.name [imageUrl]=media.image
+    [mediaName]=media.name 
+    [imageUrl]=media.image
+    [mediaId]=media.id
   ></app-media-card>
 </div>
