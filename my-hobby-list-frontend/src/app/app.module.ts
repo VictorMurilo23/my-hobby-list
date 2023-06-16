@@ -10,6 +10,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
 import { RegistryComponent } from './pages/registry/registry.component';
 import { HomeComponent } from './pages/home/home.component';
+import { MediaCardComponent } from './components/media-card/media-card.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HomeComponent } from './pages/home/home.component';
     PageNotFoundComponent,
     ErrorMessageComponent,
     RegistryComponent,
-    HomeComponent
+    HomeComponent,
+    MediaCardComponent
   ],
   imports: [
     BrowserModule,

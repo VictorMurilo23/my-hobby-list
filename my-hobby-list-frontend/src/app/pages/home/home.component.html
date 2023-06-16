@@ -1,1 +1,7 @@
 <p>home works!</p>
+<div *ngIf="getRecentAdd().length !== 0">
+  <app-media-card 
+    *ngFor="let media of getRecentAdd();" 
+    [mediaName]=media.name [imageUrl]=media.image
+  ></app-media-card>
+</div>
