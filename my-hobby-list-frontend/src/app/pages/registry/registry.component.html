@@ -1,0 +1,13 @@
+<div>
+  <label><span>Email</span>
+    <input (keyup)="saveEmail($event)" class="register-input" name="email" type="text" />
+  </label>
+  <label><span>Nome de usuário</span>
+    <input (keyup)="saveUsername($event)" class="register-input" name="username" type="text" />
+  </label>
+  <label><span>Senha</span>
+    <input (keyup)="savePassword($event)" class="register-input" name="password" type="password" />
+  </label>
+  <button (click)="register()">Registrar</button>
+</div>
+<app-error-message *ngIf="getErrorMessage() !== ''" [message]=getErrorMessage() (setErrorMessage)="setErrorMessage()"></app-error-message>
