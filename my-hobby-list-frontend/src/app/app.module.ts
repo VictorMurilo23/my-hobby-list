@@ -8,19 +8,22 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
+import { RegistryComponent } from './pages/registry/registry.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     PageNotFoundComponent,
-    ErrorMessageComponent
+    ErrorMessageComponent,
+    RegistryComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot([
       {path: "login", component: LoginComponent},
+      {path: "register", component: RegistryComponent},
       {path: '**', component: PageNotFoundComponent}
     ]),
     HttpClientModule
