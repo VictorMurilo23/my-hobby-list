@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
 import { RegistryComponent } from './pages/registry/registry.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -16,12 +17,14 @@ import { RegistryComponent } from './pages/registry/registry.component';
     LoginComponent,
     PageNotFoundComponent,
     ErrorMessageComponent,
-    RegistryComponent
+    RegistryComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot([
+      {path: "", component: HomeComponent},
       {path: "login", component: LoginComponent},
       {path: "register", component: RegistryComponent},
       {path: '**', component: PageNotFoundComponent}
