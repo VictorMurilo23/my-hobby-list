@@ -9,5 +9,4 @@ export default interface IMedia {
   image: string;
   status: MediaStatusObj;
   type: MediaTypeObj;
-  insertionDate: string;
 }
