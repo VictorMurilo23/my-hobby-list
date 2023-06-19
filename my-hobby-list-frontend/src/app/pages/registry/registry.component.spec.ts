@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegistryComponent } from './registry.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('RegistryComponent', () => {
   let component: RegistryComponent;
@@ -8,6 +9,7 @@ describe('RegistryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [HttpClientModule],
       declarations: [ RegistryComponent ]
     })
     .compileComponents();
