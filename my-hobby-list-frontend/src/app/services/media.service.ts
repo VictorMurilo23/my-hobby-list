@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
-import IMedia from '../interfaces/IMedia';
 import { Observable } from 'rxjs';
 import IRecentAdd from '../interfaces/IRecentAdd';
 
@@ -9,7 +8,7 @@ import IRecentAdd from '../interfaces/IRecentAdd';
   providedIn: 'root'
 })
 export class MediaService {
-  private baseUrl: string = `${environment.apiUrl}/media`;
+  private baseUrl = `${environment.apiUrl}/media`;
 
   constructor(private http: HttpClient) { }
 

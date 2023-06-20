@@ -10,8 +10,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent extends ErrorMessage {
-  private email: string = "";
-  private password: string = "";
+  private email = "";
+  private password = "";
 
   constructor(private service: UserService, private localStorage: LocalStorageService) {
     super("");
@@ -32,7 +32,7 @@ export class LoginComponent extends ErrorMessage {
       next: (data) => {
         this.localStorage.setToken(data.token)
       },
-      error: (error: HttpErrorResponse) => super.setErrorMessage() 
+      error: (error: HttpErrorResponse) => super.setErrorMessage(error.error.message) 
     });
   }
 }

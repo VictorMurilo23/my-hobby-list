@@ -5,6 +5,6 @@
   <label><span>Senha</span>
     <input (keyup)="savePassword($event)" class="login-input" name="password" type="password" />
   </label>
-  <button (click)="login()">Login</button>
+  <button class="send-btn" (click)="login()">Login</button>
 </div>
 <app-error-message *ngIf="getErrorMessage() !== ''" [message]=getErrorMessage() (setErrorMessage)="setErrorMessage()"></app-error-message>

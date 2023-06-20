@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import IMedia from 'src/app/interfaces/IMedia';
 import { environment } from 'src/environments/environment.development';
 
 @Component({
@@ -9,8 +8,8 @@ import { environment } from 'src/environments/environment.development';
   styleUrls: ['./media-card.component.css']
 })
 export class MediaCardComponent implements OnInit {
-  @Input() mediaName: string = "";
-  @Input() imageUrl: string = "";
+  @Input() mediaName = "";
+  @Input() imageUrl = "";
   @Input() mediaId!: number;
   
   constructor(private router: Router) {

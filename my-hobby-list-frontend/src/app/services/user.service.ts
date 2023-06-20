@@ -9,7 +9,7 @@ import IRegister from '../interfaces/IRegister';
   providedIn: 'root'
 })
 export class UserService {
-  private baseUrl: string = `${environment.apiUrl}/user`;
+  private baseUrl = `${environment.apiUrl}/user`;
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string): Observable<ILogin> {

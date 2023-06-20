@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
     this.mediaService.getRecent().subscribe({
       next: (data: IRecentAdd) => {
         this.recentAdd = [...data.medias];
-        console.log(this.recentAdd)
       }
     })
   }

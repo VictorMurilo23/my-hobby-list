@@ -5,9 +5,8 @@ export default interface IMedia {
   id: number;
   name: string;
   length: number;
-  volumes: string;
+  volumes: number | null;
   image: string;
   status: MediaStatusObj;
   type: MediaTypeObj;
-  insertionDate: string;
 }
