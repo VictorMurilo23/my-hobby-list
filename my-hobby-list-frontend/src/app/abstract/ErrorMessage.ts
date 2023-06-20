@@ -5,7 +5,7 @@ export default abstract class ErrorMessage {
     return this.errorMessage;
   }
 
-  setErrorMessage(message: string = ""): void {
+  setErrorMessage(message = ""): void {
     this.errorMessage = message;
   }
 }

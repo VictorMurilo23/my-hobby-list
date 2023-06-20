@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./error-message.component.css']
 })
 export class ErrorMessageComponent {
-  @Input() message: string = "";
+  @Input() message = "";
   @Output() setErrorMessage: EventEmitter<any> = new EventEmitter()
 
   closeMessage() {

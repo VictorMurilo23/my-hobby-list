@@ -11,9 +11,9 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./registry.component.css']
 })
 export class RegistryComponent extends ErrorMessage {
-  private email: string = "";
-  private password: string = "";
-  private username: string = ""; 
+  private email = "";
+  private password = "";
+  private username = ""; 
 
   constructor(private userService: UserService, private localStorage: LocalStorageService) {
     super("");
