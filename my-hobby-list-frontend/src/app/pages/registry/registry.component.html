@@ -8,6 +8,6 @@
   <label><span>Senha</span>
     <input (keyup)="savePassword($event)" class="register-input" name="password" type="password" />
   </label>
-  <button (click)="register()">Registrar</button>
+  <button class="send-btn" (click)="register()">Registrar</button>
 </div>
 <app-error-message *ngIf="getErrorMessage() !== ''" [message]=getErrorMessage() (setErrorMessage)="setErrorMessage()"></app-error-message>
