@@ -12,6 +12,7 @@ import { RegistryComponent } from './pages/registry/registry.component';
 import { HomeComponent } from './pages/home/home.component';
 import { MediaCardComponent } from './components/media-card/media-card.component';
 import { HeaderComponent } from './components/header/header.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { HeaderComponent } from './components/header/header.component';
     HomeComponent,
     MediaCardComponent,
     HeaderComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,
