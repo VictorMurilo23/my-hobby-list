@@ -4,7 +4,7 @@ import { HomeComponent } from './home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MediaService } from 'src/app/services/media.service';
 import { Observable } from 'rxjs';
-import IRecentAdd from 'src/app/interfaces/IRecentAdd';
+import IMediaBody from 'src/app/interfaces/IMediaBody';
 import { of } from 'rxjs';
 import { MediaCardComponent } from 'src/app/components/media-card/media-card.component';
 import { By } from '@angular/platform-browser';
@@ -13,7 +13,7 @@ import { PageNotFoundComponent } from '../page-not-found/page-not-found.componen
 import { Router } from '@angular/router';
 
 class mockService {
-  public getRecent(): Observable<IRecentAdd> {
+  public getRecent(): Observable<IMediaBody> {
     return of({
       medias: [
         {

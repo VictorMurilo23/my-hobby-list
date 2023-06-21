@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import IMedia from 'src/app/interfaces/IMedia';
-import IRecentAdd from 'src/app/interfaces/IRecentAdd';
+import IMediaBody from 'src/app/interfaces/IMediaBody';
 import { MediaService } from 'src/app/services/media.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.mediaService.getRecent().subscribe({
-      next: (data: IRecentAdd) => {
+      next: (data: IMediaBody) => {
         this.recentAdd = [...data.medias];
       }
     })

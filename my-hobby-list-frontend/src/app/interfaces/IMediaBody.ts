@@ -1,5 +1,5 @@
 import IMedia from "./IMedia";
 
-export default interface IRecentAdd {
+export default interface IMediaBody {
   medias: IMedia[];
 }

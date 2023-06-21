@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { Observable } from 'rxjs';
-import IRecentAdd from '../interfaces/IRecentAdd';
+import IMediaBody from '../interfaces/IMediaBody';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,11 @@ export class MediaService {
 
   constructor(private http: HttpClient) { }
 
-  public getRecent(): Observable<IRecentAdd> {
-    return this.http.get<IRecentAdd>(`${this.baseUrl}/recent-add`, { observe: "body", responseType: 'json' });
+  public getRecent(): Observable<IMediaBody> {
+    return this.http.get<IMediaBody>(`${this.baseUrl}/recent-add`, { observe: "body", responseType: 'json' });
+  }
+
+  public searchByName(mediaName: string): Observable<IMediaBody> {
+    return this.http.get<IMediaBody>(`${this.baseUrl}/search-by-name/${mediaName}`, { observe: "body", responseType: 'json' });
   }
 }
