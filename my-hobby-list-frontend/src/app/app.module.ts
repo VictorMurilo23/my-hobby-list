@@ -11,6 +11,7 @@ import { ErrorMessageComponent } from './components/error-message/error-message.
 import { RegistryComponent } from './pages/registry/registry.component';
 import { HomeComponent } from './pages/home/home.component';
 import { MediaCardComponent } from './components/media-card/media-card.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MediaCardComponent } from './components/media-card/media-card.component
     ErrorMessageComponent,
     RegistryComponent,
     HomeComponent,
-    MediaCardComponent
+    MediaCardComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
