@@ -16,10 +16,10 @@ export class MediaCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.imageUrl = `${environment.apiUrl}/${this.imageUrl}`
+    this.imageUrl = `${environment.apiUrl}/${this.imageUrl}`;
   }
 
   redirectToMediaPage() {
-    this.router.navigateByUrl(`/media/${this.mediaId}`)
+    this.router.navigateByUrl(`/media/${this.mediaId}`);
   }
 }
