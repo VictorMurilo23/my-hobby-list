@@ -7,16 +7,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./search-bar.component.css']
 })
 export class SearchBarComponent {
-  private searchContent = "";
+  public searchContent = "";
 
   constructor(private router: Router) {}
 
-  search() {
-    this.router.navigate(["/search"], { queryParams: { name: this.searchContent } });
+  async search() {
+    await this.router.navigate(["/search"], { queryParams: { name: this.searchContent } });
+    this.searchContent = "";
   }
 
-  setSearchContent(event: Event) {
+  setSearchContent(event: Event): void {
     const { value } = event.target as HTMLInputElement;
     this.searchContent = value;
+  }
+
+  getSearchContent(): string {
+    return this.searchContent;
   }
 }

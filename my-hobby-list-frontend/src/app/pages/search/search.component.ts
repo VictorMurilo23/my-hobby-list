@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { EMPTY, concatMap } from 'rxjs';
+import IMedia from 'src/app/interfaces/IMedia';
+import IMediaBody from 'src/app/interfaces/IMediaBody';
+import { MediaService } from 'src/app/services/media.service';
 
 @Component({
   selector: 'app-search',
@@ -7,14 +11,38 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent implements OnInit {
-  public mediaName: string | null = '';
-  private mediasList = [];
-  constructor(private route: ActivatedRoute) {}
+  public mediaName = '';
+  private mediasList: IMedia[] = [];
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private mediaService: MediaService
+  ) {}
+
+  private searchMedias() {
+    this.activatedRoute.queryParams
+      .pipe(
+        concatMap((params: any) => {
+          const nameParam = params.name || '';
+          this.mediaName = nameParam;
+          if (nameParam !== '') {
+            return this.mediaService.searchByName(this.mediaName);
+          }
+          this.mediasList = [];
+          return EMPTY;
+        })
+      )
+      .subscribe({
+        next: (data: IMediaBody) => {
+          this.mediasList = [...data.medias];
+        },
+      });
+  }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params: any) => {
-      const nameParam = params.name || null;
-      this.mediaName = nameParam;
-    });
+    this.searchMedias();
+  }
+
+  getMediasList(): IMedia[] {
+    return this.mediasList;
   }
 }
