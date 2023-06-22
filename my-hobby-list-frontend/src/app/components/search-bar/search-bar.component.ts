@@ -20,8 +20,4 @@ export class SearchBarComponent {
     const { value } = event.target as HTMLInputElement;
     this.searchContent = value;
   }
-
-  getSearchContent(): string {
-    return this.searchContent;
-  }
 }
