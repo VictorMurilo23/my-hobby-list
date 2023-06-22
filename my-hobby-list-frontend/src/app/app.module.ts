@@ -11,6 +11,9 @@ import { ErrorMessageComponent } from './components/error-message/error-message.
 import { RegistryComponent } from './pages/registry/registry.component';
 import { HomeComponent } from './pages/home/home.component';
 import { MediaCardComponent } from './components/media-card/media-card.component';
+import { HeaderComponent } from './components/header/header.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { SearchComponent } from './pages/search/search.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { MediaCardComponent } from './components/media-card/media-card.component
     ErrorMessageComponent,
     RegistryComponent,
     HomeComponent,
-    MediaCardComponent
+    MediaCardComponent,
+    HeaderComponent,
+    SearchBarComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +35,7 @@ import { MediaCardComponent } from './components/media-card/media-card.component
       {path: "", component: HomeComponent},
       {path: "login", component: LoginComponent},
       {path: "register", component: RegistryComponent},
+      {path: "search", component: SearchComponent},
       {path: '**', component: PageNotFoundComponent}
     ]),
     HttpClientModule

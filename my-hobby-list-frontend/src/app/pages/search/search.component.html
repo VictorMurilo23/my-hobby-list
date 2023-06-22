@@ -1,0 +1,8 @@
+<div *ngIf="getMediasList().length !== 0" class="search-media-cards-container">
+  <app-media-card 
+    *ngFor="let media of getMediasList();" 
+    [mediaName]=media.name 
+    [imageUrl]=media.image
+    [mediaId]=media.id
+  ></app-media-card>
+</div>
