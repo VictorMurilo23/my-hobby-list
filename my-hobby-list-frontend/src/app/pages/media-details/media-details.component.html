@@ -1,1 +1,26 @@
-<p>media-details works!</p>
+<div *ngIf="getMediaInfo() === undefined">
+  <p>loading...</p>
+</div>
+<div *ngIf="getMediaInfo() === null">
+  <app-page-not-found></app-page-not-found>
+</div>
+<div *ngIf="getMediaInfo() !== undefined && getMediaInfo() !== null">
+  <div>
+    <p>{{getMediaInfo()?.name}}</p>
+  </div>
+  <div>
+    <div>
+      <img [src]="env.apiUrl + '/' + getMediaInfo()?.image" />
+    </div>
+    <div>
+      <p>Informações</p>
+      <div>
+        <p>Tipo: {{getMediaInfo()?.type?.type}}</p>
+        <p>Status: {{getMediaInfo()?.status?.status}}</p>
+        <p *ngIf="getMediaInfo()?.volumes !== null" >Volumes: {{getMediaInfo()?.volumes}}</p>
+        <p>Duração: {{getMediaInfo()?.length}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
