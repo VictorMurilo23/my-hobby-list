@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { Observable } from 'rxjs';
 import IMediaBody from '../interfaces/IMediaBody';
+import IMedia from '../interfaces/IMedia';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,9 @@ export class MediaService {
 
   public searchByName(mediaName: string): Observable<IMediaBody> {
     return this.http.get<IMediaBody>(`${this.baseUrl}/search-by-name/${mediaName}`, { observe: "body", responseType: 'json' });
+  }
+
+  public getMediaById(mediaId: string): Observable<IMedia> {
+    return this.http.get<IMedia>(`${this.baseUrl}/search-by-id/${mediaId}`, { observe: "body", responseType: 'json' });
   }
 }

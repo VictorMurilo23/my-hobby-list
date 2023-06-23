@@ -4,9 +4,8 @@ import { SearchBarComponent } from './search-bar.component';
 import { By } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { HomeComponent } from 'src/app/pages/home/home.component';
-import { PageNotFoundComponent } from 'src/app/pages/page-not-found/page-not-found.component';
 import { Router } from '@angular/router';
+import routes from 'src/app/app.routes';
 
 describe('SearchBarComponent', () => {
   let component: SearchBarComponent;
@@ -17,10 +16,7 @@ describe('SearchBarComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         HttpClientModule,
-        RouterTestingModule.withRoutes([
-          // { path: '', component: HomeComponent },
-          { path: 'search', component: PageNotFoundComponent }
-        ]),
+        RouterTestingModule.withRoutes(routes),
       ],
       declarations: [ SearchBarComponent ]
     })
