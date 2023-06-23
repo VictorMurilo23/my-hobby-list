@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import ILogin from '../interfaces/ILogin';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import IRegister from '../interfaces/IRegister';
 
