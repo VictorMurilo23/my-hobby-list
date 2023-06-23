@@ -9,8 +9,8 @@ import { of } from 'rxjs';
 import { MediaCardComponent } from 'src/app/components/media-card/media-card.component';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 import { Router } from '@angular/router';
+import routes from 'src/app/app.routes';
 
 class mockService {
   public getRecent(): Observable<IMediaBody> {
@@ -48,10 +48,7 @@ describe('HomeComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         HttpClientModule,
-        RouterTestingModule.withRoutes([
-          { path: '', component: HomeComponent },
-          { path: 'media/:id', component: PageNotFoundComponent }
-        ]),
+        RouterTestingModule.withRoutes(routes),
       ],
       declarations: [HomeComponent, MediaCardComponent],
       providers: [{ provide: MediaService, useClass: mockService }],

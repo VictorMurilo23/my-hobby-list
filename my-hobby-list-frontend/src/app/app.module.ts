@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
+import routes from './app.routes';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RouterModule } from '@angular/router';
@@ -33,14 +34,7 @@ import { MediaDetailsComponent } from './pages/media-details/media-details.compo
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot([
-      {path: "", component: HomeComponent},
-      {path: "login", component: LoginComponent},
-      {path: "register", component: RegistryComponent},
-      {path: "search", component: SearchComponent},
-      {path: "media/:id", component: MediaDetailsComponent},
-      {path: '**', component: PageNotFoundComponent}
-    ]),
+    RouterModule.forRoot(routes),
     HttpClientModule
   ],
   providers: [],

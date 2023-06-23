@@ -18,6 +18,7 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
 import { AppComponent } from 'src/app/app.component';
 import { HomeComponent } from '../home/home.component';
 import { MediaCardComponent } from 'src/app/components/media-card/media-card.component';
+import routes from 'src/app/app.routes';
 
 describe('SearchComponent', () => {
   let component: SearchComponent;
@@ -60,10 +61,7 @@ describe('SearchComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule.withRoutes([
-          { path: '', component: HomeComponent },
-          { path: 'search', component: SearchComponent },
-        ]),
+        RouterTestingModule.withRoutes(routes),
         HttpClientModule,
       ],
       declarations: [
