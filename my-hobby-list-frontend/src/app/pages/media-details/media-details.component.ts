@@ -12,7 +12,6 @@ import { environment } from 'src/environments/environment';
 })
 export class MediaDetailsComponent implements OnInit {
   private mediaInfo!: IMedia | null;
-  public imageUrl!: string;
   public env = environment;
 
   constructor(private mediaService: MediaService, private activatedRoute: ActivatedRoute) {}
@@ -23,7 +22,6 @@ export class MediaDetailsComponent implements OnInit {
         concatMap((params: ParamMap) => {
           const idParam = params.get("id");
           if (idParam !== null) {
-            console.log(this.mediaInfo)
             return this.mediaService.getMediaById(idParam);
           }
           return EMPTY;
@@ -32,7 +30,6 @@ export class MediaDetailsComponent implements OnInit {
       .subscribe({
         next: (data: IMedia) => {
           this.mediaInfo = data;
-          console.log(data);
         },
         error: () => {
           this.mediaInfo = null;

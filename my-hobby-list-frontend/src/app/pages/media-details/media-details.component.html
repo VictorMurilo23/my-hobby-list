@@ -1,24 +1,26 @@
 <div *ngIf="getMediaInfo() === undefined">
-  <p>loading...</p>
+  <div class="loading-container">
+    <p>loading...</p>
+  </div>
 </div>
 <div *ngIf="getMediaInfo() === null">
   <app-page-not-found></app-page-not-found>
 </div>
 <div *ngIf="getMediaInfo() !== undefined && getMediaInfo() !== null">
-  <div>
-    <p>{{getMediaInfo()?.name}}</p>
+  <div class="media-title-container">
+    <p class="media-title">{{getMediaInfo()?.name}}</p>
   </div>
   <div>
-    <div>
+    <div class="media-image-container">
       <img [src]="env.apiUrl + '/' + getMediaInfo()?.image" />
     </div>
-    <div>
+    <div class="media-info-container">
       <p>Informações</p>
       <div>
-        <p>Tipo: {{getMediaInfo()?.type?.type}}</p>
-        <p>Status: {{getMediaInfo()?.status?.status}}</p>
-        <p *ngIf="getMediaInfo()?.volumes !== null" >Volumes: {{getMediaInfo()?.volumes}}</p>
-        <p>Duração: {{getMediaInfo()?.length}}</p>
+        <p class="media-type">Tipo: {{getMediaInfo()?.type?.type}}</p>
+        <p class="media-status">Status: {{getMediaInfo()?.status?.status}}</p>
+        <p class="media-volumes" *ngIf="getMediaInfo()?.volumes !== null" >Volumes: {{getMediaInfo()?.volumes}}</p>
+        <p class="media-duration">Duração: {{getMediaInfo()?.length}}</p>
       </div>
     </div>
   </div>
