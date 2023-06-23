@@ -14,6 +14,7 @@ import { MediaCardComponent } from './components/media-card/media-card.component
 import { HeaderComponent } from './components/header/header.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { SearchComponent } from './pages/search/search.component';
+import { MediaDetailsComponent } from './pages/media-details/media-details.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SearchComponent } from './pages/search/search.component';
     MediaCardComponent,
     HeaderComponent,
     SearchBarComponent,
-    SearchComponent
+    SearchComponent,
+    MediaDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +38,7 @@ import { SearchComponent } from './pages/search/search.component';
       {path: "login", component: LoginComponent},
       {path: "register", component: RegistryComponent},
       {path: "search", component: SearchComponent},
+      {path: "media/:id", component: MediaDetailsComponent},
       {path: '**', component: PageNotFoundComponent}
     ]),
     HttpClientModule
