@@ -10,6 +10,7 @@ import com.myhobbylistlmtd.springboot.exceptions.InvalidLoginException;
 import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
 import com.myhobbylistlmtd.springboot.interfaces.IBasicService;
 import com.myhobbylistlmtd.springboot.request.body.RequestRegisterUserBody;
+import com.myhobbylistlmtd.springboot.utils.Jwt;
 
 @Service
 public class UserService implements IBasicService<User, Long> {
@@ -22,13 +23,21 @@ public class UserService implements IBasicService<User, Long> {
   @Autowired
   private UserRepository repository;
 
+  /**
+   * Classe contendo os métodos de criar e verificar um token jwt.
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  @Autowired
+  private Jwt jwt;
+
   @Override
   public final User findById(final Long id) throws NotFoundException {
     try {
       User user = repository.findById(id).get();
       return user;
     } catch (NoSuchElementException e) {
-      System.out.print("Teste");
       throw new NotFoundException("User não encontrada!");
     }
   }
@@ -95,15 +104,21 @@ public class UserService implements IBasicService<User, Long> {
   * @version 1.0
   * @author Victor Murilo
   */
-  public String registerUser(final RequestRegisterUserBody body) {
+  public String registerUser(
+    final RequestRegisterUserBody body
+  ) throws AlreadyTakenException {
     this.validateIfUserExists(body);
 
     User userToBeInserted = new User(
       body.getUsername(), body.getEmail(), body.getPassword()
     );
 
-    repository.save(userToBeInserted);
-    String token = "TBA";
+    User savedUser = repository.save(userToBeInserted);
+    String token = jwt.generateJwtToken(
+      savedUser.getId(),
+      savedUser.getUsername()
+    );
+    System.out.println(jwt.verifyToken(token));
     return token;
   }
 }

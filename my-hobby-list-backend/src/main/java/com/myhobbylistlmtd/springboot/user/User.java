@@ -135,4 +135,15 @@ public class User {
   public final void setPassword(final String userPassword) {
     this.password = userPassword;
   }
+
+  /**
+   * Getter do atributo username.
+   * @return Retorna o username
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  public String getUsername() {
+    return username;
+  }
 }
