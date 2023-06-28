@@ -2,6 +2,8 @@ package com.myhobbylistlmtd.springboot.user;
 
 import java.util.NoSuchElementException;
 
+import javax.crypto.SecretKey;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,8 @@ import com.myhobbylistlmtd.springboot.request.body.RequestRegisterUserBody;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 
 @Service
 public class UserService implements IBasicService<User, Long> {
@@ -25,13 +29,25 @@ public class UserService implements IBasicService<User, Long> {
   @Autowired
   private UserRepository repository;
 
+  /**
+   * key usada ao gerar um token.
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  private SecretKey key;
+
+  UserService() {
+    String secret = System.getenv("JWT_SECRET");
+    this.key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
+  }
+
   @Override
   public final User findById(final Long id) throws NotFoundException {
     try {
       User user = repository.findById(id).get();
       return user;
     } catch (NoSuchElementException e) {
-      System.out.print("Teste");
       throw new NotFoundException("User não encontrada!");
     }
   }
@@ -115,12 +131,20 @@ public class UserService implements IBasicService<User, Long> {
     return token;
   }
 
+  /**
+   * Retorna um token contendo o id e username de um usuário.
+   * @param userId Id que vai ser armazenado no token
+   * @param username username que vai ser armazenado no token
+   * @return Um token jwt
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
   private String generateJwtToken(
     final Long userId, final String username
   ) {
-    String secret = System.getenv("JWT_SECRET");
     String jwt = Jwts.builder()
-      .signWith(SignatureAlgorithm.HS256, secret)
+      .signWith(this.key, SignatureAlgorithm.HS256)
       .claim("username", username)
       .claim("id", userId)
       .compact();
