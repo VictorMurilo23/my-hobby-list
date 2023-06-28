@@ -2,24 +2,15 @@ package com.myhobbylistlmtd.springboot.user;
 
 import java.util.NoSuchElementException;
 
-import javax.crypto.SecretKey;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myhobbylistlmtd.springboot.exceptions.AlreadyTakenException;
-import com.myhobbylistlmtd.springboot.exceptions.BadRequestException;
 import com.myhobbylistlmtd.springboot.exceptions.InvalidLoginException;
 import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
 import com.myhobbylistlmtd.springboot.interfaces.IBasicService;
 import com.myhobbylistlmtd.springboot.request.body.RequestRegisterUserBody;
-
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
+import com.myhobbylistlmtd.springboot.utils.Jwt;
 
 @Service
 public class UserService implements IBasicService<User, Long> {
@@ -33,17 +24,13 @@ public class UserService implements IBasicService<User, Long> {
   private UserRepository repository;
 
   /**
-   * key usada ao gerar um token.
+   * Classe contendo os métodos de criar e verificar um token jwt.
    * @since 1.0
    * @version 1.0
    * @author Victor Murilo
    */
-  private SecretKey key;
-
-  UserService() {
-    String secret = System.getenv("JWT_SECRET");
-    this.key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
-  }
+  @Autowired
+  private Jwt jwt;
 
   @Override
   public final User findById(final Long id) throws NotFoundException {
@@ -127,52 +114,11 @@ public class UserService implements IBasicService<User, Long> {
     );
 
     User savedUser = repository.save(userToBeInserted);
-    String token = this.generateJwtToken(
+    String token = jwt.generateJwtToken(
       savedUser.getId(),
       savedUser.getUsername()
     );
-    this.verifyToken(token);
+    System.out.println(jwt.verifyToken(token));
     return token;
-  }
-
-  /**
-   * Retorna um token contendo o id e username de um usuário.
-   * @param userId Id que vai ser armazenado no token
-   * @param username username que vai ser armazenado no token
-   * @return Um token jwt
-   * @since 1.0
-   * @version 1.0
-   * @author Victor Murilo
-   */
-  private String generateJwtToken(
-    final Long userId, final String username
-  ) {
-    String jwt = Jwts.builder()
-      .signWith(this.key, SignatureAlgorithm.HS256)
-      .claim("username", username)
-      .claim("id", userId)
-      .compact();
-    return jwt;
-  }
-
-  /**
-   * Verifica o token e retorna o id do usuário.
-   * @param token Uma string contendo um token jwt.
-   * @return Uma string com o id do usuário.
-   * @throws BadRequestException Ocorre quando o token é inválido.
-   * @since 1.0
-   * @version 1.0
-   * @author Victor Murilo
-   */
-  public String verifyToken(final String token) throws BadRequestException {
-    try {
-      Jws<Claims> jwt = Jwts.parserBuilder()
-        .setSigningKey(this.key)
-        .build()
-        .parseClaimsJws(token);
-      return jwt.getBody().get("id").toString();
-    } catch (Exception e) {
-      throw new BadRequestException("Token inválido");
-    }
   }
 }
