@@ -184,6 +184,7 @@ public class ErrorExceptionHandler {
   public Error handleRuntimeErrors(
     final RuntimeException ex
   ) {
+    ex.printStackTrace();
     return new Error(
       HttpStatus.INTERNAL_SERVER_ERROR.value(), "Erro interno!"
     );
