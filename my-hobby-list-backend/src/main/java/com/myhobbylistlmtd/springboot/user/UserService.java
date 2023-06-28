@@ -8,11 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myhobbylistlmtd.springboot.exceptions.AlreadyTakenException;
+import com.myhobbylistlmtd.springboot.exceptions.BadRequestException;
 import com.myhobbylistlmtd.springboot.exceptions.InvalidLoginException;
 import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
 import com.myhobbylistlmtd.springboot.interfaces.IBasicService;
 import com.myhobbylistlmtd.springboot.request.body.RequestRegisterUserBody;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -128,6 +131,7 @@ public class UserService implements IBasicService<User, Long> {
       savedUser.getId(),
       savedUser.getUsername()
     );
+    this.verifyToken(token);
     return token;
   }
 
@@ -149,5 +153,26 @@ public class UserService implements IBasicService<User, Long> {
       .claim("id", userId)
       .compact();
     return jwt;
+  }
+
+  /**
+   * Verifica o token e retorna o id do usuário.
+   * @param token Uma string contendo um token jwt.
+   * @return Uma string com o id do usuário.
+   * @throws BadRequestException Ocorre quando o token é inválido.
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  public String verifyToken(final String token) throws BadRequestException {
+    try {
+      Jws<Claims> jwt = Jwts.parserBuilder()
+        .setSigningKey(this.key)
+        .build()
+        .parseClaimsJws(token);
+      return jwt.getBody().get("id").toString();
+    } catch (Exception e) {
+      throw new BadRequestException("Token inválido");
+    }
   }
 }
