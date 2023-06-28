@@ -11,6 +11,9 @@ import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
 import com.myhobbylistlmtd.springboot.interfaces.IBasicService;
 import com.myhobbylistlmtd.springboot.request.body.RequestRegisterUserBody;
 
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
 @Service
 public class UserService implements IBasicService<User, Long> {
   /**
@@ -95,15 +98,32 @@ public class UserService implements IBasicService<User, Long> {
   * @version 1.0
   * @author Victor Murilo
   */
-  public String registerUser(final RequestRegisterUserBody body) {
+  public String registerUser(
+    final RequestRegisterUserBody body
+  ) throws AlreadyTakenException {
     this.validateIfUserExists(body);
 
     User userToBeInserted = new User(
       body.getUsername(), body.getEmail(), body.getPassword()
     );
 
-    repository.save(userToBeInserted);
-    String token = "TBA";
+    User savedUser = repository.save(userToBeInserted);
+    String token = this.generateJwtToken(
+      savedUser.getId(),
+      savedUser.getUsername()
+    );
     return token;
+  }
+
+  private String generateJwtToken(
+    final Long userId, final String username
+  ) {
+    String secret = System.getenv("JWT_SECRET");
+    String jwt = Jwts.builder()
+      .signWith(SignatureAlgorithm.HS256, secret)
+      .claim("username", username)
+      .claim("id", userId)
+      .compact();
+    return jwt;
   }
 }
