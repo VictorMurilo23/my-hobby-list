@@ -60,9 +60,8 @@ public class RegisterControllerTests {
         .contentType(MediaType.APPLICATION_JSON)
         .content(json));
 
-    String expectedData = "TBA";
     response.andExpect(status().isCreated())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.token").value(expectedData));
+        .andExpect(MockMvcResultMatchers.jsonPath("$.token").isString());
   }
 
   @Test
