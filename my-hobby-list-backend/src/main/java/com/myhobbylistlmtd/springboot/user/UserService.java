@@ -118,7 +118,6 @@ public class UserService implements IBasicService<User, Long> {
       savedUser.getId(),
       savedUser.getUsername()
     );
-    System.out.println(jwt.verifyToken(token));
     return token;
   }
 }
