@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class RequestUserListBody extends RequestUserId {
+public class RequestUserListBody {
   /**
    * Id de uma media.
    * @since 1.0
