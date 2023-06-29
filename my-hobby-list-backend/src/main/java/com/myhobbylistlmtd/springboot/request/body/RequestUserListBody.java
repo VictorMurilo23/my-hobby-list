@@ -78,7 +78,6 @@ public class RequestUserListBody {
    * @author Victor Murilo
    */
   public Long getMediaId() {
-    System.out.print(mediaId);
     return mediaId;
   }
 

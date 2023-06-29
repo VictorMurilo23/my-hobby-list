@@ -57,18 +57,19 @@ public class MediaControllerTests {
   @Test
   public void getRecentAdd() throws Exception {
     ResultActions response = mockMvc.perform(get("/media/recent-add"));
-    String[] correctDateOrder = {
-        "2024-05-29T08:01:00", "2023-09-19T08:01:00", "2023-06-01T08:01:00", "2023-05-30T09:01:00",
-        "2023-05-30T08:01:00", "2023-05-29T08:01:00", "2023-05-10T08:05:00", "2023-05-03T08:01:00",
-        "2023-04-20T08:01:00",
-        "2023-01-03T08:01:00" };
+    String[] correctMediasOrder = {
+        "8888888899999", "oiytrcvb", "jjdjjwj", "Tessst",
+        "tsste", "Tes1", "45445dwadawd", "vbnbvbbvng",
+        "pjdpiwjpoidajhoi",
+        "87dwdawdadw"
+    };
 
     response.andExpect(status().isOk())
         .andExpect(MockMvcResultMatchers.jsonPath("$.medias").isArray())
         .andExpect(MockMvcResultMatchers.jsonPath("$.medias", hasSize(10)));
-    for (int index = 0; index < correctDateOrder.length; index += 1) {
-      String currentItem = String.format("$.medias[%s].insertionDate", index);
-      response.andExpect(MockMvcResultMatchers.jsonPath(currentItem).value(correctDateOrder[index]));
+    for (int index = 0; index < correctMediasOrder.length; index += 1) {
+      String currentItem = String.format("$.medias[%s].name", index);
+      response.andExpect(MockMvcResultMatchers.jsonPath(currentItem).value(correctMediasOrder[index]));
     }
 
   }
