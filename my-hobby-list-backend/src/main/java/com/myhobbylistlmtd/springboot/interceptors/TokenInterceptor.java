@@ -29,7 +29,7 @@ public class TokenInterceptor implements HandlerInterceptor {
   ) throws Exception {
     String token = request.getHeader("Authorization");
     String userId = jwt.verifyToken(token);
-    request.setAttribute("userId", userId);
+    request.setAttribute("userId", Long.parseLong(userId));
     return true;
   }
 }

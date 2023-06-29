@@ -86,13 +86,16 @@ public class UserListService implements IBasicService<UserList, UserListId> {
   /**
    * Insere um novo item na lista do usuário.
    * @param body Corpo da requisição
+   * @param userId Usado para buscar se o usuário realmente existe
    * @return Uma string dizendo que deu bom.
    * @since 1.0
    * @version 1.0
    * @author Victor Murilo
    */
-  public String insertItemInList(final RequestUserListBody body) {
-    User findUser = userService.findById(body.getUserId());
+  public String insertItemInList(
+    final RequestUserListBody body, final Long userId
+  ) {
+    User findUser = userService.findById(userId);
     Media findMedia = mediaService.findById(body.getMediaId());
     ItemStatus findStatus = findItemStatusByName(
       body.getStatus() == null ? "Em andamento" : body.getStatus()

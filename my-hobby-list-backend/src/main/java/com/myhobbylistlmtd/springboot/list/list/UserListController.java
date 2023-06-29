@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -34,6 +35,7 @@ public class UserListController {
   /**
    * Rota de inserir um item na lista do usuário.
    * @param body Um objeto do tipo RequestUserListBody
+   * @param userId userId setado no TokenInterceptor
    * @return Uma message dizendo que deu certo.
    * @since 1.0
    * @version 1.0
@@ -42,9 +44,10 @@ public class UserListController {
   @PostMapping("/insert")
   @ResponseStatus(HttpStatus.CREATED)
   ResponseMessage insertItemInUserlist(
-    @RequestBody @Valid final RequestUserListBody body
+    @RequestBody @Valid final RequestUserListBody body,
+    @RequestAttribute("userId") final Long userId
   ) {
-    String insertListItem = listService.insertItemInList(body);
+    String insertListItem = listService.insertItemInList(body, userId);
     ResponseMessage response = new ResponseMessage();
     response.setMessage(insertListItem);
     return response;
