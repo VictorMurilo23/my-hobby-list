@@ -16,6 +16,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { SearchComponent } from './pages/search/search.component';
 import { MediaDetailsComponent } from './pages/media-details/media-details.component';
+import { InsertComponent } from './pages/insert/insert.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { MediaDetailsComponent } from './pages/media-details/media-details.compo
     HeaderComponent,
     SearchBarComponent,
     SearchComponent,
-    MediaDetailsComponent
+    MediaDetailsComponent,
+    InsertComponent
   ],
   imports: [
     BrowserModule,
