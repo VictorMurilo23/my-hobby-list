@@ -16,14 +16,17 @@ public class WebConfig implements WebMvcConfigurer {
   @Autowired
   private TokenInterceptor tokenInterceptor;
 
-  @Bean
-  public WebMvcConfigurer corsConfigurer() {
-    return new WebMvcConfigurer() {
-      @Override
-      public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**");
-      }
-    };
+  @Override
+  public void addCorsMappings(CorsRegistry registry) {
+    registry.addMapping("/**")
+        .allowedMethods("*")
+        .allowedOrigins("*")
+        .allowedHeaders("*");
+    registry.addMapping("/list/insert")
+        .allowedMethods("*")
+        .allowedOrigins("*")
+        .allowedHeaders("*")
+        .allowCredentials(true);
   }
 
   @Override
