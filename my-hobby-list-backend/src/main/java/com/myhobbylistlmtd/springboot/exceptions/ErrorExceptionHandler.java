@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -170,6 +171,26 @@ public class ErrorExceptionHandler {
     );
   }
 
+  /**
+   * Tratamento de erros relacionados a um método não implementado de uma rota.
+   * @param ex Exceção de HttpRequestMethodNotSupportedException
+   * @return Um objeto de Error contendo o status code e a mensagem do erro.
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+  @ResponseBody
+  @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+  public Error handleMethodNotSupportedErrors(
+    final HttpRequestMethodNotSupportedException ex
+  ) {
+    return new Error(
+      HttpStatus.METHOD_NOT_ALLOWED.value(),
+      "Método não implementado para esta rota"
+    );
+  }
+
     /**
    * Tratamento de erros a qualquer exceção não tratada.
    * @param ex Exceção de Runtime
@@ -204,9 +225,10 @@ public class ErrorExceptionHandler {
   public Error handleGeneralErrors(
     final Exception ex
   ) {
+    ex.printStackTrace();
     return new Error(
       HttpStatus.INTERNAL_SERVER_ERROR.value(),
-      String.format("Erro interno! %s", ex.getClass().getSimpleName())
+      "Erro interno!"
     );
   }
 }
