@@ -20,7 +20,7 @@ export class ListService {
     return this.http.post<IMessage>(`${this.baseUrl}/insert`, body, {
       observe: 'body',
       responseType: 'json',
-      headers: headers,
+      headers,
     });
   }
 }
