@@ -1,12 +1,26 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import IInsertInfo from '../types/IInsertInfo';
+import { Observable } from 'rxjs';
+import IMessage from '../interfaces/IMessage';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ListService {
   private baseUrl = `${environment.apiUrl}/list`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
+
+  public insertItem(body: IInsertInfo, token: string): Observable<IMessage> {
+    const headers = new HttpHeaders({
+      Authorization: token,
+    });
+    return this.http.post<IMessage>(`${this.baseUrl}/insert`, body, {
+      observe: 'body',
+      responseType: 'json',
+      headers: headers,
+    });
+  }
 }
