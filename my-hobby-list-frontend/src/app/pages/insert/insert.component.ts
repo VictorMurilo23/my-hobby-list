@@ -8,7 +8,7 @@ import { ListService } from 'src/app/services/list.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { MediaService } from 'src/app/services/media.service';
 import IInsertInfo from 'src/app/types/IInsertInfo';
-import { statusNameArray } from 'src/app/utils/statusNameArray';
+import { statusNameArray } from 'src/assets/statusNameArray';
 
 @Component({
   selector: 'app-insert',
@@ -108,7 +108,14 @@ export class InsertComponent extends ErrorMessage implements OnInit {
       next: (_data) => {
         this.router.navigate(["/"]);
       },
-      error: (error: HttpErrorResponse) => super.setErrorMessage(error.error.message)
+      error: (error: HttpErrorResponse) => {
+        const message: string = error.error.message;
+        if (message === "Token inválido") {
+          this.router.navigate(["/login"]);
+          return;
+        }
+        super.setErrorMessage(message);
+      }
     });
   }
 }

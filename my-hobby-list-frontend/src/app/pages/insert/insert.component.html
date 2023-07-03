@@ -7,38 +7,44 @@
   <app-page-not-found></app-page-not-found>
 </div>
 <div class="insert-container" *ngIf="mediaInfo !== undefined && mediaInfo !== null">
-  <p>{{mediaInfo.name}}</p>
-  <div>
+  <p class="media-name">{{mediaInfo.name}}</p>
+  <div class="duration-info-container">
     <label>
       <span>Progresso: </span>
       <input type="number" (change)="changeValue($event)" name="length-input" max={{mediaInfo.length}} value={{insertInfo.length}} />
     </label>
-    <span> / {{mediaInfo.length}}</span>
+    <span class="length"> / {{mediaInfo.length}}</span>
   </div>
-  <div *ngIf="mediaInfo.volumes !== null">
+  <div *ngIf="mediaInfo.volumes !== null" class="duration-info-container">
     <label>
       <span>Volumes lidos: </span>
       <input (change)="changeValue($event)" type="number" name="volumes-input" value={{insertInfo.volumes}} max={{insertInfo.volumes}} />
     </label>
-    <span> / {{mediaInfo.volumes}}</span>
+    <span class="length"> / {{mediaInfo.volumes}}</span>
   </div>
-  <label>
-    <span>Status: </span>
-    <select (change)="changeValue($event)" name="status-input" value={{insertInfo.status}}>
-      <option [value]="statusName" *ngFor="let statusName of insertStatusName">{{statusName}}</option>
-    </select>
-  </label>
-  <label>
-    <span>Nota: </span>
-    <select (change)="changeValue($event)" value={{insertInfo.score}} name="score-input">
-      <option [value]="number" *ngFor="let number of [0,1,2,3,4,5,6,7,8,9,10]">{{number}}</option>
-    </select>
-  </label>
-  <label>
-    <p>Comentários: </p>
-    <textarea (change)="changeValue($event)" name="notes-input" placeholder="Escreva seus comentários sobre a obra, sejam eles bons ou ruins." value={{insertInfo.notes}}>
-    </textarea>
-  </label>
-  <button (click)="sendInfo()">Enviar</button>
+  <div class="status-container">
+    <label>
+      <span>Status: </span>
+      <select (change)="changeValue($event)" name="status-input" value={{insertInfo.status}}>
+        <option [value]="statusName" *ngFor="let statusName of insertStatusName">{{statusName}}</option>
+      </select>
+    </label>
+  </div>
+  <div class="score-container">
+    <label>
+      <span>Nota: </span>
+      <select (change)="changeValue($event)" value={{insertInfo.score}} name="score-input">
+        <option [value]="number" *ngFor="let number of [0,1,2,3,4,5,6,7,8,9,10]">{{number}}</option>
+      </select>
+    </label>
+  </div>
+  <div class="notes-container">
+    <label>
+      <p>Comentários: </p>
+      <textarea (change)="changeValue($event)" name="notes-input" placeholder="Escreva seus comentários sobre a obra, sejam eles bons ou ruins." value={{insertInfo.notes}}>
+      </textarea>
+    </label>
+  </div>
+  <button class="send-insert-info-btn" (click)="sendInfo()">Enviar</button>
 </div>
 <app-error-message *ngIf="getErrorMessage() !== ''" [message]=getErrorMessage() (setErrorMessage)="setErrorMessage()"></app-error-message>
