@@ -7,20 +7,20 @@
   <app-page-not-found></app-page-not-found>
 </div>
 <div class="insert-container" *ngIf="mediaInfo !== undefined && mediaInfo !== null">
-  <p>{{mediaInfo.name}}</p>
-  <div>
+  <p class="media-name">{{mediaInfo.name}}</p>
+  <div class="duration-info-container">
     <label>
       <span>Progresso: </span>
       <input type="number" (change)="changeValue($event)" name="length-input" max={{mediaInfo.length}} value={{insertInfo.length}} />
     </label>
-    <span> / {{mediaInfo.length}}</span>
+    <span class="length"> / {{mediaInfo.length}}</span>
   </div>
-  <div *ngIf="mediaInfo.volumes !== null">
+  <div *ngIf="mediaInfo.volumes !== null" class="duration-info-container">
     <label>
       <span>Volumes lidos: </span>
       <input (change)="changeValue($event)" type="number" name="volumes-input" value={{insertInfo.volumes}} max={{insertInfo.volumes}} />
     </label>
-    <span> / {{mediaInfo.volumes}}</span>
+    <span class="length"> / {{mediaInfo.volumes}}</span>
   </div>
   <label>
     <span>Status: </span>
