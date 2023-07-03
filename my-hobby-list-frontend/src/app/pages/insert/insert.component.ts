@@ -108,7 +108,14 @@ export class InsertComponent extends ErrorMessage implements OnInit {
       next: (_data) => {
         this.router.navigate(["/"]);
       },
-      error: (error: HttpErrorResponse) => super.setErrorMessage(error.error.message)
+      error: (error: HttpErrorResponse) => {
+        const message: string = error.error.message;
+        if (message === "Token inválido") {
+          this.router.navigate(["/login"]);
+          return;
+        }
+        super.setErrorMessage(message);
+      }
     });
   }
 }
