@@ -45,6 +45,6 @@
       </textarea>
     </label>
   </div>
-  <button (click)="sendInfo()">Enviar</button>
+  <button class="send-insert-info-btn" (click)="sendInfo()">Enviar</button>
 </div>
 <app-error-message *ngIf="getErrorMessage() !== ''" [message]=getErrorMessage() (setErrorMessage)="setErrorMessage()"></app-error-message>

@@ -1,6 +1,8 @@
 import {
   ComponentFixture,
   TestBed,
+  fakeAsync,
+  tick,
 } from '@angular/core/testing';
 
 import { InsertComponent } from './insert.component';
@@ -14,11 +16,14 @@ import IMedia from 'src/app/interfaces/IMedia';
 import { By } from '@angular/platform-browser';
 import { statusNameArray } from 'src/assets/statusNameArray';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { ListService } from 'src/app/services/list.service';
 
 describe('InsertComponent', () => {
   let component: InsertComponent;
   let fixture: ComponentFixture<InsertComponent>;
   let router: Router;
+
   const mediaWithoutVolumes: IMedia = {
     id: 1,
     image: 'gto-image',
@@ -80,15 +85,16 @@ describe('InsertComponent', () => {
     let mediaService = fixture.debugElement.injector.get(MediaService);
     spyOn(mediaService, 'getMediaById').and.returnValue(
       throwError(
-        () => new HttpErrorResponse({ error: { message: "Media não encontrada" } })
+        () =>
+          new HttpErrorResponse({ error: { message: 'Media não encontrada' } })
       )
     );
     component.ngOnInit();
     expect(mediaService.getMediaById).toHaveBeenCalled();
     fixture.detectChanges();
-  
-    const notFoundElement = debugElement.query(By.css("app-page-not-found"));
-    expect(notFoundElement).toBeTruthy()
+
+    const notFoundElement = debugElement.query(By.css('app-page-not-found'));
+    expect(notFoundElement).toBeTruthy();
   });
 
   it('should render loading... before getting info', () => {
@@ -99,9 +105,9 @@ describe('InsertComponent', () => {
     );
 
     expect(mediaService.getMediaById).not.toHaveBeenCalled();
-    const loadingElement = debugElement.query(By.css("p")).nativeElement;
+    const loadingElement = debugElement.query(By.css('p')).nativeElement;
     expect(loadingElement).toBeTruthy();
-    expect(loadingElement.textContent).toBe("loading...");
+    expect(loadingElement.textContent).toBe('loading...');
   });
 
   it('should render media info with volumes', () => {
@@ -265,4 +271,240 @@ describe('InsertComponent', () => {
     expect(notesElement.nativeElement.value).toBe('Comentário muito criativo');
     expect(component.insertInfo.notes).toBe('Comentário muito criativo');
   });
+
+  it('should not pass max length and volume value', () => {
+    const { debugElement } = fixture;
+    let mediaService = fixture.debugElement.injector.get(MediaService);
+    spyOn(mediaService, 'getMediaById').and.returnValue(of(mediaWithVolumes));
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    const durationInfoContainers = debugElement.queryAll(
+      By.css('.duration-info-container input')
+    );
+
+    const lengthElement = durationInfoContainers[0];
+    expect(lengthElement).toBeTruthy();
+    lengthElement.triggerEventHandler('change', {
+      target: { value: 3819831928, name: lengthElement.attributes['name'] },
+    });
+    fixture.detectChanges();
+    expect(lengthElement.nativeElement.value).toBe(
+      `${mediaWithVolumes.length}`
+    );
+    expect(component.insertInfo.length).toBe(mediaWithVolumes.length);
+
+    const volumesElement = durationInfoContainers[1];
+    expect(volumesElement).toBeTruthy();
+    volumesElement.triggerEventHandler('change', {
+      target: {
+        value: 219293183102930,
+        name: volumesElement.attributes['name'],
+      },
+    });
+    fixture.detectChanges();
+    expect(volumesElement.nativeElement.value).toBe(
+      `${mediaWithVolumes.volumes}`
+    );
+    expect(component.insertInfo.volumes).toBe(
+      mediaWithVolumes.volumes as number
+    );
+  });
+
+  it('should redirect to login if token isnt in localStorage', fakeAsync(() => {
+    const { debugElement } = fixture;
+    let mediaService = debugElement.injector.get(MediaService);
+    let localStorageService = debugElement.injector.get(LocalStorageService);
+    spyOn(mediaService, 'getMediaById').and.returnValue(of(mediaWithVolumes));
+    spyOn(localStorageService, 'getToken').and.returnValue(null);
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    const durationInfoContainers = debugElement.queryAll(
+      By.css('.duration-info-container input')
+    );
+
+    const lengthElement = durationInfoContainers[0];
+    lengthElement.triggerEventHandler('change', {
+      target: { value: 30, name: lengthElement.attributes['name'] },
+    });
+    fixture.detectChanges();
+    expect(component.insertInfo.length).toBe(30);
+
+    const volumesElement = durationInfoContainers[1];
+    volumesElement.triggerEventHandler('change', {
+      target: { value: 2, name: volumesElement.attributes['name'] },
+    });
+    fixture.detectChanges();
+    expect(component.insertInfo.volumes).toBe(2);
+
+    const scoreElement = debugElement.query(By.css('.score-container select'));
+    scoreElement.triggerEventHandler('change', {
+      target: { value: 9, name: scoreElement.attributes['name'] },
+    });
+    fixture.detectChanges();
+    expect(component.insertInfo.score).toBe(9);
+
+    const statusElement = debugElement.query(
+      By.css('.status-container select')
+    );
+    statusElement.triggerEventHandler('change', {
+      target: {
+        value: statusNameArray[1],
+        name: statusElement.attributes['name'],
+      },
+    });
+    fixture.detectChanges();
+    expect(component.insertInfo.status).toBe(statusNameArray[1]);
+
+    const notesElement = debugElement.query(
+      By.css('.notes-container textarea')
+    );
+    expect(notesElement).toBeTruthy();
+    notesElement.triggerEventHandler('change', {
+      target: {
+        value: 'Comentário muito criativo',
+        name: notesElement.attributes['name'],
+      },
+    });
+
+    const sendBtn = debugElement.query(By.css('.send-insert-info-btn'));
+    sendBtn.triggerEventHandler('click', {});
+    tick();
+    expect(router.url).toBe('/login');
+  }));
+
+  it('should redirect to login if token is invalid', fakeAsync(() => {
+    const { debugElement } = fixture;
+    let mediaService = debugElement.injector.get(MediaService);
+    let localStorageService = debugElement.injector.get(LocalStorageService);
+    let listService = debugElement.injector.get(ListService);
+    spyOn(mediaService, 'getMediaById').and.returnValue(of(mediaWithVolumes));
+    spyOn(localStorageService, 'getToken').and.returnValue('invalid token');
+    spyOn(listService, 'insertItem').and.returnValue(
+      throwError(
+        () =>
+          new HttpErrorResponse({ error: { message: 'Token inválido' } })
+      )
+    );
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    const durationInfoContainers = debugElement.queryAll(
+      By.css('.duration-info-container input')
+    );
+
+    const lengthElement = durationInfoContainers[0];
+    lengthElement.triggerEventHandler('change', {
+      target: { value: 30, name: lengthElement.attributes['name'] },
+    });
+    fixture.detectChanges();
+    expect(component.insertInfo.length).toBe(30);
+
+    const volumesElement = durationInfoContainers[1];
+    volumesElement.triggerEventHandler('change', {
+      target: { value: 2, name: volumesElement.attributes['name'] },
+    });
+    fixture.detectChanges();
+    expect(component.insertInfo.volumes).toBe(2);
+
+    const scoreElement = debugElement.query(By.css('.score-container select'));
+    scoreElement.triggerEventHandler('change', {
+      target: { value: 9, name: scoreElement.attributes['name'] },
+    });
+    fixture.detectChanges();
+    expect(component.insertInfo.score).toBe(9);
+
+    const statusElement = debugElement.query(
+      By.css('.status-container select')
+    );
+    statusElement.triggerEventHandler('change', {
+      target: {
+        value: statusNameArray[1],
+        name: statusElement.attributes['name'],
+      },
+    });
+    fixture.detectChanges();
+    expect(component.insertInfo.status).toBe(statusNameArray[1]);
+
+    const notesElement = debugElement.query(
+      By.css('.notes-container textarea')
+    );
+    expect(notesElement).toBeTruthy();
+    notesElement.triggerEventHandler('change', {
+      target: {
+        value: 'Comentário muito criativo',
+        name: notesElement.attributes['name'],
+      },
+    });
+
+    const sendBtn = debugElement.query(By.css('.send-insert-info-btn'));
+    sendBtn.triggerEventHandler('click', {});
+    tick();
+    expect(router.url).toBe('/login');
+  }));
+
+  it('should redirect to home when insert succeeded', fakeAsync(() => {
+    const { debugElement } = fixture;
+    let mediaService = debugElement.injector.get(MediaService);
+    let localStorageService = debugElement.injector.get(LocalStorageService);
+    let listService = debugElement.injector.get(ListService);
+    spyOn(mediaService, 'getMediaById').and.returnValue(of(mediaWithVolumes));
+    spyOn(localStorageService, 'getToken').and.returnValue('valid token');
+    spyOn(listService, 'insertItem').and.returnValue(of({ message: "Deu bom" }));
+    router.navigate(['media/insert/1']);
+    component.ngOnInit();
+    fixture.detectChanges();
+    const durationInfoContainers = debugElement.queryAll(
+      By.css('.duration-info-container input')
+    );
+    const lengthElement = durationInfoContainers[0];
+    lengthElement.triggerEventHandler('change', {
+      target: { value: 30, name: lengthElement.attributes['name'] },
+    });
+    fixture.detectChanges();
+    expect(component.insertInfo.length).toBe(30);
+
+    const volumesElement = durationInfoContainers[1];
+    volumesElement.triggerEventHandler('change', {
+      target: { value: 2, name: volumesElement.attributes['name'] },
+    });
+    fixture.detectChanges();
+    expect(component.insertInfo.volumes).toBe(2);
+
+    const scoreElement = debugElement.query(By.css('.score-container select'));
+    scoreElement.triggerEventHandler('change', {
+      target: { value: 9, name: scoreElement.attributes['name'] },
+    });
+    fixture.detectChanges();
+    expect(component.insertInfo.score).toBe(9);
+
+    const statusElement = debugElement.query(
+      By.css('.status-container select')
+    );
+    statusElement.triggerEventHandler('change', {
+      target: {
+        value: statusNameArray[1],
+        name: statusElement.attributes['name'],
+      },
+    });
+    fixture.detectChanges();
+    expect(component.insertInfo.status).toBe(statusNameArray[1]);
+
+    const notesElement = debugElement.query(
+      By.css('.notes-container textarea')
+    );
+    expect(notesElement).toBeTruthy();
+    notesElement.triggerEventHandler('change', {
+      target: {
+        value: 'Comentário muito criativo',
+        name: notesElement.attributes['name'],
+      },
+    });
+
+    const sendBtn = debugElement.query(By.css('.send-insert-info-btn'));
+    sendBtn.triggerEventHandler('click', {});
+    tick();
+    expect(router.url).toBe("/")
+  }));
 });
