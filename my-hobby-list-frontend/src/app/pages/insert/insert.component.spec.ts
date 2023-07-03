@@ -5,14 +5,15 @@ import {
 
 import { InsertComponent } from './insert.component';
 import routes from 'src/app/app.routes';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { MediaService } from 'src/app/services/media.service';
 import IMedia from 'src/app/interfaces/IMedia';
 import { By } from '@angular/platform-browser';
 import { statusNameArray } from 'src/assets/statusNameArray';
+import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 
 describe('InsertComponent', () => {
   let component: InsertComponent;
@@ -42,7 +43,7 @@ describe('InsertComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientModule, RouterTestingModule.withRoutes(routes)],
-      declarations: [InsertComponent],
+      declarations: [InsertComponent, PageNotFoundComponent],
       providers: [
         {
           provide: ActivatedRoute,
@@ -72,6 +73,35 @@ describe('InsertComponent', () => {
     component.ngOnInit();
     fixture.detectChanges();
     expect(mediaService.getMediaById).toHaveBeenCalled();
+  });
+
+  it('should render not found component when doesnt found media', () => {
+    const { debugElement } = fixture;
+    let mediaService = fixture.debugElement.injector.get(MediaService);
+    spyOn(mediaService, 'getMediaById').and.returnValue(
+      throwError(
+        () => new HttpErrorResponse({ error: { message: "Media não encontrada" } })
+      )
+    );
+    component.ngOnInit();
+    expect(mediaService.getMediaById).toHaveBeenCalled();
+    fixture.detectChanges();
+  
+    const notFoundElement = debugElement.query(By.css("app-page-not-found"));
+    expect(notFoundElement).toBeTruthy()
+  });
+
+  it('should render loading... before getting info', () => {
+    const { debugElement } = fixture;
+    let mediaService = fixture.debugElement.injector.get(MediaService);
+    spyOn(mediaService, 'getMediaById').and.returnValue(
+      of(mediaWithoutVolumes)
+    );
+
+    expect(mediaService.getMediaById).not.toHaveBeenCalled();
+    const loadingElement = debugElement.query(By.css("p")).nativeElement;
+    expect(loadingElement).toBeTruthy();
+    expect(loadingElement.textContent).toBe("loading...");
   });
 
   it('should render media info with volumes', () => {
