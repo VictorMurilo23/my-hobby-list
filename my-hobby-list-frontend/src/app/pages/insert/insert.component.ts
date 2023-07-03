@@ -8,7 +8,7 @@ import { ListService } from 'src/app/services/list.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { MediaService } from 'src/app/services/media.service';
 import IInsertInfo from 'src/app/types/IInsertInfo';
-import { statusNameArray } from 'src/app/utils/statusNameArray';
+import { statusNameArray } from 'src/assets/statusNameArray';
 
 @Component({
   selector: 'app-insert',
