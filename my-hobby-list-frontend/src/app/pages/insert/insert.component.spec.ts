@@ -23,6 +23,9 @@ describe('InsertComponent', () => {
   let component: InsertComponent;
   let fixture: ComponentFixture<InsertComponent>;
   let router: Router;
+  let mediaService: MediaService;
+  let localStorageService: LocalStorageService;
+  let listService: ListService;
 
   const mediaWithoutVolumes: IMedia = {
     id: 1,
@@ -62,6 +65,9 @@ describe('InsertComponent', () => {
     router = TestBed.inject(Router);
     fixture = TestBed.createComponent(InsertComponent);
     component = fixture.componentInstance;
+    mediaService = fixture.debugElement.injector.get(MediaService);
+    localStorageService = fixture.debugElement.injector.get(LocalStorageService);
+    listService = fixture.debugElement.injector.get(ListService);
     fixture.detectChanges();
   });
 
@@ -70,7 +76,6 @@ describe('InsertComponent', () => {
   });
 
   it('should call getMediaById on init', () => {
-    let mediaService = fixture.debugElement.injector.get(MediaService);
     spyOn(mediaService, 'getMediaById').and.returnValue(
       of(mediaWithoutVolumes)
     );
@@ -82,7 +87,6 @@ describe('InsertComponent', () => {
 
   it('should render not found component when doesnt found media', () => {
     const { debugElement } = fixture;
-    let mediaService = fixture.debugElement.injector.get(MediaService);
     spyOn(mediaService, 'getMediaById').and.returnValue(
       throwError(
         () =>
@@ -99,7 +103,6 @@ describe('InsertComponent', () => {
 
   it('should render loading... before getting info', () => {
     const { debugElement } = fixture;
-    let mediaService = fixture.debugElement.injector.get(MediaService);
     spyOn(mediaService, 'getMediaById').and.returnValue(
       of(mediaWithoutVolumes)
     );
@@ -112,7 +115,6 @@ describe('InsertComponent', () => {
 
   it('should render media info with volumes', () => {
     const { debugElement } = fixture;
-    let mediaService = fixture.debugElement.injector.get(MediaService);
     spyOn(mediaService, 'getMediaById').and.returnValue(of(mediaWithVolumes));
     component.ngOnInit();
     fixture.detectChanges();
@@ -130,7 +132,6 @@ describe('InsertComponent', () => {
 
   it('should render media info without volumes', () => {
     const { debugElement } = fixture;
-    let mediaService = fixture.debugElement.injector.get(MediaService);
     spyOn(mediaService, 'getMediaById').and.returnValue(
       of(mediaWithoutVolumes)
     );
@@ -150,7 +151,6 @@ describe('InsertComponent', () => {
 
   it('should render status options based on statusNameArray', () => {
     const { debugElement } = fixture;
-    let mediaService = fixture.debugElement.injector.get(MediaService);
     spyOn(mediaService, 'getMediaById').and.returnValue(of(mediaWithVolumes));
     component.ngOnInit();
     fixture.detectChanges();
@@ -168,7 +168,6 @@ describe('InsertComponent', () => {
 
   it('should call changeValue on field change', () => {
     const { debugElement } = fixture;
-    let mediaService = fixture.debugElement.injector.get(MediaService);
     spyOn(mediaService, 'getMediaById').and.returnValue(of(mediaWithVolumes));
     spyOn(component, 'changeValue');
     component.ngOnInit();
@@ -207,7 +206,6 @@ describe('InsertComponent', () => {
 
   it('should change input value and component attribute, insertInfo, on change', () => {
     const { debugElement } = fixture;
-    let mediaService = fixture.debugElement.injector.get(MediaService);
     spyOn(mediaService, 'getMediaById').and.returnValue(of(mediaWithVolumes));
     component.ngOnInit();
     fixture.detectChanges();
@@ -274,7 +272,6 @@ describe('InsertComponent', () => {
 
   it('should not pass max length and volume value', () => {
     const { debugElement } = fixture;
-    let mediaService = fixture.debugElement.injector.get(MediaService);
     spyOn(mediaService, 'getMediaById').and.returnValue(of(mediaWithVolumes));
     component.ngOnInit();
     fixture.detectChanges();
@@ -313,8 +310,6 @@ describe('InsertComponent', () => {
 
   it('should redirect to login if token isnt in localStorage', fakeAsync(() => {
     const { debugElement } = fixture;
-    let mediaService = debugElement.injector.get(MediaService);
-    let localStorageService = debugElement.injector.get(LocalStorageService);
     spyOn(mediaService, 'getMediaById').and.returnValue(of(mediaWithVolumes));
     spyOn(localStorageService, 'getToken').and.returnValue(null);
     component.ngOnInit();
@@ -376,9 +371,6 @@ describe('InsertComponent', () => {
 
   it('should redirect to login if token is invalid', fakeAsync(() => {
     const { debugElement } = fixture;
-    let mediaService = debugElement.injector.get(MediaService);
-    let localStorageService = debugElement.injector.get(LocalStorageService);
-    let listService = debugElement.injector.get(ListService);
     spyOn(mediaService, 'getMediaById').and.returnValue(of(mediaWithVolumes));
     spyOn(localStorageService, 'getToken').and.returnValue('invalid token');
     spyOn(listService, 'insertItem').and.returnValue(
@@ -446,9 +438,6 @@ describe('InsertComponent', () => {
 
   it('should redirect to home when insert succeeded', fakeAsync(() => {
     const { debugElement } = fixture;
-    let mediaService = debugElement.injector.get(MediaService);
-    let localStorageService = debugElement.injector.get(LocalStorageService);
-    let listService = debugElement.injector.get(ListService);
     spyOn(mediaService, 'getMediaById').and.returnValue(of(mediaWithVolumes));
     spyOn(localStorageService, 'getToken').and.returnValue('valid token');
     spyOn(listService, 'insertItem').and.returnValue(of({ message: "Deu bom" }));
