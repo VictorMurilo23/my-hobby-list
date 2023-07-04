@@ -106,7 +106,6 @@ public class UserListService implements IBasicService<UserList, UserListId> {
     UserList list = new UserList();
     list.setId(id);
     list.setStatus(findStatus);
-    list.setStatus(findStatus);
     list.setScore(body.getScore());
     list.setNotes(body.getNotes());
     list.setProgress(body.getProgress() == null ? 0 : body.getProgress());
@@ -117,12 +116,15 @@ public class UserListService implements IBasicService<UserList, UserListId> {
   }
 
   /**
-   * Encontra a lista de itens de um usuário.
-   * @param userId Id do usuário a ser buscado
-   * @return Uma lista de objetos UserList
+   * Encontra a lista do usuário por nome de usuário.
+   * @param username Nome do usuário utilizado na busca
+   * @return Uma lista com objetos UserList
+   * @version 2.0
+   * @since 1.0
+   * @author Victor Murilo
    */
-  public List<UserList> findListByUserId(final Long userId) {
-    User user = userService.findById(userId);
+  public List<UserList> findListByUser(final String username) {
+    User user = userService.findByUsername(username);
     List<UserList> list = listRepo.findAllById_UserId(user);
     return list;
   }
