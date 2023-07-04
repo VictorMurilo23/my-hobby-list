@@ -1,5 +1,5 @@
-import MediaStatusObj from "../types/MediaStatusObj";
-import MediaTypeObj from "../types/MediaTypeObj";
+import StatusObj from "../types/StatusObj";
+import TypeObj from "../types/TypeObj";
 
 export default interface IMedia {
   id: number;
@@ -7,6 +7,6 @@ export default interface IMedia {
   length: number;
   volumes: number | null;
   image: string;
-  status: MediaStatusObj;
-  type: MediaTypeObj;
+  status: StatusObj;
+  type: TypeObj;
 }
