@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "shengchen.vscode-checkstyle",
+    "vscjava.vscode-java-debug",
+    "ms-azuretools.vscode-docker",
+    "vscjava.vscode-java-pack",
+    "redhat.java",
+    "vscjava.vscode-maven",
+    "vscjava.vscode-java-dependency",
+    "vscjava.vscode-java-test"
+  ]
+}
