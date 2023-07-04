@@ -1,7 +1,7 @@
 {
   "java.configuration.updateBuildConfiguration": "interactive",
   "java.checkstyle.properties": {
-    "config_loc": "${workspaceFolder}/my-hobby-list-backend"
+    "config_loc": "${workspaceFolder}"
   },
-  "java.checkstyle.configuration": "${workspaceFolder}/my-hobby-list-backend/sun_checks.xml"
+  "java.checkstyle.configuration": "${workspaceFolder}/sun_checks.xml"
 }
