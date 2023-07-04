@@ -17,6 +17,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { SearchComponent } from './pages/search/search.component';
 import { MediaDetailsComponent } from './pages/media-details/media-details.component';
 import { InsertComponent } from './pages/insert/insert.component';
+import { UserListComponent } from './pages/user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { InsertComponent } from './pages/insert/insert.component';
     SearchBarComponent,
     SearchComponent,
     MediaDetailsComponent,
-    InsertComponent
+    InsertComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
