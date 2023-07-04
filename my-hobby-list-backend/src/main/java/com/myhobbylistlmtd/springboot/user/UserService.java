@@ -88,7 +88,9 @@ public class UserService implements IBasicService<User, Long> {
     if (currentUser == null || !password.equals(currentUser.getPassword())) {
       throw new InvalidLoginException("Senha ou email incorretos");
     }
-    String token = "TBA";
+    String token = jwt.generateJwtToken(
+      currentUser.getId(), currentUser.getUsername()
+    );
     return token;
   }
 
