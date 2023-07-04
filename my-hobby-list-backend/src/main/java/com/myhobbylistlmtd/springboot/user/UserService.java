@@ -43,6 +43,40 @@ public class UserService implements IBasicService<User, Long> {
   }
 
   /**
+   * Faz uma busca por nome de usuário.
+   * @param username Nome de usuário utilizado na busca.
+   * @return Retorna um objeto de User
+   * @throws NotFoundException Ocorre quando o usuário não é encontrado
+   * @version 1.0
+   * @since 1.0
+   * @author Victor Murilo
+   */
+  public User findByUsername(final String username) throws NotFoundException {
+    User user = repository.findByUsername(username);
+    if (user == null) {
+      throw new NotFoundException("User não encontrada!");
+    }
+    return user;
+  }
+
+  /**
+   * Faz uma busca por email.
+   * @param email Email do usuário utilizado na busca.
+   * @return Retorna um objeto de User
+   * @throws NotFoundException Ocorre quando o usuário não é encontrado
+   * @version 1.0
+   * @since 1.0
+   * @author Victor Murilo
+   */
+  public User findByEmail(final String email) throws NotFoundException {
+    User user = repository.findByEmail(email);
+    if (user == null) {
+      throw new NotFoundException("User não encontrada!");
+    }
+    return user;
+  }
+
+  /**
   * Repositório utilizado para fazer as interações com o banco de dados.
   * @param body Body da requisição com atributo email e username
   * @throws AlreadyTakenException Ocorre quando é passada
@@ -88,7 +122,9 @@ public class UserService implements IBasicService<User, Long> {
     if (currentUser == null || !password.equals(currentUser.getPassword())) {
       throw new InvalidLoginException("Senha ou email incorretos");
     }
-    String token = "TBA";
+    String token = jwt.generateJwtToken(
+      currentUser.getId(), currentUser.getUsername()
+    );
     return token;
   }
 
