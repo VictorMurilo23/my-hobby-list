@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.myhobbylistlmtd.springboot.request.body.RequestUserId;
 import com.myhobbylistlmtd.springboot.request.body.RequestUserListBody;
 import com.myhobbylistlmtd.springboot.response.body.ResponseMessage;
 import com.myhobbylistlmtd.springboot.response.body.ResponseUserList;
@@ -55,18 +55,18 @@ public class UserListController {
 
   /**
    * Rota de pegar os itens da lista do usuário.
-   * @param body Um objeto de RequestUserId
+   * @param username Nome do usuário utilizado na busca
    * @return Um objeto contendo os itens da lista do usuário
    * @since 1.0
    * @version 1.0
    * @author Victor Murilo
    */
-  @GetMapping("/find")
+  @GetMapping("/find/{username}")
   @ResponseStatus(HttpStatus.OK)
   ResponseUserList findUserlistItems(
-    @RequestBody @Valid final RequestUserId body
+    final @PathVariable String username
   ) {
-    List<UserList> list = listService.findListByUserId(body.getUserId());
+    List<UserList> list = listService.findListByUser(username);
     ResponseUserList response = new ResponseUserList();
     response.setList(list);
     return response;
