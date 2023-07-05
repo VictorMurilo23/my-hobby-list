@@ -2,7 +2,10 @@ package com.myhobbylistlmtd.springboot.media.type;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.media.media.Media;
+import com.myhobbylistlmtd.springboot.utils.Views;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,6 +32,7 @@ public class MediaType {
   */
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
+  @JsonView(Views.Internal.class)
   private Long id;
 
   /** Coluna com o nome do tipo de
@@ -38,6 +42,8 @@ public class MediaType {
   * @version 1.0
   */
   @Column(name = "type", length = TYPE_LENGTH, nullable = false, unique = true)
+  @JsonView(Views.Public.class)
+  @JsonValue
   private String type;
 
   /** Associação com tabela media.
