@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.request.body.RequestUserListBody;
 import com.myhobbylistlmtd.springboot.response.body.ResponseMessage;
 import com.myhobbylistlmtd.springboot.response.body.ResponseUserList;
+import com.myhobbylistlmtd.springboot.utils.Views;
 
 import jakarta.validation.Valid;
 
@@ -63,6 +65,7 @@ public class UserListController {
    */
   @GetMapping("/find/{username}")
   @ResponseStatus(HttpStatus.OK)
+  @JsonView(Views.Public.class)
   ResponseUserList findUserlistItems(
     final @PathVariable String username
   ) {
