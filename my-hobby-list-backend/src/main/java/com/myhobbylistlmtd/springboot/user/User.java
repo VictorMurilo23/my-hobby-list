@@ -1,5 +1,9 @@
 package com.myhobbylistlmtd.springboot.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.myhobbylistlmtd.springboot.utils.Views;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,6 +35,7 @@ public class User {
   */
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
+  @JsonView(Views.Internal.class)
   private Long id;
 
   /** O nome do usuário, é necessário ser unico.
@@ -41,6 +46,7 @@ public class User {
   @Column(
     name = "username", length = USERNAME_LENGTH, nullable = false
   )
+  @JsonView(Views.Public.class)
   private String username;
 
   /** Email utilizado pelo usuário na hora de fazer login.
@@ -51,6 +57,7 @@ public class User {
   @Column(
     name = "email", nullable = false
   )
+  @JsonView(Views.Internal.class)
   private String email;
 
   /** Senha utilizado pelo usuário na hora de fazer login.
@@ -61,6 +68,7 @@ public class User {
   @Column(
     name = "password", length = PASSWORD_LENGTH, nullable = false
   )
+  @JsonIgnore
   private String password;
 
   /** Default constructor.
