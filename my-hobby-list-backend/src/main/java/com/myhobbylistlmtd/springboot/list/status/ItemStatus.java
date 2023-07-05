@@ -2,7 +2,10 @@ package com.myhobbylistlmtd.springboot.list.status;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.list.list.UserList;
+import com.myhobbylistlmtd.springboot.utils.Views;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,6 +25,7 @@ public class ItemStatus {
   */
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
+  @JsonView(Views.Internal.class)
   private Long id;
 
 
@@ -31,6 +35,8 @@ public class ItemStatus {
   * @version 1.0
   */
   @Column(name = "list_status_name", nullable = false)
+  @JsonView(Views.Public.class)
+  @JsonValue
   private String statusName;
 
   /** Associação com tabela user_list.

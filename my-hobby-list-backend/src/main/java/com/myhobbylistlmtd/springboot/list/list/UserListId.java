@@ -3,8 +3,11 @@ package com.myhobbylistlmtd.springboot.list.list;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.media.media.Media;
 import com.myhobbylistlmtd.springboot.user.User;
+import com.myhobbylistlmtd.springboot.utils.Views;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
@@ -27,6 +30,8 @@ public class UserListId implements Serializable {
   */
   @ManyToOne
   @JoinColumn(name = "media_id")
+  @JsonView(Views.Public.class)
+  @JsonValue
   private Media mediaId;
 
   /**
@@ -37,6 +42,7 @@ public class UserListId implements Serializable {
   */
   @ManyToOne
   @JoinColumn(name = "user_id")
+  @JsonView(Views.Internal.class)
   private User userId;
 
     /**
