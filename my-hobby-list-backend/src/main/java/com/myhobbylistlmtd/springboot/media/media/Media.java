@@ -2,10 +2,11 @@ package com.myhobbylistlmtd.springboot.media.media;
 
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.media.status.MediaStatus;
 import com.myhobbylistlmtd.springboot.media.type.MediaType;
 import com.myhobbylistlmtd.springboot.objs.MediaParams;
+import com.myhobbylistlmtd.springboot.utils.Views;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,6 +27,7 @@ public class Media {
   */
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
+  @JsonView({Views.Public.class, Views.MediaCard.class})
   private Long id;
 
   /** Coluna com o nome da midia.
@@ -34,6 +36,7 @@ public class Media {
   * @version 1.0
   */
   @Column(name = "name", nullable = false)
+  @JsonView({Views.Public.class, Views.MediaCard.class})
   private String name;
 
   /** Coluna com a duração da midia, dependendo da midia
@@ -43,6 +46,7 @@ public class Media {
   * @version 1.0
   */
   @Column(name = "length", nullable = false)
+  @JsonView(Views.Public.class)
   private Integer length;
 
   /** Coluna com a quantidade de volumes que uma midia pode ter,
@@ -52,6 +56,7 @@ public class Media {
   * @version 1.0
   */
   @Column(name = "volumes", nullable = true)
+  @JsonView(Views.Public.class)
   private Integer volumes = null;
 
   /** Coluna com a url da capa da media.
@@ -60,6 +65,7 @@ public class Media {
   * @version 1.0
   */
   @Column(name = "image_url", nullable = false)
+  @JsonView({Views.Public.class, Views.MediaCard.class})
   private String image;
 
   /** Chave estrangeira do id do status atual.
@@ -69,6 +75,7 @@ public class Media {
   */
   @ManyToOne
   @JoinColumn(name = "status_id", nullable = false, referencedColumnName = "id")
+  @JsonView(Views.Public.class)
   private MediaStatus status;
 
   /** Chave estrangeira do id do status atual.
@@ -78,6 +85,7 @@ public class Media {
   */
   @ManyToOne
   @JoinColumn(name = "type_id", nullable = false, referencedColumnName = "id")
+  @JsonView(Views.Public.class)
   private MediaType type;
 
   /** Data e horário de inserção da media atual.
@@ -86,7 +94,7 @@ public class Media {
   * @version 1.0
   */
   @Column(name = "insertion_date", nullable = false)
-  @JsonIgnore
+  @JsonView(Views.Internal.class)
   private LocalDateTime insertionDate;
 
   /** Default constructor.
