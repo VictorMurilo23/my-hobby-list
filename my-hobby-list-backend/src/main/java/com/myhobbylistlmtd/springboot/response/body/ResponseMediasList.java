@@ -2,7 +2,9 @@ package com.myhobbylistlmtd.springboot.response.body;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.media.media.Media;
+import com.myhobbylistlmtd.springboot.utils.Views;
 
 public class ResponseMediasList {
   /**
@@ -11,6 +13,7 @@ public class ResponseMediasList {
    * @author Victor Murilo
    * @version 1.0
    */
+  @JsonView(Views.MediaCard.class)
   private List<Media> medias;
 
   /** Getter do atributo token.
