@@ -2,9 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { Observable } from 'rxjs';
-import IMediaBody from '../interfaces/IMediaBody';
 import IMedia from '../interfaces/IMedia';
-import IMediaCard from '../interfaces/IMediaCard';
 import IMediaCardsBody from '../interfaces/IMediaCardsBody';
 
 @Injectable({

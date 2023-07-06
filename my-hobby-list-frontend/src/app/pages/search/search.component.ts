@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EMPTY, concatMap } from 'rxjs';
-import IMedia from 'src/app/interfaces/IMedia';
 import IMediaCard from 'src/app/interfaces/IMediaCard';
 import IMediaCardsBody from 'src/app/interfaces/IMediaCardsBody';
 import { MediaService } from 'src/app/services/media.service';
