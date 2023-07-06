@@ -17,8 +17,8 @@
     <div class="media-info-container">
       <p>Informações</p>
       <div>
-        <p class="media-type">Tipo: {{getMediaInfo()?.type?.type}}</p>
-        <p class="media-status">Status: {{getMediaInfo()?.status?.status}}</p>
+        <p class="media-type">Tipo: {{getMediaInfo()?.type}}</p>
+        <p class="media-status">Status: {{getMediaInfo()?.status}}</p>
         <p class="media-volumes" *ngIf="getMediaInfo()?.volumes !== null" >Volumes: {{getMediaInfo()?.volumes}}</p>
         <p class="media-duration">Duração: {{getMediaInfo()?.length}}</p>
       </div>
