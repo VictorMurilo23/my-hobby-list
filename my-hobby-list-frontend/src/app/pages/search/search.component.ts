@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EMPTY, concatMap } from 'rxjs';
 import IMedia from 'src/app/interfaces/IMedia';
-import IMediaBody from 'src/app/interfaces/IMediaBody';
+import IMediaCard from 'src/app/interfaces/IMediaCard';
+import IMediaCardsBody from 'src/app/interfaces/IMediaCardsBody';
 import { MediaService } from 'src/app/services/media.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { MediaService } from 'src/app/services/media.service';
 })
 export class SearchComponent implements OnInit {
   public mediaName = '';
-  private mediasList: IMedia[] = [];
+  private mediasList: IMediaCard[] = [];
   constructor(
     private activatedRoute: ActivatedRoute,
     private mediaService: MediaService
@@ -32,7 +33,7 @@ export class SearchComponent implements OnInit {
         })
       )
       .subscribe({
-        next: (data: IMediaBody) => {
+        next: (data: IMediaCardsBody) => {
           this.mediasList = [...data.medias];
         },
       });
@@ -42,7 +43,7 @@ export class SearchComponent implements OnInit {
     this.searchMedias();
   }
 
-  getMediasList(): IMedia[] {
+  getMediasList(): IMediaCard[] {
     return this.mediasList;
   }
 }

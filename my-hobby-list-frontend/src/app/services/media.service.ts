@@ -4,6 +4,8 @@ import { environment } from 'src/environments/environment.development';
 import { Observable } from 'rxjs';
 import IMediaBody from '../interfaces/IMediaBody';
 import IMedia from '../interfaces/IMedia';
+import IMediaCard from '../interfaces/IMediaCard';
+import IMediaCardsBody from '../interfaces/IMediaCardsBody';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +15,12 @@ export class MediaService {
 
   constructor(private http: HttpClient) { }
 
-  public getRecent(): Observable<IMediaBody> {
-    return this.http.get<IMediaBody>(`${this.baseUrl}/recent-add`, { observe: "body", responseType: 'json' });
+  public getRecent(): Observable<IMediaCardsBody> {
+    return this.http.get<IMediaCardsBody>(`${this.baseUrl}/recent-add`, { observe: "body", responseType: 'json' });
   }
 
-  public searchByName(mediaName: string): Observable<IMediaBody> {
-    return this.http.get<IMediaBody>(`${this.baseUrl}/search-by-name/${mediaName}`, { observe: "body", responseType: 'json' });
+  public searchByName(mediaName: string): Observable<IMediaCardsBody> {
+    return this.http.get<IMediaCardsBody>(`${this.baseUrl}/search-by-name/${mediaName}`, { observe: "body", responseType: 'json' });
   }
 
   public getMediaById(mediaId: string): Observable<IMedia> {
