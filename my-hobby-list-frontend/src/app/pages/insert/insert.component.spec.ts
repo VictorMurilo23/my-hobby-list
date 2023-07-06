@@ -33,14 +33,8 @@ describe('InsertComponent', () => {
     length: 208,
     volumes: null,
     name: 'GTO',
-    status: {
-      id: 1,
-      status: 'Completo',
-    },
-    type: {
-      id: 1,
-      type: 'Manga',
-    },
+    status: 'Completo',
+    type: 'Manga',
   };
 
   const mediaWithVolumes: IMedia = {
