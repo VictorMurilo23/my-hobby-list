@@ -4,7 +4,7 @@ type UserListObj = {
   media: IMedia,
   progress: number,
   score: number,
-  notes: number,
+  notes: string | null,
   status: string
 };
 
