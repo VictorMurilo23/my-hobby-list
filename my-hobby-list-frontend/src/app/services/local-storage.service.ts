@@ -14,6 +14,10 @@ export class LocalStorageService {
     this.storage.setItem("token", token)
   }
 
+  removeToken(): void {
+    this.storage.removeItem("token");
+  }
+
   getToken(): string | null {
     return this.storage.getItem("token")
   }
