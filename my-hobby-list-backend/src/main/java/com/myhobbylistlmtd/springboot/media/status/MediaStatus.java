@@ -2,7 +2,10 @@ package com.myhobbylistlmtd.springboot.media.status;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.media.media.Media;
+import com.myhobbylistlmtd.springboot.utils.Views;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,6 +25,7 @@ public class MediaStatus {
   */
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
+  @JsonView(Views.Internal.class)
   private Long id;
 
   /** Nome do tipo de status da midia.
@@ -30,6 +34,8 @@ public class MediaStatus {
   * @version 1.0
   */
   @Column(name = "status_name", nullable = false)
+  @JsonView(Views.Public.class)
+  @JsonValue
   private String status;
 
   /** Associação com tabela media.

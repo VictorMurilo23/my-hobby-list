@@ -1,0 +1,35 @@
+<div *ngIf="userList === undefined">
+  <div class="loading-container">
+    <p>loading...</p>
+  </div>
+</div>
+<div *ngIf="userList === null">
+  <app-page-not-found></app-page-not-found>
+</div>
+<div *ngIf="userList !== undefined && userList !== null" class="user-list-container">
+  <div *ngFor="let item of userList" class="user-list-item">
+    <app-media-card
+      [mediaName]=item.media.name 
+      [imageUrl]=item.media.image
+      [mediaId]=item.media.id
+    ></app-media-card>
+    <div class="item-comments">
+      <span>{{item.notes}}</span>
+    </div>
+    <div class="item-score">
+      <span>Nota: </span>
+      <span>{{item.score}}</span>
+    </div>
+    <div class="item-progress">
+      <span>Progresso: </span>
+      <span>{{item.progress}}</span>
+      <span> / {{item.media.length}}</span>
+    </div>
+    <div class="item-media-type">
+      <span>{{item.media.type}}</span>
+    </div>
+    <div class="item-status">
+      <span>{{item.status}}</span>
+    </div>
+  </div>
+</div>

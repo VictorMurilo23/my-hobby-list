@@ -32,14 +32,8 @@ describe('SearchComponent', () => {
       length: 140,
       volumes: null,
       name: 'teste1',
-      status: {
-        id: 1,
-        status: 'Teste1',
-      },
-      type: {
-        id: 1,
-        type: '1etseT',
-      },
+      status: 'Teste1',
+      type: '1etseT',
     },
     {
       id: 2,
@@ -47,14 +41,8 @@ describe('SearchComponent', () => {
       length: 160,
       volumes: null,
       name: 'teste2',
-      status: {
-        id: 2,
-        status: 'Teste2',
-      },
-      type: {
-        id: 2,
-        type: '2etseT',
-      },
+      status: 'Teste2',
+      type: '2etseT',
     },
   ];
 

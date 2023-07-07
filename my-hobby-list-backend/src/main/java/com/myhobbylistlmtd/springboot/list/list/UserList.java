@@ -1,6 +1,9 @@
 package com.myhobbylistlmtd.springboot.list.list;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.list.status.ItemStatus;
+import com.myhobbylistlmtd.springboot.utils.Views;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
@@ -24,6 +27,8 @@ public class UserList {
    * Id composto de chave estrangeiras.
    */
   @EmbeddedId
+  @JsonView(Views.Public.class)
+  @JsonProperty("media")
   private UserListId id;
 
   /** Campo do progresso feito.
@@ -32,6 +37,7 @@ public class UserList {
   * @version 1.0
   */
   @Column(name = "progress", nullable = false)
+  @JsonView(Views.Public.class)
   private Integer progress;
 
   /** Nota dada pelo o usuário.
@@ -40,6 +46,7 @@ public class UserList {
   * @version 1.0
   */
   @Column(name = "score", nullable = true)
+  @JsonView(Views.Public.class)
   private Integer score;
 
   /** Comentários do usuário sobre a media.
@@ -48,6 +55,7 @@ public class UserList {
   * @version 1.0
   */
   @Column(name = "notes", nullable = true, length = NOTES_LENGTH)
+  @JsonView(Views.Public.class)
   private String notes;
 
   /** Chave estrangeira referente ao status do item.
@@ -61,6 +69,7 @@ public class UserList {
     nullable = false,
     referencedColumnName = "id"
   )
+  @JsonView(Views.Public.class)
   private ItemStatus status;
 
   /**

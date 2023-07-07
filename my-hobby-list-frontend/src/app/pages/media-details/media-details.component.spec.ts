@@ -56,14 +56,8 @@ describe('MediaDetailsComponent', () => {
       length: 208,
       volumes: 25,
       name: 'GTO',
-      status: {
-        id: 1,
-        status: 'Completo',
-      },
-      type: {
-        id: 1,
-        type: 'Manga',
-      },
+      status: 'Completo',
+      type: 'Manga',
     };
     const { debugElement } = fixture;
     let service = debugElement.injector.get(MediaService);
@@ -115,14 +109,8 @@ describe('MediaDetailsComponent', () => {
       length: 208,
       volumes: null,
       name: 'GTO',
-      status: {
-        id: 1,
-        status: 'Completo',
-      },
-      type: {
-        id: 1,
-        type: 'Manga',
-      },
+      status: 'Completo',
+      type:'Manga',
     };
     const { debugElement } = fixture;
     let service = debugElement.injector.get(MediaService);

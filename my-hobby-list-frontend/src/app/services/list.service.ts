@@ -4,6 +4,7 @@ import IInsertInfo from '../types/IInsertInfo';
 import { Observable } from 'rxjs';
 import IMessage from '../interfaces/IMessage';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import IUserListBody from '../interfaces/IUserListBody';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,13 @@ export class ListService {
       observe: 'body',
       responseType: 'json',
       headers,
+    });
+  }
+
+  public findList(username: string): Observable<IUserListBody> {
+    return this.http.get<IUserListBody>(`${this.baseUrl}/find/${username}`, {
+      observe: 'body',
+      responseType: 'json',
     });
   }
 }

@@ -2,7 +2,9 @@ package com.myhobbylistlmtd.springboot.response.body;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.list.list.UserList;
+import com.myhobbylistlmtd.springboot.utils.Views;
 
 public class ResponseUserList {
   /**
@@ -11,6 +13,7 @@ public class ResponseUserList {
    * @version 1.0
    * @author Victor Murilo
    */
+  @JsonView(Views.Public.class)
   private List<UserList> list;
 
   /**

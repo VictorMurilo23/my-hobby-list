@@ -38,8 +38,8 @@ public class MediaControllerTests {
         .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Tessst"))
         .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
         .andExpect(MockMvcResultMatchers.jsonPath("$.image").value("capa/capa"))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.status.status").value("Completo"))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.type.type").value("Manga"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("Completo"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.type").value("Manga"))
         .andExpect(MockMvcResultMatchers.jsonPath("$.volumes").value(25));
   }
 
