@@ -79,4 +79,25 @@ describe('HeaderComponent', () => {
     tick();
     expect(router.url).toBe("/list/Teste");
   }));
+
+  it("should redirect to home when home button is clicked", fakeAsync(() => {
+    const { debugElement } = fixture;
+    spyOn(localStorageService, "getToken").and.returnValue(validToken);
+    component.ngOnInit();
+    fixture.detectChanges();
+    const userInfoContainer = debugElement.query(By.css(".user-info-container"));
+    expect(userInfoContainer).toBeTruthy();
+
+    const linkToUserList = userInfoContainer.query(By.css(".link-to-userlist"));
+    expect(linkToUserList).toBeTruthy();
+    linkToUserList.nativeElement.click();
+    tick();
+    expect(router.url).toBe("/list/Teste");
+
+    const linkToHome = debugElement.query(By.css(".home-redirect-button"));
+    expect(linkToHome).toBeTruthy();
+    linkToHome.nativeElement.click();
+    tick();
+    expect(router.url).toBe("/");
+  }));
 });
