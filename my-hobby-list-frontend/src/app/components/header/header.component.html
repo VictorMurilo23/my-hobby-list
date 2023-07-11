@@ -1,11 +1,13 @@
 <header>
   <app-search-bar></app-search-bar>
-  <div *ngIf="username === null; else logged">
-    <a [routerLink]="['/login']"><button>Login</button></a>
-    <a [routerLink]="['/register']"><button>Registro</button></a>
+  <div class="container-blablalba" *ngIf="username === null; else logged">
+    <a class="login-redirect-button" [routerLink]="['/login']"><button>Login</button></a>
+    <a class="register-redirect-button" [routerLink]="['/register']"><button>Registro</button></a>
   </div>
   <ng-template #logged>
-    <span>{{username}}</span>
-    <a [routerLink]="['/list/{{username}}']" ><span>Lista</span></a>
+    <div class="user-info-container">
+      <span class="username">{{username}}</span>
+      <a class="link-to-userlist" [routerLink]="['/list/', username]"><span>Lista</span></a>
+    </div>
   </ng-template>
 </header>
