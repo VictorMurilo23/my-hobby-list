@@ -16,6 +16,22 @@ describe('MediaDetailsComponent', () => {
   let component: MediaDetailsComponent;
   let fixture: ComponentFixture<MediaDetailsComponent>;
   let router: Router;
+  let mediaService: MediaService;
+
+  const media: IMedia = {
+    id: 1,
+    image: 'gto-image',
+    length: 208,
+    volumes: 25,
+    name: 'GTO',
+    status: 'Completo',
+    type: 'Manga',
+  };
+
+  const mediaWithoutVolumes: IMedia = {
+    ...media,
+    volumes: null
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -33,6 +49,7 @@ describe('MediaDetailsComponent', () => {
 
     router = TestBed.inject(Router);
     fixture = TestBed.createComponent(MediaDetailsComponent);
+    mediaService = fixture.debugElement.injector.get(MediaService);
     component = fixture.componentInstance;
     fixture.autoDetectChanges();
   });
@@ -51,24 +68,14 @@ describe('MediaDetailsComponent', () => {
   });
 
   it('should load media with sucess', () => {
-    const media: IMedia = {
-      id: 1,
-      image: 'gto-image',
-      length: 208,
-      volumes: 25,
-      name: 'GTO',
-      status: 'Completo',
-      type: 'Manga',
-    };
     const { debugElement } = fixture;
-    let service = debugElement.injector.get(MediaService);
-    spyOn(service, 'getMediaById').and.returnValue(of(media));
+    spyOn(mediaService, 'getMediaById').and.returnValue(of(media));
     const loadingMessage = debugElement.nativeElement.querySelector(
       '.loading-container p'
     );
     expect(loadingMessage).toBeTruthy();
     component.ngOnInit();
-    expect(service.getMediaById).toHaveBeenCalled();
+    expect(mediaService.getMediaById).toHaveBeenCalled();
     fixture.detectChanges();
 
     const mediaTitle = debugElement.nativeElement.querySelector('.media-title');
@@ -104,24 +111,14 @@ describe('MediaDetailsComponent', () => {
   });
 
   it('should not render volumes field when media doesnt have volumes', () => {
-    const media: IMedia = {
-      id: 1,
-      image: 'gto-image',
-      length: 208,
-      volumes: null,
-      name: 'GTO',
-      status: 'Completo',
-      type:'Manga',
-    };
     const { debugElement } = fixture;
-    let service = debugElement.injector.get(MediaService);
-    spyOn(service, 'getMediaById').and.returnValue(of(media));
+    spyOn(mediaService, 'getMediaById').and.returnValue(of(mediaWithoutVolumes));
     const loadingMessage = debugElement.nativeElement.querySelector(
       '.loading-container p'
     );
     expect(loadingMessage).toBeTruthy();
     component.ngOnInit();
-    expect(service.getMediaById).toHaveBeenCalled();
+    expect(mediaService.getMediaById).toHaveBeenCalled();
     fixture.detectChanges();
 
     const mediaVolumes =
@@ -131,8 +128,7 @@ describe('MediaDetailsComponent', () => {
 
   it('should render not found component when media isnt found in database', () => {
     const { debugElement } = fixture;
-    let service = debugElement.injector.get(MediaService);
-    spyOn(service, 'getMediaById').and.returnValue(
+    spyOn(mediaService, 'getMediaById').and.returnValue(
       throwError(
         () => new HttpErrorResponse({ error: { message: 'Error qualquer' } })
       )
@@ -142,7 +138,7 @@ describe('MediaDetailsComponent', () => {
     );
     expect(loadingMessage).toBeTruthy();
     component.ngOnInit();
-    expect(service.getMediaById).toHaveBeenCalled();
+    expect(mediaService.getMediaById).toHaveBeenCalled();
     fixture.detectChanges();
 
     const notFoundComponent =
@@ -151,18 +147,8 @@ describe('MediaDetailsComponent', () => {
   });
 
   it('should redirect to insert page when \"Adicionar a lista\" button is clicked', fakeAsync(() => {
-    const media: IMedia = {
-      id: 1,
-      image: 'gto-image',
-      length: 208,
-      volumes: null,
-      name: 'GTO',
-      status: 'Completo',
-      type:'Manga',
-    };
     const { debugElement } = fixture;
-    let service = debugElement.injector.get(MediaService);
-    spyOn(service, 'getMediaById').and.returnValue(of(media));
+    spyOn(mediaService, 'getMediaById').and.returnValue(of(media));
     component.ngOnInit();
 
     fixture.detectChanges();
