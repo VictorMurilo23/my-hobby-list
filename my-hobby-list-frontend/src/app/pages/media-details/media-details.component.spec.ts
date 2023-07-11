@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { MediaDetailsComponent } from './media-details.component';
 import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
@@ -10,6 +10,7 @@ import { PageNotFoundComponent } from '../page-not-found/page-not-found.componen
 import { MediaService } from 'src/app/services/media.service';
 import IMedia from 'src/app/interfaces/IMedia';
 import { environment } from 'src/environments/environment';
+import { By } from '@angular/platform-browser';
 
 describe('MediaDetailsComponent', () => {
   let component: MediaDetailsComponent;
@@ -148,4 +149,28 @@ describe('MediaDetailsComponent', () => {
       debugElement.nativeElement.querySelector('app-page-not-found');
     expect(notFoundComponent).toBeTruthy();
   });
+
+  it('should redirect to insert page when \"Adicionar a lista\" button is clicked', fakeAsync(() => {
+    const media: IMedia = {
+      id: 1,
+      image: 'gto-image',
+      length: 208,
+      volumes: null,
+      name: 'GTO',
+      status: 'Completo',
+      type:'Manga',
+    };
+    const { debugElement } = fixture;
+    let service = debugElement.injector.get(MediaService);
+    spyOn(service, 'getMediaById').and.returnValue(of(media));
+    component.ngOnInit();
+
+    fixture.detectChanges();
+    const redirectBtn = debugElement.query(By.css(".redirect-to-insert-page-button"));
+    expect(redirectBtn).toBeTruthy();
+    redirectBtn.nativeElement.click();
+    tick();
+
+    expect(router.url).toBe(`/media/insert/${media.id}`);
+  }));
 });
