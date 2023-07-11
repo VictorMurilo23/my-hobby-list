@@ -6,6 +6,6 @@
   </div>
   <ng-template #logged>
     <span>{{username}}</span>
-    <a routerLink="list/{{username}}"><span>Lista</span></a>
+    <a [routerLink]="['/list/{{username}}']" ><span>Lista</span></a>
   </ng-template>
 </header>
