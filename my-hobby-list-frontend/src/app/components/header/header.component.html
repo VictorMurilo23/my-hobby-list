@@ -1,8 +1,8 @@
 <header>
   <app-search-bar></app-search-bar>
   <div *ngIf="username === null; else logged">
-    <button routerLink="login">Login</button>
-    <button routerLink="register">Registro</button>
+    <a [routerLink]="['/login']"><button>Login</button></a>
+    <a [routerLink]="['/register']"><button>Registro</button></a>
   </div>
   <ng-template #logged>
     <span>{{username}}</span>
