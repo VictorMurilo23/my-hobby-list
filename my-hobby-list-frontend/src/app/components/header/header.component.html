@@ -1,6 +1,9 @@
 <header>
+  <div>
+    <a class="home-redirect-button" [routerLink]="['/']"><button>Home</button></a>
+  </div>
   <app-search-bar></app-search-bar>
-  <div class="container-blablalba" *ngIf="username === null; else logged">
+  <div *ngIf="username === null; else logged">
     <a class="login-redirect-button" [routerLink]="['/login']"><button>Login</button></a>
     <a class="register-redirect-button" [routerLink]="['/register']"><button>Registro</button></a>
   </div>
