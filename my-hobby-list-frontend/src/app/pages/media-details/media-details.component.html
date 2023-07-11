@@ -23,6 +23,9 @@
         <p class="media-duration">Duração: {{getMediaInfo()?.length}}</p>
       </div>
     </div>
+    <div>
+      <a class="redirect-to-insert-page-button" [routerLink]="['/media/insert/' + getMediaInfo()?.id]"><button>Adicionar a lista</button></a>
+    </div>
   </div>
 </div>
 
