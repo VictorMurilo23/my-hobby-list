@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: "media/:id", component: MediaDetailsComponent},
   {path: "media/insert/:id", component: InsertComponent},
   {path: "list/:username", component: UserListComponent},
-  {path: '**', component: PageNotFoundComponent}
+  {path: '**', pathMatch: "full", component: PageNotFoundComponent}
 ];
 
 export default routes;
