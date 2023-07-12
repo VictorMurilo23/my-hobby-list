@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import ErrorMessage from 'src/app/abstract/ErrorMessage';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { UserService } from 'src/app/services/user.service';
@@ -13,7 +14,7 @@ export class LoginComponent extends ErrorMessage {
   private email = "";
   private password = "";
 
-  constructor(private service: UserService, private localStorage: LocalStorageService) {
+  constructor(private service: UserService, private localStorage: LocalStorageService, private router: Router) {
     super("");
   }
 
@@ -30,7 +31,8 @@ export class LoginComponent extends ErrorMessage {
   login(): void {
     this.service.login(this.email, this.password).subscribe({
       next: (data) => {
-        this.localStorage.setToken(data.token)
+        this.localStorage.setToken(data.token);
+        this.router.navigateByUrl("/");
       },
       error: (error: HttpErrorResponse) => super.setErrorMessage(error.error.message) 
     });
