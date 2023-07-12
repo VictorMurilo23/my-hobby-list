@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import ErrorMessage from 'src/app/abstract/ErrorMessage';
 import IRegister from 'src/app/interfaces/IRegister';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -15,7 +16,7 @@ export class RegistryComponent extends ErrorMessage {
   private password = "";
   private username = ""; 
 
-  constructor(private userService: UserService, private localStorage: LocalStorageService) {
+  constructor(private userService: UserService, private localStorage: LocalStorageService, private router: Router) {
     super("");
   }
 
@@ -24,6 +25,7 @@ export class RegistryComponent extends ErrorMessage {
     this.userService.register(body).subscribe({
       next: (data) => {
         this.localStorage.setToken(data.token);
+        this.router.navigateByUrl("/");
       },
       error: (error: HttpErrorResponse) => super.setErrorMessage(error.error.message) 
     });
