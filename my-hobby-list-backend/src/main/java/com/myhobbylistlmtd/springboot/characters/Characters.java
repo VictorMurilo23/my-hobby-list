@@ -1,4 +1,4 @@
-package com.myhobbylistlmtd.characters;
+package com.myhobbylistlmtd.springboot.characters;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.utils.Views;
