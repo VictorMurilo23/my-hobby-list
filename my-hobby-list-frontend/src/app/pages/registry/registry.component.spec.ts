@@ -65,7 +65,7 @@ describe('RegistryComponent', () => {
     expect(component.savePassword).toHaveBeenCalled();
   });
 
-  it('should be possible to do register with sucess', fakeAsync(() => {
+  it('should be possible to do register with success', fakeAsync(() => {
     const { debugElement } = fixture;
     const token = "token válido";
     spyOn(userService, "register").and.returnValue(of({ token }));
