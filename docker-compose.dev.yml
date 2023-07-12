@@ -1,5 +1,18 @@
 version: '3.9'
 services:
+  frontend:
+    container_name: app_frontend
+    build: ./my-hobby-list-frontend
+    ports:
+      - 4200:80
+    platform: linux/x86_64
+    working_dir: /app-frontend
+    depends_on:
+      - backend
+      - db
+    volumes: 
+      - ./my-hobby-list-frontend/src:/app-frontend/src
+
   backend:
     container_name: app_backend
     build: ./my-hobby-list-backend
