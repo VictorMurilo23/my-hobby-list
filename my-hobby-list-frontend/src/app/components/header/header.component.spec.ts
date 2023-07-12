@@ -100,4 +100,26 @@ describe('HeaderComponent', () => {
     tick();
     expect(router.url).toBe("/");
   }));
+
+  it("should update userinfo every route change", fakeAsync(() => {
+    const { debugElement } = fixture;
+    const loginBtn = debugElement.query(By.css(".login-redirect-button"));
+    expect(loginBtn).toBeTruthy();
+    loginBtn.nativeElement.click();
+    tick();
+    fixture.detectChanges();
+    spyOn(localStorageService, "getToken").and.returnValue(validToken);
+
+    expect(debugElement.query(By.css(".login-redirect-button"))).toBeTruthy();
+    const homeBtn = debugElement.query(By.css(".home-redirect-button"));
+    homeBtn.nativeElement.click();
+    tick();
+    fixture.detectChanges();
+
+    expect(debugElement.query(By.css(".login-redirect-button"))).toBeNull();
+    expect(debugElement.query(By.css(".register-redirect-button"))).toBeNull();
+    const username = debugElement.query(By.css(".user-info-container")).query(By.css(".username"));
+    expect(username).toBeTruthy(); 
+    expect(username.nativeElement.textContent).toBe("Teste")
+  }));
 });
