@@ -1,14 +1,22 @@
 package com.myhobbylistlmtd.springboot.characters.role;
 
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.myhobbylistlmtd.springboot.media.characters.MediaCharacters;
 import com.myhobbylistlmtd.springboot.utils.Views;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "character_role")
 public class CharactersRole {
   /** Id gerado automaticamente.
   * @since 1.0
@@ -30,6 +38,14 @@ public class CharactersRole {
   @JsonView({Views.Public.class})
   @JsonValue
   private String roleName;
+
+   /** Associação com tabela media_characters.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @OneToMany(mappedBy = "characterRole")
+  private Set<MediaCharacters> mediaCharacters;
 
   /**
    * Getter de id.
