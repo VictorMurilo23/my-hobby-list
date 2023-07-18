@@ -48,6 +48,25 @@ public class CharactersRole {
   private Set<MediaCharacters> mediaCharacters;
 
   /**
+   * Default Constructor.
+   * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+   */
+  public CharactersRole() { }
+
+  /**
+   * Constructor.
+   * @param name Nome do papel executado
+   * @since 1.0
+   * @author Victor Murilo
+   * @version 1.0
+   */
+  public CharactersRole(final String name) {
+    this.roleName = name;
+  }
+
+  /**
    * Getter de id.
    * @return Retorna o id do role
    * @since 1.0
