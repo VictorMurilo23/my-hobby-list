@@ -3,12 +3,8 @@ package com.myhobbylistlmtd.springboot.media.characters;
 import java.io.Serializable;
 import java.util.Objects;
 
-import com.myhobbylistlmtd.springboot.characters.Characters;
-import com.myhobbylistlmtd.springboot.media.media.Media;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 @Embeddable
 public class MediaCharactersId implements Serializable {
@@ -18,9 +14,8 @@ public class MediaCharactersId implements Serializable {
   * @author Victor Murilo
   * @version 1.0
   */
-  @ManyToOne
-  @JoinColumn(name = "media_id")
-  private Media media;
+  @Column(name = "media_id")
+  private Long mediaId;
 
   /**
   * Chave referente ao usuário.
@@ -28,9 +23,8 @@ public class MediaCharactersId implements Serializable {
   * @author Victor Murilo
   * @version 1.0
   */
-  @ManyToOne
-  @JoinColumn(name = "character_id")
-  private Characters character;
+  @Column(name = "character_id")
+  private Long characterId;
 
   /**
   * Default constructor.
@@ -49,9 +43,9 @@ public class MediaCharactersId implements Serializable {
   * @author Victor Murilo
   * @version 1.0
   */
-  public MediaCharactersId(final Characters character, final Media media) {
-    this.character = character;
-    this.media = media;
+  public MediaCharactersId(final Long character, final Long media) {
+    this.characterId = character;
+    this.mediaId = media;
   }
 
   /**
@@ -61,8 +55,8 @@ public class MediaCharactersId implements Serializable {
    * @author Victor Murilo
    * @version 1.0
    */
-  public Characters getCharacter() {
-    return character;
+  public Long getCharacterId() {
+    return characterId;
   }
 
   /**
@@ -72,30 +66,30 @@ public class MediaCharactersId implements Serializable {
    * @author Victor Murilo
    * @version 1.0
    */
-  public Media getMedia() {
-    return media;
+  public Long getMediaId() {
+    return mediaId;
   }
 
   /**
    * Setter de character.
-   * @param characterId Um objeto de Characters
+   * @param id Um objeto de Characters
    * @since 1.0
    * @author Victor Murilo
    * @version 1.0
    */
-  public void setCharacter(final Characters characterId) {
-    this.character = characterId;
+  public void setCharacterId(final Long id) {
+    this.characterId = id;
   }
 
   /**
    * Setter de media.
-   * @param mediaId Um objeto de Media
+   * @param id Um objeto de Media
    * @since 1.0
    * @author Victor Murilo
    * @version 1.0
    */
-  public void setMedia(final Media mediaId) {
-    this.media = mediaId;
+  public void setMediaId(final Long id) {
+    this.mediaId = id;
   }
 
   /**
@@ -107,7 +101,7 @@ public class MediaCharactersId implements Serializable {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(character, media);
+    return Objects.hash(characterId, mediaId);
   }
 
     /**
@@ -129,7 +123,7 @@ public class MediaCharactersId implements Serializable {
       return false;
     }
     MediaCharactersId other = (MediaCharactersId) obj;
-    return Objects.equals(character, other.character)
-    && Objects.equals(media, other.media);
+    return Objects.equals(characterId, other.characterId)
+    && Objects.equals(mediaId, other.mediaId);
   }
 }
