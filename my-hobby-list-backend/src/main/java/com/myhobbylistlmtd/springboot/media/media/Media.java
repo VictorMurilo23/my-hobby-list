@@ -1,8 +1,10 @@
 package com.myhobbylistlmtd.springboot.media.media;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.myhobbylistlmtd.springboot.media.characters.MediaCharacters;
 import com.myhobbylistlmtd.springboot.media.status.MediaStatus;
 import com.myhobbylistlmtd.springboot.media.type.MediaType;
 import com.myhobbylistlmtd.springboot.objs.MediaParams;
@@ -15,6 +17,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -96,6 +99,16 @@ public class Media {
   @Column(name = "insertion_date", nullable = false)
   @JsonView(Views.Internal.class)
   private LocalDateTime insertionDate;
+
+  /**
+  * Associação com MediaCharacters.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @OneToMany(mappedBy = "media")
+  @JsonView(Views.Public.class)
+  private Set<MediaCharacters> mediaCharacters;
 
   /** Default constructor.
   * @since 1.0
