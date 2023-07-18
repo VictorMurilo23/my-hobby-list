@@ -53,7 +53,7 @@ public class MediaController {
   @GetMapping("/search-by-name/{mediaName}")
   @JsonView(Views.MediaCard.class)
   ResponseMediasList findMediaByName(final @PathVariable String mediaName) {
-    List<Media> mediasList = mediaService.findByName(mediaName);
+    List<Media> mediasList = mediaService.findAllByName(mediaName);
     ResponseMediasList response = new ResponseMediasList();
     response.setMedias(mediasList);
     return response;
