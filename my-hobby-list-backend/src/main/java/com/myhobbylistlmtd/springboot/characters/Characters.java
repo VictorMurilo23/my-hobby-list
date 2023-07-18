@@ -1,6 +1,9 @@
 package com.myhobbylistlmtd.springboot.characters;
 
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonView;
+import com.myhobbylistlmtd.springboot.media.characters.MediaCharacters;
 import com.myhobbylistlmtd.springboot.utils.Views;
 
 import jakarta.persistence.Column;
@@ -8,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -44,6 +48,16 @@ public class Characters {
   private String characterInfo;
 
   /**
+  * Associação com MediaCharacters.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @OneToMany(mappedBy = "character")
+  @JsonView(Views.Public.class)
+  private Set<MediaCharacters> mediaCharacters;
+
+  /**
    * Getter de characterInfo.
    * @return A descrição do personagem
    * @since 1.0
@@ -60,6 +74,19 @@ public class Characters {
   * @version 1.0
   */
   public Characters() { }
+
+  /**
+   * Constructor.
+   * @param name Nome do personagem
+   * @param charInfo Informações sobre o personagem
+   * @since 1.0
+   * @author Victor Murilo
+   * @version 1.0
+   */
+  public Characters(final String name, final String charInfo) {
+    this.name = name;
+    this.characterInfo = charInfo;
+  }
 
   /**
    * Getter de id.
