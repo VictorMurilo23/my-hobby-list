@@ -2,6 +2,7 @@ package com.myhobbylistlmtd.springboot.characters;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.media.characters.MediaCharacters;
 import com.myhobbylistlmtd.springboot.utils.Views;
@@ -54,7 +55,7 @@ public class Characters {
   * @version 1.0
   */
   @OneToMany(mappedBy = "character")
-  @JsonView(Views.Public.class)
+  @JsonIgnore
   private Set<MediaCharacters> mediaCharacters;
 
   /**
