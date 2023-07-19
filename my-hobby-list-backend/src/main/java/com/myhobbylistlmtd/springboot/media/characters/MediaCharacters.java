@@ -23,19 +23,26 @@ public class MediaCharacters {
    * @version 1.0
    */
   @EmbeddedId
-  @JsonView(Views.Public.class)
+  @JsonView(Views.Internal.class)
   private MediaCharactersId id;
 
   /**
-   * dwa.
+   * Atributo contendo a informação do personagem.
+   * @since 1.0
+   * @author Victor Murilo
+   * @version 1.0
    */
   @ManyToOne
   @MapsId("characterId")
   @JoinColumn(name = "character_id")
+  @JsonView(Views.Public.class)
   private Characters character;
 
   /**
-   * caidh.
+   * Atributo contendo as informações da media.
+   * @since 1.0
+   * @author Victor Murilo
+   * @version 1.0
    */
   @ManyToOne
   @MapsId("mediaId")
@@ -50,6 +57,7 @@ public class MediaCharacters {
    */
   @ManyToOne
   @JoinColumn(name = "role_id", nullable = false, referencedColumnName = "id")
+  @JsonView(Views.Public.class)
   private CharactersRole characterRole;
 
   /**
@@ -85,6 +93,7 @@ public class MediaCharacters {
     this.character = character;
     this.media = media;
     this.characterRole = role;
+    this.id = new MediaCharactersId(character.getId(), media.getId());
   }
 
   /**
