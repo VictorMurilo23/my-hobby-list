@@ -23,7 +23,7 @@ public class LoadCharacters {
   public CommandLineRunner runLoadCharacters(
       final CharacterRepository repository) {
     List<Characters> statusList = new ArrayList<Characters>();
-    statusList.add(new Characters("Onizuka", "Professor"));
+    statusList.add(new Characters("Eikichi Onizuka", "Professor"));
     repository.saveAll(statusList);
     return null;
   }
