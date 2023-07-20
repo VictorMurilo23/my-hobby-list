@@ -1,6 +1,6 @@
 import { Character } from "../types/Character";
 
-interface char {
+export interface char {
   characterRole: string;
   character: Character
 }
