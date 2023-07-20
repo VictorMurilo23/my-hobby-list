@@ -12,8 +12,8 @@ export class CharacterService {
 
   constructor(private http: HttpClient) { }
 
-  public getCharacters(mediaName: string): Observable<ICharacters[]> {
-    return this.http.get<ICharacters[]>(`${this.baseUrl}/${mediaName}`, {
+  public getCharacters(mediaName: string): Observable<ICharacters> {
+    return this.http.get<ICharacters>(`${this.baseUrl}/${mediaName}`, {
       observe: 'body',
       responseType: 'json',
     });
