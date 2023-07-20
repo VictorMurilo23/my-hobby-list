@@ -40,8 +40,25 @@ public class MediaService implements IBasicService<Media, Long> {
    * @version 1.0
    * @author Victor Murilo
    */
-  public List<Media> findByName(final String mediaName) {
-    return mediaRepo.findByNameContainingIgnoreCase(mediaName);
+  public List<Media> findAllByName(final String mediaName) {
+    return mediaRepo.findAllByNameContainingIgnoreCase(mediaName);
+  }
+
+  /**
+   * Procura uma única media por nome.
+   * @param mediaName Nome da media utilizado na busca
+   * @return Retorna um objeto de media
+   * @throws NotFoundException Ocorre quando a media não é encontrada
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  public Media findByName(final String mediaName) {
+    Media media = mediaRepo.findByName(mediaName);
+    if (media == null) {
+      throw new NotFoundException("Media não encontrada!");
+    }
+    return media;
   }
 
   @Override

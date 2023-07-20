@@ -24,5 +24,15 @@ public interface MediaRepository extends JpaRepository<Media, Long> {
   * @version 1.0
   * @author Victor Murilo
   */
-  List<Media> findByNameContainingIgnoreCase(String name);
+  List<Media> findAllByNameContainingIgnoreCase(String name);
+
+  /**
+   * Busca uma única media por nome.
+   * @param mediaName Nome da media a ser buscada
+   * @return Retorna um objeto contendo as informações da media
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  Media findByName(String mediaName);
 }
