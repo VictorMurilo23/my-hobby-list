@@ -1,5 +1,6 @@
 <div>
-  <div *ngFor="let character of characters">
-    {{character.character.name}}
+  <div *ngFor="let character of characters" class="char-card" (click)="redirect(character.character.id)">
+    <p class="char-name">{{character.character.name}}</p>
+    <p class="char-role">{{character.characterRole}}</p>
   </div>
 </div>
