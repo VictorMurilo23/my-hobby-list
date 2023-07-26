@@ -86,6 +86,6 @@ describe('CharactersComponent', () => {
     charCard.nativeElement.click();
     tick();
     fixture.detectChanges();
-    expect(router.url).toBe("/characters/1");
+    expect(router.url).toBe("/character/1");
   }));
 });

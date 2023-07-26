@@ -23,6 +23,6 @@ export class CharactersComponent implements OnInit {
   }
 
   redirect(charId: number): void {
-    this.router.navigate([`/characters/${charId}`]);
+    this.router.navigate([`/character/${charId}`]);
   }
 }
