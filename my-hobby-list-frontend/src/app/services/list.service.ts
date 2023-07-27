@@ -25,8 +25,14 @@ export class ListService {
     });
   }
 
-  public findList(username: string): Observable<IUserListBody> {
-    return this.http.get<IUserListBody>(`${this.baseUrl}/find/${username}`, {
+  public findList(username: string, statusName?: string | null): Observable<IUserListBody> {
+    if (statusName === null) {
+      return this.http.get<IUserListBody>(`${this.baseUrl}/find/${username}`, {
+        observe: 'body',
+        responseType: 'json',
+      });
+    }
+    return this.http.get<IUserListBody>(`${this.baseUrl}/find/${username}?statusName=${statusName}`, {
       observe: 'body',
       responseType: 'json',
     });
