@@ -11,12 +11,16 @@ import { MediaService } from 'src/app/services/media.service';
 import IMedia from 'src/app/interfaces/IMedia';
 import { environment } from 'src/environments/environment';
 import { By } from '@angular/platform-browser';
+import { CharactersComponent } from 'src/app/components/characters/characters.component';
+import { CharacterService } from 'src/app/services/character.service';
+import ICharacters from 'src/app/interfaces/ICharacters';
 
 describe('MediaDetailsComponent', () => {
   let component: MediaDetailsComponent;
   let fixture: ComponentFixture<MediaDetailsComponent>;
   let router: Router;
   let mediaService: MediaService;
+  let characterService: CharacterService;
 
   const media: IMedia = {
     id: 1,
@@ -28,6 +32,19 @@ describe('MediaDetailsComponent', () => {
     type: 'Manga',
   };
 
+  const characters: ICharacters = {
+    characters: [
+      {
+        character: { id: 1, characterInfo: "Test1", name: "Personagem1" },
+        characterRole: "Personagem principal"
+      },
+      {
+        character: { id: 2, characterInfo: "Test2", name: "Personagem2" },
+        characterRole: "Personagem secundário"
+      }
+    ]
+  }
+
   const mediaWithoutVolumes: IMedia = {
     ...media,
     volumes: null
@@ -36,7 +53,7 @@ describe('MediaDetailsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientModule, RouterTestingModule.withRoutes(routes)],
-      declarations: [MediaDetailsComponent, PageNotFoundComponent],
+      declarations: [MediaDetailsComponent, PageNotFoundComponent, CharactersComponent],
       providers: [
         {
           provide: ActivatedRoute,
@@ -50,6 +67,7 @@ describe('MediaDetailsComponent', () => {
     router = TestBed.inject(Router);
     fixture = TestBed.createComponent(MediaDetailsComponent);
     mediaService = fixture.debugElement.injector.get(MediaService);
+    characterService = fixture.debugElement.injector.get(CharacterService);
     component = fixture.componentInstance;
     fixture.autoDetectChanges();
   });
@@ -159,4 +177,22 @@ describe('MediaDetailsComponent', () => {
 
     expect(router.url).toBe(`/media/insert/${media.id}`);
   }));
+
+  it('should render character on button click', () => {
+    const { debugElement } = fixture;
+    spyOn(mediaService, 'getMediaById').and.returnValue(of(media));
+    spyOn(characterService, "getCharacters").and.returnValue(of(characters));
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    const showCharactersBtn = debugElement.query(By.css(".show-characters-button"));
+    expect(showCharactersBtn).toBeTruthy();
+    showCharactersBtn.nativeElement.click();
+    fixture.detectChanges();
+
+    expect(debugElement.query(By.css(".show-characters-button"))).toBeNull();
+
+    const characterCards = debugElement.queryAll(By.css(".char-card"));
+    expect(characterCards.length).toBe(2);
+  });
 });

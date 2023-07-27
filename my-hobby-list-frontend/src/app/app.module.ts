@@ -18,6 +18,7 @@ import { SearchComponent } from './pages/search/search.component';
 import { MediaDetailsComponent } from './pages/media-details/media-details.component';
 import { InsertComponent } from './pages/insert/insert.component';
 import { UserListComponent } from './pages/user-list/user-list.component';
+import { CharactersComponent } from './components/characters/characters.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { UserListComponent } from './pages/user-list/user-list.component';
     SearchComponent,
     MediaDetailsComponent,
     InsertComponent,
-    UserListComponent
+    UserListComponent,
+    CharactersComponent
   ],
   imports: [
     BrowserModule,
