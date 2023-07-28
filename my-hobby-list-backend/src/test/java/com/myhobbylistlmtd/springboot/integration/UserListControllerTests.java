@@ -143,6 +143,16 @@ public class UserListControllerTests {
 
     response.andExpect(status().isCreated())
         .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Item inserido com sucesso"));
+
+    body.setMediaId(Long.valueOf(1));
+    body.setStatus("Droppado");
+    ResultActions response2 = mockMvc.perform(post("/list/insert")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(body))
+        .header("Authorization", this.token));
+
+    response2.andExpect(status().isCreated())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Item inserido com sucesso"));
   }
 
   @Test
@@ -150,7 +160,7 @@ public class UserListControllerTests {
     ResultActions response = mockMvc.perform(get("/list/find/Teste12345"));
     response.andExpect(status().isOk())
         .andExpect(MockMvcResultMatchers.jsonPath("$.list").isArray())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.list", hasSize(1)));
+        .andExpect(MockMvcResultMatchers.jsonPath("$.list", hasSize(2)));
   }
 
   @Test
@@ -159,5 +169,21 @@ public class UserListControllerTests {
     response.andExpect(status().isNotFound())
         .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(404))
         .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User não encontrada!"));
+  }
+
+  @Test
+  public void errorWhenStatusNameNotFound() throws Exception {
+    ResultActions response = mockMvc.perform(get("/list/find/Teste12345?statusName=inexistente"));
+    response.andExpect(status().isNotFound())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(404))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Nome de status inválido"));
+  }
+
+  @Test
+  public void sucessWhenStatusNameIsValid() throws Exception {
+    ResultActions response = mockMvc.perform(get("/list/find/Teste12345?statusName=Em andamento"));
+    response.andExpect(status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.list").isArray())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.list", hasSize(1)));
   }
 }

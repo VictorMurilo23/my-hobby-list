@@ -7,6 +7,9 @@
   <app-page-not-found></app-page-not-found>
 </div>
 <div *ngIf="userList !== undefined && userList !== null" class="user-list-container">
+  <div>
+    <button class="get-list-by-status-btn" (click)="getListByStatusName(statusName)" *ngFor="let statusName of statusArray">{{statusName}}</button>
+  </div>
   <div *ngFor="let item of userList" class="user-list-item">
     <app-media-card
       [mediaName]=item.media.name 

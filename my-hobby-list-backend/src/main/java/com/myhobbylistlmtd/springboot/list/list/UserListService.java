@@ -123,9 +123,30 @@ public class UserListService implements IBasicService<UserList, UserListId> {
    * @since 1.0
    * @author Victor Murilo
    */
-  public List<UserList> findListByUser(final String username) {
+  public List<UserList> findList(final String username) {
     User user = userService.findByUsername(username);
     List<UserList> list = listRepo.findAllById_UserId(user);
+    return list;
+  }
+
+  /**
+   * Encontra a lista do usuário por nome de usuário e nome de status.
+   * @param username Nome do usuário utilizado na busca
+   * @param statusName Nome do status utilizado na busca
+   * @return Uma lista com objetos UserList
+   * @version 1.0
+   * @since 1.0
+   * @author Victor Murilo
+   */
+  public List<UserList> findList(
+    final String username, final String statusName
+  ) {
+    User user = userService.findByUsername(username);
+    ItemStatus status = this.findItemStatusByName(statusName);
+    List<UserList> list = listRepo
+    .findAllById_UserId_UsernameAndStatus_StatusName(
+      user.getUsername(), status.getStatusName()
+    );
     return list;
   }
 }

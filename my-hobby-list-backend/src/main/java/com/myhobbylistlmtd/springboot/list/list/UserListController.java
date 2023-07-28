@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -58,6 +59,7 @@ public class UserListController {
   /**
    * Rota de pegar os itens da lista do usuário.
    * @param username Nome do usuário utilizado na busca
+   * @param statusName Query com o nome do status
    * @return Um objeto contendo os itens da lista do usuário
    * @since 1.0
    * @version 1.0
@@ -67,9 +69,13 @@ public class UserListController {
   @ResponseStatus(HttpStatus.OK)
   @JsonView(Views.Public.class)
   ResponseUserList findUserlistItems(
-    final @PathVariable String username
+    final @PathVariable String username,
+    final @RequestParam(required = false) String statusName
   ) {
-    List<UserList> list = listService.findListByUser(username);
+    List<UserList> list;
+
+    list = statusName == null ? listService.findList(username)
+    : listService.findList(username, statusName);
     ResponseUserList response = new ResponseUserList();
     response.setList(list);
     return response;
