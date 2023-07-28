@@ -14,6 +14,7 @@ public class UserListItemStatusTestConfiguration {
   @Bean
   public CommandLineRunner runUserListItemStatusTestConfiguration(ItemStatusRepository repository) {
     repository.save(new ItemStatus("Em andamento"));
+    repository.save(new ItemStatus("Droppado"));
     return null;
   }
 }
