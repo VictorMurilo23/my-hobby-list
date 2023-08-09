@@ -25,8 +25,8 @@ export class ListService {
     });
   }
 
-  public findList(username: string, statusName?: string | null): Observable<IUserListBody> {
-    if (statusName === null) {
+  public findList(username: string, statusName?: string | undefined): Observable<IUserListBody> {
+    if (statusName === undefined) {
       return this.http.get<IUserListBody>(`${this.baseUrl}/find/${username}`, {
         observe: 'body',
         responseType: 'json',
