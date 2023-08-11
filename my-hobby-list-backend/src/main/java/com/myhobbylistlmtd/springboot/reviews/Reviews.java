@@ -34,4 +34,12 @@ public class Reviews {
   */
   @Column(name = "edited", nullable = false)
   private Boolean edited = false;
+
+  /** Campo indicando se o usuário recomenda ou não a media.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @Column(name = "recommended", nullable = false)
+  private Boolean recommended;
 }
