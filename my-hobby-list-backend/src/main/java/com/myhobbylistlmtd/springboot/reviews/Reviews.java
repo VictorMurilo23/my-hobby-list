@@ -67,4 +67,18 @@ public class Reviews {
   @ManyToOne
   @JoinColumn(name = "media_id")
   private Media mediaId;
+  
+  /** Default constructor.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  Reviews() {}
+
+  public Reviews(String content, Boolean recommended, Media media, User user) {
+    this.content = content;
+    this.recommended = recommended;
+    this.mediaId = media;
+    this.userId = user;
+  }
 }
