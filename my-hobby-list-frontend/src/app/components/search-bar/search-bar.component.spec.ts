@@ -48,7 +48,7 @@ describe('SearchBarComponent', () => {
 
     const searchBtn = debugElement.query(By.css('.search-bar-container button'));
     expect(searchBtn).toBeTruthy();
-    searchBtn.triggerEventHandler('click', null);
+    searchBtn.triggerEventHandler('click', { preventDefault: () => null });
     tick();
     expect(router.url).toBe("/search?name=Teste");
   }));
