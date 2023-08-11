@@ -11,7 +11,8 @@ export class SearchBarComponent {
 
   constructor(private router: Router) {}
 
-  async search() {
+  async search(event: Event) {
+    event.preventDefault();
     await this.router.navigate(["/search"], { queryParams: { name: this.searchContent } });
     this.searchContent = "";
   }
