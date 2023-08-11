@@ -1,10 +1,15 @@
 package com.myhobbylistlmtd.springboot.reviews;
 
+import com.myhobbylistlmtd.springboot.media.media.Media;
+import com.myhobbylistlmtd.springboot.user.User;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -42,4 +47,24 @@ public class Reviews {
   */
   @Column(name = "recommended", nullable = false)
   private Boolean recommended;
+
+  /**
+  * Chave referente ao usuário.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @ManyToOne
+  @JoinColumn(name = "user_id")
+  private User userId;
+
+  /**
+  * Chave referente a media.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @ManyToOne
+  @JoinColumn(name = "media_id")
+  private Media mediaId;
 }
