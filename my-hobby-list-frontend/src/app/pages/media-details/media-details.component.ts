@@ -44,6 +44,5 @@ export class MediaDetailsComponent implements OnInit {
 
   renderCharacters(): void {
     this.showCharacters = true;
-    console.log(this.showCharacters)
   }
 }
