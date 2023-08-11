@@ -126,7 +126,7 @@ describe('SearchComponent', () => {
       By.css('.search-bar-container button')
     );
     expect(searchBtn).toBeTruthy();
-    searchBtn.triggerEventHandler('click', null);
+    searchBtn.triggerEventHandler('click', { preventDefault: () => null });
     tick();
     fixtureApp.detectChanges();
 
