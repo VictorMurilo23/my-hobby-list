@@ -19,14 +19,14 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myhobbylistlmtd.springboot.MyHobbyListBackendApplication;
-import com.myhobbylistlmtd.springboot.request.body.RequestLoginBody;
+// import com.myhobbylistlmtd.springboot.request.body.RequestLoginBody;
 import com.myhobbylistlmtd.springboot.request.body.RequestRegisterUserBody;
 import com.myhobbylistlmtd.springboot.request.body.RequestUserListBody;
 import com.myhobbylistlmtd.springboot.utils.LoginTestConfiguration;
 import com.myhobbylistlmtd.springboot.utils.MediaTestConfiguration;
 import com.myhobbylistlmtd.springboot.utils.UserListItemStatusTestConfiguration;
 
-import static org.junit.jupiter.api.Assertions.*;
+// import static org.junit.jupiter.api.Assertions.*;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
