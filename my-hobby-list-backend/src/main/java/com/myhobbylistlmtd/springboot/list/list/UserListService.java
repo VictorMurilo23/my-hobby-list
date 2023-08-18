@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
-import com.myhobbylistlmtd.springboot.interfaces.IBasicService;
+import com.myhobbylistlmtd.springboot.interfaces.FindById;
 import com.myhobbylistlmtd.springboot.list.status.ItemStatus;
 import com.myhobbylistlmtd.springboot.list.status.ItemStatusRepository;
 import com.myhobbylistlmtd.springboot.media.media.Media;
@@ -17,7 +17,7 @@ import com.myhobbylistlmtd.springboot.user.User;
 import com.myhobbylistlmtd.springboot.user.UserService;
 
 @Service
-public class UserListService implements IBasicService<UserList, UserListId> {
+public class UserListService implements FindById<UserList, UserListId> {
     /**
   * Repositório utilizado para fazer as interações com o banco de dados.
   * @since 1.0

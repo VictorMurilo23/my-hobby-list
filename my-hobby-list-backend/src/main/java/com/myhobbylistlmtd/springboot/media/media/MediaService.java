@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
-import com.myhobbylistlmtd.springboot.interfaces.IBasicService;
+import com.myhobbylistlmtd.springboot.interfaces.FindById;
 
 @Service
-public class MediaService implements IBasicService<Media, Long> {
+public class MediaService implements FindById<Media, Long> {
   /**
   * Repositório de media.
   * @since 1.0

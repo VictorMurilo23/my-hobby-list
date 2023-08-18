@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 import com.myhobbylistlmtd.springboot.exceptions.AlreadyTakenException;
 import com.myhobbylistlmtd.springboot.exceptions.InvalidLoginException;
 import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
-import com.myhobbylistlmtd.springboot.interfaces.IBasicService;
+import com.myhobbylistlmtd.springboot.interfaces.FindById;
 import com.myhobbylistlmtd.springboot.request.body.RequestRegisterUserBody;
 import com.myhobbylistlmtd.springboot.utils.Jwt;
 
 @Service
-public class UserService implements IBasicService<User, Long> {
+public class UserService implements FindById<User, Long> {
   /**
   * Repositório utilizado para fazer as interações com o banco de dados.
   * @since 1.0
