@@ -12,7 +12,7 @@ public class RequestCreateReview {
    * @author Victor Murilo
    * @version 1.0
    */
-  @NotBlank(message = "mediaId deve ser um valor válido")
+  @NotNull(message = "mediaId deve ser um valor válido")
   @Positive(message = "mediaId deve ser um número positivo")
   private Long mediaId;
 
