@@ -1,7 +1,10 @@
 package com.myhobbylistlmtd.springboot.user;
 
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.myhobbylistlmtd.springboot.reviews.Reviews;
 import com.myhobbylistlmtd.springboot.utils.Views;
 
 import jakarta.persistence.Column;
@@ -9,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -70,6 +74,15 @@ public class User {
   )
   @JsonIgnore
   private String password;
+
+  /** Relacionamento com reviews.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @OneToMany(mappedBy = "userId")
+  @JsonIgnore
+  private Set<Reviews> reviews;
 
   /** Default constructor.
   * @since 1.0

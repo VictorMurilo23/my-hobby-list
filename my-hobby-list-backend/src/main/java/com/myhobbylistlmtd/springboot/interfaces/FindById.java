@@ -9,7 +9,7 @@ import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
  * @version 1.0
  * @author Victor Murilo
  */
-public interface IBasicService<T, S> {
+public interface FindById<T, S> {
   /**
    * Faz uma busca por Id.
    * @param id Um id do primeiro tipo genérico
