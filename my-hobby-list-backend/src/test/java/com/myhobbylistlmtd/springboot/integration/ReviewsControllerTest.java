@@ -101,7 +101,7 @@ public class ReviewsControllerTest {
 
     mockMvc.perform(post("/reviews/create")
         .contentType(MediaType.APPLICATION_JSON)
-        .content("{\"mediaId\": 2, \"content\": \"\"}")
+        .content("{\"mediaId\": 2, \"content\": \"\", \"recommended\": false}")
         .header("Authorization", this.token))
         .andExpect(status().isBadRequest())
         .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
@@ -109,7 +109,7 @@ public class ReviewsControllerTest {
 
     mockMvc.perform(post("/reviews/create")
         .contentType(MediaType.APPLICATION_JSON)
-        .content("{\"mediaId\": 2}")
+        .content("{\"mediaId\": 2, \"recommended\": false}")
         .header("Authorization", this.token))
         .andExpect(status().isBadRequest())
         .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
@@ -135,5 +135,17 @@ public class ReviewsControllerTest {
         .andExpect(status().isBadRequest())
         .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
         .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("recommended deve ser um campo válido"));
+  }
+
+  @Test
+  public void createReviewWithSucess() throws Exception {
+    String json = "{\"mediaId\": 2, \"content\": \"Muito legal :)\", \"recommended\": true}";
+
+    mockMvc.perform(post("/reviews/create")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(json)
+        .header("Authorization", this.token))
+        .andExpect(status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Review criado com sucesso!"));
   }
 }
