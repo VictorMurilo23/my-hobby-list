@@ -7,35 +7,30 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
 import com.myhobbylistlmtd.springboot.MyHobbyListBackendApplication;
 import com.myhobbylistlmtd.springboot.request.body.RequestRegisterUserBody;
-import com.myhobbylistlmtd.springboot.utils.LoginTestConfiguration;
 import com.myhobbylistlmtd.springboot.utils.MediaTestConfiguration;
-import com.myhobbylistlmtd.springboot.utils.UserListItemStatusTestConfiguration;
 
 // import static org.junit.jupiter.api.Assertions.*;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.hamcrest.Matchers.*;
+// import static org.hamcrest.Matchers.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = MyHobbyListBackendApplication.class)
 @AutoConfigureMockMvc
-@ContextConfiguration(classes = { LoginTestConfiguration.class, MediaTestConfiguration.class,
-    UserListItemStatusTestConfiguration.class })
+@ContextConfiguration(classes = { MediaTestConfiguration.class })
 @ActiveProfiles({ "test" })
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ReviewsControllerTest {
