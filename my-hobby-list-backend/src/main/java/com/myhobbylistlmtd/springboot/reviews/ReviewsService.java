@@ -15,29 +15,43 @@ import com.myhobbylistlmtd.springboot.user.UserService;
 public class ReviewsService {
   /**
    * Repositório de reviews.
+   * @since 1.0
+   * @author Victor Murilo
+   * @version 1.0
    */
   @Autowired
   private ReviewsRepository reviewsRepo;
 
   /**
    * userService.
+   * @since 1.0
+   * @author Victor Murilo
+   * @version 1.0
    */
   @Autowired
   private UserService userService;
 
   /**
    * mediaService.
+   * @since 1.0
+   * @author Victor Murilo
+   * @version 1.0
    */
   @Autowired
   private MediaService mediaService;
 
   /**
-   * d.
-   * @param userId d
-   * @param mediaId d
-   * @return d
+   * Encontra uma review no banco de dados.
+   * @param userId Id do usuário
+   * @param mediaId Id da media
+   * @return Retorna um objeto de Reviews
+   * @throws NotFoundException Ocorre quando a review não é encontrada
+   * @since 1.0
+   * @author Victor Murilo
+   * @version 1.0
    */
-  private Reviews findReview(final Long userId, final Long mediaId) {
+  private Reviews findReview(final Long userId, final Long mediaId)
+  throws NotFoundException {
     Reviews review = reviewsRepo.findReviewsByUserIdAndMediaId(userId, mediaId);
     if (review == null) {
       throw new NotFoundException("Review não encontrada!");
@@ -46,9 +60,13 @@ public class ReviewsService {
   }
 
   /**
-   * bla.
-   * @param body
-   * @param userId
+   * Cria uma review.
+   * @param body Corpo da requisição contendo o conteúdo da review,
+   id da media e se o usuário recomenda a media
+   * @param userId Id do usuário
+   * @since 1.0
+   * @author Victor Murilo
+   * @version 1.0
    */
   public void createReview(final RequestCreateReview body, final Long userId) {
     User user = userService.findById(userId);
@@ -60,9 +78,12 @@ public class ReviewsService {
   }
 
   /**
-   * d.
-   * @param body f
-   * @param userId f
+   * Edita uma review.
+   * @param body Corpo da requisição
+   * @param userId Id do usuário
+   * @since 1.0
+   * @author Victor Murilo
+   * @version 1.0
    */
   public void editReview(final RequestEditReview body, final Long userId) {
     Reviews review = this.findReview(userId, body.getMediaId());
