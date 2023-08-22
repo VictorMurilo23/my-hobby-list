@@ -81,11 +81,12 @@ public class ReviewsService {
    * Edita uma review.
    * @param body Corpo da requisição
    * @param userId Id do usuário
+   * @return Retorna a review com as edições feitas
    * @since 1.0
    * @author Victor Murilo
    * @version 1.0
    */
-  public void editReview(final RequestEditReview body, final Long userId) {
+  public Reviews editReview(final RequestEditReview body, final Long userId) {
     Reviews review = this.findReview(userId, body.getMediaId());
     if (body.getContent() != null) {
       review.setContent(body.getContent());
@@ -94,6 +95,6 @@ public class ReviewsService {
       review.setRecommended(body.getRecommended());
     }
     review.setEdited(true);
-    reviewsRepo.save(review);
+    return reviewsRepo.save(review);
   }
 }

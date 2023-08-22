@@ -30,7 +30,8 @@ public class ReviewsController {
 
   /**
    * Rota de criar uma review.
-   * @param body Corpo da requisição contendo o conteúdo da review, o id da media e se o usuário recomenda ou não a media
+   * @param body Corpo da requisição contendo o conteúdo da review,
+   o id da media e se o usuário recomenda ou não a media
    * @param userId Id do usuário
    * @return Retorna uma mensagem dizendo que a review foi criada com sucesso.
    * @since 1.0
@@ -51,7 +52,9 @@ public class ReviewsController {
 
   /**
    * Rota de editar uma review.
-   * @param body Corpo da requisição contendo o conteúdo da review, o id da media e se o usuário recomenda ou não a media. Só id da media é obrigatório de ter no body
+   * @param body Corpo da requisição contendo o conteúdo da review,
+   o id da media e se o usuário recomenda ou não a media.
+   Só id da media é obrigatório de ter no body
    * @param userId id do usuário
    * @return Retorna uma mensagem dizendo que a review foi editada com sucesso
    * @since 1.0
@@ -60,13 +63,11 @@ public class ReviewsController {
    */
   @PatchMapping("/edit")
   @ResponseStatus(HttpStatus.OK)
-  ResponseMessage editReview(
+  Reviews editReview(
     @Valid @RequestBody final RequestEditReview body,
     @RequestAttribute("userId") final Long userId
   ) {
-    reviewsService.editReview(body, userId);
-    ResponseMessage response = new ResponseMessage();
-    response.setMessage("Review editada com sucesso");
-    return response;
+    Reviews review = reviewsService.editReview(body, userId);
+    return review;
   }
 }
