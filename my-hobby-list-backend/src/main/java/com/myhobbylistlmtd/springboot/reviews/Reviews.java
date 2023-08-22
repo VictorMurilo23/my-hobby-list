@@ -1,5 +1,6 @@
 package com.myhobbylistlmtd.springboot.reviews;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.myhobbylistlmtd.springboot.media.media.Media;
 import com.myhobbylistlmtd.springboot.user.User;
 
@@ -56,6 +57,7 @@ public class Reviews {
   */
   @ManyToOne
   @JoinColumn(name = "user_id")
+  @JsonIgnore
   private User userId;
 
   /**
@@ -66,6 +68,7 @@ public class Reviews {
   */
   @ManyToOne
   @JoinColumn(name = "media_id")
+  @JsonIgnore
   private Media mediaId;
 
   /** Default constructor.
