@@ -1,5 +1,7 @@
 package com.myhobbylistlmtd.springboot.reviews;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -18,4 +20,16 @@ public interface ReviewsRepository extends JpaRepository<Reviews, Long> {
     nativeQuery = true
   )
   Reviews findReviewsByUserIdAndMediaId(Long userId, Long mediaId);
+
+  /**
+   * Encontra todas as reviews com base em uma id de uma media.
+   * @param mediaId id da media
+   * @param pageable página
+   * @return Página
+   */
+  @Query(
+    value = "SELECT * FROM reviews r WHERE r.media_id = ?1",
+    nativeQuery = true
+  )
+  Page<Reviews> findAllByMediaId(Long mediaId, Pageable pageable);
 }
