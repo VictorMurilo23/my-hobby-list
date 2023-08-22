@@ -21,7 +21,7 @@ import com.myhobbylistlmtd.springboot.user.UserRepository;
 
 @TestConfiguration
 @Profile({ "test" })
-public class EditReviewsConfiguration {
+public class FindReviewsConfiguration {
   @Bean
   public CommandLineRunner runEditReviewsConfiguration(UserRepository userRepo, MediaRepository mediaRepo,
       MediaStatusRepository statusRepo,
@@ -40,6 +40,22 @@ public class EditReviewsConfiguration {
             .setInsertionDate(
                 LocalDateTime.parse("2023-05-29T08:01:00"))));
     reviewRepo.save(new Reviews("Teste1", true, media, user));
+    reviewRepo.save(new Reviews("Teste2", true, media, user));
+    reviewRepo.save(new Reviews("Teste3", true, media, user));
+    reviewRepo.save(new Reviews("Teste4", true, media, user));
+    reviewRepo.save(new Reviews("Teste5", true, media, user));
+    reviewRepo.save(new Reviews("Teste6", true, media, user));
+    reviewRepo.save(new Reviews("Teste7", true, media, user));
+    reviewRepo.save(new Reviews("Teste8", true, media, user));
+    reviewRepo.save(new Reviews("Teste9", true, media, user));
+    reviewRepo.save(new Reviews("Teste10", true, media, user));
+    reviewRepo.save(new Reviews("Teste11", true, media, user));
+    reviewRepo.save(new Reviews("Teste12", true, media, user));
+    reviewRepo.save(new Reviews("Teste13", true, media, user));
+    reviewRepo.save(new Reviews("Teste14", true, media, user));
+    reviewRepo.save(new Reviews("Teste15", true, media, user));
+    reviewRepo.save(new Reviews("Teste16", true, media, user));
+
 
     return null;
   }
