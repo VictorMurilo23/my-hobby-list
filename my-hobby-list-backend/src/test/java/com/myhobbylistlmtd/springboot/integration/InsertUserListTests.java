@@ -19,7 +19,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myhobbylistlmtd.springboot.MyHobbyListBackendApplication;
-// import com.myhobbylistlmtd.springboot.request.body.RequestLoginBody;
 import com.myhobbylistlmtd.springboot.request.body.RequestRegisterUserBody;
 import com.myhobbylistlmtd.springboot.request.body.RequestUserListBody;
 import com.myhobbylistlmtd.springboot.utils.LoginTestConfiguration;
@@ -31,7 +30,7 @@ import com.myhobbylistlmtd.springboot.utils.UserListItemStatusTestConfiguration;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import static org.hamcrest.Matchers.*;
+// import static org.hamcrest.Matchers.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = MyHobbyListBackendApplication.class)
@@ -39,7 +38,7 @@ import static org.hamcrest.Matchers.*;
 @ContextConfiguration(classes = {LoginTestConfiguration.class, MediaTestConfiguration.class, UserListItemStatusTestConfiguration.class})
 @ActiveProfiles({ "test" })
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class UserListControllerTests {
+public class InsertUserListTests {
   @Autowired
   private MockMvc mockMvc;
 
@@ -153,37 +152,5 @@ public class UserListControllerTests {
 
     response2.andExpect(status().isCreated())
         .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Item inserido com sucesso"));
-  }
-
-  @Test
-  public void testSucessFindUserList() throws Exception {
-    ResultActions response = mockMvc.perform(get("/list/find/Teste12345"));
-    response.andExpect(status().isOk())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.list").isArray())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.list", hasSize(2)));
-  }
-
-  @Test
-  public void errorWhenUsernameNotFound() throws Exception {
-    ResultActions response = mockMvc.perform(get("/list/find/ehawudhawiudhawoiuh"));
-    response.andExpect(status().isNotFound())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(404))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User não encontrada!"));
-  }
-
-  @Test
-  public void errorWhenStatusNameNotFound() throws Exception {
-    ResultActions response = mockMvc.perform(get("/list/find/Teste12345?statusName=inexistente"));
-    response.andExpect(status().isNotFound())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(404))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Nome de status inválido"));
-  }
-
-  @Test
-  public void sucessWhenStatusNameIsValid() throws Exception {
-    ResultActions response = mockMvc.perform(get("/list/find/Teste12345?statusName=Em andamento"));
-    response.andExpect(status().isOk())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.list").isArray())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.list", hasSize(1)));
   }
 }

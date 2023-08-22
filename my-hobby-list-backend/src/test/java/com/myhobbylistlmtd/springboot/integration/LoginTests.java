@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -12,9 +13,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import com.myhobbylistlmtd.springboot.utils.LoginTestConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myhobbylistlmtd.springboot.MyHobbyListBackendApplication;
-import com.myhobbylistlmtd.springboot.request.body.RequestRegisterUserBody;
+import com.myhobbylistlmtd.springboot.request.body.RequestLoginBody;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,21 +26,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = MyHobbyListBackendApplication.class)
 @AutoConfigureMockMvc
+@Import(LoginTestConfiguration.class)
 @ActiveProfiles({ "test" })
-public class RegisterControllerTests {
+public class LoginTests {
+
   @Autowired
   private MockMvc mockMvc;
 
   @Test
-  public void registerInvalidEmailFormat() throws Exception {
-    RequestRegisterUserBody body = new RequestRegisterUserBody();
-    body.setEmail("emailte.com");
-    body.setUsername("Teste1");
+  public void throwsExceptionWhenInvalidEmailFormat() throws Exception {
+    RequestLoginBody body = new RequestLoginBody();
+    body.setEmail("emaildwadad.com");
     body.setPassword("1224");
     ObjectMapper objectMapper = new ObjectMapper();
     String json = objectMapper.writeValueAsString(body);
 
-    ResultActions response = mockMvc.perform(post("/user/register")
+    ResultActions response = mockMvc.perform(post("/user/login")
         .contentType(MediaType.APPLICATION_JSON)
         .content(json));
 
@@ -48,57 +51,56 @@ public class RegisterControllerTests {
   }
 
   @Test
-  public void registerSucess() throws Exception {
-    RequestRegisterUserBody body = new RequestRegisterUserBody();
-    body.setEmail("email@teste.com");
-    body.setUsername("Teste1");
+  public void throwsExceptionWhenDoesntFoundEmailOnDb() throws Exception {
+    RequestLoginBody body = new RequestLoginBody();
+    body.setEmail("email@dwadad.com");
     body.setPassword("1224");
     ObjectMapper objectMapper = new ObjectMapper();
     String json = objectMapper.writeValueAsString(body);
 
-    ResultActions response = mockMvc.perform(post("/user/register")
+    ResultActions response = mockMvc.perform(post("/user/login")
         .contentType(MediaType.APPLICATION_JSON)
         .content(json));
 
-    response.andExpect(status().isCreated())
+    response.andExpect(status().isUnauthorized())
+        .andExpect(result -> assertEquals("Senha ou email incorretos",
+            result.getResolvedException().getMessage()))
+        .andExpect(result -> assertTrue(result.getResolvedException() instanceof RuntimeException));
+  }
+
+  @Test
+  public void throwsExceptionWhenPasswordDoesntMatchDbPassword() throws Exception {
+    RequestLoginBody body = new RequestLoginBody();
+    body.setEmail("email@gmail.com");
+    body.setPassword("errado");
+
+    ObjectMapper objectMapper = new ObjectMapper();
+    String json = objectMapper.writeValueAsString(body);
+
+    ResultActions response = mockMvc.perform(post("/user/login")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(json));
+
+    response.andExpect(status().isUnauthorized())
+        .andExpect(result -> assertEquals("Senha ou email incorretos",
+            result.getResolvedException().getMessage()))
+        .andExpect(result -> assertTrue(result.getResolvedException() instanceof RuntimeException));
+  }
+
+  @Test
+  public void returnTokenWhenSucess() throws Exception {
+    RequestLoginBody body = new RequestLoginBody();
+    body.setEmail("email@gmail.com");
+    body.setPassword("1456");
+
+    ObjectMapper objectMapper = new ObjectMapper();
+    String json = objectMapper.writeValueAsString(body);
+
+    ResultActions response = mockMvc.perform(post("/user/login")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(json));
+
+    response.andExpect(status().isOk())
         .andExpect(MockMvcResultMatchers.jsonPath("$.token").isString());
-  }
-
-  @Test
-  public void registerFailWhenEmailAlreadyInDB() throws Exception {
-    RequestRegisterUserBody body = new RequestRegisterUserBody();
-    body.setEmail("email@teste.com");
-    body.setUsername("fawfa");
-    body.setPassword("1224");
-    ObjectMapper objectMapper = new ObjectMapper();
-    String json = objectMapper.writeValueAsString(body);
-
-    ResultActions response = mockMvc.perform(post("/user/register")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(json));
-
-    response.andExpect(status().isConflict())
-        .andExpect(result -> assertEquals("O email email@teste.com já está em uso.",
-            result.getResolvedException().getMessage()))
-        .andExpect(result -> assertTrue(result.getResolvedException() instanceof RuntimeException));
-  }
-
-  @Test
-  public void registerFailWhenUsernameAlreadyInDB() throws Exception {
-    RequestRegisterUserBody body = new RequestRegisterUserBody();
-    body.setEmail("email@trest.com");
-    body.setUsername("Teste1");
-    body.setPassword("1224");
-    ObjectMapper objectMapper = new ObjectMapper();
-    String json = objectMapper.writeValueAsString(body);
-
-    ResultActions response = mockMvc.perform(post("/user/register")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(json));
-
-    response.andExpect(status().isConflict())
-        .andExpect(result -> assertEquals("O nome Teste1 já está em uso.",
-            result.getResolvedException().getMessage()))
-        .andExpect(result -> assertTrue(result.getResolvedException() instanceof RuntimeException));
   }
 }

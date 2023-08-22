@@ -26,7 +26,7 @@ import static org.hamcrest.Matchers.*;
 @AutoConfigureMockMvc
 @Import(CharactersTestConfiguration.class)
 @ActiveProfiles({ "test" })
-public class CharactersControllerTests {
+public class FindCharactersTests {
   @Autowired
   private MockMvc mockMvc;
 

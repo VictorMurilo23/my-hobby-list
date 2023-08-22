@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(classes = { MediaTestConfiguration.class })
 @ActiveProfiles({ "test" })
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class ReviewsControllerTest {
+public class CreateReviewsTest {
   @Autowired
   private MockMvc mockMvc;
 
