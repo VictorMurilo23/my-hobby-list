@@ -21,16 +21,21 @@ import jakarta.validation.Valid;
 public class ReviewsController {
   /**
    * Service de reviews.
+   * @since 1.0
+   * @author Victor Murilo
+   * @version 1.0
    */
   @Autowired
   private ReviewsService reviewsService;
 
-  // TODO Fazer uma documentação decente pras rotas abaixo
   /**
-   * blabla.
-   * @param body
-   * @param userId
-   * @return f.
+   * Rota de criar uma review.
+   * @param body Corpo da requisição contendo o conteúdo da review, o id da media e se o usuário recomenda ou não a media
+   * @param userId Id do usuário
+   * @return Retorna uma mensagem dizendo que a review foi criada com sucesso.
+   * @since 1.0
+   * @author Victor Murilo
+   * @version 1.0
    */
   @PostMapping("/create")
   @ResponseStatus(HttpStatus.OK)
@@ -45,10 +50,13 @@ public class ReviewsController {
   }
 
   /**
-   * f.
-   * @param body f
-   * @param userId f
-   * @return f
+   * Rota de editar uma review.
+   * @param body Corpo da requisição contendo o conteúdo da review, o id da media e se o usuário recomenda ou não a media. Só id da media é obrigatório de ter no body
+   * @param userId id do usuário
+   * @return Retorna uma mensagem dizendo que a review foi editada com sucesso
+   * @since 1.0
+   * @author Victor Murilo
+   * @version 1.0
    */
   @PatchMapping("/edit")
   @ResponseStatus(HttpStatus.OK)
@@ -58,7 +66,7 @@ public class ReviewsController {
   ) {
     reviewsService.editReview(body, userId);
     ResponseMessage response = new ResponseMessage();
-    System.out.print(body.getContent());
+    response.setMessage("Review editada com sucesso");
     return response;
   }
 }
