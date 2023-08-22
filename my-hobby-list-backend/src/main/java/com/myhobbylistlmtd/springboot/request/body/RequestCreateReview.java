@@ -1,6 +1,5 @@
 package com.myhobbylistlmtd.springboot.request.body;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
@@ -22,8 +21,12 @@ public class RequestCreateReview {
    * @author Victor Murilo
    * @version 1.0
    */
-  @NotBlank(message = "content deve ser um valor válido")
-  @Size(max = 10000)
+  @NotNull(message = "content deve ser um valor válido")
+  @Size(
+    min = 1,
+    max = 10000,
+    message = "content deve ter um length entre 1 e 10000"
+  )
   private String content;
 
   /**
@@ -32,8 +35,8 @@ public class RequestCreateReview {
    * @author Victor Murilo
    * @version 1.0
    */
-  @NotNull(message = "recommended não pode ser null")
-  private boolean recommended;
+  @NotNull(message = "recommended deve ser um campo válido")
+  private Boolean recommended;
 
   /**
    * Getter de content.
@@ -64,7 +67,7 @@ public class RequestCreateReview {
    * @author Victor Murilo
    * @version 1.0
    */
-  public boolean getRecommended() {
+  public Boolean getRecommended() {
     return recommended;
   }
 
@@ -97,7 +100,7 @@ public class RequestCreateReview {
    * @author Victor Murilo
    * @version 1.0
    */
-  public void setRecommended(final boolean recommendedBoolean) {
+  public void setRecommended(final Boolean recommendedBoolean) {
     this.recommended = recommendedBoolean;
   }
 }
