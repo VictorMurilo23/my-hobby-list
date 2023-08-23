@@ -15,7 +15,8 @@ public class ImageService {
    * Encontra todas as imagens.
    * @param filesPath Caminho onde todas as imagens estão
    * @param url Url usada na hora de formar o caminho final da imagem
-   * @return Um objeto contendo uma lista de urls de imagens
+   * @return Um objeto contendo uma lista de urls de imagens.
+   Formato da url da lista: url(parâmetro do método)/nome-do-arquivo.extensão
    * @since 1.0
    * @version 1.0
    * @author Victor Murilo
