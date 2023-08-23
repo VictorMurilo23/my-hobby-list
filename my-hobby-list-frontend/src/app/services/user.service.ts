@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import IRegister from '../interfaces/IRegister';
+import IProfile from '../interfaces/IProfile';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +20,9 @@ export class UserService {
 
   register(body: IRegister): Observable<ILogin> {
     return this.http.post<ILogin>(`${this.baseUrl}/register`, body, { observe: "body", responseType: 'json' });
+  }
+
+  public getProfileInfo(username: string): Observable<IProfile> {
+    return this.http.get<IProfile>(`${this.baseUrl}/profile/${username}`, { observe: "body", responseType: 'json' });
   }
 }

@@ -1,0 +1,22 @@
+<div *ngIf="getProfileInfo() === undefined">
+  <div class="loading-container">
+    <p>loading...</p>
+  </div>
+</div>
+<div *ngIf="getProfileInfo() === null">
+  <app-page-not-found></app-page-not-found>
+</div>
+<div *ngIf="getProfileInfo() !== undefined && getProfileInfo() !== null">
+  <div>
+    <p class="profile-username">{{getProfileInfo()?.username}}</p>
+  </div>
+  <div>
+    <img class="profile-image" [src]="env.apiUrl + '/' + getProfileInfo()?.profileImage" [alt]="'Foto de perfil de ' + getProfileInfo()?.username">
+  </div>
+  <div>
+    <p class="profile-joined-date">{{getJoinedDate()}}</p>
+  </div>
+  <div>
+    <p class="profile-description">{{getProfileInfo()?.userDescription}}</p>
+  </div>
+</div>
