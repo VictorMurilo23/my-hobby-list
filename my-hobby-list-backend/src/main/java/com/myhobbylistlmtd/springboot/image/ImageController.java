@@ -1,11 +1,6 @@
 package com.myhobbylistlmtd.springboot.image;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
-
-import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,13 +8,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
+import com.myhobbylistlmtd.springboot.objs.AllImagesUrl;
 
 @RestController
 @RequestMapping(value = "/images")
 public class ImageController {
   // TODO Fazer duas rotas de imagens, uma de capas e outra pra personagens
-  // TODO Reaproveitar a função de pegar imagem na rota dos personagens
   /**
    * Caminho base para o diretório de imagens.
    * @since 1.0
@@ -29,60 +23,13 @@ public class ImageController {
   private String imagePathRoot = "src/main/resources/images/";
 
   /**
-   * Procura a imagem baseado no caminho passado por
-   parâmetro e, se não achar, joga uma exceção.
-   * @param path Caminho utilizado na busca da imagem.
-   * @return Retorna a imagem em formato de bytes pronta para ser enviada
-   * @throws NotFoundException Ocorre quando a imagem não
-   é encontrada e retorna um http 404.
+   * Service de image.
    * @since 1.0
    * @version 1.0
    * @author Victor Murilo
    */
-  private byte[] findImage(final String path) throws NotFoundException {
-    try {
-      byte[] image = new byte[0];
-      image = FileUtils.readFileToByteArray(
-        new File(path)
-      );
-      return image;
-    } catch (IOException e) {
-      throw new NotFoundException("Imagem não encontrada");
-    }
-  }
-
-  class AllImagesUrl {
-    /**
-     * Lista com a url de todas as imagens disponíveis.
-     */
-    private LinkedList<String> images = new LinkedList<String>();
-
-    public List<String> getImages() {
-      return images;
-    }
-
-    public void setImage(final String imageUrl) {
-      this.images.addLast(imageUrl);
-    }
-  }
-
-  /**
-   * .
-   * @param filesPath Caminho onde todas as imagens estão
-   * @param url Url usada na hora de formar o caminho final da imagem
-   * @return Um objeto contendo uma lista de urls de imagens
-   * @since 1.0
-   * @version 1.0
-   * @author Victor Murilo
-   */
-  private AllImagesUrl allImagesUrl(final String filesPath, final String url) {
-    String[] pathnames = new File(filesPath).list();
-    AllImagesUrl images = new AllImagesUrl();
-    for (String pathname : pathnames) {
-      images.setImage(String.format("%s/%s", url, pathname));
-    }
-    return images;
-  }
+  @Autowired
+  private ImageService service;
 
   /**
    * Rota estática de imagens.
@@ -97,7 +44,9 @@ public class ImageController {
   public ResponseEntity<byte[]> getCoverImage(
     @PathVariable("imageName") final String imageName
   ) {
-    byte[] image = this.findImage(this.imagePathRoot + "covers/" + imageName);
+    byte[] image = service.findImage(
+      this.imagePathRoot + "covers/" + imageName
+    );
     MediaType type = imageName.endsWith(".jpg")
     ? MediaType.IMAGE_JPEG : MediaType.IMAGE_PNG;
     return ResponseEntity.ok().contentType(type).body(image);
@@ -116,7 +65,9 @@ public class ImageController {
   public ResponseEntity<byte[]> getProfileImage(
     @PathVariable("imageName") final String imageName
   ) {
-    byte[] image = this.findImage(this.imagePathRoot + "profile/" + imageName);
+    byte[] image = service.findImage(
+      this.imagePathRoot + "profile/" + imageName
+    );
     MediaType type = imageName.endsWith(".jpg")
     ? MediaType.IMAGE_JPEG : MediaType.IMAGE_PNG;
     return ResponseEntity.ok().contentType(type).body(image);
@@ -132,7 +83,7 @@ public class ImageController {
   @GetMapping("/profile-images")
   public AllImagesUrl getAllProfileImage() {
     String filesPath = this.imagePathRoot + "profile";
-    AllImagesUrl imagesUrl = this.allImagesUrl(
+    AllImagesUrl imagesUrl = service.allImagesUrl(
       filesPath, "images/profile"
     );
     return imagesUrl;
