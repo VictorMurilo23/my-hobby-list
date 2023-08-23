@@ -92,7 +92,7 @@ public class User {
     name = "profile_image", nullable = false
   )
   @JsonView(Views.Public.class)
-  private String profileImage;
+  private String profileImage = "images/profile/default.jpeg";
 
   /** Data em que o usuário se registrou.
   * @since 1.0
