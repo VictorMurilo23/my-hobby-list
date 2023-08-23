@@ -1,5 +1,6 @@
 package com.myhobbylistlmtd.springboot.user;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -74,6 +75,39 @@ public class User {
   )
   @JsonIgnore
   private String password;
+
+  /** Url da foto de perfil utilizada pelo usuário.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @Column(
+    name = "profile_image", nullable = false
+  )
+  @JsonView(Views.Public.class)
+  private String profileImage;
+
+  /** Data em que o usuário se registrou.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @Column(
+    name = "joined_at", nullable = false
+  )
+  @JsonView(Views.Public.class)
+  private LocalDateTime joinedAt = LocalDateTime.now();
+
+  /** Descrição do perfil do usuário.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @Column(
+    name = "user_description", nullable = false
+  )
+  @JsonView(Views.Public.class)
+  private String userDescription = "";
 
   /** Relacionamento com reviews.
   * @since 1.0
