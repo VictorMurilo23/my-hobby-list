@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { ProfileComponent } from './profile.component';
 import IProfile from 'src/app/interfaces/IProfile';
@@ -72,4 +72,19 @@ describe('ProfileComponent', () => {
     expect(profileDescription).toBeTruthy();
     expect(profileDescription.nativeElement.textContent).toBe("Bla bla bla");
   });
+
+  it("should redirect to userlist when you click on list button", fakeAsync(() => {
+    const { debugElement } = fixture;
+    spyOn(userService, 'getProfileInfo').and.returnValue(of(profile));
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    const redirect = debugElement.query(By.css(".redirect-to-list-page-button"));
+    expect(redirect).toBeTruthy();
+    expect(redirect.nativeElement.textContent).toBe("Lista");
+    redirect.nativeElement.click();
+    tick();
+
+    expect(router.url).toBe("/list/Victo")
+  }));
 });
