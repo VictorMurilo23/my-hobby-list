@@ -23,6 +23,6 @@ export class UserService {
   }
 
   public getProfileInfo(username: string): Observable<IProfile> {
-    return this.http.get<IProfile>(`${this.baseUrl}/user/profile/${username}`, { observe: "body", responseType: 'json' });
+    return this.http.get<IProfile>(`${this.baseUrl}/profile/${username}`, { observe: "body", responseType: 'json' });
   }
 }
