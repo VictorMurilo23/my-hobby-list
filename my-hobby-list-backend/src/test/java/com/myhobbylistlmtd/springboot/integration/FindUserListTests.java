@@ -13,9 +13,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.myhobbylistlmtd.springboot.MyHobbyListBackendApplication;
-import com.myhobbylistlmtd.springboot.utils.LoginTestConfiguration;
-import com.myhobbylistlmtd.springboot.utils.MediaTestConfiguration;
-import com.myhobbylistlmtd.springboot.utils.UserListItemStatusTestConfiguration;
+import com.myhobbylistlmtd.springboot.utils.FindUserListConfiguration;
 
 // import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,7 +25,7 @@ import static org.hamcrest.Matchers.*;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = MyHobbyListBackendApplication.class)
 @AutoConfigureMockMvc
-@ContextConfiguration(classes = {LoginTestConfiguration.class, MediaTestConfiguration.class, UserListItemStatusTestConfiguration.class})
+@ContextConfiguration(classes = {FindUserListConfiguration.class})
 @ActiveProfiles({ "test" })
 public class FindUserListTests {
   @Autowired
