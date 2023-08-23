@@ -201,4 +201,59 @@ public class User {
   public String getUsername() {
     return username;
   }
+
+  /**
+   * Getter de joinedAt.
+   * @return Retorna a data em que o usuário se registrou
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  public LocalDateTime getJoinedAt() {
+    return joinedAt;
+  }
+
+  /**
+   * Getter de profileImage.
+   * @return Retorna a url da imagem de perfil do usuário
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  public String getProfileImage() {
+    return profileImage;
+  }
+
+  /**
+   * Setter de profileImage.
+   * @param profileImageUrl Url da imagem de perfil
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  public void setProfileImage(final String profileImageUrl) {
+    this.profileImage = profileImageUrl;
+  }
+
+  /**
+   * Getter de userDescription.
+   * @return Descrição do perfil do usuário
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  public String getUserDescription() {
+    return userDescription;
+  }
+
+  /**
+   * Setter de userDescription.
+   * @param userDescriptionStr String com a descrição do perfil do usuário
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  public void setUserDescription(final String userDescriptionStr) {
+      this.userDescription = userDescriptionStr;
+  }
 }
