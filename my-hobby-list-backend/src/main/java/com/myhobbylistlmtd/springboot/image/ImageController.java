@@ -51,7 +51,7 @@ public class ImageController {
 
   /**
    * Rota estática de imagens.
-   * @param imageName Recebe um body contendo a senha, nome do usuário e o email
+   * @param imageName Nome da imagem
    * @return Uma imagem png ou jpg.
    * @throws NotFoundException Ocorre quando a imagem não é encontrada.
    * @since 1.0
@@ -63,6 +63,25 @@ public class ImageController {
     @PathVariable("imageName") final String imageName
   ) {
     byte[] image = this.findImage(this.imagePathRoot + "covers/" + imageName);
+    MediaType type = imageName.endsWith(".jpg")
+    ? MediaType.IMAGE_JPEG : MediaType.IMAGE_PNG;
+    return ResponseEntity.ok().contentType(type).body(image);
+  }
+
+  /**
+   * Rota estática de achar uma imagem de perfil.
+   * @param imageName Nome da imagem
+   * @return Uma imagem png ou jpg.
+   * @throws NotFoundException Ocorre quando a imagem não é encontrada.
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  @GetMapping("/profile/{imageName}")
+  public ResponseEntity<byte[]> getProfileImage(
+    @PathVariable("imageName") final String imageName
+  ) {
+    byte[] image = this.findImage(this.imagePathRoot + "profile/" + imageName);
     MediaType type = imageName.endsWith(".jpg")
     ? MediaType.IMAGE_JPEG : MediaType.IMAGE_PNG;
     return ResponseEntity.ok().contentType(type).body(image);
