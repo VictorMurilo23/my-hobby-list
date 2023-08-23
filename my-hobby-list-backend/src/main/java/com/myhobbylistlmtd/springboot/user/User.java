@@ -3,6 +3,7 @@ package com.myhobbylistlmtd.springboot.user;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.reviews.Reviews;
@@ -103,6 +104,7 @@ public class User {
     name = "joined_at", nullable = false
   )
   @JsonView(Views.Public.class)
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private LocalDateTime joinedAt = LocalDateTime.now();
 
   /** Descrição do perfil do usuário.
