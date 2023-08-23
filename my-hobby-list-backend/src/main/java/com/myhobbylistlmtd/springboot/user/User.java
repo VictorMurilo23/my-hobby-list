@@ -1,7 +1,9 @@
 package com.myhobbylistlmtd.springboot.user;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.reviews.Reviews;
@@ -31,6 +33,13 @@ public class User {
   * @version 1.0
   */
   private static final int PASSWORD_LENGTH = 20;
+
+  /** Length máxima permitida para a descrição de perfil do usuário.
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+  */
+  private static final int DESCRIPTION_LENGTH = 160;
 
   /** Id gerado automaticamente.
   * @since 1.0
@@ -74,6 +83,40 @@ public class User {
   )
   @JsonIgnore
   private String password;
+
+  /** Url da foto de perfil utilizada pelo usuário.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @Column(
+    name = "profile_image", nullable = false
+  )
+  @JsonView(Views.Public.class)
+  private String profileImage = "images/profile/default.jpeg";
+
+  /** Data em que o usuário se registrou.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @Column(
+    name = "joined_at", nullable = false
+  )
+  @JsonView(Views.Public.class)
+  @JsonFormat(pattern = "yyyy-MM-dd")
+  private LocalDateTime joinedAt = LocalDateTime.now();
+
+  /** Descrição do perfil do usuário.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @Column(
+    name = "user_description", nullable = false, length = DESCRIPTION_LENGTH
+  )
+  @JsonView(Views.Public.class)
+  private String userDescription = "";
 
   /** Relacionamento com reviews.
   * @since 1.0
@@ -166,5 +209,60 @@ public class User {
    */
   public String getUsername() {
     return username;
+  }
+
+  /**
+   * Getter de joinedAt.
+   * @return Retorna a data em que o usuário se registrou
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  public LocalDateTime getJoinedAt() {
+    return joinedAt;
+  }
+
+  /**
+   * Getter de profileImage.
+   * @return Retorna a url da imagem de perfil do usuário
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  public String getProfileImage() {
+    return profileImage;
+  }
+
+  /**
+   * Setter de profileImage.
+   * @param profileImageUrl Url da imagem de perfil
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  public void setProfileImage(final String profileImageUrl) {
+    this.profileImage = profileImageUrl;
+  }
+
+  /**
+   * Getter de userDescription.
+   * @return Descrição do perfil do usuário
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  public String getUserDescription() {
+    return userDescription;
+  }
+
+  /**
+   * Setter de userDescription.
+   * @param userDescriptionStr String com a descrição do perfil do usuário
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  public void setUserDescription(final String userDescriptionStr) {
+      this.userDescription = userDescriptionStr;
   }
 }

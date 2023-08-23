@@ -2,15 +2,19 @@ package com.myhobbylistlmtd.springboot.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.request.body.RequestLoginBody;
 import com.myhobbylistlmtd.springboot.request.body.RequestRegisterUserBody;
 import com.myhobbylistlmtd.springboot.response.body.ResponseLoginBody;
+import com.myhobbylistlmtd.springboot.utils.Views;
 
 import jakarta.validation.Valid;
 
@@ -63,5 +67,18 @@ public final class UserController {
     ResponseLoginBody response = new ResponseLoginBody();
     response.setToken(token);
     return response;
+  }
+
+  /**
+   * Rota de pegar as informações de perfil.
+   * @param username Nome do usuário
+   * @return Um JSON contendo nome de usuário,
+   data de registro, descrição e url da imagem de perfil
+   */
+  @GetMapping("/profile/{username}")
+  @ResponseStatus(HttpStatus.OK)
+  @JsonView(Views.Public.class)
+  User getProfile(final @PathVariable String username) {
+    return service.findByUsername(username);
   }
 }
