@@ -33,6 +33,13 @@ public class User {
   */
   private static final int PASSWORD_LENGTH = 20;
 
+  /** Length máxima permitida para a descrição de perfil do usuário.
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+  */
+  private static final int DESCRIPTION_LENGTH = 160;
+
   /** Id gerado automaticamente.
   * @since 1.0
   * @author Victor Murilo
@@ -104,7 +111,7 @@ public class User {
   * @version 1.0
   */
   @Column(
-    name = "user_description", nullable = false
+    name = "user_description", nullable = false, length = DESCRIPTION_LENGTH
   )
   @JsonView(Views.Public.class)
   private String userDescription = "";
