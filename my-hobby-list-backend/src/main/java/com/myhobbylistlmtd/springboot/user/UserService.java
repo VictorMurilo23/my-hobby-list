@@ -1,5 +1,6 @@
 package com.myhobbylistlmtd.springboot.user;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.myhobbylistlmtd.springboot.exceptions.AlreadyTakenException;
 import com.myhobbylistlmtd.springboot.exceptions.InvalidLoginException;
 import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
+import com.myhobbylistlmtd.springboot.image.ImageService;
 import com.myhobbylistlmtd.springboot.interfaces.FindById;
 import com.myhobbylistlmtd.springboot.request.body.RequestRegisterUserBody;
 import com.myhobbylistlmtd.springboot.utils.Jwt;
@@ -22,6 +24,12 @@ public class UserService implements FindById<User, Long> {
   */
   @Autowired
   private UserRepository repository;
+
+  /**
+   * Service de image.
+   */
+  @Autowired
+  private ImageService imageService;
 
   /**
    * Classe contendo os métodos de criar e verificar um token jwt.
@@ -155,5 +163,49 @@ public class UserService implements FindById<User, Long> {
       savedUser.getUsername()
     );
     return token;
+  }
+
+  /**
+   * Válida se a url da imagem de perfil realmente existe no servidor.
+   * @param url Url da imagem
+   * @return Uma string com o caminho correto da imagem
+   * @throws NotFoundException Ocorre quando a imagem de perfil não existe
+   no servidor
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  private String validateProfileImageUrl(
+    final String url
+  ) throws NotFoundException {
+    List<String> pathsList = this.imageService.allImagesUrl(
+      "src/main/resources/images/profile",
+      "images/profile"
+    ).getImages();
+    String imageName = url.substring(url.lastIndexOf("/") + 1);
+    for (String pathname : pathsList) {
+      if (pathname.endsWith(imageName)) {
+        return pathname;
+      }
+    }
+    throw new NotFoundException("Imagem de perfil não encontrada");
+  }
+
+  /**
+   * Muda a imagem de perfil do usuário.
+   * @param userId Id do usuário
+   * @param profileImageUrl Url da imagem de perfil
+   * @return O objeto User com os dados atualizados
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  public User changeProfileImage(
+    final Long userId, final String profileImageUrl
+  ) {
+    String url = this.validateProfileImageUrl(profileImageUrl);
+    User user = this.findById(userId);
+    user.setProfileImage(url);
+    return repository.save(user);
   }
 }
