@@ -2,6 +2,8 @@ package com.myhobbylistlmtd.springboot.image;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.http.MediaType;
@@ -49,6 +51,39 @@ public class ImageController {
     }
   }
 
+  class AllImagesUrl {
+    /**
+     * Lista com a url de todas as imagens disponíveis.
+     */
+    private LinkedList<String> images = new LinkedList<String>();
+
+    public List<String> getImages() {
+      return images;
+    }
+
+    public void setImage(final String imageUrl) {
+      this.images.addLast(imageUrl);
+    }
+  }
+
+  /**
+   * .
+   * @param filesPath Caminho onde todas as imagens estão
+   * @param url Url usada na hora de formar o caminho final da imagem
+   * @return Um objeto contendo uma lista de urls de imagens
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  private AllImagesUrl allImagesUrl(final String filesPath, final String url) {
+    String[] pathnames = new File(filesPath).list();
+    AllImagesUrl images = new AllImagesUrl();
+    for (String pathname : pathnames) {
+      images.setImage(String.format("%s/%s", url, pathname));
+    }
+    return images;
+  }
+
   /**
    * Rota estática de imagens.
    * @param imageName Nome da imagem
@@ -85,5 +120,21 @@ public class ImageController {
     MediaType type = imageName.endsWith(".jpg")
     ? MediaType.IMAGE_JPEG : MediaType.IMAGE_PNG;
     return ResponseEntity.ok().contentType(type).body(image);
+  }
+
+  /**
+   * Rota de encontrar todas as imagens de perfil disponíveis.
+   * @return Uma lista com a url de todas as imagens disponíveis.
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  @GetMapping("/profile-images")
+  public AllImagesUrl getAllProfileImage() {
+    String filesPath = this.imagePathRoot + "profile";
+    AllImagesUrl imagesUrl = this.allImagesUrl(
+      filesPath, "images/profile"
+    );
+    return imagesUrl;
   }
 }
