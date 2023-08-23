@@ -7,6 +7,7 @@ import { MediaDetailsComponent } from "./pages/media-details/media-details.compo
 import { PageNotFoundComponent } from "./pages/page-not-found/page-not-found.component";
 import { InsertComponent } from "./pages/insert/insert.component";
 import { UserListComponent } from "./pages/user-list/user-list.component";
+import { ProfileComponent } from "./pages/profile/profile.component";
 
 const routes: Routes = [
   {path: "", component: HomeComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: "media/:id", component: MediaDetailsComponent},
   {path: "media/insert/:id", component: InsertComponent},
   {path: "list/:username", component: UserListComponent},
+  {path: "profile/:username", component: ProfileComponent},
   {path: '**', pathMatch: "full", component: PageNotFoundComponent}
 ];
 
