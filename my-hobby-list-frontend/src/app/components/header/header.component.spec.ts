@@ -7,18 +7,21 @@ import routes from 'src/app/app.routes';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { HttpClientModule } from '@angular/common/http';
+import { UserService } from 'src/app/services/user.service';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
   let router: Router;
   let localStorageService: LocalStorageService;
+  let userService: UserService;
   
   const validToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJUZXN0ZSJ9.7v5OsWsTA4Y0df9CeUR04X5712w1pg3Vk-muu86RZdg"
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes(routes)],
+      imports: [HttpClientModule, RouterTestingModule.withRoutes(routes)],
       declarations: [ HeaderComponent, SearchBarComponent ]
     })
     .compileComponents();
@@ -27,6 +30,7 @@ describe('HeaderComponent', () => {
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
     localStorageService = fixture.debugElement.injector.get(LocalStorageService);
+    userService = fixture.debugElement.injector.get(UserService);
     fixture.detectChanges();
   });
 
@@ -121,5 +125,23 @@ describe('HeaderComponent', () => {
     const username = debugElement.query(By.css(".user-info-container")).query(By.css(".username"));
     expect(username).toBeTruthy(); 
     expect(username.nativeElement.textContent).toBe("Teste")
+  }));
+
+  it('should redirect to /login when logout button is clicked', fakeAsync(() => {
+    const { debugElement } = fixture;
+    spyOn(localStorageService, "getToken").and.returnValue(validToken);
+    component.ngOnInit();
+    fixture.detectChanges();
+    const logoutBtn = debugElement.query(By.css(".logout-btn"));
+    expect(logoutBtn).toBeTruthy();
+    logoutBtn.nativeElement.click();
+    localStorageService.getToken = jasmine.createSpy().and.returnValue(null);
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+
+    const username = debugElement.query(By.css(".username"));
+    expect(username).not.toBeTruthy();
+    expect(router.url).toBe("/login");
   }));
 });
