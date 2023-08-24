@@ -1,1 +1,8 @@
-<p>change-profile-image works!</p>
+<div *ngIf="getImages().length !== 0">
+  <div *ngFor="let imageUrl of getImages();">
+    <img [src]="env.apiUrl + '/' + imageUrl" [alt]="'imagem de perfil' + ' ' + imageUrl">
+  </div>
+</div>
+<div *ngIf="getImages().length === 0 && getErrorMessage() !== undefined">
+  <p>{{getErrorMessage()}}</p>
+</div>
