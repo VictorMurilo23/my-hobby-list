@@ -7,6 +7,7 @@ import IMedia from 'src/app/interfaces/IMedia';
 import { ListService } from 'src/app/services/list.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { MediaService } from 'src/app/services/media.service';
+import { UserService } from 'src/app/services/user.service';
 import IInsertInfo from 'src/app/types/IInsertInfo';
 import { statusNameArray } from 'src/assets/statusNameArray';
 
@@ -32,7 +33,8 @@ export class InsertComponent extends ErrorMessage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private localStorage: LocalStorageService,
     private router: Router,
-    private listService: ListService
+    private listService: ListService,
+    private userService: UserService,
   ) {
     super('');
   }
@@ -111,7 +113,7 @@ export class InsertComponent extends ErrorMessage implements OnInit {
       error: (error: HttpErrorResponse) => {
         const message: string = error.error.message;
         if (message === "Token inválido") {
-          this.router.navigate(["/login"]);
+          this.userService.logout();
           return;
         }
         super.setErrorMessage(message);
