@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import ILogin from '../interfaces/ILogin';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import IRegister from '../interfaces/IRegister';
 import IProfile from '../interfaces/IProfile';
 import ProfileImages from '../types/ProfileImages';
@@ -36,18 +36,24 @@ export class UserService {
     });
   }
 
-  public changeProfileImage(imageUrl: string) {
+  public changeProfileImage(imageUrl: string, token: string) {
+    const headers = new HttpHeaders({
+      Authorization: token,
+    });
     return this.http.patch(
       `${this.baseUrl}/profile/change-profile-image`,
       { imageUrl },
-      { observe: 'body', responseType: 'json' }
+      { observe: 'body', responseType: 'json', headers }
     );
   }
 
   public getAllProfileImagesOptions(): Observable<ProfileImages> {
-    return this.http.get<ProfileImages>(`${environment.apiUrl}/images/profile-images`, {
-      observe: 'body',
-      responseType: 'json',
-    });
+    return this.http.get<ProfileImages>(
+      `${environment.apiUrl}/images/profile-images`,
+      {
+        observe: 'body',
+        responseType: 'json',
+      }
+    );
   }
 }
