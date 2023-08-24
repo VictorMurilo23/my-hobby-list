@@ -72,8 +72,7 @@ export class ChangeProfileImageComponent implements OnInit {
       error: (err: HttpErrorResponse) => {
         const errorMessage = err.error.message;
         if (errorMessage === 'User não encontrada!') {
-          this.localStorage.removeToken();
-          this.router.navigate(['/login']);
+          this.userService.logout();
           return;
         }
       },
