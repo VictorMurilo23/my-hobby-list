@@ -6,13 +6,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import IRegister from '../interfaces/IRegister';
 import IProfile from '../interfaces/IProfile';
 import ProfileImages from '../types/ProfileImages';
+import { Router } from '@angular/router';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   private baseUrl = `${environment.apiUrl}/user`;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private localStorage: LocalStorageService, private router: Router) {}
 
   login(email: string, password: string): Observable<ILogin> {
     const body = { email, password };
@@ -55,5 +57,10 @@ export class UserService {
         responseType: 'json',
       }
     );
+  }
+
+  public logout(): void {
+    this.localStorage.removeToken();
+    this.router.navigate(["/login"]);
   }
 }
