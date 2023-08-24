@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import IRegister from '../interfaces/IRegister';
 import IProfile from '../interfaces/IProfile';
+import ProfileImages from '../types/ProfileImages';
 
 @Injectable({
   providedIn: 'root',
@@ -41,5 +42,12 @@ export class UserService {
       { imageUrl },
       { observe: 'body', responseType: 'json' }
     );
+  }
+
+  public getAllProfileImagesOptions(): Observable<ProfileImages> {
+    return this.http.get<ProfileImages>(`${environment.apiUrl}/images/profile-images`, {
+      observe: 'body',
+      responseType: 'json',
+    });
   }
 }
