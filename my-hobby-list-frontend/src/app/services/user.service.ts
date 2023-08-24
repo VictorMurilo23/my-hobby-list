@@ -25,4 +25,8 @@ export class UserService {
   public getProfileInfo(username: string): Observable<IProfile> {
     return this.http.get<IProfile>(`${this.baseUrl}/profile/${username}`, { observe: "body", responseType: 'json' });
   }
+
+  public changeProfileImage(imageUrl: string) {
+    return this.http.patch(`${this.baseUrl}/profile/change-profile-image`, { imageUrl }, { observe: "body", responseType: "json"})
+  }
 }
