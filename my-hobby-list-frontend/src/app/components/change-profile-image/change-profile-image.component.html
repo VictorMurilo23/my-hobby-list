@@ -1,6 +1,11 @@
 <div *ngIf="getImages().length !== 0">
-  <div *ngFor="let imageUrl of getImages();">
-    <img [src]="env.apiUrl + '/' + imageUrl" [alt]="'imagem de perfil' + ' ' + imageUrl">
+  <div>
+    <div *ngFor="let imageUrl of getImages();">
+      <img class="profile-image-option" (click)="setSelectedImage($event)" [src]="env.apiUrl + '/' + imageUrl" [alt]="'imagem de perfil' + ' ' + imageUrl">
+    </div>
+  </div>
+  <div>
+    <button (click)=changeProfileImage()>Mudar imagem</button>
   </div>
 </div>
 <div *ngIf="getImages().length === 0 && getErrorMessage() !== undefined">

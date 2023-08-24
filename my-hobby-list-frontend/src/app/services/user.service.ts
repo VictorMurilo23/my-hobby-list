@@ -40,7 +40,7 @@ export class UserService {
     const headers = new HttpHeaders({
       Authorization: token,
     });
-    return this.http.patch(
+    return this.http.patch<IProfile>(
       `${this.baseUrl}/profile/change-profile-image`,
       { imageUrl },
       { observe: 'body', responseType: 'json', headers }
