@@ -8,6 +8,8 @@ import { PageNotFoundComponent } from "./pages/page-not-found/page-not-found.com
 import { InsertComponent } from "./pages/insert/insert.component";
 import { UserListComponent } from "./pages/user-list/user-list.component";
 import { ProfileComponent } from "./pages/profile/profile.component";
+import { SettingsPageComponent } from "./pages/settings-page/settings-page.component";
+import { ChangeProfileImageComponent } from "./components/change-profile-image/change-profile-image.component";
 
 const routes: Routes = [
   {path: "", component: HomeComponent},
@@ -18,6 +20,9 @@ const routes: Routes = [
   {path: "media/insert/:id", component: InsertComponent},
   {path: "list/:username", component: UserListComponent},
   {path: "profile/:username", component: ProfileComponent},
+  {path: "settings", title: "Configurações", component: SettingsPageComponent, children: [
+    {path: "change-profile-image", component: ChangeProfileImageComponent}
+  ]},
   {path: '**', pathMatch: "full", component: PageNotFoundComponent}
 ];
 
