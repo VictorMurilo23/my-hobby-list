@@ -10,6 +10,7 @@
   <ng-template #logged>
     <div class="user-info-container">
       <span class="username">{{username}}</span>
+      <button class="logout-btn" (click)="logout()">Logout</button>
       <a class="link-to-userlist" [routerLink]="['/list/', username]"><span>Lista</span></a>
     </div>
   </ng-template>

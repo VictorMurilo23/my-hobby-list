@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Buffer } from 'buffer';
 import { NavigationEnd, Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,7 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   public username! : string | null;
-  constructor(private localStorageService: LocalStorageService, private router: Router) {
+  constructor(private localStorageService: LocalStorageService, private router: Router, private userService: UserService) {
     this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) { 
         this.parseJwt();
@@ -34,5 +35,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.parseJwt();
+  }
+
+  logout() {
+    this.userService.logout();
   }
 }
