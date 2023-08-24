@@ -7,26 +7,39 @@ import IRegister from '../interfaces/IRegister';
 import IProfile from '../interfaces/IProfile';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
   private baseUrl = `${environment.apiUrl}/user`;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   login(email: string, password: string): Observable<ILogin> {
     const body = { email, password };
-    return this.http.post<ILogin>(`${this.baseUrl}/login`, body, { observe: "body", responseType: 'json' });
+    return this.http.post<ILogin>(`${this.baseUrl}/login`, body, {
+      observe: 'body',
+      responseType: 'json',
+    });
   }
 
   register(body: IRegister): Observable<ILogin> {
-    return this.http.post<ILogin>(`${this.baseUrl}/register`, body, { observe: "body", responseType: 'json' });
+    return this.http.post<ILogin>(`${this.baseUrl}/register`, body, {
+      observe: 'body',
+      responseType: 'json',
+    });
   }
 
   public getProfileInfo(username: string): Observable<IProfile> {
-    return this.http.get<IProfile>(`${this.baseUrl}/profile/${username}`, { observe: "body", responseType: 'json' });
+    return this.http.get<IProfile>(`${this.baseUrl}/profile/${username}`, {
+      observe: 'body',
+      responseType: 'json',
+    });
   }
 
   public changeProfileImage(imageUrl: string) {
-    return this.http.patch(`${this.baseUrl}/profile/change-profile-image`, { imageUrl }, { observe: "body", responseType: "json"})
+    return this.http.patch(
+      `${this.baseUrl}/profile/change-profile-image`,
+      { imageUrl },
+      { observe: 'body', responseType: 'json' }
+    );
   }
 }
