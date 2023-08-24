@@ -144,4 +144,13 @@ describe('HeaderComponent', () => {
     expect(username).not.toBeTruthy();
     expect(router.url).toBe("/login");
   }));
+
+  it('shouldn\' render logout button if user isnt logged', () => {
+    const { debugElement } = fixture;
+    spyOn(localStorageService, "getToken").and.returnValue(null);
+    component.ngOnInit();
+    fixture.detectChanges();
+    const logoutBtn = debugElement.query(By.css(".logout-btn"));
+    expect(logoutBtn).not.toBeTruthy();
+  });
 });
