@@ -20,6 +20,7 @@ import { InsertComponent } from './pages/insert/insert.component';
 import { UserListComponent } from './pages/user-list/user-list.component';
 import { CharactersComponent } from './components/characters/characters.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     InsertComponent,
     UserListComponent,
     CharactersComponent,
-    ProfileComponent
+    ProfileComponent,
+    SettingsPageComponent
   ],
   imports: [
     BrowserModule,
