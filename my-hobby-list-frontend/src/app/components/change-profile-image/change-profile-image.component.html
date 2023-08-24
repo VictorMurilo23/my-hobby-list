@@ -5,7 +5,7 @@
     </div>
   </div>
   <div>
-    <button (click)=changeProfileImage()>Mudar imagem</button>
+    <button class="change-profile-image-btn" (click)=changeProfileImage()>Mudar imagem</button>
   </div>
 </div>
 <div *ngIf="getImages().length === 0 && getErrorMessage() !== undefined">
