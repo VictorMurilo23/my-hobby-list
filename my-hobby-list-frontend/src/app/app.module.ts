@@ -21,6 +21,7 @@ import { UserListComponent } from './pages/user-list/user-list.component';
 import { CharactersComponent } from './components/characters/characters.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
+import { ChangeProfileImageComponent } from './components/change-profile-image/change-profile-image.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { SettingsPageComponent } from './pages/settings-page/settings-page.compo
     UserListComponent,
     CharactersComponent,
     ProfileComponent,
-    SettingsPageComponent
+    SettingsPageComponent,
+    ChangeProfileImageComponent
   ],
   imports: [
     BrowserModule,
