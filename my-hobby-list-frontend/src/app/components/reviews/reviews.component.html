@@ -1,1 +1,19 @@
-<p>reviews works!</p>
+<div *ngIf="loading === true; else reviews">
+  <p>loading...</p>
+</div>
+<ng-template #reviews>
+  <div>
+    <div>
+      <div class="review-card" *ngFor="let review of getReviews()">
+        <span class="review-card-username">{{review.user.username}}</span>
+        <p class="review-card-content">{{review.content}}</p>
+        <p class="review-card-recommended">{{review.recommended}}</p>
+      </div>
+    </div>
+    <div>
+      <div (click)="changePage(pageNumber)" *ngFor="let pageNumber of getPages()">
+        <button class="change-page-button">{{pageNumber}}</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
