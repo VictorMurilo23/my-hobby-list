@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from 'src/app/services/user.service';
+import { SettingsPageComponent } from 'src/app/pages/settings-page/settings-page.component';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -22,7 +23,7 @@ describe('HeaderComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientModule, RouterTestingModule.withRoutes(routes)],
-      declarations: [ HeaderComponent, SearchBarComponent ]
+      declarations: [ HeaderComponent, SearchBarComponent, SettingsPageComponent ]
     })
     .compileComponents();
     
@@ -166,5 +167,38 @@ describe('HeaderComponent', () => {
     username.nativeElement.click();
     tick();
     expect(router.url).toBe("/profile/Teste");
+  }));
+
+  it('should render settings button only if user is logged', fakeAsync(() => {
+    const { debugElement } = fixture;
+    spyOn(localStorageService, "getToken").and.returnValue(null);
+    component.ngOnInit();
+    fixture.detectChanges();
+    
+    const settings1 = debugElement.query(By.css(".settings-redirect"));
+    expect(settings1).not.toBeTruthy(); 
+
+    localStorageService.getToken = jasmine.createSpy().and.returnValue(validToken)
+    const loginBtn = debugElement.query(By.css(".login-redirect-button"));
+    expect(loginBtn).toBeTruthy();
+    loginBtn.nativeElement.click();
+    tick();
+    fixture.detectChanges();
+
+    const settings2 = debugElement.query(By.css(".settings-redirect"));
+    expect(settings2).toBeTruthy();
+  }));
+
+  it('should redirect when settings button is clicked', fakeAsync(() => {
+    const { debugElement } = fixture;
+    spyOn(localStorageService, "getToken").and.returnValue(validToken);
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    const settings = debugElement.query(By.css(".settings-redirect"));
+    expect(settings).toBeTruthy();
+    settings.nativeElement.click();
+    tick();
+    expect(router.url).toBe("/settings")
   }));
 });
