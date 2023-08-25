@@ -11,5 +11,5 @@ type User = {
 export interface Reviews {
   content: string;
   recommended: boolean;
-  username: User;
+  user: User;
 }
