@@ -4,8 +4,12 @@ export interface CreateReview {
   recommended: boolean;
 }
 
+type User = {
+  username: string,
+}
+
 export interface Reviews {
   content: string;
   recommended: boolean;
-  username: string;
+  username: User;
 }
