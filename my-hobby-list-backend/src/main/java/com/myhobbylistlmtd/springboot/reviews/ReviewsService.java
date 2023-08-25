@@ -106,7 +106,8 @@ public class ReviewsService {
    * Encontra reviews.
    * @param page número da página
    * @param mediaId id da media
-   * @return Retorna um objeto contendo uma lista de reviews e o número total de páginas
+   * @return Retorna um objeto contendo uma lista de
+   reviews e o número total de páginas
    * @since 1.0
    * @author Victor Murilo
    * @version 1.0

@@ -59,7 +59,7 @@ public class User {
   @Column(
     name = "username", length = USERNAME_LENGTH, nullable = false
   )
-  @JsonView(Views.Public.class)
+  @JsonView({Views.Public.class, Views.Review.class})
   private String username;
 
   /** Email utilizado pelo usuário na hora de fazer login.

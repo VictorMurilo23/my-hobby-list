@@ -1,8 +1,11 @@
 package com.myhobbylistlmtd.springboot.reviews;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.media.media.Media;
 import com.myhobbylistlmtd.springboot.user.User;
+import com.myhobbylistlmtd.springboot.utils.Views;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,6 +26,7 @@ public class Reviews {
   */
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
+  @JsonView({Views.Review.class})
   private Long id;
 
   /** Conteúdo da review.
@@ -31,6 +35,7 @@ public class Reviews {
   * @version 1.0
   */
   @Column(length = 10000, name = "content", nullable = false)
+  @JsonView({Views.Review.class})
   private String content;
 
   /** Campo indicando se a review foi editada ou não.
@@ -39,6 +44,7 @@ public class Reviews {
   * @version 1.0
   */
   @Column(name = "edited", nullable = false)
+  @JsonView({Views.Review.class})
   private Boolean edited = false;
 
   /** Campo indicando se o usuário recomenda ou não a media.
@@ -47,6 +53,7 @@ public class Reviews {
   * @version 1.0
   */
   @Column(name = "recommended", nullable = false)
+  @JsonView({Views.Review.class})
   private Boolean recommended;
 
   /**
@@ -57,7 +64,8 @@ public class Reviews {
   */
   @ManyToOne
   @JoinColumn(name = "user_id")
-  @JsonIgnore
+  @JsonView({Views.Review.class})
+  @JsonProperty("user")
   private User userId;
 
   /**
