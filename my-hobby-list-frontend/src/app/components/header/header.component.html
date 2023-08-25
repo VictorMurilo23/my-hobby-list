@@ -12,6 +12,7 @@
       <a [routerLink]="['/profile/', username]"><span class="username">{{username}}</span></a>
       <button class="logout-btn" (click)="logout()">Logout</button>
       <a class="link-to-userlist" [routerLink]="['/list/', username]"><span>Lista</span></a>
+      <a class="link-to-userlist" [routerLink]="['/settings']"><span class="settings-redirect">Configurações</span></a>
     </div>
   </ng-template>
 </header>
