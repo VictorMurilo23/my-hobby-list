@@ -10,13 +10,16 @@ import { UserListComponent } from "./pages/user-list/user-list.component";
 import { ProfileComponent } from "./pages/profile/profile.component";
 import { SettingsPageComponent } from "./pages/settings-page/settings-page.component";
 import { ChangeProfileImageComponent } from "./components/change-profile-image/change-profile-image.component";
+import { ReviewsComponent } from "./components/reviews/reviews.component";
 
 const routes: Routes = [
   {path: "", component: HomeComponent},
   {path: "login", component: LoginComponent},
   {path: "register", component: RegistryComponent},
   {path: "search", component: SearchComponent},
-  {path: "media/:id", component: MediaDetailsComponent},
+  {path: "media/:id", component: MediaDetailsComponent, children: [
+    {path: "reviews", component: ReviewsComponent},
+  ]},
   {path: "media/insert/:id", component: InsertComponent},
   {path: "list/:username", component: UserListComponent},
   {path: "profile/:username", component: ProfileComponent},
