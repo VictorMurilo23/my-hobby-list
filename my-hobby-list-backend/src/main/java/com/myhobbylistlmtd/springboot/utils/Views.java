@@ -9,4 +9,7 @@ public class Views {
 
   public interface MediaCard {
   }
+
+  public interface Review {
+  }
 }

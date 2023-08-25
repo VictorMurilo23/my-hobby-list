@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.request.body.RequestCreateReview;
 import com.myhobbylistlmtd.springboot.request.body.RequestEditReview;
 import com.myhobbylistlmtd.springboot.response.body.ResponseFindReviews;
 import com.myhobbylistlmtd.springboot.response.body.ResponseMessage;
+import com.myhobbylistlmtd.springboot.utils.Views;
 
 import jakarta.validation.Valid;
 
@@ -87,6 +89,7 @@ public class ReviewsController {
    */
   @GetMapping("/find/{mediaId}")
   @ResponseStatus(HttpStatus.OK)
+  @JsonView({Views.Review.class})
   ResponseFindReviews findReview(
     final @PathVariable String mediaId,
     final @RequestParam(defaultValue = "0") String page
