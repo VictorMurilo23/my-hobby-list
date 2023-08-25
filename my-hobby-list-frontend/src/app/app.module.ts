@@ -22,6 +22,7 @@ import { CharactersComponent } from './components/characters/characters.componen
 import { ProfileComponent } from './pages/profile/profile.component';
 import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
 import { ChangeProfileImageComponent } from './components/change-profile-image/change-profile-image.component';
+import { ReviewsComponent } from './components/reviews/reviews.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ChangeProfileImageComponent } from './components/change-profile-image/c
     CharactersComponent,
     ProfileComponent,
     SettingsPageComponent,
-    ChangeProfileImageComponent
+    ChangeProfileImageComponent,
+    ReviewsComponent
   ],
   imports: [
     BrowserModule,
