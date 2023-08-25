@@ -153,4 +153,18 @@ describe('HeaderComponent', () => {
     const logoutBtn = debugElement.query(By.css(".logout-btn"));
     expect(logoutBtn).not.toBeTruthy();
   });
+
+  it('should redirect to user profile when username in header is clicked', fakeAsync(() => {
+    const { debugElement } = fixture;
+    spyOn(localStorageService, "getToken").and.returnValue(validToken);
+    component.ngOnInit();
+    fixture.detectChanges();
+    
+    const username = debugElement.query(By.css(".user-info-container")).query(By.css(".username"));
+    expect(username).toBeTruthy(); 
+    expect(username.nativeElement.textContent).toBe("Teste")
+    username.nativeElement.click();
+    tick();
+    expect(router.url).toBe("/profile/Teste");
+  }));
 });
