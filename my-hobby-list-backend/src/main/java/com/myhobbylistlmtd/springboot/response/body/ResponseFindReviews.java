@@ -2,17 +2,21 @@ package com.myhobbylistlmtd.springboot.response.body;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.reviews.Reviews;
+import com.myhobbylistlmtd.springboot.utils.Views;
 
 public class ResponseFindReviews {
   /**
    * Lista com as reviews.
    */
+  @JsonView({Views.Review.class})
   private List<Reviews> reviews;
 
   /**
    * Número total de páginas.
    */
+  @JsonView({Views.Review.class})
   private int totalPages;
 
   /**
