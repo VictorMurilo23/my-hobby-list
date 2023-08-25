@@ -14,6 +14,8 @@ import { By } from '@angular/platform-browser';
 import { CharactersComponent } from 'src/app/components/characters/characters.component';
 import { CharacterService } from 'src/app/services/character.service';
 import ICharacters from 'src/app/interfaces/ICharacters';
+import { ReviewsComponent } from 'src/app/components/reviews/reviews.component';
+import { InsertComponent } from '../insert/insert.component';
 
 describe('MediaDetailsComponent', () => {
   let component: MediaDetailsComponent;
@@ -53,7 +55,7 @@ describe('MediaDetailsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientModule, RouterTestingModule.withRoutes(routes)],
-      declarations: [MediaDetailsComponent, PageNotFoundComponent, CharactersComponent],
+      declarations: [MediaDetailsComponent, PageNotFoundComponent, CharactersComponent, InsertComponent],
       providers: [
         {
           provide: ActivatedRoute,
