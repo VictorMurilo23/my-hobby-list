@@ -8,8 +8,13 @@ type User = {
   username: string,
 }
 
-export interface Reviews {
+export interface Review {
   content: string;
   recommended: boolean;
   user: User;
+}
+
+export interface FindReviews {
+  totalPages: number;
+  reviews: Review[]
 }

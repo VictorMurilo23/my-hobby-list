@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Reviews } from '../interfaces/IReviews';
+import { FindReviews } from '../interfaces/IReviews';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class ReviewService {
 
   constructor(private http: HttpClient) {}
 
-  public findReviews(mediaId: number, page = 0): Observable<Reviews> {
-    return this.http.get<Reviews>(`${this.baseUrl}/find/${mediaId}?page=${page}`, { observe: "body", responseType: 'json' });
+  public findReviews(mediaId: number, page = 0): Observable<FindReviews> {
+    return this.http.get<FindReviews>(`${this.baseUrl}/find/${mediaId}?page=${page}`, { observe: "body", responseType: 'json' });
   }
 }
