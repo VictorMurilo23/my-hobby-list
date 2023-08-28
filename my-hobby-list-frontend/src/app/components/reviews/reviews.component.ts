@@ -58,4 +58,8 @@ export class ReviewsComponent implements OnInit {
     this.currentPage = pageNumber - 1;
     this.findReviews();
   }
+
+  public getMediaId() {
+    return this.mediaId;
+  }
 }

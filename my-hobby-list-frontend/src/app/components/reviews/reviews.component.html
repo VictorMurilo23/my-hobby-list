@@ -3,6 +3,7 @@
 </div>
 <ng-template #reviews>
   <div>
+    <app-create-review [mediaId]="getMediaId()"></app-create-review>
     <div>
       <div class="review-card" *ngFor="let review of getReviews()">
         <span class="review-card-username">{{review.user.username}}</span>
