@@ -10,6 +10,7 @@ import IMediaCardsBody from '../interfaces/IMediaCardsBody';
 })
 export class MediaService {
   private baseUrl = `${environment.apiUrl}/media`;
+  private mediaName = "";
 
   constructor(private http: HttpClient) { }
 
@@ -23,5 +24,13 @@ export class MediaService {
 
   public getMediaById(mediaId: string): Observable<IMedia> {
     return this.http.get<IMedia>(`${this.baseUrl}/search-by-id/${mediaId}`, { observe: "body", responseType: 'json' });
+  }
+
+  public getMediaName(): string {
+    return this.mediaName;
+  }
+
+  public setMediaName(name: string) {
+    this.mediaName = name;
   }
 }
