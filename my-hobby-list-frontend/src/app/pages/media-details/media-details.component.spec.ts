@@ -17,12 +17,11 @@ import ICharacters from 'src/app/interfaces/ICharacters';
 import { ReviewsComponent } from 'src/app/components/reviews/reviews.component';
 import { InsertComponent } from '../insert/insert.component';
 
-fdescribe('MediaDetailsComponent', () => {
+describe('MediaDetailsComponent', () => {
   let component: MediaDetailsComponent;
   let fixture: ComponentFixture<MediaDetailsComponent>;
   let router: Router;
   let mediaService: MediaService;
-  let characterService: CharacterService;
 
   const media: IMedia = {
     id: 1,
@@ -34,19 +33,6 @@ fdescribe('MediaDetailsComponent', () => {
     type: 'Manga',
   };
 
-  const characters: ICharacters = {
-    characters: [
-      {
-        character: { id: 1, characterInfo: "Test1", name: "Personagem1" },
-        characterRole: "Personagem principal"
-      },
-      {
-        character: { id: 2, characterInfo: "Test2", name: "Personagem2" },
-        characterRole: "Personagem secundário"
-      }
-    ]
-  }
-
   const mediaWithoutVolumes: IMedia = {
     ...media,
     volumes: null
@@ -55,21 +41,20 @@ fdescribe('MediaDetailsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientModule, RouterTestingModule.withRoutes(routes)],
-      declarations: [MediaDetailsComponent, PageNotFoundComponent, CharactersComponent, InsertComponent],
+      declarations: [MediaDetailsComponent, PageNotFoundComponent, CharactersComponent, InsertComponent, ReviewsComponent],
       providers: [
         {
           provide: ActivatedRoute,
           useValue: {
             paramMap: of(convertToParamMap({ id: 1 })),
           },
-        },
+        }
       ],
     }).compileComponents();
 
     router = TestBed.inject(Router);
     fixture = TestBed.createComponent(MediaDetailsComponent);
     mediaService = fixture.debugElement.injector.get(MediaService);
-    characterService = fixture.debugElement.injector.get(CharacterService);
     component = fixture.componentInstance;
     fixture.autoDetectChanges();
   });
@@ -182,17 +167,26 @@ fdescribe('MediaDetailsComponent', () => {
     expect(router.url).toBe(`/media/insert/${media.id}`);
   }));
 
-  it('should render character on button click', fakeAsync(() => {
+  it('should redirect to characters nested route on button click', () => {
     const { debugElement } = fixture;
     spyOn(mediaService, 'getMediaById').and.returnValue(of(media));
     component.ngOnInit();
     fixture.detectChanges();
 
-    const showCharactersBtn = debugElement.query(By.css(".show-characters-button"));
-    expect(showCharactersBtn).toBeTruthy();
-    showCharactersBtn.nativeElement.click();
-    tick();
+    const redirectToCharacters = debugElement.query(By.css(".show-characters-button"));
+    expect(redirectToCharacters).toBeTruthy();
+    redirectToCharacters.nativeElement.click();
+    expect(redirectToCharacters.nativeElement.getAttribute("ng-reflect-router-link")).toBe("./characters");
+  });
+
+  it('should redirect to reviews nested route on button click', () => {
+    const { debugElement } = fixture;
+    spyOn(mediaService, 'getMediaById').and.returnValue(of(media));
+    
+    component.ngOnInit();
     fixture.detectChanges();
-    expect(router.url).toBe("/characters")
-  }));
+    const redirectToReviews = debugElement.query(By.css(".show-reviews-button"));
+    expect(redirectToReviews).toBeTruthy();
+    expect(redirectToReviews.nativeElement.getAttribute("ng-reflect-router-link")).toBe("./reviews");
+  });
 });
