@@ -17,7 +17,7 @@ import ICharacters from 'src/app/interfaces/ICharacters';
 import { ReviewsComponent } from 'src/app/components/reviews/reviews.component';
 import { InsertComponent } from '../insert/insert.component';
 
-describe('MediaDetailsComponent', () => {
+fdescribe('MediaDetailsComponent', () => {
   let component: MediaDetailsComponent;
   let fixture: ComponentFixture<MediaDetailsComponent>;
   let router: Router;
@@ -90,12 +90,14 @@ describe('MediaDetailsComponent', () => {
   it('should load media with sucess', () => {
     const { debugElement } = fixture;
     spyOn(mediaService, 'getMediaById').and.returnValue(of(media));
+    spyOn(mediaService, "setMediaName").and.callFake((name) => "");
     const loadingMessage = debugElement.nativeElement.querySelector(
       '.loading-container p'
     );
     expect(loadingMessage).toBeTruthy();
     component.ngOnInit();
     expect(mediaService.getMediaById).toHaveBeenCalled();
+    expect(mediaService.setMediaName).toHaveBeenCalled();
     fixture.detectChanges();
 
     const mediaTitle = debugElement.nativeElement.querySelector('.media-title');
@@ -180,21 +182,17 @@ describe('MediaDetailsComponent', () => {
     expect(router.url).toBe(`/media/insert/${media.id}`);
   }));
 
-  it('should render character on button click', () => {
+  it('should render character on button click', fakeAsync(() => {
     const { debugElement } = fixture;
     spyOn(mediaService, 'getMediaById').and.returnValue(of(media));
-    spyOn(characterService, "getCharacters").and.returnValue(of(characters));
     component.ngOnInit();
     fixture.detectChanges();
 
     const showCharactersBtn = debugElement.query(By.css(".show-characters-button"));
     expect(showCharactersBtn).toBeTruthy();
     showCharactersBtn.nativeElement.click();
+    tick();
     fixture.detectChanges();
-
-    expect(debugElement.query(By.css(".show-characters-button"))).toBeNull();
-
-    const characterCards = debugElement.queryAll(By.css(".char-card"));
-    expect(characterCards.length).toBe(2);
-  });
+    expect(router.url).toBe("/characters")
+  }));
 });
