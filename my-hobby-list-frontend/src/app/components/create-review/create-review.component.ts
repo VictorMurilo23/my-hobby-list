@@ -39,6 +39,7 @@ export class CreateReviewComponent {
       this.userService.logout();
       return;
     }
-    this.reviewService.createReview(this.review, token);
+    this.review.mediaId = this.mediaId;
+    this.reviewService.createReview(this.review, token).subscribe();
   }
 }
