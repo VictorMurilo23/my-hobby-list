@@ -1,1 +1,8 @@
-<p>create-review works!</p>
+<div>
+  <div class="textarea-div"><textarea rows="10"></textarea></div>
+  <div>
+    <button [ngClass]="getReviewRecommended() ? 'recommended-btn activated' : 'recommended-btn'" (click)="setReviewRecommended(true)">SIM</button>
+    <button [ngClass]="getReviewRecommended() === false ? 'recommended-btn activated' : 'recommended-btn'" (click)="setReviewRecommended(false)">NÃO</button>
+  </div>
+  <button (click)="sendReview()">Enviar</button>
+</div>
