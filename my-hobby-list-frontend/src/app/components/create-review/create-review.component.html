@@ -4,5 +4,5 @@
     <button [ngClass]="getReviewRecommended() ? 'recommended-btn activated' : 'recommended-btn'" (click)="setReviewRecommended(true)">SIM</button>
     <button [ngClass]="getReviewRecommended() === false ? 'recommended-btn activated' : 'recommended-btn'" (click)="setReviewRecommended(false)">NÃO</button>
   </div>
-  <button (click)="sendReview()">Enviar</button>
+  <button class="send-review-btn" (click)="sendReview()">Enviar</button>
 </div>
