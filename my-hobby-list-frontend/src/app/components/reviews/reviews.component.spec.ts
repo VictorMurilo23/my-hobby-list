@@ -9,6 +9,7 @@ import { By } from '@angular/platform-browser';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 import { ReviewService } from 'src/app/services/review.service';
+import { CreateReviewComponent } from '../create-review/create-review.component';
 
 describe('ReviewsComponent', () => {
   let component: ReviewsComponent;
@@ -33,7 +34,7 @@ describe('ReviewsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientModule, RouterTestingModule.withRoutes(routes)],
-      declarations: [ ReviewsComponent ],
+      declarations: [ ReviewsComponent, CreateReviewComponent ],
       providers: [
         {
           provide: ActivatedRoute,
