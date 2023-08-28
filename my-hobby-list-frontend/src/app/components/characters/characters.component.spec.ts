@@ -9,11 +9,13 @@ import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import routes from 'src/app/app.routes';
+import { MediaService } from 'src/app/services/media.service';
 
 describe('CharactersComponent', () => {
   let component: CharactersComponent;
   let fixture: ComponentFixture<CharactersComponent>;
   let characterService: CharacterService;
+  let mediaService: MediaService;
   let router: Router;
 
   const characters: char[] = [
@@ -40,8 +42,10 @@ describe('CharactersComponent', () => {
 
     fixture = TestBed.createComponent(CharactersComponent);
     characterService = fixture.debugElement.injector.get(CharacterService);
+    mediaService = fixture.debugElement.injector.get(MediaService);
     component = fixture.componentInstance;
     router = TestBed.inject(Router);
+    spyOn(mediaService, "getMediaName").and.returnValue("GTO");
     fixture.detectChanges();
   });
 
@@ -54,7 +58,6 @@ describe('CharactersComponent', () => {
     spyOn(characterService, 'getCharacters').and.returnValue(
       of({ characters })
     );
-    component.mediaName = 'GTO';
     component.ngOnInit();
     fixture.detectChanges();
     expect(characterService.getCharacters).toHaveBeenCalled();
@@ -77,7 +80,6 @@ describe('CharactersComponent', () => {
     spyOn(characterService, 'getCharacters').and.returnValue(
       of({ characters })
     );
-    component.mediaName = 'GTO';
     component.ngOnInit();
     fixture.detectChanges();
     expect(characterService.getCharacters).toHaveBeenCalled();
