@@ -1,0 +1,13 @@
+textarea {
+  width: 90%;
+  max-width: 96%;
+}
+
+.textarea-div {
+  width: 30em;
+  /* border: 1px solid red; */
+}
+
+.activated {
+  border: 1px solid red;
+}
