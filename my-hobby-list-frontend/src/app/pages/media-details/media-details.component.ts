@@ -13,7 +13,6 @@ import { environment } from 'src/environments/environment';
 export class MediaDetailsComponent implements OnInit {
   private mediaInfo!: IMedia | null;
   public env = environment;
-  public showCharacters = false;
 
   constructor(private mediaService: MediaService, private activatedRoute: ActivatedRoute) {}
 
@@ -31,6 +30,7 @@ export class MediaDetailsComponent implements OnInit {
       .subscribe({
         next: (data: IMedia) => {
           this.mediaInfo = data;
+          this.mediaService.setMediaName(data.name);
         },
         error: () => {
           this.mediaInfo = null;
@@ -40,9 +40,5 @@ export class MediaDetailsComponent implements OnInit {
 
   getMediaInfo(): IMedia | null | undefined {
     return this.mediaInfo;
-  }
-
-  renderCharacters(): void {
-    this.showCharacters = true;
   }
 }

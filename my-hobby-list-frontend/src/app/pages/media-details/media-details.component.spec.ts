@@ -22,7 +22,6 @@ describe('MediaDetailsComponent', () => {
   let fixture: ComponentFixture<MediaDetailsComponent>;
   let router: Router;
   let mediaService: MediaService;
-  let characterService: CharacterService;
 
   const media: IMedia = {
     id: 1,
@@ -34,19 +33,6 @@ describe('MediaDetailsComponent', () => {
     type: 'Manga',
   };
 
-  const characters: ICharacters = {
-    characters: [
-      {
-        character: { id: 1, characterInfo: "Test1", name: "Personagem1" },
-        characterRole: "Personagem principal"
-      },
-      {
-        character: { id: 2, characterInfo: "Test2", name: "Personagem2" },
-        characterRole: "Personagem secundário"
-      }
-    ]
-  }
-
   const mediaWithoutVolumes: IMedia = {
     ...media,
     volumes: null
@@ -55,21 +41,20 @@ describe('MediaDetailsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientModule, RouterTestingModule.withRoutes(routes)],
-      declarations: [MediaDetailsComponent, PageNotFoundComponent, CharactersComponent, InsertComponent],
+      declarations: [MediaDetailsComponent, PageNotFoundComponent, CharactersComponent, InsertComponent, ReviewsComponent],
       providers: [
         {
           provide: ActivatedRoute,
           useValue: {
             paramMap: of(convertToParamMap({ id: 1 })),
           },
-        },
+        }
       ],
     }).compileComponents();
 
     router = TestBed.inject(Router);
     fixture = TestBed.createComponent(MediaDetailsComponent);
     mediaService = fixture.debugElement.injector.get(MediaService);
-    characterService = fixture.debugElement.injector.get(CharacterService);
     component = fixture.componentInstance;
     fixture.autoDetectChanges();
   });
@@ -90,12 +75,14 @@ describe('MediaDetailsComponent', () => {
   it('should load media with sucess', () => {
     const { debugElement } = fixture;
     spyOn(mediaService, 'getMediaById').and.returnValue(of(media));
+    spyOn(mediaService, "setMediaName").and.callFake((name) => "");
     const loadingMessage = debugElement.nativeElement.querySelector(
       '.loading-container p'
     );
     expect(loadingMessage).toBeTruthy();
     component.ngOnInit();
     expect(mediaService.getMediaById).toHaveBeenCalled();
+    expect(mediaService.setMediaName).toHaveBeenCalled();
     fixture.detectChanges();
 
     const mediaTitle = debugElement.nativeElement.querySelector('.media-title');
@@ -180,21 +167,26 @@ describe('MediaDetailsComponent', () => {
     expect(router.url).toBe(`/media/insert/${media.id}`);
   }));
 
-  it('should render character on button click', () => {
+  it('should redirect to characters nested route on button click', () => {
     const { debugElement } = fixture;
     spyOn(mediaService, 'getMediaById').and.returnValue(of(media));
-    spyOn(characterService, "getCharacters").and.returnValue(of(characters));
     component.ngOnInit();
     fixture.detectChanges();
 
-    const showCharactersBtn = debugElement.query(By.css(".show-characters-button"));
-    expect(showCharactersBtn).toBeTruthy();
-    showCharactersBtn.nativeElement.click();
+    const redirectToCharacters = debugElement.query(By.css(".show-characters-button"));
+    expect(redirectToCharacters).toBeTruthy();
+    redirectToCharacters.nativeElement.click();
+    expect(redirectToCharacters.nativeElement.getAttribute("ng-reflect-router-link")).toBe("./characters");
+  });
+
+  it('should redirect to reviews nested route on button click', () => {
+    const { debugElement } = fixture;
+    spyOn(mediaService, 'getMediaById').and.returnValue(of(media));
+    
+    component.ngOnInit();
     fixture.detectChanges();
-
-    expect(debugElement.query(By.css(".show-characters-button"))).toBeNull();
-
-    const characterCards = debugElement.queryAll(By.css(".char-card"));
-    expect(characterCards.length).toBe(2);
+    const redirectToReviews = debugElement.query(By.css(".show-reviews-button"));
+    expect(redirectToReviews).toBeTruthy();
+    expect(redirectToReviews.nativeElement.getAttribute("ng-reflect-router-link")).toBe("./reviews");
   });
 });

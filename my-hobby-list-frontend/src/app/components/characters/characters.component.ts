@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import ICharacters, { char } from 'src/app/interfaces/ICharacters';
 import { CharacterService } from 'src/app/services/character.service';
+import { MediaService } from 'src/app/services/media.service';
 
 @Component({
   selector: 'app-characters',
@@ -9,13 +10,13 @@ import { CharacterService } from 'src/app/services/character.service';
   styleUrls: ['./characters.component.css']
 })
 export class CharactersComponent implements OnInit {
-  public characters: char[] = []; 
-  @Input() mediaName = "";
+  public characters: char[] = [];
 
-  constructor(private characterService: CharacterService, private router: Router) {}
+  constructor(private mediaService: MediaService, private characterService: CharacterService, private router: Router) {}
 
   ngOnInit(): void {
-    this.characterService.getCharacters(this.mediaName).subscribe({
+    const mediaName = this.mediaService.getMediaName();
+    this.characterService.getCharacters(mediaName).subscribe({
       next: (data: ICharacters) => {
         this.characters = data.characters;
       }
