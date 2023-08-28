@@ -23,7 +23,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
 import { ChangeProfileImageComponent } from './components/change-profile-image/change-profile-image.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
-import { CreateReviewComponent } from './pages/create-review/create-review.component';
+import { CreateReviewComponent } from './components/create-review/create-review.component';
 
 @NgModule({
   declarations: [
