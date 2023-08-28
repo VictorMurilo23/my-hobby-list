@@ -11,6 +11,7 @@ import { ProfileComponent } from "./pages/profile/profile.component";
 import { SettingsPageComponent } from "./pages/settings-page/settings-page.component";
 import { ChangeProfileImageComponent } from "./components/change-profile-image/change-profile-image.component";
 import { ReviewsComponent } from "./components/reviews/reviews.component";
+import { CharactersComponent } from "./components/characters/characters.component";
 
 const routes: Routes = [
   {path: "", component: HomeComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: "search", component: SearchComponent},
   {path: "media/:id", component: MediaDetailsComponent, children: [
     {path: "reviews", component: ReviewsComponent},
+    {path: "characters", component: CharactersComponent}
   ]},
   {path: "media/insert/:id", component: InsertComponent},
   {path: "list/:username", component: UserListComponent},
