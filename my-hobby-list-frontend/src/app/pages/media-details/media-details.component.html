@@ -27,6 +27,7 @@
       <a class="redirect-to-insert-page-button" [routerLink]="['/media/insert/' + getMediaInfo()?.id]"><button>Adicionar a lista</button></a>
     </div>
   </div>
-  <a class="show-characters-button" routerLink="/characters"><button>Personagens</button></a>
+  <a class="show-characters-button" [routerLink]="['./characters']"><button>Personagens</button></a>
+  <a class="show-reviews-button" [routerLink]="['./reviews']"><button>Reviews</button></a>
   <router-outlet></router-outlet>
 </div>
