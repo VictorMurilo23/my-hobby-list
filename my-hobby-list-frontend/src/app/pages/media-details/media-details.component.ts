@@ -31,6 +31,7 @@ export class MediaDetailsComponent implements OnInit {
       .subscribe({
         next: (data: IMedia) => {
           this.mediaInfo = data;
+          this.mediaService.setMediaName(data.name);
         },
         error: () => {
           this.mediaInfo = null;
