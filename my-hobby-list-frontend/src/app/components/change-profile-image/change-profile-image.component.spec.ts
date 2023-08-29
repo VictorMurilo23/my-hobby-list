@@ -13,6 +13,7 @@ import { By } from '@angular/platform-browser';
 import { LoginComponent } from 'src/app/pages/login/login.component';
 import { SettingsPageComponent } from 'src/app/pages/settings-page/settings-page.component';
 import IProfile from 'src/app/interfaces/IProfile';
+import { environment } from 'src/environments/environment';
 
 describe('ChangeProfileImageComponent', () => {
   let component: ChangeProfileImageComponent;
@@ -104,11 +105,11 @@ describe('ChangeProfileImageComponent', () => {
 
     images[0].nativeElement.click();
     fixture.detectChanges();
-    expect(component["selectedImage"] as any).toEqual("http://localhost:3001/images/01.png");
+    expect(component["selectedImage"] as any).toEqual(`${environment.apiUrl}/images/01.png`);
 
     images[1].nativeElement.click();
     fixture.detectChanges();
-    expect(component["selectedImage"] as any).toEqual("http://localhost:3001/images/02.png");
+    expect(component["selectedImage"] as any).toEqual(`${environment.apiUrl}/images/02.png`);
   });
   
   it('shouldn\'t call userService.changeProfileImage if a image isnt selected', () => {
@@ -163,7 +164,7 @@ describe('ChangeProfileImageComponent', () => {
     btn.nativeElement.click();
     tick();
     expect(router.url).toBe("/profile/Victo")
-    expect(userService.changeProfileImage).toHaveBeenCalledWith("http://localhost:3001/images/01.png", "d");
+    expect(userService.changeProfileImage).toHaveBeenCalledWith(`${environment.apiUrl}/images/01.png`, "d");
   }));
 
   it('should redirect to /login if userService.changeProfileImage return HttpError with "User não encontrada!"', fakeAsync(() => {
@@ -188,6 +189,6 @@ describe('ChangeProfileImageComponent', () => {
     tick();
     expect(router.url).toBe("/login");
     expect(localStorage.removeToken).toHaveBeenCalled();
-    expect(userService.changeProfileImage).toHaveBeenCalledWith("http://localhost:3001/images/01.png", "d");
+    expect(userService.changeProfileImage).toHaveBeenCalledWith(`${environment.apiUrl}/images/01.png`, "d");
   }));
 });
