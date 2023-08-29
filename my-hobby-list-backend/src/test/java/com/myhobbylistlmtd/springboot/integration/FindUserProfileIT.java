@@ -40,7 +40,7 @@ public class FindUserProfileIT {
     response.andExpect(status().isOk())
         .andExpect(MockMvcResultMatchers.jsonPath("$.*", hasSize(4)))
         .andExpect(MockMvcResultMatchers.jsonPath("$.userDescription").value(""))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.profileImage").value("images/profile/default.jpeg"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.profileImage").value("images/profile/default.jpg"))
         .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("Victor"))
         .andExpect(MockMvcResultMatchers.jsonPath("$.joinedAt").value(todayDate));
   }
