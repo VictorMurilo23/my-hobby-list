@@ -24,6 +24,7 @@ import { SettingsPageComponent } from './pages/settings-page/settings-page.compo
 import { ChangeProfileImageComponent } from './components/change-profile-image/change-profile-image.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { CreateReviewComponent } from './components/create-review/create-review.component';
+import { ReviewCardComponent } from './components/review-card/review-card.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { CreateReviewComponent } from './components/create-review/create-review.
     SettingsPageComponent,
     ChangeProfileImageComponent,
     ReviewsComponent,
-    CreateReviewComponent
+    CreateReviewComponent,
+    ReviewCardComponent
   ],
   imports: [
     BrowserModule,
