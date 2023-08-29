@@ -54,7 +54,7 @@ public class ReviewsService {
    * @author Victor Murilo
    * @version 1.0
    */
-  private Reviews findReview(final Long userId, final Long mediaId)
+  public Reviews findReview(final Long userId, final Long mediaId)
   throws NotFoundException {
     Reviews review = reviewsRepo.findReviewsByUserIdAndMediaId(userId, mediaId);
     if (review == null) {
