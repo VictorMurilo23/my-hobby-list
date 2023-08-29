@@ -11,9 +11,7 @@ export class MediaService {
   private baseUrl = `${environment.apiUrl}/media`;
   private mediaName = "";
 
-  constructor(private http: HttpClient) { 
-
-    console.log(this.baseUrl);
+  constructor(private http: HttpClient) {
   }
 
   public getRecent(): Observable<IMediaCardsBody> {
