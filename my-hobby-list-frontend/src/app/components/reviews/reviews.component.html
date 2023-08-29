@@ -6,7 +6,9 @@
     <div>
       <app-create-review *ngIf="showCreateReviewComponent; else userReview" [mediaId]="getMediaId()"></app-create-review>
       <ng-template #userReview>
-        <app-review-card [reviewInfo]="getUserReview()"></app-review-card>
+        <div class="user-review-card-container">
+          <app-review-card [reviewInfo]="getUserReview()"></app-review-card>
+        </div>
       </ng-template>
     </div>
     <div>
