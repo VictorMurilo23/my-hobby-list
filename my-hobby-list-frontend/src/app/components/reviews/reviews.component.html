@@ -3,7 +3,12 @@
 </div>
 <ng-template #reviews>
   <div>
-    <app-create-review [mediaId]="getMediaId()"></app-create-review>
+    <div>
+      <app-create-review *ngIf="showCreateReviewComponent; else userReview" [mediaId]="getMediaId()"></app-create-review>
+      <ng-template #userReview>
+        <app-review-card [reviewInfo]="getUserReview()"></app-review-card>
+      </ng-template>
+    </div>
     <div>
       <app-review-card [reviewInfo]="review" *ngFor="let review of getReviews()"></app-review-card>
     </div>
