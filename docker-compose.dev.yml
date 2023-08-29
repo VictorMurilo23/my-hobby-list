@@ -17,7 +17,7 @@ services:
     container_name: app_backend
     build: ./my-hobby-list-backend
     ports:
-      - 3001:8080
+      - 8080:8080
     platform: linux/x86_64
     restart: "on-failure"
     working_dir: /app-backend
