@@ -27,7 +27,7 @@ import static org.hamcrest.Matchers.*;
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = {FindUserListConfiguration.class})
 @ActiveProfiles({ "test" })
-public class FindUserListTests {
+public class FindUserListIT {
   @Autowired
   private MockMvc mockMvc;
 

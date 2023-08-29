@@ -24,7 +24,7 @@ import static org.hamcrest.Matchers.hasSize;
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = { FindReviewsConfiguration.class })
 @ActiveProfiles({ "test" })
-public class FindReviewsTest {
+public class FindReviewsIT {
   @Autowired
   private MockMvc mockMvc;
 
