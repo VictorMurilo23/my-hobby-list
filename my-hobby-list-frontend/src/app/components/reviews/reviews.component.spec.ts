@@ -3,19 +3,21 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReviewsComponent } from './reviews.component';
 import routes from 'src/app/app.routes';
 import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientModule } from '@angular/common/http';
-import { FindReviews } from 'src/app/interfaces/IReviews';
+import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
+import { FindReviews, Review } from 'src/app/interfaces/IReviews';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { ReviewService } from 'src/app/services/review.service';
 import { CreateReviewComponent } from '../create-review/create-review.component';
 import { ReviewCardComponent } from '../review-card/review-card.component';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
-describe('ReviewsComponent', () => {
+fdescribe('ReviewsComponent', () => {
   let component: ReviewsComponent;
   let fixture: ComponentFixture<ReviewsComponent>;
   let reviewService: ReviewService;
+  let localStorage: LocalStorageService;
 
   const reviewsPageOne: FindReviews = {
     totalPages: 2,
@@ -30,6 +32,14 @@ describe('ReviewsComponent', () => {
     reviews: [
       { content: "awdowahfo", recommended: true, user: { username: "Teste" } },
     ]
+  }
+
+  const userReview: Review = {
+    content: "Muito bom",
+    recommended: true,
+    user: {
+      username: "aaaaaaaaaaaaaaaaaaaaa"
+    }
   }
 
   beforeEach(async () => {
@@ -52,6 +62,7 @@ describe('ReviewsComponent', () => {
     fixture = TestBed.createComponent(ReviewsComponent);
     component = fixture.componentInstance;
     reviewService = fixture.debugElement.injector.get(ReviewService);
+    localStorage = fixture.debugElement.injector.get(LocalStorageService);
     spyOn(reviewService, "findReviews").and.returnValue(of(reviewsPageOne));
     fixture.detectChanges();
   });
@@ -115,5 +126,34 @@ describe('ReviewsComponent', () => {
     buttons[0].nativeElement.click();
     expect(reviewService.findReviews).toHaveBeenCalledTimes(1);
     fixture.detectChanges();
+  });
+
+  it("should show user review on success", () => {
+    const {debugElement} = fixture;
+    spyOn(localStorage, "getToken").and.returnValue("token válido")
+    spyOn(reviewService, "findUserReview").and.returnValue(of(userReview));
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    const userReviewContainer = debugElement.query(By.css(".user-review-card-container"));
+    expect(userReviewContainer).toBeTruthy();
+
+    expect(userReviewContainer.query(By.css('.review-card-username')).nativeElement.textContent).toBe("aaaaaaaaaaaaaaaaaaaaa");
+    expect(userReviewContainer.query(By.css('.review-card-content')).nativeElement.textContent).toBe("Muito bom");
+    expect(userReviewContainer.query(By.css('.review-card-recommended')).nativeElement.textContent).toBe("true");
+  });
+
+  it("should render create-review if findUserReview happens to be a error", () => {
+    const {debugElement} = fixture;
+    spyOn(localStorage, "getToken").and.returnValue("token válido")
+    spyOn(reviewService, "findUserReview").and.returnValue(throwError(
+      () =>
+        new HttpErrorResponse({ error: { message: 'Error genérico' } })
+    ));
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    const userReviewContainer = debugElement.query(By.css(".user-review-card-container"));
+    expect(userReviewContainer).not.toBeTruthy();
   });
 });
