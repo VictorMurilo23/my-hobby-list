@@ -98,4 +98,25 @@ public class ReviewsController {
       Integer.valueOf(page), Long.valueOf(mediaId)
     );
   }
+
+  /**
+   * Rota de encontrar uma review utilizando o id da media e do usuário.
+   * @param mediaId id da media
+   * @param userId id do usuário vindo do token
+   * @return Retorna um objeto contendo as informações da review
+   * @since 1.0
+   * @author Victor Murilo
+   * @version 1.0
+   */
+  @GetMapping("/find-user-review/{mediaId}")
+  @ResponseStatus(HttpStatus.OK)
+  @JsonView({Views.Review.class})
+  Reviews findReviewByMediaIdAndUserId(
+    final @PathVariable String mediaId,
+    @RequestAttribute("userId") final Long userId
+  ) {
+    return reviewsService.findReview(
+      Long.valueOf(mediaId), Long.valueOf(mediaId)
+    );
+  }
 }
