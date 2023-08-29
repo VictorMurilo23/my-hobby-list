@@ -5,11 +5,7 @@
   <div>
     <app-create-review [mediaId]="getMediaId()"></app-create-review>
     <div>
-      <div class="review-card" *ngFor="let review of getReviews()">
-        <span class="review-card-username">{{review.user.username}}</span>
-        <p class="review-card-content">{{review.content}}</p>
-        <p class="review-card-recommended">{{review.recommended}}</p>
-      </div>
+      <app-review-card [reviewInfo]="review" *ngFor="let review of getReviews()"></app-review-card>
     </div>
     <div>
       <div (click)="changePage(pageNumber)" *ngFor="let pageNumber of getPages()">
