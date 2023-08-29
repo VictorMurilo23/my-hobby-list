@@ -38,7 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(classes = {LoginTestConfiguration.class, MediaTestConfiguration.class, UserListItemStatusTestConfiguration.class})
 @ActiveProfiles({ "test" })
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class InsertUserListTests {
+public class InsertUserListIT {
   @Autowired
   private MockMvc mockMvc;
 
