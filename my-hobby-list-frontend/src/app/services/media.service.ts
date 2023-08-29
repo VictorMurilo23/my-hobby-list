@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import IMedia from '../interfaces/IMedia';
 import IMediaCardsBody from '../interfaces/IMediaCardsBody';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +11,10 @@ export class MediaService {
   private baseUrl = `${environment.apiUrl}/media`;
   private mediaName = "";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+
+    console.log(this.baseUrl);
+  }
 
   public getRecent(): Observable<IMediaCardsBody> {
     return this.http.get<IMediaCardsBody>(`${this.baseUrl}/recent-add`, { observe: "body", responseType: 'json' });
