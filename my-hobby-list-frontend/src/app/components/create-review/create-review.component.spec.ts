@@ -8,6 +8,7 @@ import { By } from '@angular/platform-browser';
 import { ReviewService } from 'src/app/services/review.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { UserService } from 'src/app/services/user.service';
+import { of } from 'rxjs';
 
 describe('CreateReviewComponent', () => {
   let component: CreateReviewComponent;
@@ -91,7 +92,7 @@ describe('CreateReviewComponent', () => {
   it('should call reviewService.createReview when user tries to send a review', () => {
     const { debugElement } = fixture;
     spyOn(userService, "logout");
-    spyOn(reviewService, "createReview");
+    spyOn(reviewService, "createReview").and.returnValue(of({ null: "null" }));
     spyOn(localStorage, "getToken").and.returnValue("fff");
 
     const textareaContent = debugElement.query(By.css(".review-content"));
