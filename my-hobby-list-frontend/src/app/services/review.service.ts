@@ -27,4 +27,8 @@ export class ReviewService {
       headers,
     });
   }
+
+  public findUserReview(mediaId: number, token: string) {
+    //TODO Adicionar a conexão com o backend
+  }
 }
