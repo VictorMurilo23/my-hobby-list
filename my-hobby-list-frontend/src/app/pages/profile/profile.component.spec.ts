@@ -9,6 +9,7 @@ import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { By } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -62,7 +63,7 @@ describe('ProfileComponent', () => {
     const profileImage = debugElement.query(By.css(".profile-image"));
     expect(profileImage).toBeTruthy();
     expect(profileImage.nativeElement.getAttribute("alt")).toBe("Foto de perfil de Victo");
-    expect(profileImage.nativeElement.getAttribute("src")).toBe("http://localhost:3001/image.jpg");
+    expect(profileImage.nativeElement.getAttribute("src")).toBe(`${environment.apiUrl}/image.jpg`);
 
     const joinedAt = debugElement.query(By.css(".profile-joined-date"));
     expect(joinedAt).toBeTruthy();
