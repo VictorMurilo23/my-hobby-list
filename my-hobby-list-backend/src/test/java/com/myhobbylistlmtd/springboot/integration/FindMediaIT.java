@@ -26,7 +26,7 @@ import static org.hamcrest.Matchers.*;
 @AutoConfigureMockMvc
 @ActiveProfiles({ "test" })
 @Import(MediaTestConfiguration.class)
-public class FindMediaTests {
+public class FindMediaIT {
   @Autowired
   private MockMvc mockMvc;
 
