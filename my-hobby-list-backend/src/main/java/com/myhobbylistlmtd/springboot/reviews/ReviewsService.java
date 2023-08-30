@@ -120,4 +120,27 @@ public class ReviewsService {
     Page<Reviews> d = reviewsRepo.findAllByMediaId(mediaId, test);
     return new ResponseFindReviews(d.getTotalPages(), d.getContent());
   }
+
+  /**
+   * Encontra reviews por nome de usuário.
+   * @param pageNumber número da página
+   * @param username nome do usuário
+   * @return Objeto com o total de páginas e as reviews feitas
+   * @since 1.0
+   * @author Victor Murilo
+   * @version 1.0
+   */
+  public ResponseFindReviews findUserReviews(
+    final Integer pageNumber, final String username
+  ) {
+    User user = userService.findByUsername(username);
+    final int pageSize = 10;
+    Pageable page = PageRequest.of(pageNumber, pageSize);
+    Page<Reviews> reviews = reviewsRepo.findAllUserReviews(
+      user.getUsername(), page
+    );
+    return new ResponseFindReviews(
+      reviews.getTotalPages(), reviews.getContent()
+    );
+  }
 }
