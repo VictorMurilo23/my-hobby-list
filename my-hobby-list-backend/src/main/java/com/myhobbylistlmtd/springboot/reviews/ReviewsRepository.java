@@ -32,4 +32,17 @@ public interface ReviewsRepository extends JpaRepository<Reviews, Long> {
     nativeQuery = true
   )
   Page<Reviews> findAllByMediaId(Long mediaId, Pageable pageable);
+
+  /**
+   * Encontra todas as reviews feitas por só um usuário.
+   * @param username nome do usuário
+   * @param pageable página
+   * @return Página
+   */
+  @Query(
+    value = "SELECT re.*, us.username FROM reviews re LEFT "
+    + "JOIN users us ON re.user_id = us.id WHERE us.username = ?1",
+    nativeQuery = true
+  )
+  Page<Reviews> findAllUserReviews(String username, Pageable pageable);
 }

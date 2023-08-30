@@ -119,4 +119,24 @@ public class ReviewsController {
       Long.valueOf(mediaId), Long.valueOf(mediaId)
     );
   }
+
+  /**
+   * Rota de encontrar todas as reviews de um usuário específico.
+   * @param username nome do usuário
+   * @param page Número da página
+   * @return Retorna de um Json com a lista de reviews e o total de páginas
+   * @since 1.0
+   * @author Victor Murilo
+   * @version 1.0
+   */
+  @GetMapping("/find-all-user-reviews/{username}")
+  @ResponseStatus(HttpStatus.OK)
+  @JsonView({Views.Review.class})
+  ResponseFindReviews findAllUserReviews(
+    final @PathVariable String username,
+    final @RequestParam(defaultValue = "0") String page
+  ) {
+    return reviewsService.findUserReviews(Integer.valueOf(page), username);
+  }
+
 }
