@@ -13,7 +13,7 @@ import { CreateReviewComponent } from '../create-review/create-review.component'
 import { ReviewCardComponent } from '../review-card/review-card.component';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
-fdescribe('ReviewsComponent', () => {
+describe('ReviewsComponent', () => {
   let component: ReviewsComponent;
   let fixture: ComponentFixture<ReviewsComponent>;
   let reviewService: ReviewService;
