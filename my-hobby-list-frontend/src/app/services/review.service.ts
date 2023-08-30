@@ -38,4 +38,11 @@ export class ReviewService {
       headers,
     });
   }
+
+  public findAllUserReviews(username: string, page: number) {
+    return this.http.get<Review>(`${this.baseUrl}/find-all-user-reviews/${username}?page=${page}`, {
+      observe: 'body',
+      responseType: 'json',
+    });
+  }
 }
