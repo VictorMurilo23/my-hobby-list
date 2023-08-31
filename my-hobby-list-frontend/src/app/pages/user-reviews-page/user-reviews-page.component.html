@@ -1,1 +1,12 @@
-<p>user-reviews-page works!</p>
+<app-page-not-found *ngIf="showNotFound === true; else showReviews"></app-page-not-found>
+<ng-template #showReviews>
+  <div>
+    <div class="review-container" *ngFor="let review of getReviews()">
+      <app-review-card [reviewInfo]="review"></app-review-card>
+      <button *ngIf="showEditBtn()" class="edit-review-button" (click)="setEditing(review)">Editar</button>
+      <div *ngIf="review.editing === true">
+        <app-create-review [reviewInfo]="review" [mediaId]="review.media.id" [sendReview]="sendReview"></app-create-review>
+      </div>
+    </div>
+  </div>
+</ng-template>
