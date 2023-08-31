@@ -4,7 +4,7 @@
 <ng-template #reviews>
   <div>
     <div>
-      <app-create-review *ngIf="showCreateReviewComponent; else userReview" [mediaId]="getMediaId()"></app-create-review>
+      <app-create-review *ngIf="showCreateReviewComponent; else userReview" [mediaId]="getMediaId()" [sendReview]="sendReview" [reviewInfo]="getUserReview()"></app-create-review>
       <ng-template #userReview>
         <div class="user-review-card-container">
           <app-review-card [reviewInfo]="getUserReview()"></app-review-card>
