@@ -10,13 +10,13 @@ public class ResponseFindReviews {
   /**
    * Lista com as reviews.
    */
-  @JsonView({Views.Review.class})
+  @JsonView({Views.Review.class, Views.ReviewPage.class})
   private List<Reviews> reviews;
 
   /**
    * Número total de páginas.
    */
-  @JsonView({Views.Review.class})
+  @JsonView({Views.Review.class, Views.ReviewPage.class})
   private int totalPages;
 
   /**

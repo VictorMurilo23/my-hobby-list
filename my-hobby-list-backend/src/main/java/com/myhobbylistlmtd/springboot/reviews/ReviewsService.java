@@ -54,7 +54,7 @@ public class ReviewsService {
    * @author Victor Murilo
    * @version 1.0
    */
-  private Reviews findReview(final Long userId, final Long mediaId)
+  public Reviews findReview(final Long userId, final Long mediaId)
   throws NotFoundException {
     Reviews review = reviewsRepo.findReviewsByUserIdAndMediaId(userId, mediaId);
     if (review == null) {
@@ -119,5 +119,28 @@ public class ReviewsService {
     Pageable test = PageRequest.of(page, pageSize);
     Page<Reviews> d = reviewsRepo.findAllByMediaId(mediaId, test);
     return new ResponseFindReviews(d.getTotalPages(), d.getContent());
+  }
+
+  /**
+   * Encontra reviews por nome de usuário.
+   * @param pageNumber número da página
+   * @param username nome do usuário
+   * @return Objeto com o total de páginas e as reviews feitas
+   * @since 1.0
+   * @author Victor Murilo
+   * @version 1.0
+   */
+  public ResponseFindReviews findUserReviews(
+    final Integer pageNumber, final String username
+  ) {
+    User user = userService.findByUsername(username);
+    final int pageSize = 10;
+    Pageable page = PageRequest.of(pageNumber, pageSize);
+    Page<Reviews> reviews = reviewsRepo.findAllUserReviews(
+      user.getUsername(), page
+    );
+    return new ResponseFindReviews(
+      reviews.getTotalPages(), reviews.getContent()
+    );
   }
 }

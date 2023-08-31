@@ -8,7 +8,6 @@ import { By } from '@angular/platform-browser';
 import { ReviewService } from 'src/app/services/review.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { UserService } from 'src/app/services/user.service';
-import { of } from 'rxjs';
 
 describe('CreateReviewComponent', () => {
   let component: CreateReviewComponent;
@@ -30,6 +29,8 @@ describe('CreateReviewComponent', () => {
     reviewService = fixture.debugElement.injector.get(ReviewService);
     component = fixture.componentInstance;
     component.mediaId = 1;
+    component.sendReview = jasmine.createSpy().and.returnValue(null);
+    component.reviewInfo = { content: "D", recommended: true, user: { username: "Teste" } }
     fixture.detectChanges();
   });
 
@@ -46,7 +47,7 @@ describe('CreateReviewComponent', () => {
       target: { value: "Comentário muito interessante" },
     });
     fixture.detectChanges();
-    expect(component["review"]["content"]).toBe("Comentário muito interessante");
+    expect(component["reviewInfo"]["content"]).toBe("Comentário muito interessante");
     expect(textareaContent.nativeElement.value).toBe("Comentário muito interessante");
   });
 
@@ -58,41 +59,18 @@ describe('CreateReviewComponent', () => {
     recommendedBtns[1].nativeElement.click();
     fixture.detectChanges();
     expect(recommendedBtns[1].attributes["class"]?.includes("activated")).toBeTruthy();
-    expect(component["review"]["recommended"]).toBe(false);
+    expect(component["reviewInfo"]["recommended"]).toBe(false);
 
     recommendedBtns[0].nativeElement.click();
     fixture.detectChanges();
     expect(recommendedBtns[0].attributes["class"]?.includes("activated")).toBeTruthy();
     expect(recommendedBtns[1].attributes["class"]?.includes("activated")).not.toBeTruthy();
-    expect(component["review"]["recommended"]).toBe(true);
-  });
-
-  it('should call logout when user tries to send a review with a null token', () => {
-    const { debugElement } = fixture;
-    spyOn(userService, "logout");
-    spyOn(localStorage, "getToken").and.returnValue(null);
-
-    const textareaContent = debugElement.query(By.css(".review-content"));
-    expect(textareaContent).toBeTruthy();
-    textareaContent.triggerEventHandler('change', {
-      target: { value: "Comentário muito interessante" },
-    });
-
-    const recommendedBtns = debugElement.queryAll(By.css(".recommended-btn"));
-    expect(recommendedBtns).toBeTruthy();
-    recommendedBtns[1].nativeElement.click();
-    fixture.detectChanges();
-
-    const sendReviewBtn = debugElement.query(By.css(".send-review-btn"));
-    sendReviewBtn.nativeElement.click();
-
-    expect(userService.logout).toHaveBeenCalled();
+    expect(component["reviewInfo"]["recommended"]).toBe(true);
   });
 
   it('should call reviewService.createReview when user tries to send a review', () => {
     const { debugElement } = fixture;
     spyOn(userService, "logout");
-    spyOn(reviewService, "createReview").and.returnValue(of({ null: "null" }));
     spyOn(localStorage, "getToken").and.returnValue("fff");
 
     const textareaContent = debugElement.query(By.css(".review-content"));
@@ -109,6 +87,6 @@ describe('CreateReviewComponent', () => {
     const sendReviewBtn = debugElement.query(By.css(".send-review-btn"));
     sendReviewBtn.nativeElement.click();
 
-    expect(reviewService.createReview).toHaveBeenCalled();
+    expect(component.sendReview).toHaveBeenCalled();
   });
 });

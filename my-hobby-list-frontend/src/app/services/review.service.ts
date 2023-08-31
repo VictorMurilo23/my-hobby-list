@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CreateReview, FindReviews } from '../interfaces/IReviews';
+import { CreateReview, FindReviews, FindUserReviews, Review } from '../interfaces/IReviews';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -26,5 +26,35 @@ export class ReviewService {
       responseType: 'json',
       headers,
     });
+  }
+
+  public findUserReview(mediaId: number, token: string) {
+    const headers = new HttpHeaders({
+      Authorization: token,
+    });
+    return this.http.get<Review>(`${this.baseUrl}/find-user-review/${mediaId}`, {
+      observe: 'body',
+      responseType: 'json',
+      headers,
+    });
+  }
+
+  public findAllUserReviews(username: string, page: number): Observable<FindUserReviews> {
+    return this.http.get<FindUserReviews>(`${this.baseUrl}/find-all-user-reviews/${username}?page=${page}`, {
+      observe: 'body',
+      responseType: 'json',
+    });
+  }
+
+  public editReview(reviewObj: CreateReview, token: string) {
+    const headers = new HttpHeaders({
+      Authorization: token,
+    });
+    const { content, mediaId, recommended } = reviewObj;
+    return this.http.patch(`${this.baseUrl}/edit`, { content, mediaId, recommended }, {
+      observe: 'body',
+      responseType: 'json',
+      headers,
+    })
   }
 }

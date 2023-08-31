@@ -12,6 +12,7 @@ import { SettingsPageComponent } from "./pages/settings-page/settings-page.compo
 import { ChangeProfileImageComponent } from "./components/change-profile-image/change-profile-image.component";
 import { ReviewsComponent } from "./components/reviews/reviews.component";
 import { CharactersComponent } from "./components/characters/characters.component";
+import { UserReviewsPageComponent } from "./pages/user-reviews-page/user-reviews-page.component";
 
 const routes: Routes = [
   {path: "", component: HomeComponent},
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path: "settings", title: "Configurações", component: SettingsPageComponent, children: [
     {path: "change-profile-image", component: ChangeProfileImageComponent}
   ]},
+  {path: "reviews/:username", component: UserReviewsPageComponent},
   {path: '**', pathMatch: "full", component: PageNotFoundComponent}
 ];
 
