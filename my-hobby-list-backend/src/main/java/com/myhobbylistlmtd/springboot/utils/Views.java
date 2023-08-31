@@ -12,4 +12,7 @@ public class Views {
 
   public interface Review {
   }
+
+  public interface ReviewPage extends Review {
+  }
 }
