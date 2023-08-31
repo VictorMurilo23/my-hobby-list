@@ -32,7 +32,7 @@ public class Media {
   */
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @JsonView({Views.Public.class, Views.MediaCard.class})
+  @JsonView({Views.Public.class, Views.MediaCard.class, Views.ReviewPage.class})
   private Long id;
 
   /** Coluna com o nome da midia.
@@ -41,7 +41,7 @@ public class Media {
   * @version 1.0
   */
   @Column(name = "name", nullable = false)
-  @JsonView({Views.Public.class, Views.MediaCard.class})
+  @JsonView({Views.Public.class, Views.MediaCard.class, Views.ReviewPage.class})
   private String name;
 
   /** Coluna com a duração da midia, dependendo da midia
@@ -70,7 +70,7 @@ public class Media {
   * @version 1.0
   */
   @Column(name = "image_url", nullable = false)
-  @JsonView({Views.Public.class, Views.MediaCard.class})
+  @JsonView({Views.Public.class, Views.MediaCard.class, Views.ReviewPage.class})
   private String image;
 
   /** Chave estrangeira do id do status atual.
