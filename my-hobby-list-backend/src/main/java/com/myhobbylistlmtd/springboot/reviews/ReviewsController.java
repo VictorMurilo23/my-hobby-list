@@ -131,7 +131,7 @@ public class ReviewsController {
    */
   @GetMapping("/find-all-user-reviews/{username}")
   @ResponseStatus(HttpStatus.OK)
-  @JsonView({Views.Review.class})
+  @JsonView({Views.ReviewPage.class})
   ResponseFindReviews findAllUserReviews(
     final @PathVariable String username,
     final @RequestParam(defaultValue = "0") String page
