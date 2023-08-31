@@ -59,6 +59,20 @@ export class UserService {
     );
   }
 
+  public getUsernameFromToken(): string | null {
+    try {
+      const token = this.localStorage.getToken();
+      if (token === null) throw new Error();
+      const payload = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
+      const { username } = payload;
+      if (username === null) throw new Error();
+      return username;
+    } catch (e) {
+      this.localStorage.removeToken();
+      return null;
+    }
+  }
+
   public logout(): void {
     this.localStorage.removeToken();
     this.router.navigate(["/login"]);
