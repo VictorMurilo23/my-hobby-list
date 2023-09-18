@@ -21,6 +21,17 @@ public class MediaService implements FindById<Media, Long> {
   private MediaRepository mediaRepo;
 
   /**
+   * Constructor utilizado nos testes unitários.
+   * @param mediaRepo Repository de media
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  public MediaService(final MediaRepository mediaRepo) {
+    this.mediaRepo = mediaRepo;
+  }
+
+  /**
   * Retorna as 10 medias recém-adicionadas.
   * @return Retorna um token com as informações do usuário
   * @since 1.0
