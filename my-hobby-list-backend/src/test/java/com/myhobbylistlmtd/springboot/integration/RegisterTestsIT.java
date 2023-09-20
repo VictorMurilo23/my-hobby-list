@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -15,6 +16,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myhobbylistlmtd.springboot.MyHobbyListBackendApplication;
 import com.myhobbylistlmtd.springboot.request.body.RequestRegisterUserBody;
+import com.myhobbylistlmtd.springboot.utils.RegisterTestConfiguration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = MyHobbyListBackendApplication.class)
 @AutoConfigureMockMvc
+@Import(RegisterTestConfiguration.class)
 @ActiveProfiles({ "test" })
 public class RegisterTestsIT {
   @Autowired
@@ -50,8 +53,8 @@ public class RegisterTestsIT {
   @Test
   public void registerSucess() throws Exception {
     RequestRegisterUserBody body = new RequestRegisterUserBody();
-    body.setEmail("email@teste.com");
-    body.setUsername("Teste1");
+    body.setEmail("teste@teste.com");
+    body.setUsername("Teste12");
     body.setPassword("1224");
     ObjectMapper objectMapper = new ObjectMapper();
     String json = objectMapper.writeValueAsString(body);
