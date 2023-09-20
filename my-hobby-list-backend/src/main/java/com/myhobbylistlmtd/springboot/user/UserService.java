@@ -40,6 +40,25 @@ public class UserService implements FindById<User, Long> {
   @Autowired
   private Jwt jwt;
 
+    /**
+   * Constructor utilizado nos testes unitários.
+   * @param userRepo Mock de UserRepository
+   * @param imageService Mock de ImageService
+   * @param jwt Mock do jwt
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  public UserService(
+    final UserRepository userRepo,
+    final ImageService imageService,
+    final Jwt jwt
+  ) {
+    this.repository = userRepo;
+    this.imageService = imageService;
+    this.jwt = jwt;
+  }
+
   @Override
   public final User findById(final Long id) throws NotFoundException {
     try {
