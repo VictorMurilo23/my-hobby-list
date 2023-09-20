@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.media.characters.MediaCharacters;
 import com.myhobbylistlmtd.springboot.media.status.MediaStatus;
@@ -24,6 +25,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "media")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Media {
   /** Id gerado automaticamente.
   * @since 1.0
