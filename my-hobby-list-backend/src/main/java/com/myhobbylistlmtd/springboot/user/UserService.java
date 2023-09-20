@@ -115,7 +115,10 @@ public class UserService implements FindById<User, Long> {
   private void validateIfUserExists(
     final RequestRegisterUserBody body
   ) throws AlreadyTakenException {
-    List<User> users = this.repository.findByUsernameOrEmail(body.getUsername(), body.getEmail());
+    List<User> users = this.repository.findByUsernameOrEmail(
+      body.getUsername(), body.getEmail()
+    );
+    System.out.println(users.size());
 
     for (int index = 0; index < users.size(); index += 1) {
       if (users.get(index).getEmail().equals(body.getEmail())) {
