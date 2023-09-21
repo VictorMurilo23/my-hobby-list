@@ -45,6 +45,22 @@ public class ReviewsService {
   private MediaService mediaService;
 
   /**
+   * Constructor utilizado nos testes unitários.
+   * @param mediaService Mock de MediaService
+   * @param userService Mock de UserService
+   * @param reviewsRepo Mock de ReviewRepository
+   */
+  public ReviewsService(
+    final MediaService mediaService,
+    final UserService userService,
+    final ReviewsRepository reviewsRepo
+  ) {
+    this.mediaService = mediaService;
+    this.userService = userService;
+    this.reviewsRepo = reviewsRepo;
+  }
+
+  /**
    * Encontra uma review no banco de dados.
    * @param userId Id do usuário
    * @param mediaId Id da media
