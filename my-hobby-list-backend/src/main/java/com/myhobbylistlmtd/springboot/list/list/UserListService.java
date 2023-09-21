@@ -54,6 +54,28 @@ public class UserListService implements FindById<UserList, UserListId> {
   @Autowired
   private MediaService mediaService;
 
+  /**
+   * Constructor utilizado nos testes unitários.
+   * @param mediaService Mock de MediaService
+   * @param userService Mock de UserService
+   * @param listItemTypeRepo Mock de ItemStatusRepository
+   * @param listRepo Mock de UserListRepository
+   * @since 1.0
+   * @version 1.9
+   * @author Victor Murilo
+   */
+  public UserListService(
+    final MediaService mediaService,
+    final UserService userService,
+    final ItemStatusRepository listItemTypeRepo,
+    final UserListRepository listRepo
+  ) {
+    this.mediaService = mediaService;
+    this.userService = userService;
+    this.listItemTypeRepo = listItemTypeRepo;
+    this.listRepo = listRepo;
+  }
+
   @Override
   public final UserList findById(final UserListId id) throws NotFoundException {
     try {
