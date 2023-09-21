@@ -29,6 +29,22 @@ public class MediaCharactersService {
   private MediaService mediaService;
 
   /**
+   * Constructor utilizado nos testes unitários.
+   * @param mediaService Mock de MediaService
+   * @param mediaCharactersRepo Mock de MediaCharactersRepository
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  public MediaCharactersService(
+    final MediaService mediaService,
+    final MediaCharactersRepository mediaCharactersRepo
+  ) {
+    this.mediaCharactersRepo = mediaCharactersRepo;
+    this.mediaService = mediaService;
+  }
+
+  /**
    * Procura todos os personagens de uma media.
    * @param mediaName Nome da media
    * @return Uma lista com todos os personagens
