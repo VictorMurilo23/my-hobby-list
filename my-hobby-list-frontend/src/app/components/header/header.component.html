@@ -17,23 +17,23 @@
     <div class="user-info-container">
       <button
         type="button"
-        class="btn dropdown-toggle"
+        class="btn dropdown-toggle username"
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        {{ username }}
+        {{username}}
       </button>
       <div class="dropdown-menu">
-        <a class="dropdown-item" [routerLink]="['/profile/', username]">
+        <a class="dropdown-item profile-link" [routerLink]="['/profile/', username]">
           <span>Perfil</span>
         </a>
-        <a class="dropdown-item" [routerLink]="['/list/', username]">
+        <a class="dropdown-item link-to-userlist" [routerLink]="['/list/', username]">
           <span>Lista</span>
         </a>
         <a class="dropdown-item" [routerLink]="['/settings']">
           <span class="settings-redirect">Configurações</span>
         </a>
-        <button class="dropdown-item" (click)="logout()">Logout</button>
+        <button class="dropdown-item logout-btn" (click)="logout()">Logout</button>
       </div>
     </div>
   </ng-template>
