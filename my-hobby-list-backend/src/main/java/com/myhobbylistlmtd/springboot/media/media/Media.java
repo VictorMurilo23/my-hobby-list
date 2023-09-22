@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.media.characters.MediaCharacters;
 import com.myhobbylistlmtd.springboot.media.status.MediaStatus;
-import com.myhobbylistlmtd.springboot.media.type.MediaType;
+import com.myhobbylistlmtd.springboot.mediatype.MediaType;
 import com.myhobbylistlmtd.springboot.objs.MediaParams;
 import com.myhobbylistlmtd.springboot.reviews.Reviews;
 import com.myhobbylistlmtd.springboot.utils.Views;
