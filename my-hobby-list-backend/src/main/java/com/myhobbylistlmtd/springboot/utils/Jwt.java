@@ -37,7 +37,7 @@ public class Jwt {
    * @version 1.0
    * @author Victor Murilo
    */
-  public final String generateJwtToken(
+  public String generateJwtToken(
     final Long userId, final String username
   ) {
     String jwt = Jwts.builder()
@@ -57,7 +57,7 @@ public class Jwt {
    * @version 1.0
    * @author Victor Murilo
    */
-  public final String verifyToken(
+  public String verifyToken(
     final String token
   ) throws BadRequestException {
     try {

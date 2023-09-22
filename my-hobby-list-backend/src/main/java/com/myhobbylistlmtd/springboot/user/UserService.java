@@ -40,6 +40,25 @@ public class UserService implements FindById<User, Long> {
   @Autowired
   private Jwt jwt;
 
+    /**
+   * Constructor utilizado nos testes unitários.
+   * @param userRepo Mock de UserRepository
+   * @param imageService Mock de ImageService
+   * @param jwt Mock do jwt
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  public UserService(
+    final UserRepository userRepo,
+    final ImageService imageService,
+    final Jwt jwt
+  ) {
+    this.repository = userRepo;
+    this.imageService = imageService;
+    this.jwt = jwt;
+  }
+
   @Override
   public final User findById(final Long id) throws NotFoundException {
     try {
@@ -96,17 +115,22 @@ public class UserService implements FindById<User, Long> {
   private void validateIfUserExists(
     final RequestRegisterUserBody body
   ) throws AlreadyTakenException {
-    User findEmail = this.repository.findByEmail(body.getEmail());
-    User findUsername = this.repository.findByUsername(body.getUsername());
-    if (findEmail != null) {
-      throw new AlreadyTakenException(
-        String.format("O email %s já está em uso.", body.getEmail())
-      );
-    }
-    if (findUsername != null) {
-      throw new AlreadyTakenException(
-        String.format("O nome %s já está em uso.", body.getUsername())
-      );
+    List<User> users = this.repository.findByUsernameOrEmail(
+      body.getUsername(), body.getEmail()
+    );
+    System.out.println(users.size());
+
+    for (int index = 0; index < users.size(); index += 1) {
+      if (users.get(index).getEmail().equals(body.getEmail())) {
+        throw new AlreadyTakenException(
+          String.format("O email %s já está em uso.", body.getEmail())
+        );
+      }
+      if (users.get(index).getUsername().equals(body.getUsername())) {
+        throw new AlreadyTakenException(
+          String.format("O nome %s já está em uso.", body.getUsername())
+        );
+      }
     }
   }
 
