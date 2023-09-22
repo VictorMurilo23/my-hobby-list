@@ -1,4 +1,4 @@
-package com.myhobbylistlmtd.springboot.list.list;
+package com.myhobbylistlmtd.springboot.userlist;
 
 import java.util.List;
 

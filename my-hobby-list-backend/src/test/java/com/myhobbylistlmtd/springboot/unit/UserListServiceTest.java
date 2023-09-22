@@ -21,10 +21,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
-import com.myhobbylistlmtd.springboot.list.list.UserList;
-import com.myhobbylistlmtd.springboot.list.list.UserListId;
-import com.myhobbylistlmtd.springboot.list.list.UserListRepository;
-import com.myhobbylistlmtd.springboot.list.list.UserListService;
 import com.myhobbylistlmtd.springboot.listitemstatus.ListItemStatus;
 import com.myhobbylistlmtd.springboot.listitemstatus.ListItemStatusRepository;
 import com.myhobbylistlmtd.springboot.media.media.Media;
@@ -33,6 +29,10 @@ import com.myhobbylistlmtd.springboot.objs.MediaParams;
 import com.myhobbylistlmtd.springboot.request.body.RequestUserListBody;
 import com.myhobbylistlmtd.springboot.user.User;
 import com.myhobbylistlmtd.springboot.user.UserService;
+import com.myhobbylistlmtd.springboot.userlist.UserList;
+import com.myhobbylistlmtd.springboot.userlist.UserListId;
+import com.myhobbylistlmtd.springboot.userlist.UserListRepository;
+import com.myhobbylistlmtd.springboot.userlist.UserListService;
 
 @ExtendWith(MockitoExtension.class)
 public class UserListServiceTest {
