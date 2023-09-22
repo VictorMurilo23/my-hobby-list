@@ -6,4 +6,4 @@
   * @version 1.0
 */
 
-package com.myhobbylistlmtd.springboot.media.status;
+package com.myhobbylistlmtd.springboot.mediastatus;

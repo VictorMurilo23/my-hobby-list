@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import com.myhobbylistlmtd.springboot.media.status.MediaStatus;
-import com.myhobbylistlmtd.springboot.media.status.MediaStatusRepository;
+import com.myhobbylistlmtd.springboot.mediastatus.MediaStatus;
+import com.myhobbylistlmtd.springboot.mediastatus.MediaStatusRepository;
 
 @Configuration
 @Profile({ "production" })
