@@ -67,7 +67,7 @@ describe('HeaderComponent', () => {
 
     const username = userInfoContainer.query(By.css(".username"));
     expect(username).toBeTruthy(); 
-    expect(username.nativeElement.textContent).toBe("Teste")
+    expect(username.nativeElement.textContent).toBe(" Teste ")
   });
 
   it("should render a button that redirects to userlist when token is valid", fakeAsync(() => {
@@ -125,7 +125,7 @@ describe('HeaderComponent', () => {
     expect(debugElement.query(By.css(".register-redirect-button"))).toBeNull();
     const username = debugElement.query(By.css(".user-info-container")).query(By.css(".username"));
     expect(username).toBeTruthy(); 
-    expect(username.nativeElement.textContent).toBe("Teste")
+    expect(username.nativeElement.textContent).toBe(" Teste ")
   }));
 
   it('should redirect to /login when logout button is clicked', fakeAsync(() => {
@@ -133,6 +133,10 @@ describe('HeaderComponent', () => {
     spyOn(localStorageService, "getToken").and.returnValue(validToken);
     component.ngOnInit();
     fixture.detectChanges();
+    const username = debugElement.query(By.css(".username"));
+    username.nativeElement.click();
+    fixture.detectChanges();
+
     const logoutBtn = debugElement.query(By.css(".logout-btn"));
     expect(logoutBtn).toBeTruthy();
     logoutBtn.nativeElement.click();
@@ -141,8 +145,7 @@ describe('HeaderComponent', () => {
     tick();
     fixture.detectChanges();
 
-    const username = debugElement.query(By.css(".username"));
-    expect(username).not.toBeTruthy();
+    expect(debugElement.query(By.css(".username"))).not.toBeTruthy();
     expect(router.url).toBe("/login");
   }));
 
@@ -163,8 +166,12 @@ describe('HeaderComponent', () => {
     
     const username = debugElement.query(By.css(".user-info-container")).query(By.css(".username"));
     expect(username).toBeTruthy(); 
-    expect(username.nativeElement.textContent).toBe("Teste")
+    expect(username.nativeElement.textContent).toBe(" Teste ")
     username.nativeElement.click();
+    tick();
+
+    const linkToProfile = debugElement.query(By.css(".profile-link"))
+    linkToProfile.nativeElement.click();
     tick();
     expect(router.url).toBe("/profile/Teste");
   }));
