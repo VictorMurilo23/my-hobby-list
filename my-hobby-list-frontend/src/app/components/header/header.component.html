@@ -1,15 +1,15 @@
-<header>
+<header class="d-flex flex-row justify-content-between m-1">
   <div>
-    <a class="home-redirect-button" [routerLink]="['/']"><button>Home</button></a>
+    <a class="home-redirect-button" [routerLink]="['/']"><button type="button" class="btn btn-dark">Home</button></a>
   </div>
   <app-search-bar></app-search-bar>
-  <div *ngIf="username === null; else logged">
-    <a class="login-redirect-button" [routerLink]="['/login']"><button>Login</button></a>
-    <a class="register-redirect-button" [routerLink]="['/register']"><button>Registro</button></a>
+  <div class="d-flex gap-1" *ngIf="username === null; else logged">
+    <a class="login-redirect-button" [routerLink]="['/login']"><button type="button" class="btn btn-primary">Login</button></a>
+    <a class="register-redirect-button" [routerLink]="['/register']"><button type="button" class="btn btn-secondary">Registro</button></a>
   </div>
   <ng-template #logged>
     <div class="user-info-container">
-      <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">{{username}}</button>
+      <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">{{username}}</button>
       <div class="dropdown-menu">
         <a class="dropdown-item" [routerLink]="['/profile/', username]"><span>Perfil</span></a>
         <a class="dropdown-item" [routerLink]="['/list/', username]"><span>Lista</span></a>
