@@ -6,7 +6,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.myhobbylistlmtd.springboot.media.characters.MediaCharacters;
+import com.myhobbylistlmtd.springboot.mediacharacters.MediaCharacters;
 import com.myhobbylistlmtd.springboot.mediastatus.MediaStatus;
 import com.myhobbylistlmtd.springboot.mediatype.MediaType;
 import com.myhobbylistlmtd.springboot.objs.MediaParams;

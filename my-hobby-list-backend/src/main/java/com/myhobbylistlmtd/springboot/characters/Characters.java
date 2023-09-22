@@ -4,7 +4,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.myhobbylistlmtd.springboot.media.characters.MediaCharacters;
+import com.myhobbylistlmtd.springboot.mediacharacters.MediaCharacters;
 import com.myhobbylistlmtd.springboot.utils.Views;
 
 import jakarta.persistence.Column;
