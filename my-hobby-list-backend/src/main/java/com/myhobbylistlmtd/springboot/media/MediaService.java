@@ -1,4 +1,4 @@
-package com.myhobbylistlmtd.springboot.media.media;
+package com.myhobbylistlmtd.springboot.media;
 
 import java.util.List;
 import java.util.NoSuchElementException;

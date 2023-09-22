@@ -21,8 +21,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 
 import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
-import com.myhobbylistlmtd.springboot.media.media.Media;
-import com.myhobbylistlmtd.springboot.media.media.MediaService;
+import com.myhobbylistlmtd.springboot.media.Media;
+import com.myhobbylistlmtd.springboot.media.MediaService;
 import com.myhobbylistlmtd.springboot.objs.MediaParams;
 import com.myhobbylistlmtd.springboot.request.body.RequestCreateReview;
 import com.myhobbylistlmtd.springboot.request.body.RequestEditReview;

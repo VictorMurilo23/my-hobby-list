@@ -3,7 +3,7 @@ package com.myhobbylistlmtd.springboot.response.body;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.myhobbylistlmtd.springboot.media.media.Media;
+import com.myhobbylistlmtd.springboot.media.Media;
 import com.myhobbylistlmtd.springboot.utils.Views;
 
 public class ResponseMediasList {

@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.myhobbylistlmtd.springboot.media.media.Media;
-import com.myhobbylistlmtd.springboot.media.media.MediaService;
+import com.myhobbylistlmtd.springboot.media.Media;
+import com.myhobbylistlmtd.springboot.media.MediaService;
 
 @Service
 public class MediaCharactersService {

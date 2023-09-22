@@ -3,7 +3,7 @@ package com.myhobbylistlmtd.springboot.mediacharacters;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.characters.Characters;
 import com.myhobbylistlmtd.springboot.charactersrole.CharactersRole;
-import com.myhobbylistlmtd.springboot.media.media.Media;
+import com.myhobbylistlmtd.springboot.media.Media;
 import com.myhobbylistlmtd.springboot.utils.Views;
 
 import jakarta.persistence.EmbeddedId;
