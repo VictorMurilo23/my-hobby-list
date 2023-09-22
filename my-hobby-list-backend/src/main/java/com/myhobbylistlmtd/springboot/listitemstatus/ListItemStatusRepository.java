@@ -1,11 +1,11 @@
-package com.myhobbylistlmtd.springboot.list.status;
+package com.myhobbylistlmtd.springboot.listitemstatus;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ItemStatusRepository extends JpaRepository<
-ItemStatus, Long
+public interface ListItemStatusRepository extends JpaRepository<
+ListItemStatus, Long
 > {
   /**
   * Faz uma busca pelo nome do status.
@@ -16,5 +16,5 @@ ItemStatus, Long
   * @version 1.0
   * @author Victor Murilo
   */
-  ItemStatus findByStatusName(String status);
+  ListItemStatus findByStatusName(String status);
 }

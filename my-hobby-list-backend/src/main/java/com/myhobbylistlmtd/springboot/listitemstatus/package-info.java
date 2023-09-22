@@ -5,4 +5,4 @@
   * @author Victor Murilo
   * @version 1.0
  */
-package com.myhobbylistlmtd.springboot.list.status;
+package com.myhobbylistlmtd.springboot.listitemstatus;

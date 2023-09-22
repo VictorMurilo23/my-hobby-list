@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Profile;
 import com.myhobbylistlmtd.springboot.list.list.UserList;
 import com.myhobbylistlmtd.springboot.list.list.UserListId;
 import com.myhobbylistlmtd.springboot.list.list.UserListRepository;
-import com.myhobbylistlmtd.springboot.list.status.ItemStatus;
-import com.myhobbylistlmtd.springboot.list.status.ItemStatusRepository;
+import com.myhobbylistlmtd.springboot.listitemstatus.ListItemStatus;
+import com.myhobbylistlmtd.springboot.listitemstatus.ListItemStatusRepository;
 import com.myhobbylistlmtd.springboot.media.media.Media;
 import com.myhobbylistlmtd.springboot.media.media.MediaRepository;
 import com.myhobbylistlmtd.springboot.media.status.MediaStatus;
@@ -29,7 +29,7 @@ public class FindUserListConfiguration {
   public CommandLineRunner runFindUserListConfiguration(UserRepository userRepo, MediaRepository mediaRepo,
       MediaStatusRepository statusRepo,
       MediaTypeRepository typeRepo,
-      ItemStatusRepository listItemStatusRepo,
+      ListItemStatusRepository listItemStatusRepo,
       UserListRepository listRepo) {
     User user = userRepo.save(new User("Teste12345", "email@gmail.com", "123"));
     MediaStatus mediaStatus = statusRepo.save(new MediaStatus("Completo"));
@@ -53,8 +53,8 @@ public class FindUserListConfiguration {
             .setInsertionDate(
                 LocalDateTime.parse("2023-05-29T08:01:00"))));
     
-    ItemStatus onGoingItemStatus = listItemStatusRepo.save(new ItemStatus("Em andamento"));
-    ItemStatus droppedItemStatus = listItemStatusRepo.save(new ItemStatus("Droppado"));
+    ListItemStatus onGoingItemStatus = listItemStatusRepo.save(new ListItemStatus("Em andamento"));
+    ListItemStatus droppedItemStatus = listItemStatusRepo.save(new ListItemStatus("Droppado"));
 
     UserList listItem1 = new UserList();
     listItem1.setId(new UserListId(user, media1));

@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
 import com.myhobbylistlmtd.springboot.interfaces.FindById;
-import com.myhobbylistlmtd.springboot.list.status.ItemStatus;
-import com.myhobbylistlmtd.springboot.list.status.ItemStatusRepository;
+import com.myhobbylistlmtd.springboot.listitemstatus.ListItemStatus;
+import com.myhobbylistlmtd.springboot.listitemstatus.ListItemStatusRepository;
 import com.myhobbylistlmtd.springboot.media.media.Media;
 import com.myhobbylistlmtd.springboot.media.media.MediaService;
 import com.myhobbylistlmtd.springboot.request.body.RequestUserListBody;
@@ -34,7 +34,7 @@ public class UserListService implements FindById<UserList, UserListId> {
   * @author Victor Murilo
   */
   @Autowired
-  private ItemStatusRepository listItemTypeRepo;
+  private ListItemStatusRepository listItemTypeRepo;
 
   /**
    * Service relacionado aos usuários.
@@ -67,7 +67,7 @@ public class UserListService implements FindById<UserList, UserListId> {
   public UserListService(
     final MediaService mediaService,
     final UserService userService,
-    final ItemStatusRepository listItemTypeRepo,
+    final ListItemStatusRepository listItemTypeRepo,
     final UserListRepository listRepo
   ) {
     this.mediaService = mediaService;
@@ -96,9 +96,9 @@ public class UserListService implements FindById<UserList, UserListId> {
    * @version 1.0
    * @author Victor Murilo
    */
-  private ItemStatus findItemStatusByName(final String statusName)
+  private ListItemStatus findItemStatusByName(final String statusName)
   throws NotFoundException {
-    ItemStatus status = listItemTypeRepo.findByStatusName(statusName);
+    ListItemStatus status = listItemTypeRepo.findByStatusName(statusName);
     if (status == null) {
       throw new NotFoundException("Nome de status inválido");
     }
@@ -119,7 +119,7 @@ public class UserListService implements FindById<UserList, UserListId> {
   ) {
     User findUser = userService.findById(userId);
     Media findMedia = mediaService.findById(body.getMediaId());
-    ItemStatus findStatus = findItemStatusByName(
+    ListItemStatus findStatus = findItemStatusByName(
       body.getStatus() == null ? "Em andamento" : body.getStatus()
     );
 
@@ -164,7 +164,7 @@ public class UserListService implements FindById<UserList, UserListId> {
     final String username, final String statusName
   ) {
     User user = userService.findByUsername(username);
-    ItemStatus status = this.findItemStatusByName(statusName);
+    ListItemStatus status = this.findItemStatusByName(statusName);
     List<UserList> list = listRepo
     .findAllById_UserId_UsernameAndStatus_StatusName(
       user.getUsername(), status.getStatusName()

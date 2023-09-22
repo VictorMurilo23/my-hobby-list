@@ -2,7 +2,7 @@ package com.myhobbylistlmtd.springboot.list.list;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.myhobbylistlmtd.springboot.list.status.ItemStatus;
+import com.myhobbylistlmtd.springboot.listitemstatus.ListItemStatus;
 import com.myhobbylistlmtd.springboot.utils.Views;
 
 import jakarta.persistence.Column;
@@ -70,7 +70,7 @@ public class UserList {
     referencedColumnName = "id"
   )
   @JsonView(Views.Public.class)
-  private ItemStatus status;
+  private ListItemStatus status;
 
   /**
    * Getter do atributo Id.
@@ -167,7 +167,7 @@ public class UserList {
    * @author Victor Murilo
    * @version 1.0
    */
-  public ItemStatus getStatus() {
+  public ListItemStatus getStatus() {
     return status;
   }
 
@@ -178,7 +178,7 @@ public class UserList {
    * @author Victor Murilo
    * @version 1.0
    */
-  public void setStatus(final ItemStatus newStatus) {
+  public void setStatus(final ListItemStatus newStatus) {
     this.status = newStatus;
   }
 }
