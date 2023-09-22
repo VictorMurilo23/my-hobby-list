@@ -1,4 +1,4 @@
-package com.myhobbylistlmtd.springboot.list.list;
+package com.myhobbylistlmtd.springboot.userlist;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;

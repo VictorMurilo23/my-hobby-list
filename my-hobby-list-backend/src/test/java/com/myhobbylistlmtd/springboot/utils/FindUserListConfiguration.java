@@ -7,9 +7,6 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 
-import com.myhobbylistlmtd.springboot.list.list.UserList;
-import com.myhobbylistlmtd.springboot.list.list.UserListId;
-import com.myhobbylistlmtd.springboot.list.list.UserListRepository;
 import com.myhobbylistlmtd.springboot.listitemstatus.ListItemStatus;
 import com.myhobbylistlmtd.springboot.listitemstatus.ListItemStatusRepository;
 import com.myhobbylistlmtd.springboot.media.media.Media;
@@ -21,6 +18,9 @@ import com.myhobbylistlmtd.springboot.media.type.MediaTypeRepository;
 import com.myhobbylistlmtd.springboot.objs.MediaParams;
 import com.myhobbylistlmtd.springboot.user.User;
 import com.myhobbylistlmtd.springboot.user.UserRepository;
+import com.myhobbylistlmtd.springboot.userlist.UserList;
+import com.myhobbylistlmtd.springboot.userlist.UserListId;
+import com.myhobbylistlmtd.springboot.userlist.UserListRepository;
 
 @TestConfiguration
 @Profile({ "test" })
