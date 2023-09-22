@@ -85,6 +85,9 @@
                         <exclude>**/exceptions/*.class</exclude>
 						<exclude>**/interceptors/*.class</exclude>
 						<exclude>**/interfaces/*.class</exclude>
+                        <exclude>**/configuration/*.class</exclude>
+                        <exclude>**/response/body/*.class</exclude>
+                        <exclude>**/request/body/*.class</exclude>
 						<exclude>**/migrations/*.class</exclude>
 						<exclude>**/objs/*.class</exclude>
                         <exclude>**/package-info.class</exclude>
