@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.myhobbylistlmtd.springboot.characters.CharacterRepository;
 import com.myhobbylistlmtd.springboot.charactersrole.CharactersRoleRepository;
-import com.myhobbylistlmtd.springboot.media.media.MediaRepository;
+import com.myhobbylistlmtd.springboot.media.MediaRepository;
 import com.myhobbylistlmtd.springboot.mediacharacters.MediaCharacters;
 import com.myhobbylistlmtd.springboot.mediacharacters.MediaCharactersRepository;
 

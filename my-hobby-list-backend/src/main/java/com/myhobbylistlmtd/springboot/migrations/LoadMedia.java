@@ -10,8 +10,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import com.myhobbylistlmtd.springboot.media.media.Media;
-import com.myhobbylistlmtd.springboot.media.media.MediaRepository;
+import com.myhobbylistlmtd.springboot.media.Media;
+import com.myhobbylistlmtd.springboot.media.MediaRepository;
 import com.myhobbylistlmtd.springboot.mediastatus.MediaStatus;
 import com.myhobbylistlmtd.springboot.mediastatus.MediaStatusRepository;
 import com.myhobbylistlmtd.springboot.mediatype.MediaType;

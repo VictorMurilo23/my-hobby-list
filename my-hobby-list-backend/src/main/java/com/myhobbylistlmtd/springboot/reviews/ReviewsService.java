@@ -7,8 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
-import com.myhobbylistlmtd.springboot.media.media.Media;
-import com.myhobbylistlmtd.springboot.media.media.MediaService;
+import com.myhobbylistlmtd.springboot.media.Media;
+import com.myhobbylistlmtd.springboot.media.MediaService;
 import com.myhobbylistlmtd.springboot.request.body.RequestCreateReview;
 import com.myhobbylistlmtd.springboot.request.body.RequestEditReview;
 import com.myhobbylistlmtd.springboot.response.body.ResponseFindReviews;

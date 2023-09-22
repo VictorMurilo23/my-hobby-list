@@ -1,4 +1,4 @@
-package com.myhobbylistlmtd.springboot.media.media;
+package com.myhobbylistlmtd.springboot.media;
 
 import java.time.LocalDateTime;
 import java.util.Set;
