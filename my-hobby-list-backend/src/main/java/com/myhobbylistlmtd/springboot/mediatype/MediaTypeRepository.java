@@ -1,4 +1,4 @@
-package com.myhobbylistlmtd.springboot.media.type;
+package com.myhobbylistlmtd.springboot.mediatype;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
