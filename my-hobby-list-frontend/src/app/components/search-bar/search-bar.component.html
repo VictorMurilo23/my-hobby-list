@@ -1,6 +1,6 @@
-<div class="search-bar-container">
-  <form>
-    <input [value]="searchContent" class="search-input" (change)="setSearchContent($event)" type="search" placeholder="Buscar Anime, Manga, Filme, e mais..." />
-    <button type="submit" (click)="search($event)">Buscar</button>
+<div class="d-flex">
+  <form class="form-group d-flex flex-row gap-1">
+    <input [value]="searchContent" class="form-control" (change)="setSearchContent($event)" type="search" placeholder="Buscar Anime, Manga, Filme, e mais..." />
+    <button class="btn btn-primary btn-sm" type="submit" (click)="search($event)">Buscar</button>
   </form>
 </div>
