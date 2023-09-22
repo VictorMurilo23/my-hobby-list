@@ -9,10 +9,13 @@
   </div>
   <ng-template #logged>
     <div class="user-info-container">
-      <a [routerLink]="['/profile/', username]"><span class="username">{{username}}</span></a>
-      <button class="logout-btn" (click)="logout()">Logout</button>
-      <a class="link-to-userlist" [routerLink]="['/list/', username]"><span>Lista</span></a>
-      <a class="link-to-userlist" [routerLink]="['/settings']"><span class="settings-redirect">Configurações</span></a>
+      <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">{{username}}</button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" [routerLink]="['/profile/', username]"><span>Perfil</span></a>
+        <a class="dropdown-item" [routerLink]="['/list/', username]"><span>Lista</span></a>
+        <a class="dropdown-item" [routerLink]="['/settings']"><span class="settings-redirect">Configurações</span></a>
+        <button class="dropdown-item" (click)="logout()">Logout</button>
+      </div>
     </div>
   </ng-template>
 </header>
