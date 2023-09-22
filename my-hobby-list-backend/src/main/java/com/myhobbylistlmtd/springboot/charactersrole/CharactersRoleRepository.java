@@ -1,4 +1,4 @@
-package com.myhobbylistlmtd.springboot.characters.role;
+package com.myhobbylistlmtd.springboot.charactersrole;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
