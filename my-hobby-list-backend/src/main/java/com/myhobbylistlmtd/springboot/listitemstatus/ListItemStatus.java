@@ -1,4 +1,4 @@
-package com.myhobbylistlmtd.springboot.list.status;
+package com.myhobbylistlmtd.springboot.listitemstatus;
 
 import java.util.Set;
 
@@ -17,7 +17,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "list_item_status")
-public class ItemStatus {
+public class ListItemStatus {
   /** Id gerado automaticamente.
   * @since 1.0
   * @author Victor Murilo
@@ -52,7 +52,7 @@ public class ItemStatus {
   * @author Victor Murilo
   * @version 1.0
   */
-  public ItemStatus() { }
+  public ListItemStatus() { }
 
   /** Cria um novo status de item da lista.
   * @param statusName Nome do status
@@ -60,7 +60,7 @@ public class ItemStatus {
   * @author Victor Murilo
   * @version 1.0
   */
-  public ItemStatus(final String statusName) {
+  public ListItemStatus(final String statusName) {
     this.statusName = statusName;
   }
 

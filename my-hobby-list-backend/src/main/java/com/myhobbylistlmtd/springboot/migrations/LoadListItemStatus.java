@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import com.myhobbylistlmtd.springboot.list.status.ItemStatus;
-import com.myhobbylistlmtd.springboot.list.status.ItemStatusRepository;
+import com.myhobbylistlmtd.springboot.listitemstatus.ListItemStatus;
+import com.myhobbylistlmtd.springboot.listitemstatus.ListItemStatusRepository;
 
 @Configuration
 @Profile({ "production" })
@@ -21,13 +21,13 @@ public class LoadListItemStatus {
    */
   @Bean
   public CommandLineRunner runLoadListItemStatus(
-      final ItemStatusRepository repository) {
-    List<ItemStatus> statusList = new ArrayList<ItemStatus>();
-    statusList.add(new ItemStatus("Em andamento"));
-    statusList.add(new ItemStatus("Concluído"));
-    statusList.add(new ItemStatus("Droppado"));
-    statusList.add(new ItemStatus("Planejado"));
-    statusList.add(new ItemStatus("Pausado"));
+      final ListItemStatusRepository repository) {
+    List<ListItemStatus> statusList = new ArrayList<ListItemStatus>();
+    statusList.add(new ListItemStatus("Em andamento"));
+    statusList.add(new ListItemStatus("Concluído"));
+    statusList.add(new ListItemStatus("Droppado"));
+    statusList.add(new ListItemStatus("Planejado"));
+    statusList.add(new ListItemStatus("Pausado"));
 
     repository.saveAll(statusList);
     return null;

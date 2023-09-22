@@ -25,8 +25,8 @@ import com.myhobbylistlmtd.springboot.list.list.UserList;
 import com.myhobbylistlmtd.springboot.list.list.UserListId;
 import com.myhobbylistlmtd.springboot.list.list.UserListRepository;
 import com.myhobbylistlmtd.springboot.list.list.UserListService;
-import com.myhobbylistlmtd.springboot.list.status.ItemStatus;
-import com.myhobbylistlmtd.springboot.list.status.ItemStatusRepository;
+import com.myhobbylistlmtd.springboot.listitemstatus.ListItemStatus;
+import com.myhobbylistlmtd.springboot.listitemstatus.ListItemStatusRepository;
 import com.myhobbylistlmtd.springboot.media.media.Media;
 import com.myhobbylistlmtd.springboot.media.media.MediaService;
 import com.myhobbylistlmtd.springboot.objs.MediaParams;
@@ -45,7 +45,7 @@ public class UserListServiceTest {
   private UserService userService = mock(UserService.class);
   
   @Mock
-  private ItemStatusRepository listItemTypeRepo;
+  private ListItemStatusRepository listItemTypeRepo;
   
   @Mock
   private UserListRepository listRepo;
@@ -60,7 +60,7 @@ public class UserListServiceTest {
     Media media = new Media(new MediaParams("Teste1"));
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
     UserListId id = new UserListId(user, media);
-    ItemStatus status = new ItemStatus("Em andamento");
+    ListItemStatus status = new ListItemStatus("Em andamento");
 
     UserList list = new UserList();
     list.setId(id);
@@ -94,7 +94,7 @@ public class UserListServiceTest {
   public void insertItemInListWithSuccess() {
     Media media = new Media(new MediaParams("Teste1"));
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
-    ItemStatus status = new ItemStatus("Em andamento");
+    ListItemStatus status = new ListItemStatus("Em andamento");
     Long mediaId = Long.valueOf(10);
     Long userId = Long.valueOf(2);
 
@@ -140,7 +140,7 @@ public class UserListServiceTest {
   public void insertItemInListShouldChangeStatusIfStatusInBodyIsNull() {
     Media media = new Media(new MediaParams("Teste1"));
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
-    ItemStatus status = new ItemStatus("Em andamento");
+    ListItemStatus status = new ListItemStatus("Em andamento");
     Long mediaId = Long.valueOf(10);
     Long userId = Long.valueOf(2);
 
@@ -164,7 +164,7 @@ public class UserListServiceTest {
   public void insertItemInListShouldChangeProgressIfProgressInBodyIsNull() {
     Media media = new Media(new MediaParams("Teste1"));
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
-    ItemStatus status = new ItemStatus("Em andamento");
+    ListItemStatus status = new ListItemStatus("Em andamento");
     Long mediaId = Long.valueOf(10);
     Long userId = Long.valueOf(2);
 
@@ -187,7 +187,7 @@ public class UserListServiceTest {
   public void findList() {
     Media media = new Media(new MediaParams("Teste1"));
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
-    ItemStatus status = new ItemStatus("Em andamento");
+    ListItemStatus status = new ListItemStatus("Em andamento");
     UserListId id = new UserListId(user, media);
     
     UserList firstListItem = new UserList();
@@ -234,7 +234,7 @@ public class UserListServiceTest {
   public void findListWithStatusName() {
     Media media = new Media(new MediaParams("Teste1"));
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
-    ItemStatus status = new ItemStatus("Em andamento");
+    ListItemStatus status = new ListItemStatus("Em andamento");
     UserListId id = new UserListId(user, media);
     
     UserList firstListItem = new UserList();
