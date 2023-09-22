@@ -17,9 +17,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
-import com.myhobbylistlmtd.springboot.media.media.Media;
-import com.myhobbylistlmtd.springboot.media.media.MediaRepository;
-import com.myhobbylistlmtd.springboot.media.media.MediaService;
+import com.myhobbylistlmtd.springboot.media.Media;
+import com.myhobbylistlmtd.springboot.media.MediaRepository;
+import com.myhobbylistlmtd.springboot.media.MediaService;
 import com.myhobbylistlmtd.springboot.objs.MediaParams;
 
 @ExtendWith(MockitoExtension.class)

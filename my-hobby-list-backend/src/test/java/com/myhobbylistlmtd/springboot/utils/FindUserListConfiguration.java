@@ -7,20 +7,20 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 
-import com.myhobbylistlmtd.springboot.list.list.UserList;
-import com.myhobbylistlmtd.springboot.list.list.UserListId;
-import com.myhobbylistlmtd.springboot.list.list.UserListRepository;
-import com.myhobbylistlmtd.springboot.list.status.ItemStatus;
-import com.myhobbylistlmtd.springboot.list.status.ItemStatusRepository;
-import com.myhobbylistlmtd.springboot.media.media.Media;
-import com.myhobbylistlmtd.springboot.media.media.MediaRepository;
-import com.myhobbylistlmtd.springboot.media.status.MediaStatus;
-import com.myhobbylistlmtd.springboot.media.status.MediaStatusRepository;
-import com.myhobbylistlmtd.springboot.media.type.MediaType;
-import com.myhobbylistlmtd.springboot.media.type.MediaTypeRepository;
+import com.myhobbylistlmtd.springboot.listitemstatus.ListItemStatus;
+import com.myhobbylistlmtd.springboot.listitemstatus.ListItemStatusRepository;
+import com.myhobbylistlmtd.springboot.media.Media;
+import com.myhobbylistlmtd.springboot.media.MediaRepository;
+import com.myhobbylistlmtd.springboot.mediastatus.MediaStatus;
+import com.myhobbylistlmtd.springboot.mediastatus.MediaStatusRepository;
+import com.myhobbylistlmtd.springboot.mediatype.MediaType;
+import com.myhobbylistlmtd.springboot.mediatype.MediaTypeRepository;
 import com.myhobbylistlmtd.springboot.objs.MediaParams;
 import com.myhobbylistlmtd.springboot.user.User;
 import com.myhobbylistlmtd.springboot.user.UserRepository;
+import com.myhobbylistlmtd.springboot.userlist.UserList;
+import com.myhobbylistlmtd.springboot.userlist.UserListId;
+import com.myhobbylistlmtd.springboot.userlist.UserListRepository;
 
 @TestConfiguration
 @Profile({ "test" })
@@ -29,7 +29,7 @@ public class FindUserListConfiguration {
   public CommandLineRunner runFindUserListConfiguration(UserRepository userRepo, MediaRepository mediaRepo,
       MediaStatusRepository statusRepo,
       MediaTypeRepository typeRepo,
-      ItemStatusRepository listItemStatusRepo,
+      ListItemStatusRepository listItemStatusRepo,
       UserListRepository listRepo) {
     User user = userRepo.save(new User("Teste12345", "email@gmail.com", "123"));
     MediaStatus mediaStatus = statusRepo.save(new MediaStatus("Completo"));
@@ -53,8 +53,8 @@ public class FindUserListConfiguration {
             .setInsertionDate(
                 LocalDateTime.parse("2023-05-29T08:01:00"))));
     
-    ItemStatus onGoingItemStatus = listItemStatusRepo.save(new ItemStatus("Em andamento"));
-    ItemStatus droppedItemStatus = listItemStatusRepo.save(new ItemStatus("Droppado"));
+    ListItemStatus onGoingItemStatus = listItemStatusRepo.save(new ListItemStatus("Em andamento"));
+    ListItemStatus droppedItemStatus = listItemStatusRepo.save(new ListItemStatus("Droppado"));
 
     UserList listItem1 = new UserList();
     listItem1.setId(new UserListId(user, media1));

@@ -118,7 +118,6 @@ public class UserService implements FindById<User, Long> {
     List<User> users = this.repository.findByUsernameOrEmail(
       body.getUsername(), body.getEmail()
     );
-    System.out.println(users.size());
 
     for (int index = 0; index < users.size(); index += 1) {
       if (users.get(index).getEmail().equals(body.getEmail())) {

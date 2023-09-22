@@ -10,12 +10,12 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 
-import com.myhobbylistlmtd.springboot.media.media.Media;
-import com.myhobbylistlmtd.springboot.media.media.MediaRepository;
-import com.myhobbylistlmtd.springboot.media.status.MediaStatus;
-import com.myhobbylistlmtd.springboot.media.status.MediaStatusRepository;
-import com.myhobbylistlmtd.springboot.media.type.MediaType;
-import com.myhobbylistlmtd.springboot.media.type.MediaTypeRepository;
+import com.myhobbylistlmtd.springboot.media.Media;
+import com.myhobbylistlmtd.springboot.media.MediaRepository;
+import com.myhobbylistlmtd.springboot.mediastatus.MediaStatus;
+import com.myhobbylistlmtd.springboot.mediastatus.MediaStatusRepository;
+import com.myhobbylistlmtd.springboot.mediatype.MediaType;
+import com.myhobbylistlmtd.springboot.mediatype.MediaTypeRepository;
 import com.myhobbylistlmtd.springboot.objs.MediaParams;
 
 @TestConfiguration

@@ -11,16 +11,16 @@ import org.springframework.context.annotation.Profile;
 
 import com.myhobbylistlmtd.springboot.characters.CharacterRepository;
 import com.myhobbylistlmtd.springboot.characters.Characters;
-import com.myhobbylistlmtd.springboot.characters.role.CharactersRole;
-import com.myhobbylistlmtd.springboot.characters.role.CharactersRoleRepository;
-import com.myhobbylistlmtd.springboot.media.characters.MediaCharacters;
-import com.myhobbylistlmtd.springboot.media.characters.MediaCharactersRepository;
-import com.myhobbylistlmtd.springboot.media.media.Media;
-import com.myhobbylistlmtd.springboot.media.media.MediaRepository;
-import com.myhobbylistlmtd.springboot.media.status.MediaStatus;
-import com.myhobbylistlmtd.springboot.media.status.MediaStatusRepository;
-import com.myhobbylistlmtd.springboot.media.type.MediaType;
-import com.myhobbylistlmtd.springboot.media.type.MediaTypeRepository;
+import com.myhobbylistlmtd.springboot.charactersrole.CharactersRole;
+import com.myhobbylistlmtd.springboot.charactersrole.CharactersRoleRepository;
+import com.myhobbylistlmtd.springboot.media.Media;
+import com.myhobbylistlmtd.springboot.media.MediaRepository;
+import com.myhobbylistlmtd.springboot.mediacharacters.MediaCharacters;
+import com.myhobbylistlmtd.springboot.mediacharacters.MediaCharactersRepository;
+import com.myhobbylistlmtd.springboot.mediastatus.MediaStatus;
+import com.myhobbylistlmtd.springboot.mediastatus.MediaStatusRepository;
+import com.myhobbylistlmtd.springboot.mediatype.MediaType;
+import com.myhobbylistlmtd.springboot.mediatype.MediaTypeRepository;
 import com.myhobbylistlmtd.springboot.objs.MediaParams;
 
 @TestConfiguration
