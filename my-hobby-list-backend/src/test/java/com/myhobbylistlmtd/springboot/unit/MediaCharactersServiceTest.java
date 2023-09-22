@@ -19,11 +19,11 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import com.myhobbylistlmtd.springboot.characters.Characters;
 import com.myhobbylistlmtd.springboot.charactersrole.CharactersRole;
-import com.myhobbylistlmtd.springboot.media.characters.MediaCharacters;
-import com.myhobbylistlmtd.springboot.media.characters.MediaCharactersRepository;
-import com.myhobbylistlmtd.springboot.media.characters.MediaCharactersService;
 import com.myhobbylistlmtd.springboot.media.media.Media;
 import com.myhobbylistlmtd.springboot.media.media.MediaService;
+import com.myhobbylistlmtd.springboot.mediacharacters.MediaCharacters;
+import com.myhobbylistlmtd.springboot.mediacharacters.MediaCharactersRepository;
+import com.myhobbylistlmtd.springboot.mediacharacters.MediaCharactersService;
 import com.myhobbylistlmtd.springboot.objs.MediaParams;
 
 @ExtendWith(MockitoExtension.class)

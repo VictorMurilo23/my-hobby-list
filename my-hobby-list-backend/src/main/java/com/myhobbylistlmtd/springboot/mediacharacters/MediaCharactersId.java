@@ -1,4 +1,4 @@
-package com.myhobbylistlmtd.springboot.media.characters;
+package com.myhobbylistlmtd.springboot.mediacharacters;
 
 import java.io.Serializable;
 import java.util.Objects;
