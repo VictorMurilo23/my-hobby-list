@@ -1,4 +1,4 @@
-package com.myhobbylistlmtd.springboot.media.status;
+package com.myhobbylistlmtd.springboot.mediastatus;
 
 import java.util.Set;
 

@@ -2,7 +2,7 @@ package com.myhobbylistlmtd.springboot.objs;
 
 import java.time.LocalDateTime;
 
-import com.myhobbylistlmtd.springboot.media.status.MediaStatus;
+import com.myhobbylistlmtd.springboot.mediastatus.MediaStatus;
 import com.myhobbylistlmtd.springboot.mediatype.MediaType;
 import com.myhobbylistlmtd.springboot.request.body.RequestMediaBody;
 
