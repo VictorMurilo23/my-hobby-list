@@ -2,7 +2,7 @@ package com.myhobbylistlmtd.springboot.media.characters;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.characters.Characters;
-import com.myhobbylistlmtd.springboot.characters.role.CharactersRole;
+import com.myhobbylistlmtd.springboot.charactersrole.CharactersRole;
 import com.myhobbylistlmtd.springboot.media.media.Media;
 import com.myhobbylistlmtd.springboot.utils.Views;
 

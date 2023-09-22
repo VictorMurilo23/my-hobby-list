@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import com.myhobbylistlmtd.springboot.characters.role.CharactersRole;
-import com.myhobbylistlmtd.springboot.characters.role.CharactersRoleRepository;
+import com.myhobbylistlmtd.springboot.charactersrole.CharactersRole;
+import com.myhobbylistlmtd.springboot.charactersrole.CharactersRoleRepository;
 
 @Configuration
 @Profile({ "production" })
