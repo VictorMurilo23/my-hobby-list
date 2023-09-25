@@ -1,13 +1,19 @@
-<div>
-  <label><span>Email</span>
-    <input (keyup)="saveEmail($event)" class="register-input" name="email" type="text" />
-  </label>
-  <label><span>Nome de usuário</span>
-    <input (keyup)="saveUsername($event)" class="register-input" name="username" type="text" />
-  </label>
-  <label><span>Senha</span>
-    <input (keyup)="savePassword($event)" class="register-input" name="password" type="password" />
-  </label>
-  <button class="send-btn" (click)="register()">Registrar</button>
+<div class="d-flex flex-column align-items-center gap-2">
+  <div>
+    <label for="email-input" class="form-label">Email</label>
+    <input (keyup)="saveEmail($event)" id="email-input" class="register-input form-control" name="email" type="text" />
+  </div>
+  
+  <div>
+    <label for="username-input" class="form-label">Nome de usuário</label>
+    <input id="username-input" (keyup)="saveUsername($event)" class="register-input form-control" name="username" type="text" />
+  </div>
+  
+  <div>
+    <label for="password-input" class="form-label">Senha</label>
+    <input id="password-input" (keyup)="savePassword($event)" class="register-input form-control" name="password" type="password" />
+  </div>
+  
+  <button class="send-btn btn btn-primary" (click)="register()">Registrar</button>
 </div>
 <app-error-message *ngIf="getErrorMessage() !== ''" [message]=getErrorMessage() (setErrorMessage)="setErrorMessage()"></app-error-message>
