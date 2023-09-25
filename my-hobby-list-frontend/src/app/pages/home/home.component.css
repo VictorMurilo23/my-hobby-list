@@ -1,4 +1,12 @@
 .recent-add-container {
   display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-left: 12px;
+}
+
+.cards-container {
+  flex-wrap: wrap;
   gap: 12px;
+  display: flex;
 }
