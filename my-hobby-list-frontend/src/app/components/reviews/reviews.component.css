@@ -1,0 +1,16 @@
+.reviews {
+  margin-top: 12px;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-review-card-container {
+  margin-bottom: 12px;
+}
+
+.reviews-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
