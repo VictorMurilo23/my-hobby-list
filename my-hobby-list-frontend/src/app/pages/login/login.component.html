@@ -1,10 +1,12 @@
-<div class="login-container">
-  <label><span>Email</span>
-    <input (keyup)="saveEmail($event)" class="login-input" name="email" type="text" />
-  </label>
-  <label><span>Senha</span>
-    <input (keyup)="savePassword($event)" class="login-input" name="password" type="password" />
-  </label>
-  <button class="send-btn" (click)="login()">Login</button>
+<div class="login-container d-flex flex-column align-items-center gap-2">
+  <div>
+    <label for="email-input" class="form-label"><span>Email</span></label>
+    <input (keyup)="saveEmail($event)" id="email-input" class="login-input form-control" name="email" type="text" />
+  </div>
+  <div>
+    <label for="password-input" class="form-label"><span>Senha</span></label>
+    <input id="password-input" (keyup)="savePassword($event)" class="login-input form-control" name="password" type="password" />
+  </div>
+  <button class="send-btn btn btn-primary" (click)="login()">Login</button>
 </div>
 <app-error-message *ngIf="getErrorMessage() !== ''" [message]=getErrorMessage() (setErrorMessage)="setErrorMessage()"></app-error-message>
