@@ -113,7 +113,7 @@ describe('UserReviewsPageComponent', () => {
       .nativeElement.textContent;
     expect(firstReview).toBeTruthy();
     expect(content).toBe('df');
-    expect(recommended).toBe('true');
+    expect(recommended).toBe('Recomendado');
     const editBtn = firstReview.query(By.css('.edit-review-button'));
     expect(editBtn).toBeTruthy();
     editBtn.nativeElement.click();
@@ -138,7 +138,7 @@ describe('UserReviewsPageComponent', () => {
     expect(
       firstReview.query(By.css('.review-card-recommended')).nativeElement
         .textContent
-    ).toBe('true');
+    ).toBe('Recomendado');
     expect(firstReview.query(By.css('app-create-review'))).not.toBeTruthy();
   });
 
