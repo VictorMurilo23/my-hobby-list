@@ -1,0 +1,10 @@
+.media-details-container {
+  margin-left: 16px;
+  margin-bottom: 16px;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
