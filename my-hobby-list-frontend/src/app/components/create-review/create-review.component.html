@@ -1,8 +1,14 @@
 <div>
-  <div class="textarea-div"><textarea class="review-content" (change)="setReviewContent($any($event.target).value)" [value]="getReviewContent()" rows="10"></textarea></div>
+  <div class="textarea-div"><textarea class="review-content form-control" (change)="setReviewContent($any($event.target).value)" [value]="getReviewContent()" rows="10"></textarea></div>
   <div>
-    <button [ngClass]="getReviewRecommended() ? 'recommended-btn activated' : 'recommended-btn'" (click)="setReviewRecommended(true)">SIM</button>
-    <button [ngClass]="getReviewRecommended() === false ? 'recommended-btn activated' : 'recommended-btn'" (click)="setReviewRecommended(false)">NÃO</button>
+    <div>
+      <input type="radio" id="recommended-true" name="recommended" class="form-check-input" (click)="setReviewRecommended(true)">
+      <label class="form-check-label" for="recommended-true">Recomendo</label>
+    </div>
+    <div>
+      <input type="radio" id="recommended-false" name="recommended" class="form-check-input" (click)="setReviewRecommended(false)">
+      <label class="form-check-label" for="recommended-false">Não recomendo</label>
+    </div>
   </div>
-  <button class="send-review-btn" (click)="send()">Enviar</button>
+  <button class="send-review-btn btn btn-primary" (click)="send()">Enviar</button>
 </div>
