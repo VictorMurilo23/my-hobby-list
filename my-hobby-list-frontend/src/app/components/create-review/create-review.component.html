@@ -2,11 +2,11 @@
   <div class="textarea-div"><textarea class="review-content form-control" (change)="setReviewContent($any($event.target).value)" [value]="getReviewContent()" rows="10"></textarea></div>
   <div>
     <div>
-      <input type="radio" id="recommended-true" name="recommended" class="form-check-input" (click)="setReviewRecommended(true)">
+      <input type="radio" id="recommended-true" name="recommended" class="form-check-input recommended-btn" (click)="setReviewRecommended(true)">
       <label class="form-check-label" for="recommended-true">Recomendo</label>
     </div>
     <div>
-      <input type="radio" id="recommended-false" name="recommended" class="form-check-input" (click)="setReviewRecommended(false)">
+      <input type="radio" id="recommended-false" name="recommended" class="form-check-input recommended-btn" (click)="setReviewRecommended(false)">
       <label class="form-check-label" for="recommended-false">Não recomendo</label>
     </div>
   </div>
