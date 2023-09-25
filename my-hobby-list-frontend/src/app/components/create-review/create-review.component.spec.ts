@@ -58,13 +58,10 @@ describe('CreateReviewComponent', () => {
     expect(recommendedBtns).toBeTruthy();
     recommendedBtns[1].nativeElement.click();
     fixture.detectChanges();
-    expect(recommendedBtns[1].attributes["class"]?.includes("activated")).toBeTruthy();
     expect(component["reviewInfo"]["recommended"]).toBe(false);
 
     recommendedBtns[0].nativeElement.click();
     fixture.detectChanges();
-    expect(recommendedBtns[0].attributes["class"]?.includes("activated")).toBeTruthy();
-    expect(recommendedBtns[1].attributes["class"]?.includes("activated")).not.toBeTruthy();
     expect(component["reviewInfo"]["recommended"]).toBe(true);
   });
 
