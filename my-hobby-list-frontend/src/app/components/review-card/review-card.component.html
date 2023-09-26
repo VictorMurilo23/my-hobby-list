@@ -1,5 +1,14 @@
-<div class="review-card">
+<div class="review-card card">
+  <div class="review-card-recommended" *ngIf="reviewInfo.recommended === true; else thumbsDown">
+    <img src="../../../assets/icon_thumbsUp_v6.png" alt="imagem polegar pra cima">
+    <span>Recomendado</span>
+  </div>
+  <ng-template #thumbsDown>
+    <div class="review-card-recommended">
+      <img src="../../../assets/icon_thumbsDown_v6.png" alt="imagem polegar pra baixo">
+      <span>Não recomendado</span>
+    </div>
+  </ng-template>
   <span class="review-card-username">{{reviewInfo.user.username}}</span>
   <p class="review-card-content">{{reviewInfo.content}}</p>
-  <p class="review-card-recommended">{{reviewInfo.recommended}}</p>
 </div>

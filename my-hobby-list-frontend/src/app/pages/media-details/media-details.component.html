@@ -6,28 +6,30 @@
 <div *ngIf="getMediaInfo() === null">
   <app-page-not-found></app-page-not-found>
 </div>
-<div *ngIf="getMediaInfo() !== undefined && getMediaInfo() !== null">
+<div *ngIf="getMediaInfo() !== undefined && getMediaInfo() !== null" class="media-details-container">
   <div class="media-title-container">
-    <p class="media-title">{{getMediaInfo()?.name}}</p>
+    <span class="media-title text-break fs-2">{{getMediaInfo()?.name}}</span>
   </div>
   <div>
     <div class="media-image-container">
-      <img [src]="env.apiUrl + '/' + getMediaInfo()?.image" />
-    </div>
-    <div class="media-info-container">
-      <p>Informações</p>
-      <div>
-        <p class="media-type">Tipo: {{getMediaInfo()?.type}}</p>
-        <p class="media-status">Status: {{getMediaInfo()?.status}}</p>
-        <p class="media-volumes" *ngIf="getMediaInfo()?.volumes !== null" >Volumes: {{getMediaInfo()?.volumes}}</p>
-        <p class="media-duration">Duração: {{getMediaInfo()?.length}}</p>
-      </div>
+      <img class="img-thumbnail" [src]="env.apiUrl + '/' + getMediaInfo()?.image" />
     </div>
     <div>
-      <a class="redirect-to-insert-page-button" [routerLink]="['/media/insert/' + getMediaInfo()?.id]"><button>Adicionar a lista</button></a>
+      <a class="redirect-to-insert-page-button" [routerLink]="['/media/insert/' + getMediaInfo()?.id]"><button class="btn btn-primary">Adicionar a lista</button></a>
+    </div>
+    <div class="media-info-container">
+      <span class="fs-4">Informações</span>
+      <div>
+        <p class="media-type"><span class="fw-bold">Tipo:</span> {{getMediaInfo()?.type}}</p>
+        <p class="media-status"><span class="fw-bold">Status:</span> {{getMediaInfo()?.status}}</p>
+        <p class="media-volumes" *ngIf="getMediaInfo()?.volumes !== null" ><span class="fw-bold">Volumes:</span> {{getMediaInfo()?.volumes}}</p>
+        <p class="media-duration"><span class="fw-bold">Duração:</span> {{getMediaInfo()?.length}}</p>
+      </div>
     </div>
   </div>
-  <a class="show-characters-button" [routerLink]="['./characters']"><button>Personagens</button></a>
-  <a class="show-reviews-button" [routerLink]="['./reviews']"><button>Reviews</button></a>
+  <nav>
+    <a class="show-characters-button nav-link" [routerLink]="['./characters']"><button class="btn btn-secondary">Personagens</button></a>
+    <a class="show-reviews-button nav-link" [routerLink]="['./reviews']"><button class="btn btn-secondary">Reviews</button></a>
+  </nav>
   <router-outlet></router-outlet>
 </div>

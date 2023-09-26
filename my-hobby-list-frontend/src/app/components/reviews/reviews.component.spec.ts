@@ -87,12 +87,12 @@ describe('ReviewsComponent', () => {
     expect(firstReviewCard.children.length).toBe(3);
     expect(firstReviewCard.query(By.css(".review-card-username")).nativeElement.textContent).toBe("victo");
     expect(firstReviewCard.query(By.css(".review-card-content")).nativeElement.textContent).toBe("d");
-    expect(firstReviewCard.query(By.css(".review-card-recommended")).nativeElement.textContent).toBe("false");
+    expect(firstReviewCard.query(By.css(".review-card-recommended")).nativeElement.textContent).toBe("Não recomendado");
 
     expect(secondReviewCard.children.length).toBe(3);
     expect(secondReviewCard.query(By.css(".review-card-username")).nativeElement.textContent).toBe("vito");
     expect(secondReviewCard.query(By.css(".review-card-content")).nativeElement.textContent).toBe("adaeadwawa");
-    expect(secondReviewCard.query(By.css(".review-card-recommended")).nativeElement.textContent).toBe("true");
+    expect(secondReviewCard.query(By.css(".review-card-recommended")).nativeElement.textContent).toBe("Recomendado");
   });
 
   it('should render change page buttons', () => {
@@ -140,7 +140,7 @@ describe('ReviewsComponent', () => {
 
     expect(userReviewContainer.query(By.css('.review-card-username')).nativeElement.textContent).toBe("aaaaaaaaaaaaaaaaaaaaa");
     expect(userReviewContainer.query(By.css('.review-card-content')).nativeElement.textContent).toBe("Muito bom");
-    expect(userReviewContainer.query(By.css('.review-card-recommended')).nativeElement.textContent).toBe("true");
+    expect(userReviewContainer.query(By.css('.review-card-recommended')).nativeElement.textContent).toBe("Recomendado");
   });
 
   it("should render create-review if findUserReview happens to be a error", () => {

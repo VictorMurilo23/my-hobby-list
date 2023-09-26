@@ -2,7 +2,7 @@
   <p>loading...</p>
 </div>
 <ng-template #reviews>
-  <div>
+  <div class="reviews">
     <div>
       <app-create-review *ngIf="showCreateReviewComponent; else userReview" [mediaId]="getMediaId()" [sendReview]="sendReview" [reviewInfo]="getUserReview()"></app-create-review>
       <ng-template #userReview>
@@ -11,12 +11,12 @@
         </div>
       </ng-template>
     </div>
-    <div>
+    <div class="reviews-container">
       <app-review-card [reviewInfo]="review" *ngFor="let review of getReviews()"></app-review-card>
     </div>
     <div>
-      <div (click)="changePage(pageNumber)" *ngFor="let pageNumber of getPages()">
-        <button class="change-page-button">{{pageNumber}}</button>
+      <div class="pagination pagination-sm" (click)="changePage(pageNumber)" *ngFor="let pageNumber of getPages()">
+        <button class="change-page-button page-link">{{pageNumber}}</button>
       </div>
     </div>
   </div>

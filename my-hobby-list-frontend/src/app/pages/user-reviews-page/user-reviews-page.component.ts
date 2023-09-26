@@ -21,7 +21,6 @@ export class UserReviewsPageComponent implements OnInit, SendReview {
     private userService: UserService
   ) {}
   private routeUsernameParam!: string;
-  private tokenUsername: string | null = null;
   private reviews: UserReviews[] = [];
   private currentPage = 0;
   public showNotFound = false;
@@ -35,7 +34,6 @@ export class UserReviewsPageComponent implements OnInit, SendReview {
           const username = params.get('username');
           if (username !== null) {
             this.routeUsernameParam = username;
-            this.tokenUsername = this.userService.getUsernameFromToken();
             return this.reviewService.findAllUserReviews(username, 0);
           }
           return EMPTY;
@@ -69,11 +67,15 @@ export class UserReviewsPageComponent implements OnInit, SendReview {
   }
 
   public showEditBtn() {
-    return this.routeUsernameParam === this.tokenUsername;
+    return this.routeUsernameParam === this.userService.getUsernameFromToken();
   }
 
   public setEditing(review: UserReviews) {
-    review.editing = true;
+    if (review.editing === undefined) {
+      review.editing = true
+      return;
+    }
+    review.editing = !review.editing
   }
 
   sendReview = (review: CreateReview): void => {

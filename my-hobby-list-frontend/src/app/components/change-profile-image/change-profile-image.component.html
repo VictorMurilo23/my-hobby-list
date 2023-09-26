@@ -1,13 +1,14 @@
-<div *ngIf="getImages().length !== 0">
-  <div>
+<div *ngIf="getImages().length !== 0" class="mt-3 d-flex flex-column justify-content-center mb-3">
+  <span>Escolha uma das imagens de perfil abaixo</span>
+  <div class="d-flex flex-row flex-wrap">
     <div *ngFor="let imageUrl of getImages();">
-      <img class="profile-image-option" (click)="setSelectedImage($event)" [src]="env.apiUrl + '/' + imageUrl" [alt]="'imagem de perfil' + ' ' + imageUrl">
+      <img class="profile-image-option img-thumbnail" (click)="setSelectedImage($event)" [src]="env.apiUrl + '/' + imageUrl" [alt]="'imagem de perfil' + ' ' + imageUrl">
     </div>
   </div>
-  <div>
-    <button class="change-profile-image-btn" (click)=changeProfileImage()>Mudar imagem</button>
+  <div class="align-self-center">
+    <button class="change-profile-image-btn btn btn-primary" (click)=changeProfileImage()>Mudar imagem</button>
   </div>
 </div>
-<div *ngIf="getImages().length === 0 && getErrorMessage() !== undefined">
+<div class="mb-3" *ngIf="getImages().length === 0 && getErrorMessage() !== undefined">
   <p>{{getErrorMessage()}}</p>
 </div>

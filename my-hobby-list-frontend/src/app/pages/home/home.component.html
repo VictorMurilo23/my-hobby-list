@@ -1,11 +1,13 @@
-<div>
-  <p>Midias recém adicionadas:</p>
-</div>
 <div *ngIf="getRecentAdd().length !== 0" class="recent-add-container">
-  <app-media-card 
-    *ngFor="let media of getRecentAdd();" 
-    [mediaName]=media.name 
-    [imageUrl]=media.image
-    [mediaId]=media.id
-  ></app-media-card>
+  <div>
+    <span>Midias recém adicionadas:</span>
+  </div>
+  <div class="cards-container">
+    <app-media-card
+      *ngFor="let media of getRecentAdd();"
+      [mediaName]=media.name
+      [imageUrl]=media.image
+      [mediaId]=media.id
+    ></app-media-card>
+  </div>
 </div>

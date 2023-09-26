@@ -219,7 +219,7 @@ describe('UserListComponent', () => {
     ).toBe('Progresso: 0 / 1');
     expect(
       firstItem.query(By.css('.item-media-type')).nativeElement.textContent
-    ).toBe('Jogo');
+    ).toBe('Tipo: Jogo');
     expect(
       firstItem.query(By.css('.item-status')).nativeElement.textContent
     ).toBe('Em andamento');
@@ -237,7 +237,7 @@ describe('UserListComponent', () => {
     ).toBe('Progresso: 10 / 89');
     expect(
       secondItem.query(By.css('.item-media-type')).nativeElement.textContent
-    ).toBe('Livro');
+    ).toBe('Tipo: Livro');
     expect(
       secondItem.query(By.css('.item-status')).nativeElement.textContent
     ).toBe('Em andamento');
@@ -327,7 +327,7 @@ describe('UserListComponent', () => {
     ).toBe('Progresso: 0 / 1');
     expect(
       firstItem.query(By.css('.item-media-type')).nativeElement.textContent
-    ).toBe('Jogo');
+    ).toBe('Tipo: Jogo');
     expect(
       firstItem.query(By.css('.item-status')).nativeElement.textContent
     ).toBe('Em andamento');
@@ -345,7 +345,7 @@ describe('UserListComponent', () => {
     ).toBe('Progresso: 10 / 89');
     expect(
       secondItem.query(By.css('.item-media-type')).nativeElement.textContent
-    ).toBe('Livro');
+    ).toBe('Tipo: Livro');
     expect(
       secondItem.query(By.css('.item-status')).nativeElement.textContent
     ).toBe('Em andamento');

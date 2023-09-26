@@ -6,45 +6,102 @@
 <div *ngIf="mediaInfo === null">
   <app-page-not-found></app-page-not-found>
 </div>
-<div class="insert-container" *ngIf="mediaInfo !== undefined && mediaInfo !== null">
-  <p class="media-name">{{mediaInfo.name}}</p>
+<div
+  class="insert-container flex-column d-flex align-items-baseline"
+  *ngIf="mediaInfo !== undefined && mediaInfo !== null"
+>
+  <p class="media-name text-break fs-2">{{ mediaInfo.name }}</p>
   <div class="duration-info-container">
-    <label>
+    <label for="input-length" class="form-label">
       <span>Progresso: </span>
-      <input type="number" (change)="changeValue($event)" name="length-input" max={{mediaInfo.length}} value={{insertInfo.length}} />
     </label>
-    <span class="length"> / {{mediaInfo.length}}</span>
+    <div class="d-flex flex-row align-items-center">
+      <input
+        id="input-length"
+        type="number"
+        class="form-control input-insert"
+        (change)="setProgress($event)"
+        name="length-input"
+        max="{{ mediaInfo.length }}"
+        value="{{ insertInfo.progress }}"
+      />
+      <span class="length fs-5"> / {{ mediaInfo.length }}</span>
+    </div>
   </div>
   <div *ngIf="mediaInfo.volumes !== null" class="duration-info-container">
-    <label>
+    <label for="input-volumes" class="form-label">
       <span>Volumes lidos: </span>
-      <input (change)="changeValue($event)" type="number" name="volumes-input" value={{insertInfo.volumes}} max={{insertInfo.volumes}} />
     </label>
-    <span class="length"> / {{mediaInfo.volumes}}</span>
+    <div class="d-flex flex-row align-items-center">
+      <input
+        (change)="setVolumes($event)"
+        id="input-volumes"
+        class="form-control input-insert"
+        type="number"
+        name="volumes-input"
+        value="{{ insertInfo.volumes }}"
+        max="{{ insertInfo.volumes }}"
+      />
+      <span class="length fs-5"> / {{ mediaInfo.volumes }}</span>
+    </div>
   </div>
-  <div class="status-container">
-    <label>
+  <div class="status-container form-floating">
+    <select
+      id="select-status"
+      (change)="setStatus($event)"
+      name="status-input"
+      class="form-select input-insert"
+      value="{{ insertInfo.status }}"
+    >
+      <option
+        [value]="statusName"
+        *ngFor="let statusName of insertStatusName"
+      >
+        {{ statusName }}
+      </option>
+    </select>
+    <label for="select-status">
       <span>Status: </span>
-      <select (change)="changeValue($event)" name="status-input" value={{insertInfo.status}}>
-        <option [value]="statusName" *ngFor="let statusName of insertStatusName">{{statusName}}</option>
-      </select>
     </label>
   </div>
-  <div class="score-container">
-    <label>
+  <div class="score-container form-floating">
+    <select
+      (change)="setScore($event)"
+      id="select-score"
+      class="form-select input-insert"
+      value="{{ insertInfo.score }}"
+      name="score-input"
+    >
+      <option
+        [value]="number"
+        *ngFor="let number of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+      >
+        {{ number }}
+      </option>
+    </select>
+    <label for="select-score">
       <span>Nota: </span>
-      <select (change)="changeValue($event)" value={{insertInfo.score}} name="score-input">
-        <option [value]="number" *ngFor="let number of [0,1,2,3,4,5,6,7,8,9,10]">{{number}}</option>
-      </select>
     </label>
   </div>
   <div class="notes-container">
-    <label>
-      <p>Comentários: </p>
-      <textarea (change)="changeValue($event)" name="notes-input" placeholder="Escreva seus comentários sobre a obra, sejam eles bons ou ruins." value={{insertInfo.notes}}>
-      </textarea>
+    <label for="input-notes" class="form-label">
+      <span>Comentários:</span>
     </label>
+    <textarea
+      (change)="setNotes($event)"
+      class="form-control"
+      rows="5"
+      id="input-notes"
+      name="notes-input"
+      placeholder="Escreva seus comentários sobre a obra, sejam eles bons ou ruins."
+      value="{{ insertInfo.notes }}"
+    >
+    </textarea>
   </div>
-  <button class="send-insert-info-btn" (click)="sendInfo()">Enviar</button>
+  <button class="send-insert-info-btn btn btn-primary" (click)="sendInfo()">Enviar</button>
 </div>
-<app-error-message *ngIf="getErrorMessage() !== ''" [message]=getErrorMessage() (setErrorMessage)="setErrorMessage()"></app-error-message>
+<app-error-message
+  *ngIf="getErrorMessage() !== ''"
+  [message]="getErrorMessage()"
+  (setErrorMessage)="setErrorMessage()"
+></app-error-message>

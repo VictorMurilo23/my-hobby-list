@@ -1,0 +1,7 @@
+.review-card {
+  width: 21rem;
+}
+
+.review-card-recommended span {
+  padding-left: 6px;
+}
