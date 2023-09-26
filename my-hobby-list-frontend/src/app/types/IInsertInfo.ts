@@ -1,6 +1,6 @@
 type IInsertInfo = {
   mediaId: number,
-  length: number,
+  progress: number,
   status: string,
   score: number,
   volumes: number,
