@@ -6,33 +6,40 @@
 <div *ngIf="userList === null">
   <app-page-not-found></app-page-not-found>
 </div>
-<div *ngIf="userList !== undefined && userList !== null" class="user-list-container">
-  <div>
-    <button class="get-list-by-status-btn" (click)="getListByStatusName(statusName)" *ngFor="let statusName of statusArray">{{statusName}}</button>
+<div *ngIf="userList !== undefined && userList !== null" class="user-list-container d-flex flex-column align-items-center">
+  <div class="d-flex flex-wrap flex-row gap-1 justify-content-center">
+    <button class="get-list-by-status-btn btn btn-primary" (click)="getListByStatusName(statusName)" *ngFor="let statusName of statusArray">{{statusName}}</button>
   </div>
-  <div *ngFor="let item of userList" class="user-list-item">
-    <app-media-card
-      [mediaName]=item.media.name 
-      [imageUrl]=item.media.image
-      [mediaId]=item.media.id
-    ></app-media-card>
-    <div class="item-comments">
-      <span>{{item.notes}}</span>
-    </div>
-    <div class="item-score">
-      <span>Nota: </span>
-      <span>{{item.score}}</span>
-    </div>
-    <div class="item-progress">
-      <span>Progresso: </span>
-      <span>{{item.progress}}</span>
-      <span> / {{item.media.length}}</span>
-    </div>
-    <div class="item-media-type">
-      <span>{{item.media.type}}</span>
-    </div>
-    <div class="item-status">
-      <span>{{item.status}}</span>
+  <div class="mt-3 d-flex flex-row flex-wrap justify-content-center gap-2">
+    <div *ngFor="let item of userList" class="user-list-item card">
+      <app-media-card
+        [mediaName]=item.media.name
+        [imageUrl]=item.media.image
+        [mediaId]=item.media.id
+      ></app-media-card>
+      <div class="card-body d-flex flex-column align-items-center gap-1">
+        <div class="item-comments d-flex flex-column align-items-center text-break">
+          <span>{{item.notes}}</span>
+        </div>
+        <div class="item-score align-self-center">
+          <span>Nota: </span>
+          <span>{{item.score}}</span>
+        </div>
+        <div class="item-media-type">
+          <span>Tipo: </span>
+          <div><span>{{item.media.type}}</span></div>
+        </div>
+        <div class="item-progress d-flex flex-column align-items-center">
+          <span>Progresso: </span>
+          <div>
+            <span>{{item.progress}}</span>
+            <span> / {{item.media.length}}</span>
+          </div>
+        </div>
+        <div class="item-status">
+          <span>{{item.status}}</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
