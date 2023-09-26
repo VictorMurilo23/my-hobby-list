@@ -21,7 +21,6 @@ export class UserReviewsPageComponent implements OnInit, SendReview {
     private userService: UserService
   ) {}
   private routeUsernameParam!: string;
-  private tokenUsername: string | null = null;
   private reviews: UserReviews[] = [];
   private currentPage = 0;
   public showNotFound = false;
