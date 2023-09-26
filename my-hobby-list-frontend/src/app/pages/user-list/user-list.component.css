@@ -1,0 +1,8 @@
+.user-list-item {
+  width: fit-content;
+  /* height: fit-content; */
+}
+
+.item-comments {
+  width: 5em;
+}
