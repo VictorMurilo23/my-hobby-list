@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { UserReviewsPageComponent } from './user-reviews-page.component';
 import { ReviewCardComponent } from 'src/app/components/review-card/review-card.component';
@@ -9,7 +9,7 @@ import routes from 'src/app/app.routes';
 import { RouterTestingModule } from '@angular/router/testing';
 import { UserService } from 'src/app/services/user.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
 import { ReviewService } from 'src/app/services/review.service';
 import { of, throwError } from 'rxjs';
 import { By } from '@angular/platform-browser';
@@ -21,6 +21,7 @@ describe('UserReviewsPageComponent', () => {
   let reviewService: ReviewService;
   let localStorage: LocalStorageService;
   let userService: UserService;
+  let router: Router;
 
   const originalReviews: UserReviews[] = [
     {
@@ -63,6 +64,7 @@ describe('UserReviewsPageComponent', () => {
     reviewService = fixture.debugElement.injector.get(ReviewService);
     userService = fixture.debugElement.injector.get(UserService);
     reviews = JSON.parse(JSON.stringify(originalReviews));
+    router = TestBed.inject(Router);
     spyOn(localStorage, 'getToken').and.returnValue('d');
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -227,4 +229,19 @@ describe('UserReviewsPageComponent', () => {
     fixture.detectChanges();
     expect(userService.logout).toHaveBeenCalled();
   });
+
+  it('should redirect to media details page on click in media name', fakeAsync(() => {
+    const { debugElement } = fixture;
+    spyOn(reviewService, 'findAllUserReviews').and.returnValue(
+      of({ totalPages: 1, reviews })
+    );
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    const firstReviewMediaName = debugElement.query(By.css('.media-name'));
+    expect(firstReviewMediaName).toBeTruthy();
+    firstReviewMediaName.nativeElement.click();
+    tick();
+    expect(router.url).toBe("/media/1")
+  }));
 });
