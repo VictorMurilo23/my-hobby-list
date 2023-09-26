@@ -96,7 +96,7 @@ export class UserService {
       if (token === null) throw new Error();
       const payload = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
       const { username } = payload;
-      if (username === null) throw new Error();
+      if (username === undefined) throw new Error();
       return username;
     } catch (e) {
       this.localStorage.removeToken();
