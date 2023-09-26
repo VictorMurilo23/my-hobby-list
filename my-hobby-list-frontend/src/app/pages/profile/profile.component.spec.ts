@@ -67,7 +67,7 @@ describe('ProfileComponent', () => {
 
     const joinedAt = debugElement.query(By.css(".profile-joined-date"));
     expect(joinedAt).toBeTruthy();
-    expect(joinedAt.nativeElement.textContent).toBe("August 22, 2023");
+    expect(joinedAt.nativeElement.textContent).toBe("Se registrou em: August 22, 2023");
     
     const profileDescription = debugElement.query(By.css(".profile-description"));
     expect(profileDescription).toBeTruthy();
