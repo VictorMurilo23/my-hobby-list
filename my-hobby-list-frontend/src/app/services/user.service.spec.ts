@@ -4,7 +4,7 @@ import { UserService } from './user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { LocalStorageService } from './local-storage.service';
 
-fdescribe('UserService', () => {
+describe('UserService', () => {
   let service: UserService;
   let localStorage: LocalStorageService;
 
