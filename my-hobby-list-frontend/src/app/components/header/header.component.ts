@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { Buffer } from 'buffer';
 import { NavigationEnd, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
@@ -11,7 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HeaderComponent implements OnInit {
   public username! : string | null;
-  constructor(private localStorageService: LocalStorageService, private router: Router, private userService: UserService) {
+  constructor(private router: Router, private userService: UserService) {
     this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) { 
         this.parseJwt();
@@ -20,17 +18,7 @@ export class HeaderComponent implements OnInit {
   }
 
   private parseJwt(): void {
-    try {
-      const token = this.localStorageService.getToken();
-      if (token === null) throw new Error();
-      const payload = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
-      const { username } = payload;
-      if (username === null) throw new Error();
-      this.username = username;
-    } catch (e) {
-      this.localStorageService.removeToken();
-      this.username = null;
-    }
+    this.username = this.userService.getUsernameFromToken();
   }
 
   ngOnInit(): void {
