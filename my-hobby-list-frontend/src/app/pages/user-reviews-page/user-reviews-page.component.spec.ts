@@ -22,7 +22,7 @@ describe('UserReviewsPageComponent', () => {
   let localStorage: LocalStorageService;
   let userService: UserService;
 
-  const reviews: UserReviews[] = [
+  const originalReviews: UserReviews[] = [
     {
       content: 'df',
       recommended: true,
@@ -36,6 +36,8 @@ describe('UserReviewsPageComponent', () => {
       media: { id: 2, image: '/f', name: 'EEEEEEE' },
     },
   ];
+
+  let reviews: UserReviews[] = [];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -60,6 +62,7 @@ describe('UserReviewsPageComponent', () => {
     localStorage = fixture.debugElement.injector.get(LocalStorageService);
     reviewService = fixture.debugElement.injector.get(ReviewService);
     userService = fixture.debugElement.injector.get(UserService);
+    reviews = JSON.parse(JSON.stringify(originalReviews));
     spyOn(localStorage, 'getToken').and.returnValue('d');
     component = fixture.componentInstance;
     fixture.detectChanges();
