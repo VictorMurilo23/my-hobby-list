@@ -1,7 +1,8 @@
 <app-page-not-found *ngIf="showNotFound === true; else showReviews"></app-page-not-found>
 <ng-template #showReviews>
-  <div class="d-flex gap-4 flex-column">
+  <div class="d-flex gap-4 flex-column ms-2">
     <div class="review-container" *ngFor="let review of getReviews()">
+      <a [routerLink]="['/media/', review.media.id]"><span class="text-break media-name">Nome: {{review.media.name}}</span></a>
       <app-review-card [reviewInfo]="review"></app-review-card>
       <button *ngIf="showEditBtn()" class="edit-review-button btn btn-primary" (click)="setEditing(review)">Editar</button>
       <div *ngIf="review.editing === true">
