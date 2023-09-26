@@ -20,10 +20,10 @@
         id="input-length"
         type="number"
         class="form-control input-insert"
-        (change)="changeValue($event)"
+        (change)="setProgress($event)"
         name="length-input"
         max="{{ mediaInfo.length }}"
-        value="{{ insertInfo.length }}"
+        value="{{ insertInfo.progress }}"
       />
       <span class="length fs-5"> / {{ mediaInfo.length }}</span>
     </div>
@@ -34,7 +34,7 @@
     </label>
     <div class="d-flex flex-row align-items-center">
       <input
-        (change)="changeValue($event)"
+        (change)="setVolumes($event)"
         id="input-volumes"
         class="form-control input-insert"
         type="number"
@@ -48,7 +48,7 @@
   <div class="status-container form-floating">
     <select
       id="select-status"
-      (change)="changeValue($event)"
+      (change)="setStatus($event)"
       name="status-input"
       class="form-select input-insert"
       value="{{ insertInfo.status }}"
@@ -66,7 +66,7 @@
   </div>
   <div class="score-container form-floating">
     <select
-      (change)="changeValue($event)"
+      (change)="setScore($event)"
       id="select-score"
       class="form-select input-insert"
       value="{{ insertInfo.score }}"
@@ -88,7 +88,7 @@
       <span>Comentários:</span>
     </label>
     <textarea
-      (change)="changeValue($event)"
+      (change)="setNotes($event)"
       class="form-control"
       rows="5"
       id="input-notes"

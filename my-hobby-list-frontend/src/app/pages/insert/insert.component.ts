@@ -21,9 +21,9 @@ export class InsertComponent extends ErrorMessage implements OnInit {
   public insertStatusName: string[] = statusNameArray;
   public insertInfo: IInsertInfo = {
     mediaId: 0,
-    length: 0,
+    progress: 0,
     status: this.insertStatusName[0],
-    score: 0,
+    score: 1,
     volumes: 0,
     notes: '',
   };
@@ -61,41 +61,47 @@ export class InsertComponent extends ErrorMessage implements OnInit {
       });
   }
 
-  changeValue(event: Event): void {
+  public setNotes(event: Event): void {
     const input = event.target as HTMLInputElement;
     const value = input.value;
-    switch (input.name) {
-      case 'status-input':
-        this.insertInfo.status = value;
-        break;
-      case 'length-input':
-        if (
-          typeof this.mediaInfo?.length === 'number' &&
-          parseInt(value) > this.mediaInfo.length
-        ) {
-          this.insertInfo.length = this.mediaInfo.length;
-        } else {
-          this.insertInfo.length = parseInt(value);
-        }
-        break;
-      case 'volumes-input':
-        if (
-          typeof this.mediaInfo?.volumes === 'number' &&
-          parseInt(value) > this.mediaInfo.volumes
-        ) {
-          this.insertInfo.volumes = this.mediaInfo.volumes;
-        } else {
-          this.insertInfo.volumes = parseInt(value);
-        }
-        break;
-      case 'score-input':
-        this.insertInfo.score = parseInt(value);
-        break;
-      case 'notes-input':
-        this.insertInfo.notes = value;
-        break;
-      default:
-        return;
+    this.insertInfo.notes = value;
+  }
+
+  public setScore(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const value = input.value;
+    this.insertInfo.score = parseInt(value);
+  }
+
+  public setStatus(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const value = input.value;
+    this.insertInfo.status = value;
+  }
+
+  public setVolumes(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const value = input.value;
+    if (
+      typeof this.mediaInfo?.volumes === 'number' &&
+      parseInt(value) > this.mediaInfo.volumes
+    ) {
+      this.insertInfo.volumes = this.mediaInfo.volumes;
+    } else {
+      this.insertInfo.volumes = parseInt(value);
+    }
+  }
+
+  public setProgress(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const value = input.value;
+    if (
+      typeof this.mediaInfo?.length === 'number' &&
+      parseInt(value) > this.mediaInfo.length
+    ) {
+      this.insertInfo.progress = this.mediaInfo.length;
+    } else {
+      this.insertInfo.progress = parseInt(value);
     }
   }
 
@@ -105,7 +111,7 @@ export class InsertComponent extends ErrorMessage implements OnInit {
       this.router.navigate(["/login"]);
       return;
     }
-    super.setErrorMessage("")
+    super.setErrorMessage("");
     this.listService.insertItem(this.insertInfo, token).subscribe({
       next: (_data) => {
         this.router.navigate(["/"]);
