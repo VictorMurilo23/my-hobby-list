@@ -1,4 +1,8 @@
+.input-insert {
+  width: 10em;
+}
+
 .insert-container {
-  display: flex;
-  flex-direction: column;
+  margin-left: 12px;
+  gap: 12px;
 }
