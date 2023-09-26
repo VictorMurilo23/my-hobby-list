@@ -160,10 +160,9 @@ describe('InsertComponent', () => {
     }
   });
 
-  it('should call changeValue on field change', () => {
+  it('should change component values on field change', () => {
     const { debugElement } = fixture;
     spyOn(mediaService, 'getMediaById').and.returnValue(of(mediaWithVolumes));
-    // spyOn(component, 'changeValue');
     component.ngOnInit();
     fixture.detectChanges();
 
@@ -173,29 +172,37 @@ describe('InsertComponent', () => {
 
     const lengthElement = durationInfoContainers[0];
     expect(lengthElement).toBeTruthy();
-    lengthElement.triggerEventHandler('change', { target: { value: "dd" } });
+    lengthElement.triggerEventHandler('change', { target: { value: 20 } });
+    fixture.detectChanges();
+    expect(component.insertInfo.progress).toBe(20);
 
     const volumesElement = durationInfoContainers[1];
     expect(volumesElement).toBeTruthy();
-    volumesElement.triggerEventHandler('change',  { target: { value: "dd" } });
+    volumesElement.triggerEventHandler('change',  { target: { value: 1 } });
+    fixture.detectChanges();
+    expect(component.insertInfo.volumes).toBe(1);
 
     const scoreElement = debugElement.query(By.css('.score-container select'));
     expect(scoreElement).toBeTruthy();
-    scoreElement.triggerEventHandler('change',  { target: { value: "dd" } });
+    scoreElement.triggerEventHandler('change',  { target: { value: 9 } });
+    fixture.detectChanges();
+    expect(component.insertInfo.score).toBe(9);
 
     const statusElement = debugElement.query(
       By.css('.status-container select')
     );
     expect(statusElement).toBeTruthy();
-    statusElement.triggerEventHandler('change',  { target: { value: "dd" } });
+    statusElement.triggerEventHandler('change',  { target: { value: "Em andamento" } });
+    fixture.detectChanges();
+    expect(component.insertInfo.status).toBe("Em andamento");
 
     const notesElement = debugElement.query(
       By.css('.notes-container textarea')
     );
     expect(notesElement).toBeTruthy();
-    notesElement.triggerEventHandler('change',  { target: { value: "dd" } });
-
-    // expect(component.changeValue).toHaveBeenCalledTimes(5);
+    notesElement.triggerEventHandler('change',  { target: { value: "Muito legal" } });
+    fixture.detectChanges();
+    expect(component.insertInfo.notes).toBe("Muito legal");
   });
 
   it('should change input value and component attribute, insertInfo, on change', () => {
