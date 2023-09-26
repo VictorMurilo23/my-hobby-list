@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import IRegister from '../interfaces/IRegister';
+import { Buffer } from 'buffer';
 import IProfile from '../interfaces/IProfile';
 import ProfileImages from '../types/ProfileImages';
 import { Router } from '@angular/router';
