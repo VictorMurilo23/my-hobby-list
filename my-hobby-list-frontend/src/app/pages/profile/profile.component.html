@@ -6,20 +6,20 @@
 <div *ngIf="getProfileInfo() === null">
   <app-page-not-found></app-page-not-found>
 </div>
-<div *ngIf="getProfileInfo() !== undefined && getProfileInfo() !== null">
+<div class="ms-2 d-flex flex-row align-items-baseline text-break" *ngIf="getProfileInfo() !== undefined && getProfileInfo() !== null">
   <div>
-    <p class="profile-username">{{getProfileInfo()?.username}}</p>
-  </div>
-  <div>
-    <img class="profile-image" [src]="env.apiUrl + '/' + getProfileInfo()?.profileImage" [alt]="'Foto de perfil de ' + getProfileInfo()?.username">
-  </div>
-  <div>
-    <p class="profile-joined-date">{{getJoinedDate()}}</p>
+    <span class="profile-username fs-2">{{getProfileInfo()?.username}}</span>
+    <div>
+      <img class="profile-image img-thumbnail" [src]="env.apiUrl + '/' + getProfileInfo()?.profileImage" [alt]="'Foto de perfil de ' + getProfileInfo()?.username">
+    </div>
+    <div>
+      <p class="profile-joined-date">Se registrou em: {{getJoinedDate()}}</p>
+    </div>
+    <div>
+      <a class="redirect-to-list-page-button" [routerLink]="['/list/' + getProfileInfo()?.username]"><button class="btn btn-primary">Lista</button></a>
+    </div>
   </div>
   <div>
     <p class="profile-description">{{getProfileInfo()?.userDescription}}</p>
-  </div>
-  <div>
-    <a class="redirect-to-list-page-button" [routerLink]="['/list/' + getProfileInfo()?.username]"><button>Lista</button></a>
   </div>
 </div>
