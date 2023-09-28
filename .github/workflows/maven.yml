@@ -40,15 +40,14 @@ jobs:
     
     runs-on: ubuntu-latest
 
-    integration:
-      services:
-        mysql:
-          image: mysql
-          env:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: dev
-          ports:
-            - "3306:3306"
+    services:
+      mysql:
+        image: mysql
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: dev
+        ports:
+          - "3306:3306"
 
     steps:
     - uses: actions/checkout@v3
