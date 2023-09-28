@@ -5,9 +5,13 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    paths:
+      - 'my-hobby-list-frontend/**'
+    branches: [ "**" ]
   pull_request:
-    branches: [ "main" ]
+    paths:
+      - 'my-hobby-list-frontend/**'
+    branches: [ "**" ]
 
 jobs:
   build:
