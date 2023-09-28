@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit {
     const dateString = this.getProfileInfo()?.joinedAt;
     if (dateString !== undefined) {
       const dateObj = new Date(dateString);
-      return `${dateObj.toLocaleString('default', {
+      return `${dateObj.toLocaleString('pt-BR', {
         month: 'long',
       })} ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
     }
