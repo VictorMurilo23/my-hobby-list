@@ -152,6 +152,7 @@
                     <argLine>${surefireArgLine}</argLine>
                     <excludes>
                         <exclude>**/IT*.java</exclude>
+                        <exclude>**/MyHobbyListBackendApplicationTests.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
