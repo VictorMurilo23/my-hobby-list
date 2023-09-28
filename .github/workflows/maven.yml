@@ -37,7 +37,18 @@ jobs:
       run: mvn clean install -DskipTests
   tests:
     needs: build
+    
     runs-on: ubuntu-latest
+
+    integration:
+      services:
+        mysql:
+          image: mysql
+          env:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: dev
+          ports:
+            - "3306:3306"
 
     steps:
     - uses: actions/checkout@v3
@@ -50,3 +61,13 @@ jobs:
     - name: Unit tests
       working-directory: ./my-hobby-list-backend
       run: mvn test -Djacoco.skip=true
+    - name: Integration tests
+      env:
+        DB_USER: root
+        DB_PASS: root
+        DB_HOST: localhost
+        DB_PORT: 3306
+        DB: dev
+        JWT_SECRET: W2XFmnJht6IlH0xfNqjvUjqYnSDgbj3basIDSNTvxZRNDj20G4QhECx4YxWwotJFdMJq6MbQSrlMxvrr47p4+InmHRnWtVUBi/GrZR5N+num0JpfCDLQBSohgYCKi7U8dbUQOmW3r7+03RW41eMMGsfXcwob8ahOHbyPuRijGo71mhVcLR320t9kjeLgSY03D970SaKCdeBtE6wAtrxvzH0DQJIUPfTMrdBu/Z6COYVvHkyMsF/AlORNKfdJP5hUMTDqHngnSPJ2nTr394M7DH6gtILxGP6qU6j6V0Rkc6naahSVnYS2VewvGF9/Pu/hR6JM/qPhWUiKBdV/ZZWMuA==
+      working-directory: ./my-hobby-list-backend
+      run: mvn clean verify -Djacoco.skip=true
