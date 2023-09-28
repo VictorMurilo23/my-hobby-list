@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: Backend CI
 
 on:
   push:
@@ -34,4 +34,51 @@ jobs:
         cache: maven
     - name: Build with Maven
       working-directory: ./my-hobby-list-backend
-      run: mvn -B package --file pom.xml
+      run: mvn clean install -DskipTests
+  unit-tests:
+    needs: build
+    
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    - name: Unit tests
+      working-directory: ./my-hobby-list-backend
+      run: mvn test -Djacoco.skip=true
+  integration_tests:
+    needs: [build, unit-tests]
+
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: dev
+        ports:
+          - "3306:3306"
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    - name: Integration tests
+      env:
+        DB_USER: root
+        DB_PASS: root
+        DB_HOST: localhost
+        DB_PORT: 3306
+        DB: dev
+        JWT_SECRET: W2XFmnJht6IlH0xfNqjvUjqYnSDgbj3basIDSNTvxZRNDj20G4QhECx4YxWwotJFdMJq6MbQSrlMxvrr47p4+InmHRnWtVUBi/GrZR5N+num0JpfCDLQBSohgYCKi7U8dbUQOmW3r7+03RW41eMMGsfXcwob8ahOHbyPuRijGo71mhVcLR320t9kjeLgSY03D970SaKCdeBtE6wAtrxvzH0DQJIUPfTMrdBu/Z6COYVvHkyMsF/AlORNKfdJP5hUMTDqHngnSPJ2nTr394M7DH6gtILxGP6qU6j6V0Rkc6naahSVnYS2VewvGF9/Pu/hR6JM/qPhWUiKBdV/ZZWMuA==
+      working-directory: ./my-hobby-list-backend
+      run: mvn clean verify -Djacoco.skip=true
