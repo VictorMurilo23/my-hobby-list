@@ -3,14 +3,12 @@ package com.myhobbylistlmtd.springboot.media;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.mediacharacters.MediaCharacters;
 import com.myhobbylistlmtd.springboot.mediastatus.MediaStatus;
 import com.myhobbylistlmtd.springboot.mediatype.MediaType;
 import com.myhobbylistlmtd.springboot.objs.MediaParams;
-import com.myhobbylistlmtd.springboot.reviews.Reviews;
 import com.myhobbylistlmtd.springboot.utils.Views;
 
 import jakarta.persistence.Column;
@@ -113,15 +111,6 @@ public class Media {
   @OneToMany(mappedBy = "media")
   @JsonView(Views.Public.class)
   private Set<MediaCharacters> characters;
-
-  /** Relacionamento com reviews.
-  * @since 1.0
-  * @author Victor Murilo
-  * @version 1.0
-  */
-  @OneToMany(mappedBy = "mediaId")
-  @JsonIgnore
-  private Set<Reviews> reviews;
 
   /** Default constructor.
   * @since 1.0

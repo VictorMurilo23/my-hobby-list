@@ -27,7 +27,6 @@ public class FindReviewsConfiguration {
       MediaStatusRepository statusRepo,
       MediaTypeRepository typeRepo,
       ReviewsRepository reviewRepo) {
-    User user = userRepo.save(new User("Victor", "email@gmail.com", "123"));
     MediaStatus mediaStatus = statusRepo.save(new MediaStatus("Completo"));
     MediaType mediaType = typeRepo.save(new MediaType("Jogo"));
     Media media = mediaRepo.save(new Media(
@@ -39,24 +38,12 @@ public class FindReviewsConfiguration {
             .setImageUrl("capa/capa")
             .setInsertionDate(
                 LocalDateTime.parse("2023-05-29T08:01:00"))));
-    reviewRepo.save(new Reviews("Teste1", true, media, user));
-    reviewRepo.save(new Reviews("Teste2", true, media, user));
-    reviewRepo.save(new Reviews("Teste3", true, media, user));
-    reviewRepo.save(new Reviews("Teste4", true, media, user));
-    reviewRepo.save(new Reviews("Teste5", true, media, user));
-    reviewRepo.save(new Reviews("Teste6", true, media, user));
-    reviewRepo.save(new Reviews("Teste7", true, media, user));
-    reviewRepo.save(new Reviews("Teste8", true, media, user));
-    reviewRepo.save(new Reviews("Teste9", true, media, user));
-    reviewRepo.save(new Reviews("Teste10", true, media, user));
-    reviewRepo.save(new Reviews("Teste11", true, media, user));
-    reviewRepo.save(new Reviews("Teste12", true, media, user));
-    reviewRepo.save(new Reviews("Teste13", true, media, user));
-    reviewRepo.save(new Reviews("Teste14", true, media, user));
-    reviewRepo.save(new Reviews("Teste15", true, media, user));
-    reviewRepo.save(new Reviews("Teste16", true, media, user));
-
-
+    for (int index = 1; index <= 16; index += 1) {
+      User user = userRepo.save(
+        new User("Victor" + index, "email" + index + "@gmail.com", "123")
+      );
+      reviewRepo.save(new Reviews("Teste" + index, true, media, user));
+    }
     return null;
   }
 }
