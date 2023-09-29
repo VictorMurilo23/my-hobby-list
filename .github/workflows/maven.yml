@@ -12,7 +12,7 @@ on:
   push:
     paths:
       - 'my-hobby-list-backend/**'
-    branches: [ "**" ]
+    branches: [ "main" ]
   pull_request:
     paths:
       - 'my-hobby-list-backend/**'

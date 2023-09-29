@@ -7,7 +7,7 @@ on:
   push:
     paths:
       - 'my-hobby-list-frontend/**'
-    branches: [ "**" ]
+    branches: [ "main" ]
   pull_request:
     paths:
       - 'my-hobby-list-frontend/**'
