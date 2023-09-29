@@ -95,8 +95,8 @@ public class ReviewsId {
   }
 
     /**
-   * Getter do atributo user.
-   * @return Um objeto de User
+   * Compara com outro objeto de ReviewsId.
+   * @return Um boolean dizendo se os objetos são iguais ou não
    * @since 1.0
    * @author Victor Murilo
    * @version 1.0
