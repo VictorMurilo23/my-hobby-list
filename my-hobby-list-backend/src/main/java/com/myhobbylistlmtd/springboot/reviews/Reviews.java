@@ -7,26 +7,19 @@ import com.myhobbylistlmtd.springboot.user.User;
 import com.myhobbylistlmtd.springboot.utils.Views;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "reviews")
 public class Reviews {
-  /** Id gerado automaticamente.
-  * @since 1.0
-  * @author Victor Murilo
-  * @version 1.0
-  */
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @JsonView({Views.Review.class})
-  private Long id;
+  /**
+   * Id composto de chave estrangeiras.
+   */
+  @EmbeddedId
+  @JsonView(Views.Public.class)
+  private ReviewsId id;
 
   /** Conteúdo da review.
   * @since 1.0
@@ -55,30 +48,6 @@ public class Reviews {
   @JsonView({Views.Review.class})
   private Boolean recommended;
 
-  /**
-  * Chave referente ao usuário.
-  * @since 1.0
-  * @author Victor Murilo
-  * @version 1.0
-  */
-  @ManyToOne
-  @JoinColumn(name = "user_id")
-  @JsonView({Views.Review.class})
-  @JsonProperty("user")
-  private User userId;
-
-  /**
-  * Chave referente a media.
-  * @since 1.0
-  * @author Victor Murilo
-  * @version 1.0
-  */
-  @ManyToOne
-  @JoinColumn(name = "media_id")
-  @JsonView({Views.ReviewPage.class})
-  @JsonProperty("media")
-  private Media mediaId;
-
   /** Default constructor.
   * @since 1.0
   * @author Victor Murilo
@@ -102,8 +71,7 @@ public class Reviews {
   ) {
     this.content = content;
     this.recommended = recommended;
-    this.mediaId = media;
-    this.userId = user;
+    this.id = new ReviewsId(user, media);
   }
 
   /**
@@ -157,7 +125,7 @@ public class Reviews {
    * @author Victor Murilo
    * @version 1.0
    */
-  public Long getId() {
+  public ReviewsId getId() {
     return id;
   }
 
@@ -168,8 +136,10 @@ public class Reviews {
    * @author Victor Murilo
    * @version 1.0
    */
+  @JsonProperty("media")
+  @JsonView({Views.ReviewPage.class})
   public Media getMediaId() {
-    return mediaId;
+    return this.id.getMediaId();
   }
 
   /**
@@ -179,8 +149,10 @@ public class Reviews {
    * @author Victor Murilo
    * @version 1.0
    */
+  @JsonView({Views.Review.class})
+  @JsonProperty("user")
   public User getUserId() {
-    return userId;
+    return this.id.getUserId();
   }
 
   /**
