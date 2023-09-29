@@ -6,6 +6,7 @@
 
 <suppressions>
   <suppress files=".*[\\/]src[\\/]test[\\/]" checks="[a-zA-Z0-9]*"/>
+  <suppress files=".*[\\/]migrations[\\/]" checks="[a-zA-Z0-9]*"/>
   <suppress files="WebConfig\.java" checks="[a-zA-Z0-9]*"/>
   <suppress files="WebSecurityConfig\.java" checks="[a-zA-Z0-9]*"/>
   <suppress files="MyHobbyListBackendApplication\.java" checks="[a-zA-Z0-9]*"/>
