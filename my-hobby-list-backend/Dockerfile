@@ -8,5 +8,6 @@ RUN ./mvnw clean install -Dmaven.test.skip=true
  
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app-backend
+EXPOSE 8080
 COPY --from=builder /app-backend/target/*.jar /app-backend/*.jar
 ENTRYPOINT ["java", "-jar", "/app-backend/*.jar" ]
