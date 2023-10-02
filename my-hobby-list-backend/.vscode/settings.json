@@ -3,5 +3,5 @@
   "java.checkstyle.properties": {
     "config_loc": "${workspaceFolder}"
   },
-  "java.checkstyle.configuration": "${workspaceFolder}/sun_checks.xml"
+  "java.checkstyle.configuration": "${workspaceFolder}/checkstyle.xml"
 }
