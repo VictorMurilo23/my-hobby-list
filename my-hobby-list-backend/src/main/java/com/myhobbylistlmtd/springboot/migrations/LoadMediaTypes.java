@@ -13,7 +13,7 @@ import com.myhobbylistlmtd.springboot.mediatype.MediaType;
 import com.myhobbylistlmtd.springboot.mediatype.MediaTypeRepository;
 
 @Configuration
-@Profile({ "dev" })
+@Profile({ "production" })
 public class LoadMediaTypes {
   /**
    * Popula o banco com todos os tipos de midias.

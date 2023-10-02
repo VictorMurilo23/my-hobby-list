@@ -20,7 +20,7 @@ import com.myhobbylistlmtd.springboot.objs.MediaParams;
 
 @Configuration
 @ComponentScan("com.myhobbylistlmtd.springboot.migrations")
-@Profile({ "dev" })
+@Profile({ "production" })
 public class LoadMedia {
   /**
    * Repositório de media.

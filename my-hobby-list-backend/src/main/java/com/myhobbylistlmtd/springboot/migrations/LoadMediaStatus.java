@@ -13,7 +13,7 @@ import com.myhobbylistlmtd.springboot.mediastatus.MediaStatus;
 import com.myhobbylistlmtd.springboot.mediastatus.MediaStatusRepository;
 
 @Configuration
-@Profile({ "dev" })
+@Profile({ "production" })
 public class LoadMediaStatus {
   /**
    * Popula o banco com todos os status de midias.
