@@ -15,7 +15,7 @@ import com.myhobbylistlmtd.springboot.mediacharacters.MediaCharactersRepository;
 
 @Configuration
 @ComponentScan("com.myhobbylistlmtd.springboot.migrations")
-@Profile({ "production" })
+@Profile({ "dev" })
 public class LoadMediaCharacters {
 
   /**

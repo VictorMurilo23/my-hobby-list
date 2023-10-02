@@ -12,7 +12,7 @@ import com.myhobbylistlmtd.springboot.listitemstatus.ListItemStatus;
 import com.myhobbylistlmtd.springboot.listitemstatus.ListItemStatusRepository;
 
 @Configuration
-@Profile({ "production" })
+@Profile({ "dev" })
 public class LoadListItemStatus {
   /**
    * Salvar os tipos de status que itens da lista podem ter.
