@@ -12,7 +12,7 @@ import com.myhobbylistlmtd.springboot.characters.CharacterRepository;
 import com.myhobbylistlmtd.springboot.characters.Characters;
 
 @Configuration
-@Profile({ "dev" })
+@Profile({ "production" })
 public class LoadCharacters {
   /**
    * Salvar os tipos de status que itens da lista podem ter.
