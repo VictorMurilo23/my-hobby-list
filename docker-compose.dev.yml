@@ -1,8 +1,14 @@
 version: '3.9'
+networks:
+  privnet:
 services:
   frontend:
     container_name: app_frontend
-    build: ./my-hobby-list-frontend
+    build: 
+      context: my-hobby-list-frontend
+      dockerfile: Dockerfile
+      args:
+        - CONFIGURATION=development
     ports:
       - 4200:80
     platform: linux/x86_64
@@ -12,6 +18,8 @@ services:
       - db
     volumes: 
       - ./my-hobby-list-frontend/src:/app-frontend/src
+    networks:
+      - privnet
 
   backend:
     container_name: app_backend
@@ -33,6 +41,8 @@ services:
       - DB_PORT=3306
       - JWT_SECRET=W2XFmnJht6IlH0xfNqjvUjqYnSDgbj3basIDSNTvxZRNDj20G4QhECx4YxWwotJFdMJq6MbQSrlMxvrr47p4+InmHRnWtVUBi/GrZR5N+num0JpfCDLQBSohgYCKi7U8dbUQOmW3r7+03RW41eMMGsfXcwob8ahOHbyPuRijGo71mhVcLR320t9kjeLgSY03D970SaKCdeBtE6wAtrxvzH0DQJIUPfTMrdBu/Z6COYVvHkyMsF/AlORNKfdJP5hUMTDqHngnSPJ2nTr394M7DH6gtILxGP6qU6j6V0Rkc6naahSVnYS2VewvGF9/Pu/hR6JM/qPhWUiKBdV/ZZWMuA==
       - DB=db_app
+    networks:
+      - privnet
 
   db:
     image: mysql:8.0.21
@@ -44,3 +54,5 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=db_app
     restart: 'always'
+    networks:
+      - privnet
