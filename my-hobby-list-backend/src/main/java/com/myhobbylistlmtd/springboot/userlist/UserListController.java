@@ -21,10 +21,19 @@ import com.myhobbylistlmtd.springboot.response.body.ResponseMessage;
 import com.myhobbylistlmtd.springboot.response.body.ResponseUserList;
 import com.myhobbylistlmtd.springboot.utils.Views;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/list")
+@Tag(name = "UserList")
 public class UserListController {
     /**
   * Serviço de list, responsável pelas regras de negócio.
@@ -46,6 +55,26 @@ public class UserListController {
    */
   @PostMapping("/insert")
   @ResponseStatus(HttpStatus.CREATED)
+  @Operation(
+    summary = "Insere uma mídia na lista do usuário",
+    parameters = {
+      @Parameter(
+        in = ParameterIn.HEADER,
+        schema = @Schema(implementation = String.class),
+        name = "Authorization",
+        required = true,
+        description = "JWT gerado ao fazer login ou registro"
+      )
+    }
+  )
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "201",
+      description = "Retorna uma mensagem dizendo que deu certo.",
+      content = { @Content(mediaType = "application/json",
+      schema = @Schema(implementation = ResponseMessage.class)) }
+    )
+  })
   ResponseMessage insertItemInUserlist(
     @RequestBody @Valid final RequestUserListBody body,
     @RequestAttribute("userId") final Long userId
@@ -65,6 +94,29 @@ public class UserListController {
    * @version 1.0
    * @author Victor Murilo
    */
+  @Operation(
+    summary = "Busca a lista de um usuário",
+    description = "Busca todos os itens da lista do usuário. "
+    + "É possível passar a query statusName caso queria só "
+    + "itens de um status específico.",
+    parameters = {
+      @Parameter(
+        in = ParameterIn.HEADER,
+        schema = @Schema(implementation = String.class),
+        name = "Authorization",
+        required = true,
+        description = "JWT gerado ao fazer login ou registro"
+      )
+    }
+  )
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200",
+      description = "Retorna um array com os itens da lista.",
+      content = { @Content(mediaType = "application/json",
+      schema = @Schema(implementation = ResponseUserList.class)) }
+    )
+  })
   @GetMapping("/find/{username}")
   @ResponseStatus(HttpStatus.OK)
   @JsonView(Views.Public.class)
