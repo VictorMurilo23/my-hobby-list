@@ -98,16 +98,7 @@ public class UserListController {
     summary = "Busca a lista de um usuário",
     description = "Busca todos os itens da lista do usuário. "
     + "É possível passar a query statusName caso queria só "
-    + "itens de um status específico.",
-    parameters = {
-      @Parameter(
-        in = ParameterIn.HEADER,
-        schema = @Schema(implementation = String.class),
-        name = "Authorization",
-        required = true,
-        description = "JWT gerado ao fazer login ou registro"
-      )
-    }
+    + "itens de um status específico."
   )
   @ApiResponses(value = {
     @ApiResponse(
