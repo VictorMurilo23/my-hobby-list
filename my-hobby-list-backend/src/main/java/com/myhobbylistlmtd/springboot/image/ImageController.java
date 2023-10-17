@@ -10,8 +10,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.myhobbylistlmtd.springboot.objs.AllImagesUrl;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping(value = "/images")
+@Tag(name = "Images")
 public class ImageController {
   // TODO Fazer duas rotas de imagens, uma de capas e outra pra personagens
   /**
@@ -41,6 +49,23 @@ public class ImageController {
    * @author Victor Murilo
    */
   @GetMapping("/covers/{imageName}")
+  @Operation(summary = "Pega a imagem da capa da mídia")
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200",
+      description = "Retorna uma imagem, podendo ser um .jpg ou .png",
+      content = {
+        @Content(
+          mediaType = "image/jpeg",
+          schema = @Schema(type = "string", format = "binary")
+        ),
+        @Content(
+          mediaType = "image/png",
+          schema = @Schema(type = "string", format = "binary")
+        )
+      }
+    )
+  })
   public ResponseEntity<byte[]> getCoverImage(
     @PathVariable("imageName") final String imageName
   ) {
@@ -62,6 +87,23 @@ public class ImageController {
    * @author Victor Murilo
    */
   @GetMapping("/profile/{imageName}")
+  @Operation(summary = "Pega uma imagem de perfil")
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200",
+      description = "Retorna uma imagem, podendo ser um .jpg ou .png",
+      content = {
+        @Content(
+          mediaType = "image/jpeg",
+          schema = @Schema(type = "string", format = "binary")
+        ),
+        @Content(
+          mediaType = "image/png",
+          schema = @Schema(type = "string", format = "binary")
+        )
+      }
+    ),
+  })
   public ResponseEntity<byte[]> getProfileImage(
     @PathVariable("imageName") final String imageName
   ) {
@@ -81,6 +123,20 @@ public class ImageController {
    * @author Victor Murilo
    */
   @GetMapping("/profile-images")
+  @Operation(summary = "Pega todas as imagens de perfil disponíveis")
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200",
+      description = "Retorna um array com a url de todas as imagens de "
+      + "perfil disponíveis",
+      content = {
+        @Content(
+          mediaType = "application/json",
+          schema = @Schema(implementation = AllImagesUrl.class)
+        )
+      }
+    ),
+  })
   public AllImagesUrl getAllProfileImage() {
     String filesPath = this.imagePathRoot + "profile";
     AllImagesUrl imagesUrl = service.allImagesUrl(

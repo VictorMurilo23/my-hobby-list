@@ -19,10 +19,19 @@ import com.myhobbylistlmtd.springboot.request.body.RequestRegisterUserBody;
 import com.myhobbylistlmtd.springboot.response.body.ResponseLoginBody;
 import com.myhobbylistlmtd.springboot.utils.Views;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/user")
+@Tag(name = "User")
 public final class UserController {
   /**
   * Serviço do user, responsável pelas regras de negócio.
@@ -43,6 +52,15 @@ public final class UserController {
   * @author Victor Murilo
   */
   @PostMapping("/login")
+  @Operation(summary = "Login do usuário")
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200",
+      description = "O login é feito com sucesso e um JWT é retornado",
+      content = { @Content(mediaType = "application/json",
+      schema = @Schema(implementation = ResponseLoginBody.class)) }
+    )
+  })
   ResponseLoginBody validateLogin(
     @Valid @RequestBody final RequestLoginBody body
   ) {
@@ -63,6 +81,15 @@ public final class UserController {
   */
   @PostMapping("/register")
   @ResponseStatus(HttpStatus.CREATED)
+  @Operation(summary = "Registrar um usuário")
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "201",
+      description = "O registro é feito com sucesso e um JWT é retornado",
+      content = { @Content(mediaType = "application/json",
+      schema = @Schema(implementation = ResponseLoginBody.class)) }
+    )
+  })
   ResponseLoginBody registerUser(
     @Valid @RequestBody final RequestRegisterUserBody body
   ) {
@@ -81,6 +108,15 @@ public final class UserController {
    * @version 1.0
    * @author Victor Murilo
    */
+  @Operation(summary = "Buscar perfil do usuário")
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200",
+      description = "Retorna informações do usuário",
+      content = { @Content(mediaType = "application/json",
+      schema = @Schema(implementation = User.class)) }
+    )
+  })
   @GetMapping("/profile/{username}")
   @ResponseStatus(HttpStatus.OK)
   @JsonView(Views.Public.class)
@@ -97,6 +133,25 @@ public final class UserController {
    * @version 1.0
    * @author Victor Murilo
    */
+  @Operation(
+    summary = "Mudar imagem de perfil",
+    parameters = {
+      @Parameter(
+        in = ParameterIn.HEADER,
+        schema = @Schema(implementation = String.class),
+        name = "Authorization",
+        required = true,
+        description = "JWT gerado ao fazer login ou registro"
+      )
+    })
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200",
+      description = "Retorna informações do usuário",
+      content = { @Content(mediaType = "application/json",
+      schema = @Schema(implementation = User.class)) }
+    )
+  })
   @PatchMapping("/profile/change-profile-image")
   @ResponseStatus(HttpStatus.OK)
   @JsonView(Views.Public.class)

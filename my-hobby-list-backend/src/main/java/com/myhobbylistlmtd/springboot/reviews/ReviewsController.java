@@ -20,10 +20,19 @@ import com.myhobbylistlmtd.springboot.response.body.ResponseFindReviews;
 import com.myhobbylistlmtd.springboot.response.body.ResponseMessage;
 import com.myhobbylistlmtd.springboot.utils.Views;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/reviews")
+@Tag(name = "Reviews")
 public class ReviewsController {
   /**
    * Service de reviews.
@@ -45,7 +54,28 @@ public class ReviewsController {
    * @version 1.0
    */
   @PostMapping("/create")
+  // TODO alterar o ResponseStatus pra HttpStatus.CREATED e corrigir os testes
   @ResponseStatus(HttpStatus.OK)
+  @Operation(
+    summary = "Criar uma review",
+    parameters = {
+      @Parameter(
+        in = ParameterIn.HEADER,
+        schema = @Schema(implementation = String.class),
+        name = "Authorization",
+        required = true,
+        description = "JWT gerado ao fazer login ou registro"
+      )
+    }
+  )
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200",
+      description = "O review criada com sucesso",
+      content = { @Content(mediaType = "application/json",
+      schema = @Schema(implementation = ResponseMessage.class)) }
+    )
+  })
   ResponseMessage createReview(
     @Valid @RequestBody final RequestCreateReview body,
     @RequestAttribute("userId") final Long userId
@@ -69,6 +99,26 @@ public class ReviewsController {
    */
   @PatchMapping("/edit")
   @ResponseStatus(HttpStatus.OK)
+  @Operation(
+    summary = "Editar uma review",
+    parameters = {
+      @Parameter(
+        in = ParameterIn.HEADER,
+        schema = @Schema(implementation = String.class),
+        name = "Authorization",
+        required = true,
+        description = "JWT gerado ao fazer login ou registro"
+      )
+    }
+  )
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200",
+      description = "Retorna a review com as informações editadas",
+      content = { @Content(mediaType = "application/json",
+      schema = @Schema(implementation = Reviews.class)) }
+    )
+  })
   Reviews editReview(
     @Valid @RequestBody final RequestEditReview body,
     @RequestAttribute("userId") final Long userId
@@ -87,6 +137,17 @@ public class ReviewsController {
    * @author Victor Murilo
    * @version 1.0
    */
+  @Operation(summary = "Encontrar reviews de uma mídia")
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200",
+      description = "Retorna um array com as mídias e o número total de páginas"
+      + ". OBS: A numeração das páginas funciona igual a um array, ou seja, "
+      + "a primeira página é a de número 0",
+      content = { @Content(mediaType = "application/json",
+      schema = @Schema(implementation = ResponseFindReviews.class)) }
+    )
+  })
   @GetMapping("/find/{mediaId}")
   @ResponseStatus(HttpStatus.OK)
   @JsonView({Views.Review.class})
@@ -111,6 +172,26 @@ public class ReviewsController {
   @GetMapping("/find-user-review/{mediaId}")
   @ResponseStatus(HttpStatus.OK)
   @JsonView({Views.Review.class})
+  @Operation(
+    summary = "Encontrar uma única review do usuário",
+    parameters = {
+      @Parameter(
+        in = ParameterIn.HEADER,
+        schema = @Schema(implementation = String.class),
+        name = "Authorization",
+        required = true,
+        description = "JWT gerado ao fazer login ou registro"
+      )
+    }
+  )
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200",
+      description = "Retorna as informações de uma única review",
+      content = { @Content(mediaType = "application/json",
+      schema = @Schema(implementation = Reviews.class)) }
+    )
+  })
   Reviews findReviewByMediaIdAndUserId(
     final @PathVariable String mediaId,
     @RequestAttribute("userId") final Long userId
@@ -129,6 +210,18 @@ public class ReviewsController {
    * @author Victor Murilo
    * @version 1.0
    */
+  @Operation(summary = "Encontra todas as reviews de um usuário")
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200",
+      description = "Retorna um array com as reviews do usuário "
+      + "e o número total de páginas"
+      + ". OBS: A numeração das páginas funciona igual a um array, ou seja, "
+      + "a primeira página é a de número 0",
+      content = { @Content(mediaType = "application/json",
+      schema = @Schema(implementation = ResponseFindReviews.class)) }
+    )
+  })
   @GetMapping("/find-all-user-reviews/{username}")
   @ResponseStatus(HttpStatus.OK)
   @JsonView({Views.ReviewPage.class})

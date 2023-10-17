@@ -13,7 +13,15 @@ import com.myhobbylistlmtd.springboot.exceptions.BadRequestException;
 import com.myhobbylistlmtd.springboot.response.body.ResponseMediasList;
 import com.myhobbylistlmtd.springboot.utils.Views;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
+@Tag(name = "Media")
 @RequestMapping("/media")
 public class MediaController {
   /**
@@ -35,6 +43,14 @@ public class MediaController {
   */
   @GetMapping("/recent-add")
   @JsonView(Views.MediaCard.class)
+  @Operation(summary = "Pega as mídias recém-adicionadas")
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200", description = "Pega as 10 mídias recém-adicionadas",
+      content = { @Content(mediaType = "application/json",
+      schema = @Schema(implementation = ResponseMediasList.class)) }
+    )
+  })
   ResponseMediasList findRecentMedias() {
     List<Media> recentMedias = mediaService.getMostRecentMedias();
     ResponseMediasList response = new ResponseMediasList();
@@ -50,6 +66,16 @@ public class MediaController {
   * @version 1.0
   * @author Victor Murilo
   */
+  @Operation(summary = "Procura mais de uma mídia por nome")
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200",
+      description = "Retorna um array contendo de mídias "
+      + "que incluem a string procurada",
+      content = { @Content(mediaType = "application/json",
+      schema = @Schema(implementation = ResponseMediasList.class)) }
+    )
+  })
   @GetMapping("/search-by-name/{mediaName}")
   @JsonView(Views.MediaCard.class)
   ResponseMediasList findMediaByName(final @PathVariable String mediaName) {
@@ -69,6 +95,15 @@ public class MediaController {
   * @version 1.0
   * @author Victor Murilo
   */
+  @Operation(summary = "Pega uma única mídia por id")
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200",
+      description = "Retorna as informações da mídia",
+      content = { @Content(mediaType = "application/json",
+      schema = @Schema(implementation = ResponseMediasList.class)) }
+    )
+  })
   @GetMapping("/search-by-id/{id}")
   @JsonView(Views.Public.class)
   Media findMediaById(
