@@ -15,4 +15,7 @@ public class Views {
 
   public interface ReviewPage extends Review {
   }
+
+  public interface Comment {
+  }
 }
