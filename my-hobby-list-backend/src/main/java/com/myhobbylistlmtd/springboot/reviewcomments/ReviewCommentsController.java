@@ -32,10 +32,11 @@ public class ReviewCommentsController {
   private ReviewCommentsService reviewCommentsService;
 
   /**
-   * .
-   * @param userId
-   * @param body
-   * @return d
+   * Endpoint de criar um comentário em uma review.
+   * @param userId Id do usuário que fez o comentário
+   * @param body Corpo da requisição com informações
+   sobre a review e o conteúdo do comentário
+   * @return Retorna um objeto com as informações do comentário
    */
   @PostMapping("/create")
   @ResponseStatus(HttpStatus.CREATED)
