@@ -80,6 +80,25 @@ public class ReviewsService {
   }
 
   /**
+   * Encontra uma review pelo nome de usuário e mediaId.
+   * @param username Nome do usuário
+   * @param mediaId Id da media referente a review
+   * @return Objeto de Reviews
+   */
+  public Reviews findReviewByUsernameAndMediaId(
+    final String username,
+    final Long mediaId
+  ) {
+    Reviews review = reviewsRepo.findReviewByUsernameAndMediaId(
+      username, mediaId
+    );
+    if (review == null) {
+      throw new NotFoundException("Review não encontrada!");
+    }
+    return review;
+  }
+
+  /**
    * Cria uma review.
    * @param body Corpo da requisição contendo o conteúdo da review,
    id da media e se o usuário recomenda a media
