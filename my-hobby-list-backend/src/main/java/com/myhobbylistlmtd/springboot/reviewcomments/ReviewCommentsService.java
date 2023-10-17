@@ -32,11 +32,17 @@ public class ReviewCommentsService {
   /**
    * Constructor utilizado nos testes unitários.
    * @param reviewCommentsRepo Mock de ReviewCommentsRepository
+   * @param reviewsService Mock de ReviewsService
+   * @param userService Mock de UserService
    */
   public ReviewCommentsService(
-    final ReviewCommentsRepository reviewCommentsRepo
+    final ReviewCommentsRepository reviewCommentsRepo,
+    final ReviewsService reviewsService,
+    final UserService userService
   ) {
     this.reviewCommentsRepo = reviewCommentsRepo;
+    this.reviewsService = reviewsService;
+    this.userService = userService;
   }
 
   /**
