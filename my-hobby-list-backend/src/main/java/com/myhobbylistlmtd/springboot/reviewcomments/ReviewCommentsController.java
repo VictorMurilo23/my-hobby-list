@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.request.body.RequestCreateReviewComment;
+import com.myhobbylistlmtd.springboot.utils.Views;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -40,6 +42,7 @@ public class ReviewCommentsController {
    */
   @PostMapping("/create")
   @ResponseStatus(HttpStatus.CREATED)
+  @JsonView({ Views.Comment.class })
   @Operation(
     summary = "Fazer um comentário em uma review",
     parameters = {
