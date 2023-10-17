@@ -1,5 +1,6 @@
 package com.myhobbylistlmtd.springboot.reviewcomments;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.reviews.Reviews;
 import com.myhobbylistlmtd.springboot.user.User;
@@ -24,12 +25,14 @@ public class ReviewComments {
    * Conteúdo do comentário.
    */
   @Column(name = "commentary", nullable = false, length = 10000)
+  @JsonView({ Views.Comment.class })
   private String commentary;
 
   /**
    * Boolean dizendo se a review foi editada ou não.
    */
   @Column(name = "edited", nullable = false)
+  @JsonView({ Views.Comment.class })
   private Boolean edited = false;
 
   /**
@@ -89,7 +92,17 @@ public class ReviewComments {
    * Setter de edited.
    * @param editedBool Boolean dizendo se o comentário foi editado ou não
    */
-  public final void setEdited(final Boolean editedBool) {
+  public void setEdited(final Boolean editedBool) {
     this.edited = editedBool;
+  }
+
+  /**
+   * Getter de username. Usado no retorno do JSON.
+   * @return Nome do usuário que fez o comentário.
+   */
+  @JsonView({ Views.Comment.class })
+  @JsonProperty("username")
+  public String getUsername() {
+    return this.id.getUserId().getUsername();
   }
 }
