@@ -120,7 +120,7 @@ public class ReviewComments {
   }
 
   /**
-   * Getter de insertionDate
+   * Getter de insertionDate.
    * @return A data em que o comentário foi feito
    */
   public LocalDateTime getInsertionDate() {
