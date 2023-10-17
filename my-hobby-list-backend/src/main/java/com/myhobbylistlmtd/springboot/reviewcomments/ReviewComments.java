@@ -1,6 +1,8 @@
 package com.myhobbylistlmtd.springboot.reviewcomments;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.myhobbylistlmtd.springboot.reviews.Reviews;
+import com.myhobbylistlmtd.springboot.user.User;
 import com.myhobbylistlmtd.springboot.utils.Views;
 
 import jakarta.persistence.Column;
@@ -28,7 +30,28 @@ public class ReviewComments {
    * Boolean dizendo se a review foi editada ou não.
    */
   @Column(name = "edited", nullable = false)
-  private Boolean edited;
+  private Boolean edited = false;
+
+  /**
+   * Default constructor.
+   */
+  public ReviewComments() {
+  }
+
+  /**
+   * Constructor com review, userId e commentary.
+   * @param review Objeto de Review com a review referente ao comentário
+   * @param userId userId do usuário que fez o comentário
+   * @param commentary conteúdo do comentário
+   */
+  public ReviewComments(
+    final Reviews review,
+    final User user,
+    final String commentary
+  ) {
+    this.id = new ReviewCommentsId(user, review);
+    this.commentary = commentary;
+  }
 
   /**
    * Getter de commentary.
