@@ -41,7 +41,7 @@ public class ReviewComments {
   /**
    * Constructor com review, userId e commentary.
    * @param review Objeto de Review com a review referente ao comentário
-   * @param userId userId do usuário que fez o comentário
+   * @param user userId do usuário que fez o comentário
    * @param commentary conteúdo do comentário
    */
   public ReviewComments(
