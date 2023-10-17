@@ -1,5 +1,8 @@
 package com.myhobbylistlmtd.springboot.reviewcomments;
 
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.reviews.Reviews;
@@ -34,6 +37,16 @@ public class ReviewComments {
   @Column(name = "edited", nullable = false)
   @JsonView({ Views.Comment.class })
   private Boolean edited = false;
+
+  /** Data e horário de inserção da media atual.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @Column(name = "insertion_date", nullable = false)
+  @JsonView({ Views.Comment.class })
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+  private LocalDateTime insertionDate = LocalDateTime.now();
 
   /**
    * Default constructor.
@@ -104,5 +117,13 @@ public class ReviewComments {
   @JsonProperty("username")
   public String getUsername() {
     return this.id.getUserId().getUsername();
+  }
+
+  /**
+   * Getter de insertionDate
+   * @return A data em que o comentário foi feito
+   */
+  public LocalDateTime getInsertionDate() {
+    return insertionDate;
   }
 }
