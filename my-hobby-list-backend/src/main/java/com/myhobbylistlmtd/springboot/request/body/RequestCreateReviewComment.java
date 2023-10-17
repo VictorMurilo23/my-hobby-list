@@ -26,6 +26,7 @@ public class RequestCreateReviewComment {
     max = 20,
     message = "nome do usuário deve ter um length entre 1 e 20"
   )
+  @NotNull(message = "usernameFromReview é obrigatório")
   private String usernameFromReview;
 
   /**
@@ -39,6 +40,7 @@ public class RequestCreateReviewComment {
     max = 1000,
     message = "comentário deve ter um length entre 1 e 1000"
   )
+  @NotNull(message = "commentary é obrigatório")
   private String commentary;
 
   /**
