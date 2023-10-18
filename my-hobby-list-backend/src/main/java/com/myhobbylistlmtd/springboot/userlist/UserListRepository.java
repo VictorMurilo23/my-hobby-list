@@ -3,6 +3,7 @@ package com.myhobbylistlmtd.springboot.userlist;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.myhobbylistlmtd.springboot.user.User;
@@ -34,4 +35,17 @@ UserList, UserListId
   List<UserList> findAllById_UserId_UsernameAndStatus_StatusName(
     String username, String statusName
   );
+
+  /**
+   * Encontra um item na lista do usuário por mediaId e userId.
+   * @param userId Id do usuário
+   * @param mediaId Id da media
+   * @return Um objeto de UserList contendo só informações
+   do item da lista do usuário
+   */
+  @Query(
+    value = "SELECT * FROM user_list WHERE user_id = ?1 AND media_id = ?2",
+    nativeQuery = true
+  )
+  UserList findByUserIdAndMediaId(Long userId, Long mediaId);
 }
