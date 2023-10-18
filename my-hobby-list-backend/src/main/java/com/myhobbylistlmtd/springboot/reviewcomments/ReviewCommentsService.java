@@ -1,5 +1,7 @@
 package com.myhobbylistlmtd.springboot.reviewcomments;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,5 +67,19 @@ public class ReviewCommentsService {
       body.getCommentary()
     );
     return reviewCommentsRepo.save(comment);
+  }
+
+  /**
+   * Encontra todos os comentários de uma review.
+   * @param username Nome do usuário que fez a review
+   * @param mediaId Id da media
+   * @return Lista com todos os comentários
+   */
+  public List<ReviewComments> findReviewComments(
+    final String username,
+    final Long mediaId
+  ) {
+    return reviewCommentsRepo
+      .findReviewsByUsernameAndMediaId(username, mediaId);
   }
 }
