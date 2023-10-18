@@ -133,6 +133,14 @@ public class Media {
   */
   public Media() { }
 
+  /**
+   * Constructor só com o nome da mídia. Geralmente utilizado em testes
+   * @param name Nome da mídia
+   */
+  public Media(String name) { 
+    this.name = name;
+  }
+
   /** Cria uma nova midia sem volume.
   * @param name Nome da mídia
   * @param length Duração da mídia
