@@ -23,7 +23,6 @@ import org.springframework.data.domain.PageImpl;
 import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
 import com.myhobbylistlmtd.springboot.media.Media;
 import com.myhobbylistlmtd.springboot.media.MediaService;
-import com.myhobbylistlmtd.springboot.objs.MediaParams;
 import com.myhobbylistlmtd.springboot.request.body.RequestCreateReview;
 import com.myhobbylistlmtd.springboot.request.body.RequestEditReview;
 import com.myhobbylistlmtd.springboot.response.body.ResponseFindReviews;
@@ -53,7 +52,7 @@ public class ReviewsServiceTest {
 
   @Test
   public void findReviewWithSuccess() {
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
     Long userId = Long.valueOf(1);
     Long mediaId = Long.valueOf(4);
@@ -86,7 +85,7 @@ public class ReviewsServiceTest {
 
   @Test
   public void createReviewWithSuccess() {
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
     Long userId = Long.valueOf(1);
     Long mediaId = Long.valueOf(4);
@@ -108,7 +107,7 @@ public class ReviewsServiceTest {
 
   @Test
   public void editReviewContentWithSuccess() {
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
     Long userId = Long.valueOf(1);
     Long mediaId = Long.valueOf(4);
@@ -132,7 +131,7 @@ public class ReviewsServiceTest {
 
   @Test
   public void editReviewRecommendedWithSuccess() {
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
     Long userId = Long.valueOf(1);
     Long mediaId = Long.valueOf(4);
@@ -156,7 +155,7 @@ public class ReviewsServiceTest {
 
   @Test
   public void editReviewRecommendedAndContentWithSuccess() {
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
     Long userId = Long.valueOf(1);
     Long mediaId = Long.valueOf(4);
@@ -181,7 +180,7 @@ public class ReviewsServiceTest {
 
   @Test
   public void findReviewsWithSuccess() {
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
     Long mediaId = Long.valueOf(4);
     Reviews review = new Reviews("blablabla", false, media, user);
@@ -200,7 +199,7 @@ public class ReviewsServiceTest {
 
   @Test
   public void findUserReviewsWithSuccess() {
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
     Reviews review = new Reviews("blablabla", false, media, user);
 
