@@ -18,4 +18,7 @@ public class Views {
 
   public interface Comment {
   }
+
+  public interface UserListItem {
+  }
 }
