@@ -1,7 +1,11 @@
 package com.myhobbylistlmtd.springboot.reviewcomments;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.myhobbylistlmtd.springboot.exceptions.BadRequestException;
 import com.myhobbylistlmtd.springboot.request.body.RequestCreateReviewComment;
+import com.myhobbylistlmtd.springboot.response.body.ResponseReviewComments;
 import com.myhobbylistlmtd.springboot.utils.Views;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -67,7 +73,40 @@ public class ReviewCommentsController {
     @RequestAttribute("userId") final Long userId,
     @Valid @RequestBody final RequestCreateReviewComment body
   ) {
-    ReviewComments test = this.reviewCommentsService.createReview(userId, body);
-    return test;
+    ReviewComments comment = this.reviewCommentsService
+      .createReview(userId, body);
+    return comment;
+  }
+
+  /**
+   * .
+   * @param username
+   * @param mediaId
+   * @return d
+   */
+  @GetMapping("/find/{username}/{mediaId}")
+  @ResponseStatus(HttpStatus.OK)
+  @JsonView({ Views.Comment.class })
+  @Operation(summary = "Pega os comentários de uma review")
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200",
+      description = "Retorna um array com os comentários",
+      content = { @Content(mediaType = "application/json",
+      schema = @Schema(implementation = ReviewComments.class)) }
+    )
+  })
+  ResponseReviewComments findComments(
+    final @PathVariable String username,
+    final @PathVariable String mediaId
+  ) {
+    try {
+      List<ReviewComments> commentsList = this.reviewCommentsService
+        .findReviewComments(username, Long.valueOf(mediaId));
+
+      return new ResponseReviewComments(commentsList);
+    } catch (NumberFormatException e) {
+      throw new BadRequestException("Insira um mediaId em formato de número");
+    }
   }
 }
