@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
 import com.myhobbylistlmtd.springboot.listitemstatus.ListItemStatus;
@@ -261,5 +262,209 @@ public class UserListServiceTest {
     assertThat(serviceReturn.get(0).getStatus().getStatusName(), is("Em andamento"));
     assertThat(serviceReturn.get(0).getId().getUserId().getUsername(), is("teste"));
     assertThat(serviceReturn.get(0).getId().getMediaId().getName(), is("Teste1"));
+  }
+
+  @Test
+  public void editAllListItemValuesWithSuccess() {
+    Long mediaId = Long.valueOf(4);
+    Media media = new Media(new MediaParams("Teste1"));
+    ReflectionTestUtils.setField(media, "id", mediaId);
+    User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
+    ListItemStatus status = new ListItemStatus("Em andamento");
+    UserListId id = new UserListId(user, media);
+    
+    UserList listItem = new UserList();
+    listItem.setId(id);
+    listItem.setStatus(status);
+    listItem.setScore(10);
+    listItem.setNotes("blablal");
+    listItem.setProgress(5);
+
+    RequestUserListBody body = new RequestUserListBody();
+    body.setMediaId(media.getId());
+    body.setNotes("Comentário muito legal :)");
+    body.setScore(5);
+    body.setProgress(10);
+    body.setStatus("Droppado");
+
+    when(listRepo.findByUserIdAndMediaId(anyLong(), anyLong())).thenReturn(listItem);
+    when(listItemTypeRepo.findByStatusName("Droppado")).thenReturn(new ListItemStatus("Droppado"));
+    when(listRepo.save(any())).thenAnswer(i -> i.getArguments()[0]);
+
+    UserList serviceReturn = this.listService.editListItem(body, Long.valueOf(1));
+
+    verify(listItemTypeRepo).findByStatusName("Droppado");
+    verify(listRepo).findByUserIdAndMediaId(anyLong(), anyLong());
+    verify(listRepo).save(any());
+
+    assertThat(serviceReturn.getProgress(), is(10));
+    assertThat(serviceReturn.getNotes(), is("Comentário muito legal :)"));
+    assertThat(serviceReturn.getScore(), is(5));
+    assertThat(serviceReturn.getStatusName(), is("Droppado"));
+  }
+
+  @Test
+  public void editOnlyStatusFromListItemWithSuccess() {
+    Long mediaId = Long.valueOf(4);
+    Media media = new Media(new MediaParams("Teste1"));
+    ReflectionTestUtils.setField(media, "id", mediaId);
+    User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
+    ListItemStatus status = new ListItemStatus("Em andamento");
+    UserListId id = new UserListId(user, media);
+    
+    UserList listItem = new UserList();
+    listItem.setId(id);
+    listItem.setStatus(status);
+    listItem.setScore(10);
+    listItem.setNotes("blablal");
+    listItem.setProgress(5);
+
+    RequestUserListBody body = new RequestUserListBody();
+    body.setMediaId(media.getId());
+    body.setStatus("Droppado");
+
+    when(listRepo.findByUserIdAndMediaId(anyLong(), anyLong())).thenReturn(listItem);
+    when(listItemTypeRepo.findByStatusName("Droppado")).thenReturn(new ListItemStatus("Droppado"));
+    when(listRepo.save(any())).thenAnswer(i -> i.getArguments()[0]);
+
+    UserList serviceReturn = this.listService.editListItem(body, Long.valueOf(1));
+
+    verify(listItemTypeRepo).findByStatusName("Droppado");
+    verify(listRepo).findByUserIdAndMediaId(anyLong(), anyLong());
+    verify(listRepo).save(any());
+
+    assertThat(serviceReturn.getProgress(), is(5));
+    assertThat(serviceReturn.getNotes(), is("blablal"));
+    assertThat(serviceReturn.getScore(), is(10));
+    assertThat(serviceReturn.getStatusName(), is("Droppado"));
+  }
+
+  @Test
+  public void editOnlyProgressFromListItemWithSuccess() {
+    Long mediaId = Long.valueOf(4);
+    Media media = new Media(new MediaParams("Teste1"));
+    ReflectionTestUtils.setField(media, "id", mediaId);
+    User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
+    ListItemStatus status = new ListItemStatus("Em andamento");
+    UserListId id = new UserListId(user, media);
+    
+    UserList listItem = new UserList();
+    listItem.setId(id);
+    listItem.setStatus(status);
+    listItem.setScore(10);
+    listItem.setNotes("blablal");
+    listItem.setProgress(5);
+
+    RequestUserListBody body = new RequestUserListBody();
+    body.setMediaId(media.getId());
+    body.setProgress(15);
+
+    when(listRepo.findByUserIdAndMediaId(anyLong(), anyLong())).thenReturn(listItem);
+    when(listRepo.save(any())).thenAnswer(i -> i.getArguments()[0]);
+
+    UserList serviceReturn = this.listService.editListItem(body, Long.valueOf(1));
+
+    verify(listRepo).findByUserIdAndMediaId(anyLong(), anyLong());
+    verify(listRepo).save(any());
+
+    assertThat(serviceReturn.getProgress(), is(15));
+    assertThat(serviceReturn.getNotes(), is("blablal"));
+    assertThat(serviceReturn.getScore(), is(10));
+    assertThat(serviceReturn.getStatusName(), is("Em andamento"));
+  }
+
+  @Test
+  public void editOnlyNotesFromListItemWithSuccess() {
+    Long mediaId = Long.valueOf(4);
+    Media media = new Media(new MediaParams("Teste1"));
+    ReflectionTestUtils.setField(media, "id", mediaId);
+    User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
+    ListItemStatus status = new ListItemStatus("Em andamento");
+    UserListId id = new UserListId(user, media);
+    
+    UserList listItem = new UserList();
+    listItem.setId(id);
+    listItem.setStatus(status);
+    listItem.setScore(10);
+    listItem.setNotes("blablal");
+    listItem.setProgress(5);
+
+    RequestUserListBody body = new RequestUserListBody();
+    body.setMediaId(media.getId());
+    body.setNotes("TestesTest");
+
+    when(listRepo.findByUserIdAndMediaId(anyLong(), anyLong())).thenReturn(listItem);
+    when(listRepo.save(any())).thenAnswer(i -> i.getArguments()[0]);
+
+    UserList serviceReturn = this.listService.editListItem(body, Long.valueOf(1));
+
+    verify(listRepo).findByUserIdAndMediaId(anyLong(), anyLong());
+    verify(listRepo).save(any());
+
+    assertThat(serviceReturn.getProgress(), is(5));
+    assertThat(serviceReturn.getNotes(), is("TestesTest"));
+    assertThat(serviceReturn.getScore(), is(10));
+    assertThat(serviceReturn.getStatusName(), is("Em andamento"));
+  }
+
+  @Test
+  public void editOnlyScoreFromListItemWithSuccess() {
+    Long mediaId = Long.valueOf(4);
+    Media media = new Media(new MediaParams("Teste1"));
+    ReflectionTestUtils.setField(media, "id", mediaId);
+    User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
+    ListItemStatus status = new ListItemStatus("Em andamento");
+    UserListId id = new UserListId(user, media);
+    
+    UserList listItem = new UserList();
+    listItem.setId(id);
+    listItem.setStatus(status);
+    listItem.setScore(10);
+    listItem.setNotes("blablal");
+    listItem.setProgress(5);
+
+    RequestUserListBody body = new RequestUserListBody();
+    body.setMediaId(media.getId());
+    body.setScore(2);
+
+    when(listRepo.findByUserIdAndMediaId(anyLong(), anyLong())).thenReturn(listItem);
+    when(listRepo.save(any())).thenAnswer(i -> i.getArguments()[0]);
+
+    UserList serviceReturn = this.listService.editListItem(body, Long.valueOf(1));
+
+    verify(listRepo).findByUserIdAndMediaId(anyLong(), anyLong());
+    verify(listRepo).save(any());
+
+    assertThat(serviceReturn.getProgress(), is(5));
+    assertThat(serviceReturn.getNotes(), is("blablal"));
+    assertThat(serviceReturn.getScore(), is(2));
+    assertThat(serviceReturn.getStatusName(), is("Em andamento"));
+  }
+
+  @Test
+  public void throwErrorWhenUserListItemDoesntExists() {
+    Long mediaId = Long.valueOf(4);
+    Media media = new Media(new MediaParams("Teste1"));
+    ReflectionTestUtils.setField(media, "id", mediaId);
+    User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
+    ListItemStatus status = new ListItemStatus("Em andamento");
+    UserListId id = new UserListId(user, media);
+    
+    UserList listItem = new UserList();
+    listItem.setId(id);
+    listItem.setStatus(status);
+    listItem.setScore(10);
+    listItem.setNotes("blablal");
+    listItem.setProgress(5);
+
+    RequestUserListBody body = new RequestUserListBody();
+    body.setMediaId(media.getId());
+    body.setStatus("Droppado");
+
+    when(listRepo.findByUserIdAndMediaId(anyLong(), anyLong())).thenReturn(null);
+
+    assertThrows(NotFoundException.class, () -> this.listService.editListItem(body, Long.valueOf(1)));
+    
+    verify(listRepo).findByUserIdAndMediaId(anyLong(), anyLong());
   }
 }
