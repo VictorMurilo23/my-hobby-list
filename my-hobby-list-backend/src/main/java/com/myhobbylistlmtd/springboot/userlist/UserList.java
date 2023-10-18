@@ -3,6 +3,7 @@ package com.myhobbylistlmtd.springboot.userlist;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.listitemstatus.ListItemStatus;
+import com.myhobbylistlmtd.springboot.media.Media;
 import com.myhobbylistlmtd.springboot.utils.Views;
 
 import jakarta.persistence.Column;
@@ -37,7 +38,7 @@ public class UserList {
   * @version 1.0
   */
   @Column(name = "progress", nullable = false)
-  @JsonView(Views.Public.class)
+  @JsonView({ Views.UserListItem.class })
   private Integer progress;
 
   /** Nota dada pelo o usuário.
@@ -46,7 +47,7 @@ public class UserList {
   * @version 1.0
   */
   @Column(name = "score", nullable = true)
-  @JsonView(Views.Public.class)
+  @JsonView({ Views.UserListItem.class })
   private Integer score;
 
   /** Comentários do usuário sobre a media.
@@ -55,7 +56,7 @@ public class UserList {
   * @version 1.0
   */
   @Column(name = "notes", nullable = true, length = NOTES_LENGTH)
-  @JsonView(Views.Public.class)
+  @JsonView({ Views.UserListItem.class })
   private String notes;
 
   /** Chave estrangeira referente ao status do item.
@@ -69,7 +70,6 @@ public class UserList {
     nullable = false,
     referencedColumnName = "id"
   )
-  @JsonView(Views.Public.class)
   private ListItemStatus status;
 
   /**
@@ -180,5 +180,26 @@ public class UserList {
    */
   public void setStatus(final ListItemStatus newStatus) {
     this.status = newStatus;
+  }
+
+  /**
+   * Pega o nome do status.
+   * @return String com o nome do status
+   */
+  @JsonProperty("status")
+  @JsonView({ Views.UserListItem.class })
+  public String getStatusName() {
+    return this.status.getStatusName();
+  }
+
+
+  /**
+   * Pega as informações da media.
+   * @return Objeto de media
+   */
+  @JsonProperty("media")
+  @JsonView({ Views.UserListItem.class })
+  public Media getMedia() {
+    return this.id.getMediaId();
   }
 }
