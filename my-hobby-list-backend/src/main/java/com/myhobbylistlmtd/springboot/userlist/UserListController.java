@@ -111,7 +111,7 @@ public class UserListController {
   })
   @GetMapping("/find/{username}")
   @ResponseStatus(HttpStatus.OK)
-  @JsonView(Views.Public.class)
+  @JsonView(Views.UserListItem.class)
   ResponseUserList findUserlistItems(
     final @PathVariable String username,
     final @RequestParam(required = false) String statusName
@@ -134,6 +134,7 @@ public class UserListController {
    */
   @PatchMapping("/edit")
   @ResponseStatus(HttpStatus.OK)
+  @JsonView({ Views.UserListItem.class })
   @Operation(
     summary = "Edita um item da lista do usuário",
     parameters = {
