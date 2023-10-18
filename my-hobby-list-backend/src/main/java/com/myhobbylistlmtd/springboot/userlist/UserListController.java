@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
@@ -110,7 +111,7 @@ public class UserListController {
   })
   @GetMapping("/find/{username}")
   @ResponseStatus(HttpStatus.OK)
-  @JsonView(Views.Public.class)
+  @JsonView(Views.UserListItem.class)
   ResponseUserList findUserlistItems(
     final @PathVariable String username,
     final @RequestParam(required = false) String statusName
@@ -122,5 +123,42 @@ public class UserListController {
     ResponseUserList response = new ResponseUserList();
     response.setList(list);
     return response;
+  }
+
+
+  /**
+   * Endpoint de atualizar um item na lista do usuário.
+   * @param body Corpo da requisição com as novas informações
+   * @param userId Id do usuário vindo do token
+   * @return Objeto UserList com as informações atualizadas
+   */
+  @PatchMapping("/edit")
+  @ResponseStatus(HttpStatus.OK)
+  @JsonView({ Views.UserListItem.class })
+  @Operation(
+    summary = "Edita um item da lista do usuário",
+    parameters = {
+      @Parameter(
+        in = ParameterIn.HEADER,
+        schema = @Schema(implementation = String.class),
+        name = "Authorization",
+        required = true,
+        description = "JWT gerado ao fazer login ou registro"
+      )
+    }
+  )
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200",
+      description = "Retorna o item da lista atualizado.",
+      content = { @Content(mediaType = "application/json",
+      schema = @Schema(implementation = UserList.class)) }
+    )
+  })
+  UserList editUserListItem(
+    @RequestBody @Valid final RequestUserListBody body,
+    @RequestAttribute("userId") final Long userId
+  ) {
+    return this.listService.editListItem(body, userId);
   }
 }
