@@ -26,7 +26,6 @@ import com.myhobbylistlmtd.springboot.listitemstatus.ListItemStatus;
 import com.myhobbylistlmtd.springboot.listitemstatus.ListItemStatusRepository;
 import com.myhobbylistlmtd.springboot.media.Media;
 import com.myhobbylistlmtd.springboot.media.MediaService;
-import com.myhobbylistlmtd.springboot.objs.MediaParams;
 import com.myhobbylistlmtd.springboot.request.body.RequestUserListBody;
 import com.myhobbylistlmtd.springboot.user.User;
 import com.myhobbylistlmtd.springboot.user.UserService;
@@ -58,7 +57,7 @@ public class UserListServiceTest {
 
   @Test
   public void findByIdWithSucess() {
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
     UserListId id = new UserListId(user, media);
     ListItemStatus status = new ListItemStatus("Em andamento");
@@ -93,7 +92,7 @@ public class UserListServiceTest {
 
   @Test
   public void insertItemInListWithSuccess() {
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
     ListItemStatus status = new ListItemStatus("Em andamento");
     Long mediaId = Long.valueOf(10);
@@ -139,7 +138,7 @@ public class UserListServiceTest {
 
   @Test
   public void insertItemInListShouldChangeStatusIfStatusInBodyIsNull() {
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
     ListItemStatus status = new ListItemStatus("Em andamento");
     Long mediaId = Long.valueOf(10);
@@ -163,7 +162,7 @@ public class UserListServiceTest {
 
   @Test
   public void insertItemInListShouldChangeProgressIfProgressInBodyIsNull() {
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
     ListItemStatus status = new ListItemStatus("Em andamento");
     Long mediaId = Long.valueOf(10);
@@ -186,7 +185,7 @@ public class UserListServiceTest {
 
   @Test
   public void findList() {
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
     ListItemStatus status = new ListItemStatus("Em andamento");
     UserListId id = new UserListId(user, media);
@@ -199,7 +198,7 @@ public class UserListServiceTest {
     firstListItem.setProgress(5);
     
     UserList secondListItem = new UserList();
-    secondListItem.setId(new UserListId(user, new Media(new MediaParams("Teste2"))));
+    secondListItem.setId(new UserListId(user, new Media("Teste2")));
     secondListItem.setStatus(status);
     secondListItem.setScore(5);
     secondListItem.setNotes("2021313");
@@ -233,7 +232,7 @@ public class UserListServiceTest {
 
   @Test
   public void findListWithStatusName() {
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
     ListItemStatus status = new ListItemStatus("Em andamento");
     UserListId id = new UserListId(user, media);
@@ -267,7 +266,7 @@ public class UserListServiceTest {
   @Test
   public void editAllListItemValuesWithSuccess() {
     Long mediaId = Long.valueOf(4);
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
     ReflectionTestUtils.setField(media, "id", mediaId);
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
     ListItemStatus status = new ListItemStatus("Em andamento");
@@ -306,7 +305,7 @@ public class UserListServiceTest {
   @Test
   public void editOnlyStatusFromListItemWithSuccess() {
     Long mediaId = Long.valueOf(4);
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
     ReflectionTestUtils.setField(media, "id", mediaId);
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
     ListItemStatus status = new ListItemStatus("Em andamento");
@@ -342,7 +341,7 @@ public class UserListServiceTest {
   @Test
   public void editOnlyProgressFromListItemWithSuccess() {
     Long mediaId = Long.valueOf(4);
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
     ReflectionTestUtils.setField(media, "id", mediaId);
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
     ListItemStatus status = new ListItemStatus("Em andamento");
@@ -376,7 +375,7 @@ public class UserListServiceTest {
   @Test
   public void editOnlyNotesFromListItemWithSuccess() {
     Long mediaId = Long.valueOf(4);
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
     ReflectionTestUtils.setField(media, "id", mediaId);
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
     ListItemStatus status = new ListItemStatus("Em andamento");
@@ -410,7 +409,7 @@ public class UserListServiceTest {
   @Test
   public void editOnlyScoreFromListItemWithSuccess() {
     Long mediaId = Long.valueOf(4);
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
     ReflectionTestUtils.setField(media, "id", mediaId);
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
     ListItemStatus status = new ListItemStatus("Em andamento");
@@ -444,7 +443,7 @@ public class UserListServiceTest {
   @Test
   public void throwErrorWhenUserListItemDoesntExists() {
     Long mediaId = Long.valueOf(4);
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
     ReflectionTestUtils.setField(media, "id", mediaId);
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
     ListItemStatus status = new ListItemStatus("Em andamento");
