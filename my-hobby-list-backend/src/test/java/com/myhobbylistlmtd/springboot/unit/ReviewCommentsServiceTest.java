@@ -18,7 +18,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.myhobbylistlmtd.springboot.media.Media;
-import com.myhobbylistlmtd.springboot.objs.MediaParams;
 import com.myhobbylistlmtd.springboot.request.body.RequestCreateReviewComment;
 import com.myhobbylistlmtd.springboot.reviewcomments.ReviewComments;
 import com.myhobbylistlmtd.springboot.reviewcomments.ReviewCommentsRepository;
@@ -48,7 +47,7 @@ public class ReviewCommentsServiceTest {
 
   @Test
   public void createCommentWithSuccess() {
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
     Long userId = Long.valueOf(1);
     Long mediaId = Long.valueOf(4);
@@ -77,7 +76,7 @@ public class ReviewCommentsServiceTest {
 
   @Test
   public void findCommentsWithSuccess() {
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
     User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
     Long mediaId = Long.valueOf(4);
 
