@@ -43,6 +43,9 @@ public class LoadCharacters {
     charsList.add(new Characters("Ryouji Kaji", "/characters/evangelion/ryouji-kaji.jpg"));
     charsList.add(new Characters("Asuka Langley Souryuu", "/characters/evangelion/asuka.jpg"));
 
+    charsList.add(new Characters("Jack", "/characters/samurai-jack/samurai-jack.jpg"));
+    charsList.add(new Characters("Aku", "/characters/samurai-jack/aku.png"));
+
     repository.saveAll(charsList);
     return null;
   }

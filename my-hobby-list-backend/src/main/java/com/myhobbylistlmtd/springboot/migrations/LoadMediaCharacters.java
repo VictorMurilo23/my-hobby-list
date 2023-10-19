@@ -46,6 +46,7 @@ public class LoadMediaCharacters {
       CharactersRole secundary = charRoleRepo.findByRoleName("Personagem secundário");
       Media gto = mediaRepo.findByName("GTO");
       Media evangelion = mediaRepo.findByName("Neon Genesis Evangelion: The End of Evangelion");
+      Media samuraiJack = mediaRepo.findByName("Samurai Jack: The Shadow of Aku");
 
       List<MediaCharacters> charsList = new LinkedList<MediaCharacters>();
       charsList.add(
@@ -167,6 +168,21 @@ public class LoadMediaCharacters {
           evangelion,
           characterRepo.findByName("Asuka Langley Souryuu"),
           secundary
+        )
+      );
+
+      charsList.add(
+        new MediaCharacters(
+          samuraiJack,
+          characterRepo.findByName("Aku"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          samuraiJack,
+          characterRepo.findByName("Jack"),
+          main
         )
       );
 
