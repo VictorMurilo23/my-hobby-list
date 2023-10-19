@@ -48,6 +48,7 @@ public class LoadMediaCharacters {
       Media evangelion = mediaRepo.findByName("Neon Genesis Evangelion: The End of Evangelion");
       Media samuraiJack = mediaRepo.findByName("Samurai Jack: The Shadow of Aku");
       Media finalFantasyTactics = mediaRepo.findByName("Final Fantasy Tactics: The War of the Lions");
+      Media legendaryMechanic = mediaRepo.findByName("The Legendary Mechanic (Novel)");
 
       List<MediaCharacters> charsList = new LinkedList<MediaCharacters>();
       charsList.add(
@@ -213,6 +214,28 @@ public class LoadMediaCharacters {
           finalFantasyTactics,
           characterRepo.findByName("Ovelia Atkascha"),
           secundary
+        )
+      );
+
+      charsList.add(
+        new MediaCharacters(
+          legendaryMechanic,
+          characterRepo.findByName("Hila"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          legendaryMechanic,
+          characterRepo.findByName("Esper God"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          legendaryMechanic,
+          characterRepo.findByName("Han Xiao"),
+          main
         )
       );
 

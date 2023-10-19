@@ -51,6 +51,10 @@ public class LoadCharacters {
     charsList.add(new Characters("Ramza Beoulve", "/characters/fft-twotl/ramza.png"));
     charsList.add(new Characters("Ovelia Atkascha", "/characters/fft-twotl/ovelia.png"));
 
+    charsList.add(new Characters("Hila", "/characters/the-legendary-mechanic/hila.webp"));
+    charsList.add(new Characters("Esper God", "/characters/the-legendary-mechanic/esgod.jpg"));
+    charsList.add(new Characters("Han Xiao", "/characters/the-legendary-mechanic/han-xiao.jpg"));
+
     repository.saveAll(charsList);
     return null;
   }
