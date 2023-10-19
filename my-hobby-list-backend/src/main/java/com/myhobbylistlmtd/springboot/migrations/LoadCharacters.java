@@ -79,6 +79,14 @@ public class LoadCharacters {
     charsList.add(new Characters("Edward Kelley", "/characters/nioh/edward-kelley.jpg"));
     charsList.add(new Characters("William Adams", "/characters/nioh/william.png"));
 
+    charsList.add(new Characters("Yuuji Endou", "/characters/kaiji/endou.jpg"));
+    charsList.add(new Characters("Kaiji Itou", "/characters/kaiji/kaiji.jpg"));
+    charsList.add(new Characters("Kazutaka Hyoudou", "/characters/kaiji/kazutaka-hyoudou.jpg"));
+    charsList.add(new Characters("Kouji Ishida", "/characters/kaiji/kouji-ishida.jpg"));
+    charsList.add(new Characters("Narrador", "/characters/kaiji/narrador.jpg"));
+    charsList.add(new Characters("Makoto Sahara", "/characters/kaiji/sahara.jpg"));
+    charsList.add(new Characters("Yukio Tonegawa", "/characters/kaiji/tonegawa.jpg"));
+
     repository.saveAll(charsList);
     return null;
   }

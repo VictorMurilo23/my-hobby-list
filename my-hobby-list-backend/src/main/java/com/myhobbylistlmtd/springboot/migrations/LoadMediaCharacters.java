@@ -54,6 +54,7 @@ public class LoadMediaCharacters {
       Media godOfWar = mediaRepo.findByName("God of War");
       Media godOfWarTwo = mediaRepo.findByName("God of War 2");
       Media nioh = mediaRepo.findByName("Nioh");
+      Media kaiji = mediaRepo.findByName("Gyakkyou Burai Kaiji: Ultimate Survivor");
 
       List<MediaCharacters> charsList = new LinkedList<MediaCharacters>();
       charsList.add(
@@ -413,6 +414,56 @@ public class LoadMediaCharacters {
         new MediaCharacters(
           nioh,
           characterRepo.findByName("Okatsu"),
+          secundary
+        )
+      );
+
+      charsList.add(
+        new MediaCharacters(
+          kaiji,
+          characterRepo.findByName("Kaiji Itou"),
+          main
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          kaiji,
+          characterRepo.findByName("Yuuji Endou"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          kaiji,
+          characterRepo.findByName("Kazutaka Hyoudou"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          kaiji,
+          characterRepo.findByName("Kouji Ishida"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          kaiji,
+          characterRepo.findByName("Narrador"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          kaiji,
+          characterRepo.findByName("Makoto Sahara"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          kaiji,
+          characterRepo.findByName("Yukio Tonegawa"),
           secundary
         )
       );
