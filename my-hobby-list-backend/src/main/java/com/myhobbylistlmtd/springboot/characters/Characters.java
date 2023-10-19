@@ -38,15 +38,15 @@ public class Characters {
   @JsonView({Views.Public.class})
   private String name;
 
-  /**
-   * Descrição do personagem.
+    /**
+   * Url da imagem do personagem.
    * @since 1.0
    * @version 1.0
    * @author Victor Murilo
    */
-  @Column(name = "character_info", length = 1000)
+  @Column(name = "character_image_url")
   @JsonView({Views.Public.class})
-  private String characterInfo;
+  private String characterImageUrl;
 
   /**
   * Associação com MediaCharacters.
@@ -58,17 +58,6 @@ public class Characters {
   @JsonIgnore
   private Set<MediaCharacters> mediaCharacters;
 
-  /**
-   * Getter de characterInfo.
-   * @return A descrição do personagem
-   * @since 1.0
-   * @version 1.0
-   * @author Victor Murilo
-   */
-  public String getCharacterInfo() {
-    return characterInfo;
-  }
-
   /** Default constructor.
   * @since 1.0
   * @author Victor Murilo
@@ -79,14 +68,17 @@ public class Characters {
   /**
    * Constructor.
    * @param name Nome do personagem
-   * @param charInfo Informações sobre o personagem
+   * @param imageUrl Url da imagem do personagem
    * @since 1.0
    * @author Victor Murilo
    * @version 1.0
    */
-  public Characters(final String name, final String charInfo) {
+  public Characters(
+    final String name,
+    final String imageUrl
+  ) {
     this.name = name;
-    this.characterInfo = charInfo;
+    this.characterImageUrl = imageUrl;
   }
 
   /**
@@ -112,17 +104,6 @@ public class Characters {
   }
 
   /**
-   * Setter de characterInfo.
-   * @param info Uma string com a descrição do personagem
-   * @since 1.0
-   * @version 1.0
-   * @author Victor Murilo
-   */
-  public void setCharacterInfo(final String info) {
-    this.characterInfo = info;
-  }
-
-  /**
    * Setter de name.
    * @param charName Uma string com o nome do personagem
    * @since 1.0
@@ -131,5 +112,21 @@ public class Characters {
    */
   public void setName(final String charName) {
     this.name = charName;
+  }
+
+  /**
+   * Getter de characterImageUrl.
+   * @return Uma string com a url da imagem do personagem
+   */
+  public String getCharacterImageUrl() {
+    return characterImageUrl;
+  }
+
+  /**
+   * Setter de characterImageUrl.
+   * @param characterImageUrlStr String com a url da imagem do personagem
+   */
+  public void setCharacterImageUrl(final String characterImageUrlStr) {
+    this.characterImageUrl = characterImageUrlStr;
   }
 }
