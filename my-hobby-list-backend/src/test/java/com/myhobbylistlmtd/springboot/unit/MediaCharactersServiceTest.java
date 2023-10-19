@@ -45,9 +45,9 @@ public class MediaCharactersServiceTest {
     Media media = new Media("Teste1");
     Long mediaId = Long.valueOf(4);
     ReflectionTestUtils.setField(media, "id", mediaId);
-    Characters characterOne = new Characters("Personagem1", "Info1");
-    Characters characterTwo = new Characters("Personagem2", "Info2");
-    Characters characterThree = new Characters("Personagem3", "Info3");
+    Characters characterOne = new Characters("Personagem1", "Info1", "/teste1");
+    Characters characterTwo = new Characters("Personagem2", "Info2", "/teste2");
+    Characters characterThree = new Characters("Personagem3", "Info3", "/teste3");
 
     CharactersRole roleOne = new CharactersRole("Protagonista");
     CharactersRole roleTwo = new CharactersRole("Antagonista");
