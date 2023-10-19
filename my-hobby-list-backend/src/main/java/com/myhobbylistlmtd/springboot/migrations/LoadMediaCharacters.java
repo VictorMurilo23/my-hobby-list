@@ -102,6 +102,15 @@ public class LoadMediaCharacters {
           main
         )
       );
+
+      charsList.add(
+        new MediaCharacters(
+          mediaRepo.findByName("Cocoto Fishing Master"),
+          characterRepo.findByName("Cocoto"),
+          main
+        )
+      );
+
       mediaCharRepo.saveAll(charsList);
     };
   }

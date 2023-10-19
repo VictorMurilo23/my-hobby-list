@@ -22,16 +22,19 @@ public class LoadCharacters {
   @Bean
   public CommandLineRunner runLoadCharacters(
       final CharacterRepository repository) {
-    List<Characters> statusList = new ArrayList<Characters>();
-    statusList.add(new Characters("Eikichi Onizuka", "/characters/gto/onizuka.jpg"));
-    statusList.add(new Characters("Azusa Fuyutsuki", "/characters/gto/azusa-fuyutsuki.jpg"));
-    statusList.add(new Characters("Hiroshi Uchiyamada", "/characters/gto/hiroshi-uchiyamada.jpg"));
-    statusList.add(new Characters("Miyabi Aizawa", "/characters/gto/miyabi-aizawa.jpg"));
-    statusList.add(new Characters("Ryuuji Danma", "/characters/gto/ryuuji-danma.jpg"));
-    statusList.add(new Characters("Tomoko Nomura", "/characters/gto/tomoko-nomura.jpg"));
-    statusList.add(new Characters("Urumi Kanzaki", "/characters/gto/urumi-kanzaki.jpg"));
-    statusList.add(new Characters("Yoshito Kikuchi", "/characters/gto/yoshito-kikuchi.jpg"));
-    repository.saveAll(statusList);
+    List<Characters> charsList = new ArrayList<Characters>();
+    charsList.add(new Characters("Eikichi Onizuka", "/characters/gto/onizuka.jpg"));
+    charsList.add(new Characters("Azusa Fuyutsuki", "/characters/gto/azusa-fuyutsuki.jpg"));
+    charsList.add(new Characters("Hiroshi Uchiyamada", "/characters/gto/hiroshi-uchiyamada.jpg"));
+    charsList.add(new Characters("Miyabi Aizawa", "/characters/gto/miyabi-aizawa.jpg"));
+    charsList.add(new Characters("Ryuuji Danma", "/characters/gto/ryuuji-danma.jpg"));
+    charsList.add(new Characters("Tomoko Nomura", "/characters/gto/tomoko-nomura.jpg"));
+    charsList.add(new Characters("Urumi Kanzaki", "/characters/gto/urumi-kanzaki.jpg"));
+    charsList.add(new Characters("Yoshito Kikuchi", "/characters/gto/yoshito-kikuchi.jpg"));
+
+    charsList.add(new Characters("Cocoto", "/characters/cocoto-fishing-master/cocoto.png"));
+
+    repository.saveAll(charsList);
     return null;
   }
 }
