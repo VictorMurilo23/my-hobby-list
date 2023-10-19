@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.mediacharacters.MediaCharacters;
 import com.myhobbylistlmtd.springboot.mediastatus.MediaStatus;
 import com.myhobbylistlmtd.springboot.mediatype.MediaType;
-import com.myhobbylistlmtd.springboot.objs.MediaParams;
 import com.myhobbylistlmtd.springboot.utils.Views;
 
 import jakarta.persistence.Column;
@@ -134,22 +133,71 @@ public class Media {
   */
   public Media() { }
 
-  /** Cria uma nova midia.
-  * @param params Um objeto contendo as informações de nome,
-  duração, quantidade de volumes, url da capa, tipo e status da media.
+  /**
+   * Constructor só com o nome da mídia. Geralmente utilizado em testes
+   * @param name Nome da mídia
+   */
+  public Media(final String name) {
+    this.name = name;
+  }
+
+  /** Cria uma nova midia sem volume.
+  * @param name Nome da mídia
+  * @param length Duração da mídia
+  * @param status Status da mídia
+  * @param type Tipo da mídia
+  * @param insertionDate Data de inserção da mídia
+  * @param image String com a url da imagem da capa da mídia
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 2.0
+  */
+  public Media(
+    final String name,
+    final Integer length,
+    final MediaStatus status,
+    final MediaType type,
+    final LocalDateTime insertionDate,
+    final String image
+  ) {
+    this.image = image;
+    this.name = name;
+    this.length = length;
+    this.status = status;
+    this.type = type;
+    this.insertionDate = insertionDate;
+  }
+
+  /** Cria uma nova midia com volume.
+  * @param name Nome da mídia
+  * @param length Duração da mídia
+  * @param status Status da mídia
+  * @param type Tipo da mídia
+  * @param insertionDate Data de inserção da mídia
+  * @param image String com a url da imagem da capa da mídia
+  * @param volumes Integer com a quantidade de volumes da mídia
   * @since 1.0
   * @author Victor Murilo
   * @version 1.0
   */
-  public Media(final MediaParams params) {
-    this.name = params.getName();
-    this.length = params.getLength();
-    this.volumes = params.getVolumes();
-    this.status = params.getStatus();
-    this.type = params.getType();
-    this.image = params.getImageUrl();
-    this.insertionDate = params.getInsertionDate();
+  public Media(
+    final String name,
+    final Integer length,
+    final MediaStatus status,
+    final MediaType type,
+    final LocalDateTime insertionDate,
+    final String image,
+    final Integer volumes
+  ) {
+    this.image = image;
+    this.name = name;
+    this.volumes = volumes;
+    this.length = length;
+    this.status = status;
+    this.type = type;
+    this.insertionDate = insertionDate;
   }
+
 
   /** Getter do atributo id.
   * @return Retorna um id único da midia.

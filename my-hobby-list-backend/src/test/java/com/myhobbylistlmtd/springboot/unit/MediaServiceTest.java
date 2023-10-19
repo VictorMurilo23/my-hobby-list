@@ -20,7 +20,6 @@ import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
 import com.myhobbylistlmtd.springboot.media.Media;
 import com.myhobbylistlmtd.springboot.media.MediaRepository;
 import com.myhobbylistlmtd.springboot.media.MediaService;
-import com.myhobbylistlmtd.springboot.objs.MediaParams;
 
 @ExtendWith(MockitoExtension.class)
 public class MediaServiceTest {
@@ -36,8 +35,8 @@ public class MediaServiceTest {
 
   @Test
   public void getMostRecentMedias() {
-    Media media1 = new Media(new MediaParams("Teste1"));
-    Media media2 = new Media(new MediaParams("Teste2"));
+    Media media1 = new Media("Teste1");
+    Media media2 = new Media("Teste2");
     List<Media> recentMedias = new ArrayList<Media>();
     recentMedias.add(media1);
     recentMedias.add(media2);
@@ -55,9 +54,9 @@ public class MediaServiceTest {
   @Test
   public void findAllByName() {
     List<Media> mediaList = new ArrayList<Media>();
-    mediaList.add(new Media(new MediaParams("Nome muito interessante")));
-    mediaList.add(new Media(new MediaParams("Nome blablabal")));
-    mediaList.add(new Media(new MediaParams("Nome 3")));
+    mediaList.add(new Media("Nome muito interessante"));
+    mediaList.add(new Media("Nome blablabal"));
+    mediaList.add(new Media("Nome 3"));
 
     when(mediaRepo.findAllByNameContainingIgnoreCase("Nome")).thenReturn(mediaList);
 
@@ -72,7 +71,7 @@ public class MediaServiceTest {
 
   @Test
   public void findByNameWithSucess() {
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
 
     when(mediaRepo.findByName("Teste1")).thenReturn(media);
 
@@ -94,7 +93,7 @@ public class MediaServiceTest {
   @Test
   public void findByIdWithSucess() {
     Long id = Long.valueOf(1);
-    Optional<Media> media = Optional.of(new Media(new MediaParams("Teste1")));
+    Optional<Media> media = Optional.of(new Media("Teste1"));
 
     when(mediaRepo.findById(Long.valueOf(id))).thenReturn(media);
 
