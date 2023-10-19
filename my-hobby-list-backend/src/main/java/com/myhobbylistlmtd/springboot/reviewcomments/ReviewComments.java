@@ -10,19 +10,50 @@ import com.myhobbylistlmtd.springboot.user.User;
 import com.myhobbylistlmtd.springboot.utils.Views;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "review_comments")
 public class ReviewComments {
+
   /**
-   * Id composto de chave estrangeiras.
+   * Id gerado automaticamente.
    */
-  @EmbeddedId
-  @JsonView(Views.Public.class)
-  private ReviewCommentsId id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @JsonView(
+    {
+      Views.Public.class, Views.MediaCard.class,
+      Views.ReviewPage.class, Views.UserListItem.class
+    }
+  )
+  private Long id;
+
+  /**
+  * Chave estrageira referente ao usuário.
+  * @since 1.0
+  * @author Victor Murilo
+  * @version 1.0
+  */
+  @ManyToOne
+  @JoinColumn(name = "user_id")
+  @JsonProperty("user")
+  private User userId;
+
+  /**
+   * Chave estrageira referente a review.
+   */
+  @ManyToOne
+  @PrimaryKeyJoinColumn(name = "review_id")
+  @JsonProperty("review")
+  private Reviews reviewId;
 
   /**
    * Conteúdo do comentário.
@@ -65,7 +96,8 @@ public class ReviewComments {
     final User user,
     final String commentary
   ) {
-    this.id = new ReviewCommentsId(user, review);
+    this.userId = user;
+    this.reviewId = review;
     this.commentary = commentary;
   }
 
@@ -89,7 +121,7 @@ public class ReviewComments {
    * Getter de id.
    * @return O id do comentário
    */
-  public ReviewCommentsId getId() {
+  public Long getId() {
     return id;
   }
 
@@ -116,7 +148,7 @@ public class ReviewComments {
   @JsonView({ Views.Comment.class })
   @JsonProperty("username")
   public String getUsername() {
-    return this.id.getUserId().getUsername();
+    return this.userId.getUsername();
   }
 
   /**
