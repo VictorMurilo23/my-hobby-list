@@ -48,6 +48,16 @@ public class Characters {
   @JsonView({Views.Public.class})
   private String characterInfo;
 
+    /**
+   * Url da imagem do personagem.
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  @Column(name = "character_image_url")
+  @JsonView({Views.Public.class})
+  private String characterImageUrl;
+
   /**
   * Associação com MediaCharacters.
   * @since 1.0
@@ -80,13 +90,19 @@ public class Characters {
    * Constructor.
    * @param name Nome do personagem
    * @param charInfo Informações sobre o personagem
+   * @param imageUrl Url da imagem do personagem
    * @since 1.0
    * @author Victor Murilo
    * @version 1.0
    */
-  public Characters(final String name, final String charInfo) {
+  public Characters(
+    final String name,
+    final String charInfo,
+    final String imageUrl
+  ) {
     this.name = name;
     this.characterInfo = charInfo;
+    this.characterImageUrl = imageUrl;
   }
 
   /**
@@ -131,5 +147,21 @@ public class Characters {
    */
   public void setName(final String charName) {
     this.name = charName;
+  }
+
+  /**
+   * Getter de characterImageUrl.
+   * @return Uma string com a url da imagem do personagem
+   */
+  public String getCharacterImageUrl() {
+    return characterImageUrl;
+  }
+
+  /**
+   * Setter de characterImageUrl.
+   * @param characterImageUrlStr String com a url da imagem do personagem
+   */
+  public void setCharacterImageUrl(final String characterImageUrlStr) {
+    this.characterImageUrl = characterImageUrlStr;
   }
 }
