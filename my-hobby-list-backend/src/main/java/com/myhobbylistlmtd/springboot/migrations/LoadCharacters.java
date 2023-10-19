@@ -46,6 +46,11 @@ public class LoadCharacters {
     charsList.add(new Characters("Jack", "/characters/samurai-jack/samurai-jack.jpg"));
     charsList.add(new Characters("Aku", "/characters/samurai-jack/aku.png"));
 
+    charsList.add(new Characters("Delita Heiral", "/characters/fft-twotl/delita.png"));
+    charsList.add(new Characters("Alma Beoulve", "/characters/fft-twotl/alma-beoulve.png"));
+    charsList.add(new Characters("Ramza Beoulve", "/characters/fft-twotl/ramza.png"));
+    charsList.add(new Characters("Ovelia Atkascha", "/characters/fft-twotl/ovelia.png"));
+
     repository.saveAll(charsList);
     return null;
   }
