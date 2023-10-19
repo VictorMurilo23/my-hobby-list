@@ -53,6 +53,7 @@ public class LoadMediaCharacters {
       Media breakingBad = mediaRepo.findByName("Breaking Bad - 1° Temporada");
       Media godOfWar = mediaRepo.findByName("God of War");
       Media godOfWarTwo = mediaRepo.findByName("God of War 2");
+      Media nioh = mediaRepo.findByName("Nioh");
 
       List<MediaCharacters> charsList = new LinkedList<MediaCharacters>();
       charsList.add(
@@ -379,6 +380,43 @@ public class LoadMediaCharacters {
           secundary
         )
       );
+
+      charsList.add(
+        new MediaCharacters(
+          nioh,
+          characterRepo.findByName("William Adams"),
+          main
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          nioh,
+          characterRepo.findByName("Edward Kelley"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          nioh,
+          characterRepo.findByName("Hanzo Hattori"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          nioh,
+          characterRepo.findByName("Fuku"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          nioh,
+          characterRepo.findByName("Okatsu"),
+          secundary
+        )
+      );
+
       mediaCharRepo.saveAll(charsList);
     };
   }

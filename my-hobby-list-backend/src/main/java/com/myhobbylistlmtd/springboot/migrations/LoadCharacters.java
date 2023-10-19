@@ -73,6 +73,12 @@ public class LoadCharacters {
     charsList.add(new Characters("Zeus", "/characters/god-of-war/zeus.jpg"));
     charsList.add(new Characters("Spartano que morre", "/characters/god-of-war/spartano.png"));
 
+    charsList.add(new Characters("Okatsu", "/characters/nioh/okatsu.jpg"));
+    charsList.add(new Characters("Fuku", "/characters/nioh/fuku.jpg"));
+    charsList.add(new Characters("Hanzo Hattori", "/characters/nioh/hanzo_hattori.png"));
+    charsList.add(new Characters("Edward Kelley", "/characters/nioh/edward-kelley.jpg"));
+    charsList.add(new Characters("William Adams", "/characters/nioh/william.png"));
+
     repository.saveAll(charsList);
     return null;
   }
