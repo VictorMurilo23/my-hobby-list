@@ -24,7 +24,6 @@ import com.myhobbylistlmtd.springboot.media.MediaService;
 import com.myhobbylistlmtd.springboot.mediacharacters.MediaCharacters;
 import com.myhobbylistlmtd.springboot.mediacharacters.MediaCharactersRepository;
 import com.myhobbylistlmtd.springboot.mediacharacters.MediaCharactersService;
-import com.myhobbylistlmtd.springboot.objs.MediaParams;
 
 @ExtendWith(MockitoExtension.class)
 public class MediaCharactersServiceTest {
@@ -43,7 +42,7 @@ public class MediaCharactersServiceTest {
 
   @Test
   public void getCharactersWithSuccess() {
-    Media media = new Media(new MediaParams("Teste1"));
+    Media media = new Media("Teste1");
     Long mediaId = Long.valueOf(4);
     ReflectionTestUtils.setField(media, "id", mediaId);
     Characters characterOne = new Characters("Personagem1", "Info1");
