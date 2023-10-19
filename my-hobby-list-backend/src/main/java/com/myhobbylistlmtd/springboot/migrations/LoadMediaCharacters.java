@@ -50,6 +50,7 @@ public class LoadMediaCharacters {
       Media finalFantasyTactics = mediaRepo.findByName("Final Fantasy Tactics: The War of the Lions");
       Media legendaryMechanic = mediaRepo.findByName("The Legendary Mechanic (Novel)");
       Media bloodborne = mediaRepo.findByName("Bloodborne");
+      Media breakingBad = mediaRepo.findByName("Breaking Bad - 1° Temporada");
 
       List<MediaCharacters> charsList = new LinkedList<MediaCharacters>();
       charsList.add(
@@ -272,6 +273,42 @@ public class LoadMediaCharacters {
         new MediaCharacters(
           bloodborne,
           characterRepo.findByName("Gehrman"),
+          secundary
+        )
+      );
+
+      charsList.add(
+        new MediaCharacters(
+          breakingBad,
+          characterRepo.findByName("Walter White"),
+          main
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          breakingBad,
+          characterRepo.findByName("Jesse Pinkman"),
+          main
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          breakingBad,
+          characterRepo.findByName("Marie Schrader"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          breakingBad,
+          characterRepo.findByName("Hank Schrader"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          breakingBad,
+          characterRepo.findByName("Skylar White"),
           secundary
         )
       );

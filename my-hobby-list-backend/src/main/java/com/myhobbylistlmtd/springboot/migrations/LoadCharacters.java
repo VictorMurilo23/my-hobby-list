@@ -61,6 +61,12 @@ public class LoadCharacters {
     charsList.add(new Characters("Eileen O Corvo", "/characters/bloodborne/eileen.png"));
     charsList.add(new Characters("Gehrman", "/characters/bloodborne/gerhman.png"));
 
+    charsList.add(new Characters("Hank Schrader", "/characters/breaking-bad/hank-schrader.png"));
+    charsList.add(new Characters("Jesse Pinkman", "/characters/breaking-bad/jesse-pinkman.jpg"));
+    charsList.add(new Characters("Marie Schrader", "/characters/breaking-bad/marie.jpg"));
+    charsList.add(new Characters("Skylar White", "/characters/breaking-bad/skylar-white.png"));
+    charsList.add(new Characters("Walter White", "/characters/breaking-bad/walter-white.jpg"));
+
     repository.saveAll(charsList);
     return null;
   }
