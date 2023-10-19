@@ -55,6 +55,12 @@ public class LoadCharacters {
     charsList.add(new Characters("Esper God", "/characters/the-legendary-mechanic/esgod.jpg"));
     charsList.add(new Characters("Han Xiao", "/characters/the-legendary-mechanic/han-xiao.jpg"));
 
+    charsList.add(new Characters("Alfred", "/characters/bloodborne/alfred.jpg"));
+    charsList.add(new Characters("Boneca", "/characters/bloodborne/boneca.png"));
+    charsList.add(new Characters("O Caçador", "/characters/bloodborne/cacador.jpg"));
+    charsList.add(new Characters("Eileen O Corvo", "/characters/bloodborne/eileen.png"));
+    charsList.add(new Characters("Gehrman", "/characters/bloodborne/gerhman.png"));
+
     repository.saveAll(charsList);
     return null;
   }

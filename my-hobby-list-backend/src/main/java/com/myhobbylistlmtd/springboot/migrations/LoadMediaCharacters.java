@@ -49,6 +49,7 @@ public class LoadMediaCharacters {
       Media samuraiJack = mediaRepo.findByName("Samurai Jack: The Shadow of Aku");
       Media finalFantasyTactics = mediaRepo.findByName("Final Fantasy Tactics: The War of the Lions");
       Media legendaryMechanic = mediaRepo.findByName("The Legendary Mechanic (Novel)");
+      Media bloodborne = mediaRepo.findByName("Bloodborne");
 
       List<MediaCharacters> charsList = new LinkedList<MediaCharacters>();
       charsList.add(
@@ -236,6 +237,42 @@ public class LoadMediaCharacters {
           legendaryMechanic,
           characterRepo.findByName("Han Xiao"),
           main
+        )
+      );
+
+      charsList.add(
+        new MediaCharacters(
+          bloodborne,
+          characterRepo.findByName("O Caçador"),
+          main
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          bloodborne,
+          characterRepo.findByName("Alfred"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          bloodborne,
+          characterRepo.findByName("Boneca"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          bloodborne,
+          characterRepo.findByName("Eileen O Corvo"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          bloodborne,
+          characterRepo.findByName("Gehrman"),
+          secundary
         )
       );
 
