@@ -43,7 +43,9 @@ public class LoadMediaCharacters {
       ctx.getBean(LoadMedia.class).init();
 
       CharactersRole main = charRoleRepo.findByRoleName("Personagem principal");
+      CharactersRole secundary = charRoleRepo.findByRoleName("Personagem secundário");
       Media gto = mediaRepo.findByName("GTO");
+      Media evangelion = mediaRepo.findByName("Neon Genesis Evangelion: The End of Evangelion");
 
       List<MediaCharacters> charsList = new LinkedList<MediaCharacters>();
       charsList.add(
@@ -108,6 +110,63 @@ public class LoadMediaCharacters {
           mediaRepo.findByName("Cocoto Fishing Master"),
           characterRepo.findByName("Cocoto"),
           main
+        )
+      );
+
+      charsList.add(
+        new MediaCharacters(
+          evangelion,
+          characterRepo.findByName("Shinji Ikari"),
+          main
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          evangelion,
+          characterRepo.findByName("Gendou Ikari"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          evangelion,
+          characterRepo.findByName("Kaworu Nagisa"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          evangelion,
+          characterRepo.findByName("Misato Katsuragi"),
+          main
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          evangelion,
+          characterRepo.findByName("Rei Ayanami"),
+          main
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          evangelion,
+          characterRepo.findByName("Ritsuko Akagi"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          evangelion,
+          characterRepo.findByName("Ryouji Kaji"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          evangelion,
+          characterRepo.findByName("Asuka Langley Souryuu"),
+          secundary
         )
       );
 

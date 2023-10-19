@@ -34,6 +34,15 @@ public class LoadCharacters {
 
     charsList.add(new Characters("Cocoto", "/characters/cocoto-fishing-master/cocoto.png"));
 
+    charsList.add(new Characters("Shinji Ikari", "/characters/evangelion/shinji.jpg"));
+    charsList.add(new Characters("Gendou Ikari", "/characters/evangelion/gendou.jpg"));
+    charsList.add(new Characters("Kaworu Nagisa", "/characters/evangelion/kaworu.jpg"));
+    charsList.add(new Characters("Misato Katsuragi", "/characters/evangelion/misato.jpg"));
+    charsList.add(new Characters("Rei Ayanami", "/characters/evangelion/rei.jpg"));
+    charsList.add(new Characters("Ritsuko Akagi", "/characters/evangelion/ritsuko.jpg"));
+    charsList.add(new Characters("Ryouji Kaji", "/characters/evangelion/ryouji-kaji.jpg"));
+    charsList.add(new Characters("Asuka Langley Souryuu", "/characters/evangelion/asuka.jpg"));
+
     repository.saveAll(charsList);
     return null;
   }
