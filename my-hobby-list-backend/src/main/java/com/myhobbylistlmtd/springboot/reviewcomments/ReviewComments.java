@@ -22,19 +22,19 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "review_comments")
 public class ReviewComments {
-
   /**
    * Id gerado automaticamente.
    */
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "comment_id")
   @JsonView(
     {
       Views.Public.class, Views.MediaCard.class,
       Views.ReviewPage.class, Views.UserListItem.class
     }
   )
-  private Long id;
+  private Long commentId;
 
   /**
   * Chave estrageira referente ao usuário.
@@ -118,11 +118,11 @@ public class ReviewComments {
   }
 
   /**
-   * Getter de id.
+   * Getter de commentId.
    * @return O id do comentário
    */
-  public Long getId() {
-    return id;
+  public Long getCommentId() {
+    return commentId;
   }
 
   /**
