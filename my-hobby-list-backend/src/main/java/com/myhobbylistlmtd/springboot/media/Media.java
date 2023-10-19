@@ -137,7 +137,7 @@ public class Media {
    * Constructor só com o nome da mídia. Geralmente utilizado em testes
    * @param name Nome da mídia
    */
-  public Media(String name) { 
+  public Media(final String name) {
     this.name = name;
   }
 
