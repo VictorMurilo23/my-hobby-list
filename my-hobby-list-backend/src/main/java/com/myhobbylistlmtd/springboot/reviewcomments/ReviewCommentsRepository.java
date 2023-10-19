@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ReviewCommentsRepository extends JpaRepository<
   ReviewComments,
-  ReviewCommentsId
+  Long
 > {
 
   /**
