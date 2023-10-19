@@ -38,16 +38,6 @@ public class Characters {
   @JsonView({Views.Public.class})
   private String name;
 
-  /**
-   * Descrição do personagem.
-   * @since 1.0
-   * @version 1.0
-   * @author Victor Murilo
-   */
-  @Column(name = "character_info", length = 1000)
-  @JsonView({Views.Public.class})
-  private String characterInfo;
-
     /**
    * Url da imagem do personagem.
    * @since 1.0
@@ -68,17 +58,6 @@ public class Characters {
   @JsonIgnore
   private Set<MediaCharacters> mediaCharacters;
 
-  /**
-   * Getter de characterInfo.
-   * @return A descrição do personagem
-   * @since 1.0
-   * @version 1.0
-   * @author Victor Murilo
-   */
-  public String getCharacterInfo() {
-    return characterInfo;
-  }
-
   /** Default constructor.
   * @since 1.0
   * @author Victor Murilo
@@ -89,7 +68,6 @@ public class Characters {
   /**
    * Constructor.
    * @param name Nome do personagem
-   * @param charInfo Informações sobre o personagem
    * @param imageUrl Url da imagem do personagem
    * @since 1.0
    * @author Victor Murilo
@@ -97,11 +75,9 @@ public class Characters {
    */
   public Characters(
     final String name,
-    final String charInfo,
     final String imageUrl
   ) {
     this.name = name;
-    this.characterInfo = charInfo;
     this.characterImageUrl = imageUrl;
   }
 
@@ -125,17 +101,6 @@ public class Characters {
    */
   public String getName() {
     return name;
-  }
-
-  /**
-   * Setter de characterInfo.
-   * @param info Uma string com a descrição do personagem
-   * @since 1.0
-   * @version 1.0
-   * @author Victor Murilo
-   */
-  public void setCharacterInfo(final String info) {
-    this.characterInfo = info;
   }
 
   /**
