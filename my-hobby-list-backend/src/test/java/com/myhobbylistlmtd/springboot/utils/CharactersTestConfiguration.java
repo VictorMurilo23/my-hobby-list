@@ -65,10 +65,10 @@ public class CharactersTestConfiguration {
       )
     );
     
-    Characters character1 = characterRepo.save(new Characters("Personagem1", "dwahd9uwahud", "/teste1"));
-    Characters character2 = characterRepo.save(new Characters("Personagem2", "diaioaw", "/teste2"));
-    Characters character3 = characterRepo.save(new Characters("Personagem3", "dauguwtacfdvyuatgcfuaw", "/teste3"));
-    Characters character4 = characterRepo.save(new Characters("Personagem4", "djahiowgwayfvcfawy", "/teste4"));
+    Characters character1 = characterRepo.save(new Characters("Personagem1", "/teste1"));
+    Characters character2 = characterRepo.save(new Characters("Personagem2", "/teste2"));
+    Characters character3 = characterRepo.save(new Characters("Personagem3", "/teste3"));
+    Characters character4 = characterRepo.save(new Characters("Personagem4", "/teste4"));
 
     CharactersRole mainRole = charRoleRepo.save(new CharactersRole("Personagem principal"));
     
