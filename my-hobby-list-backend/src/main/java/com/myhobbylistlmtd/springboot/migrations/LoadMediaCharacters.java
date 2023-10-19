@@ -51,6 +51,8 @@ public class LoadMediaCharacters {
       Media legendaryMechanic = mediaRepo.findByName("The Legendary Mechanic (Novel)");
       Media bloodborne = mediaRepo.findByName("Bloodborne");
       Media breakingBad = mediaRepo.findByName("Breaking Bad - 1° Temporada");
+      Media godOfWar = mediaRepo.findByName("God of War");
+      Media godOfWarTwo = mediaRepo.findByName("God of War 2");
 
       List<MediaCharacters> charsList = new LinkedList<MediaCharacters>();
       charsList.add(
@@ -313,6 +315,70 @@ public class LoadMediaCharacters {
         )
       );
 
+      charsList.add(
+        new MediaCharacters(
+          godOfWar,
+          characterRepo.findByName("Kratos"),
+          main
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          godOfWar,
+          characterRepo.findByName("Athena"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          godOfWar,
+          characterRepo.findByName("Ares"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          godOfWar,
+          characterRepo.findByName("Zeus"),
+          secundary
+        )
+      );
+      
+      charsList.add(
+        new MediaCharacters(
+          godOfWarTwo,
+          characterRepo.findByName("Kratos"),
+          main
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          godOfWarTwo,
+          characterRepo.findByName("Athena"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          godOfWarTwo,
+          characterRepo.findByName("Ares"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          godOfWarTwo,
+          characterRepo.findByName("Zeus"),
+          secundary
+        )
+      );
+      charsList.add(
+        new MediaCharacters(
+          godOfWarTwo,
+          characterRepo.findByName("Skylar White"),
+          secundary
+        )
+      );
       mediaCharRepo.saveAll(charsList);
     };
   }

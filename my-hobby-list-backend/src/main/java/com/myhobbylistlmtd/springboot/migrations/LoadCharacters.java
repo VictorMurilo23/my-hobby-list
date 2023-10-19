@@ -67,6 +67,12 @@ public class LoadCharacters {
     charsList.add(new Characters("Skylar White", "/characters/breaking-bad/skylar-white.png"));
     charsList.add(new Characters("Walter White", "/characters/breaking-bad/walter-white.jpg"));
 
+    charsList.add(new Characters("Ares", "/characters/god-of-war/ares.png"));
+    charsList.add(new Characters("Athena", "/characters/god-of-war/athena.png"));
+    charsList.add(new Characters("Kratos", "/characters/god-of-war/kratos.jpg"));
+    charsList.add(new Characters("Zeus", "/characters/god-of-war/zeus.jpg"));
+    charsList.add(new Characters("Spartano que morre", "/characters/god-of-war/spartano.png"));
+
     repository.saveAll(charsList);
     return null;
   }
