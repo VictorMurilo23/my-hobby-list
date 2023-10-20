@@ -20,15 +20,15 @@ describe('CharactersComponent', () => {
 
   const characters: char[] = [
     {
-      character: { characterInfo: 'teste1', id: 1, name: 'Personagem 1' },
+      character: { characterImageUrl: 'teste1', id: 1, name: 'Personagem 1' },
       characterRole: 'Personagem principal',
     },
     {
-      character: { characterInfo: 'teste2', id: 2, name: 'Personagem 2' },
+      character: { characterImageUrl: 'teste2', id: 2, name: 'Personagem 2' },
       characterRole: 'Personagem secundário',
     },
     {
-      character: { characterInfo: 'teste3', id: 3, name: 'Personagem 3' },
+      character: { characterImageUrl: 'teste3', id: 3, name: 'Personagem 3' },
       characterRole: 'Personagem secundário',
     },
   ];
