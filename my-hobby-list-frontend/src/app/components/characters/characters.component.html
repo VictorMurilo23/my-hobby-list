@@ -1,5 +1,6 @@
 <div class="characters-container">
   <div *ngFor="let character of characters" class="card char-card" (click)="redirect(character.character.id)">
+    <img src="{{env.apiUrl + '/' +  character.character.characterImageUrl}}" class="card-img-top" alt="{{'imagem do ' + character.character.name}}">
     <div class="card-body">
       <h5 class="char-name card-title">{{character.character.name}}</h5>
       <p class="char-role card-text">{{character.characterRole}}</p>

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import ICharacters, { char } from 'src/app/interfaces/ICharacters';
 import { CharacterService } from 'src/app/services/character.service';
 import { MediaService } from 'src/app/services/media.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-characters',
@@ -11,6 +12,7 @@ import { MediaService } from 'src/app/services/media.service';
 })
 export class CharactersComponent implements OnInit {
   public characters: char[] = [];
+  readonly env = environment;
 
   constructor(private mediaService: MediaService, private characterService: CharacterService, private router: Router) {}
 
@@ -18,6 +20,7 @@ export class CharactersComponent implements OnInit {
     const mediaName = this.mediaService.getMediaName();
     this.characterService.getCharacters(mediaName).subscribe({
       next: (data: ICharacters) => {
+        console.log(data);
         this.characters = data.characters;
       }
     })
