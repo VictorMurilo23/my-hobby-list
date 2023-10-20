@@ -35,6 +35,7 @@ public class FindCharactersIT {
     ResultActions response = mockMvc.perform(get("/characters/Teste"));
 
     response.andExpect(status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.*", hasSize(1)))
         .andExpect(MockMvcResultMatchers.jsonPath("$.characters").isArray())
         .andExpect(MockMvcResultMatchers.jsonPath("$.characters", hasSize(2)))
         .andExpect(MockMvcResultMatchers.jsonPath("$.characters[0].characterRole").value("Personagem principal"))
@@ -48,6 +49,7 @@ public class FindCharactersIT {
     ResultActions response = mockMvc.perform(get("/characters/bdawddahdb"));
 
     response.andExpect(status().isNotFound())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.*", hasSize(2)))
         .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(404))
         .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Media não encontrada!"));
   }
@@ -57,6 +59,7 @@ public class FindCharactersIT {
     ResultActions response = mockMvc.perform(get("/characters/Teste3"));
 
     response.andExpect(status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.*", hasSize(1)))
         .andExpect(MockMvcResultMatchers.jsonPath("$.characters").isArray())
         .andExpect(MockMvcResultMatchers.jsonPath("$.characters", hasSize(0)));
   }
