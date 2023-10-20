@@ -104,7 +104,10 @@ public class ReviewCommentsController {
       List<ReviewComments> commentsList = this.reviewCommentsService
         .findReviewComments(username, Long.valueOf(mediaId));
 
-      return new ResponseReviewComments(commentsList);
+      return new ResponseReviewComments(
+        commentsList,
+        commentsList.get(0).getReviewId()
+      );
     } catch (NumberFormatException e) {
       throw new BadRequestException("Insira um mediaId em formato de número");
     }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.reviewcomments.ReviewComments;
+import com.myhobbylistlmtd.springboot.reviews.Reviews;
 import com.myhobbylistlmtd.springboot.utils.Views;
 
 public class ResponseReviewComments {
@@ -14,11 +15,21 @@ public class ResponseReviewComments {
   private List<ReviewComments> comments;
 
   /**
+   * Review.
+   */
+  @JsonView({ Views.Review.class })
+  private Reviews review;
+
+  /**
    * d.
    * @param comments
+   * @param review
    */
-  public ResponseReviewComments(final List<ReviewComments> comments) {
+  public ResponseReviewComments(
+    final List<ReviewComments> comments, final Reviews review
+  ) {
     this.comments = comments;
+    this.review = review;
   }
 
   /**
@@ -35,5 +46,21 @@ public class ResponseReviewComments {
    */
   public void setComments(final List<ReviewComments> commentsList) {
     this.comments = commentsList;
+  }
+
+  /**
+   * Getter de review.
+   * @return Um objeto de review
+   */
+  public Reviews getReview() {
+    return review;
+  }
+
+  /**
+   * Setter de review.
+   * @param reviewObj Objeto de review
+   */
+  public void setReview(final Reviews reviewObj) {
+    this.review = reviewObj;
   }
 }

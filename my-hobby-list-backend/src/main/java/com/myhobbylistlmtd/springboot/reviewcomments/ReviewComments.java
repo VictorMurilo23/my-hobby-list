@@ -158,4 +158,12 @@ public class ReviewComments {
   public LocalDateTime getInsertionDate() {
     return insertionDate;
   }
+
+  /**
+   * Getter de reviewId.
+   * @return Um objeto com as informaçoes da review
+   */
+  public Reviews getReviewId() {
+    return reviewId;
+  }
 }
