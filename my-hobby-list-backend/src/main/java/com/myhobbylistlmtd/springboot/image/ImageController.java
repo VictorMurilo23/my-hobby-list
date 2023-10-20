@@ -21,7 +21,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping(value = "/images")
 @Tag(name = "Images")
 public class ImageController {
-  // TODO Fazer duas rotas de imagens, uma de capas e outra pra personagens
   /**
    * Caminho base para o diretório de imagens.
    * @since 1.0
@@ -143,5 +142,46 @@ public class ImageController {
       filesPath, "images/profile"
     );
     return imagesUrl;
+  }
+
+  /**
+   * Rota estática de achar uma imagem de um personagem.
+   * @param imageName Nome da imagem
+   * @param mediaName Nome da media
+   * @return Uma imagem png ou jpg.
+   * @throws NotFoundException Ocorre quando a imagem não é encontrada.
+   * @since 1.0
+   * @version 1.0
+   * @author Victor Murilo
+   */
+  @GetMapping("/characters/{mediaName}/{imageName}")
+  @Operation(summary = "Pega uma imagem do personagem")
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "200",
+      description = "Retorna uma imagem, podendo ser um .jpg ou .png",
+      content = {
+        @Content(
+          mediaType = "image/jpeg",
+          schema = @Schema(type = "string", format = "binary")
+        ),
+        @Content(
+          mediaType = "image/png",
+          schema = @Schema(type = "string", format = "binary")
+        )
+      }
+    ),
+  })
+  public ResponseEntity<byte[]> getCharactersImage(
+    @PathVariable("imageName") final String imageName,
+    @PathVariable("mediaName") final String mediaName
+  ) {
+    System.out.println(this.imagePathRoot + "characters/" + mediaName + "/" + imageName);
+    byte[] image = service.findImage(
+      this.imagePathRoot + "characters/" + mediaName + "/" + imageName
+    );
+    MediaType type = imageName.endsWith(".jpg")
+    ? MediaType.IMAGE_JPEG : MediaType.IMAGE_PNG;
+    return ResponseEntity.ok().contentType(type).body(image);
   }
 }
