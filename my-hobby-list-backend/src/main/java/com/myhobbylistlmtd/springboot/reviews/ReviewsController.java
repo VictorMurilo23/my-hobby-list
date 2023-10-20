@@ -98,6 +98,7 @@ public class ReviewsController {
    */
   @PatchMapping("/edit")
   @ResponseStatus(HttpStatus.OK)
+  @JsonView({Views.Review.class})
   @Operation(
     summary = "Editar uma review",
     parameters = {
