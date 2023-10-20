@@ -23,6 +23,7 @@ import com.myhobbylistlmtd.springboot.utils.EditReviewsConfiguration;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.hamcrest.Matchers.hasSize;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = MyHobbyListBackendApplication.class)
@@ -72,7 +73,12 @@ public class EditReviewsIT {
         .content(json)
         .header("Authorization", this.token))
         .andExpect(status().isOk())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.content").value("Teste"));
+        .andExpect(MockMvcResultMatchers.jsonPath("$.*", hasSize(4)))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.content").value("Teste"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.edited").value(true))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.recommended").value(true))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.user.*", hasSize(1)))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.user.username").value("Victor"));
   }
 
   @Test
@@ -84,7 +90,11 @@ public class EditReviewsIT {
         .content(json)
         .header("Authorization", this.token))
         .andExpect(status().isOk())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.recommended").value("false"));
+        .andExpect(MockMvcResultMatchers.jsonPath("$.*", hasSize(4)))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.edited").value(true))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.recommended").value("false"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.user.*", hasSize(1)))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.user.username").value("Victor"));
   }
 
   @Test
@@ -96,8 +106,12 @@ public class EditReviewsIT {
         .content(json)
         .header("Authorization", this.token))
         .andExpect(status().isOk())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.recommended").value("true"))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.content").value("Teste12345"));
+        .andExpect(MockMvcResultMatchers.jsonPath("$.*", hasSize(4)))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.edited").value(true))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.recommended").value(true))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.content").value("Teste12345"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.user.*", hasSize(1)))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.user.username").value("Victor"));
   }
 
   @Test
@@ -109,6 +123,6 @@ public class EditReviewsIT {
         .content(json)
         .header("Authorization", this.token))
         .andExpect(status().isBadRequest())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("recommended deve ser um campo v\u00E1lido"));
+        .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("recommended deve ser um campo válido"));
   }
 }

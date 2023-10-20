@@ -123,7 +123,6 @@ public class Media {
   * @version 1.0
   */
   @OneToMany(mappedBy = "media")
-  @JsonView(Views.Public.class)
   private Set<MediaCharacters> characters;
 
   /** Default constructor.

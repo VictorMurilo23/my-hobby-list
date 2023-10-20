@@ -33,8 +33,15 @@ public class FindReviewsIT {
     ResultActions response = mockMvc.perform(get("/reviews/find/1"));
 
     response.andExpect(status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.*", hasSize(2)))
         .andExpect(MockMvcResultMatchers.jsonPath("$.reviews").isArray())
         .andExpect(MockMvcResultMatchers.jsonPath("$.reviews", hasSize(10)))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.reviews[0].*", hasSize(4)))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.reviews[0].content").value("Teste1"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.reviews[0].edited").value(false))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.reviews[0].recommended").value(true))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.reviews[0].user.*", hasSize(1)))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.reviews[0].user.username").value("Victor1"))
         .andExpect(MockMvcResultMatchers.jsonPath("$.totalPages").value(2));
   }
 
@@ -42,16 +49,19 @@ public class FindReviewsIT {
   public void findCharactersPages() throws Exception {
     mockMvc.perform(get("/reviews/find/1?page=0"))
         .andExpect(status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.*", hasSize(2)))
         .andExpect(MockMvcResultMatchers.jsonPath("$.reviews").isArray())
         .andExpect(MockMvcResultMatchers.jsonPath("$.reviews", hasSize(10)))
         .andExpect(MockMvcResultMatchers.jsonPath("$.totalPages").value(2));
     mockMvc.perform(get("/reviews/find/1?page=1"))
         .andExpect(status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.*", hasSize(2)))
         .andExpect(MockMvcResultMatchers.jsonPath("$.reviews").isArray())
         .andExpect(MockMvcResultMatchers.jsonPath("$.reviews", hasSize(6)))
         .andExpect(MockMvcResultMatchers.jsonPath("$.totalPages").value(2));
     mockMvc.perform(get("/reviews/find/1?page=2"))
         .andExpect(status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.*", hasSize(2)))
         .andExpect(MockMvcResultMatchers.jsonPath("$.reviews").isArray())
         .andExpect(MockMvcResultMatchers.jsonPath("$.reviews", hasSize(0)))
         .andExpect(MockMvcResultMatchers.jsonPath("$.totalPages").value(2));

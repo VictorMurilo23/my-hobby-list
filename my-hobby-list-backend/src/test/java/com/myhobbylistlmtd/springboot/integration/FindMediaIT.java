@@ -35,8 +35,10 @@ public class FindMediaIT {
     ResultActions response = mockMvc.perform(get("/media/search-by-id/1"));
 
     response.andExpect(status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.*", hasSize(7)))
         .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Tessst"))
         .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.length").value(208))
         .andExpect(MockMvcResultMatchers.jsonPath("$.image").value("capa/capa"))
         .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("Completo"))
         .andExpect(MockMvcResultMatchers.jsonPath("$.type").value("Manga"))
@@ -48,10 +50,15 @@ public class FindMediaIT {
     ResultActions response = mockMvc.perform(get("/media/search-by-name/tes"));
 
     response.andExpect(status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.*", hasSize(1)))
         .andExpect(MockMvcResultMatchers.jsonPath("$.medias").isArray())
         .andExpect(MockMvcResultMatchers.jsonPath("$.medias", hasSize(2)))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.medias[0].id").value(1))
         .andExpect(MockMvcResultMatchers.jsonPath("$.medias[0].name").value("Tessst"))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.medias[1].name").value("Tes1"));
+        .andExpect(MockMvcResultMatchers.jsonPath("$.medias[0].image").value("capa/capa"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.medias[1].id").value(3))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.medias[1].name").value("Tes1"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.medias[1].image").value("capa/capa"));
   }
 
   @Test
@@ -65,11 +72,14 @@ public class FindMediaIT {
     };
 
     response.andExpect(status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.*", hasSize(1)))
         .andExpect(MockMvcResultMatchers.jsonPath("$.medias").isArray())
         .andExpect(MockMvcResultMatchers.jsonPath("$.medias", hasSize(10)));
     for (int index = 0; index < correctMediasOrder.length; index += 1) {
-      String currentItem = String.format("$.medias[%s].name", index);
-      response.andExpect(MockMvcResultMatchers.jsonPath(currentItem).value(correctMediasOrder[index]));
+      String currentItem = String.format("$.medias[%s]", index);
+      response
+        .andExpect(MockMvcResultMatchers.jsonPath(currentItem + ".name").value(correctMediasOrder[index]))
+        .andExpect(MockMvcResultMatchers.jsonPath(currentItem + ".*", hasSize(3)));
     }
 
   }
