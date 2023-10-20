@@ -20,7 +20,6 @@ export class CharactersComponent implements OnInit {
     const mediaName = this.mediaService.getMediaName();
     this.characterService.getCharacters(mediaName).subscribe({
       next: (data: ICharacters) => {
-        console.log(data);
         this.characters = data.characters;
       }
     })
