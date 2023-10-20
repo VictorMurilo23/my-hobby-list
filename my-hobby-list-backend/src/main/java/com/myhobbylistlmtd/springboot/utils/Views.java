@@ -16,7 +16,7 @@ public class Views {
   public interface ReviewPage extends Review {
   }
 
-  public interface Comment {
+  public interface Comment extends Review {
   }
 
   public interface UserListItem {
