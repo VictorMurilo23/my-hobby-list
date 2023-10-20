@@ -377,7 +377,7 @@ public class LoadMediaCharacters {
       charsList.add(
         new MediaCharacters(
           godOfWarTwo,
-          characterRepo.findByName("Skylar White"),
+          characterRepo.findByName("Spartano que morre"),
           secundary
         )
       );
