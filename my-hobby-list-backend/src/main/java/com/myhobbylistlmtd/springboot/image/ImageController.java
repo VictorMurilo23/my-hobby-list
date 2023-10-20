@@ -176,7 +176,6 @@ public class ImageController {
     @PathVariable("imageName") final String imageName,
     @PathVariable("mediaName") final String mediaName
   ) {
-    System.out.println(this.imagePathRoot + "characters/" + mediaName + "/" + imageName);
     byte[] image = service.findImage(
       this.imagePathRoot + "characters/" + mediaName + "/" + imageName
     );
