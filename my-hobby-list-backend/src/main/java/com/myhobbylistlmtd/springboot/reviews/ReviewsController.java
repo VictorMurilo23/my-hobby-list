@@ -54,8 +54,7 @@ public class ReviewsController {
    * @version 1.0
    */
   @PostMapping("/create")
-  // TODO alterar o ResponseStatus pra HttpStatus.CREATED e corrigir os testes
-  @ResponseStatus(HttpStatus.OK)
+  @ResponseStatus(HttpStatus.CREATED)
   @Operation(
     summary = "Criar uma review",
     parameters = {

@@ -140,7 +140,7 @@ public class CreateReviewsIT {
         .contentType(MediaType.APPLICATION_JSON)
         .content(json)
         .header("Authorization", this.token))
-        .andExpect(status().isOk())
+        .andExpect(status().isCreated())
         .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Review criado com sucesso!"));
   }
 }
