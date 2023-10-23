@@ -13,6 +13,7 @@ import { ChangeProfileImageComponent } from "./components/change-profile-image/c
 import { ReviewsComponent } from "./components/reviews/reviews.component";
 import { CharactersComponent } from "./components/characters/characters.component";
 import { UserReviewsPageComponent } from "./pages/user-reviews-page/user-reviews-page.component";
+import { ReviewCommentsComponent } from "./pages/review-comments/review-comments.component";
 
 const routes: Routes = [
   {path: "", component: HomeComponent},
@@ -30,6 +31,7 @@ const routes: Routes = [
     {path: "change-profile-image", component: ChangeProfileImageComponent}
   ]},
   {path: "reviews/:username", component: UserReviewsPageComponent},
+  {path: "review/:username/:mediaId", component: ReviewCommentsComponent},
   {path: '**', pathMatch: "full", component: PageNotFoundComponent}
 ];
 
