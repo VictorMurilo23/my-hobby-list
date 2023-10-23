@@ -94,7 +94,7 @@ export class ReviewService {
    * @param mediaId Id da media referente a review
    * @returns Um objeto contendo os comentários e a review
    */
-  public reviewDetails(username: string, mediaId: number) {
+  public reviewDetails(username: string, mediaId: string) {
     return this.http.get<ReviewDetails>(`${this.baseUrl}-comments/find/${username}/${mediaId}`, { observe: "body", responseType: 'json' });
   }
 }
