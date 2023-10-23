@@ -33,9 +33,23 @@ public class FindReviewCommentsIT {
     ResultActions response = mockMvc.perform(get("/review-comments/find/Victor/1"));
 
     response.andExpect(status().isOk())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.*", hasSize(1)))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.*", hasSize(2)))
         .andExpect(MockMvcResultMatchers.jsonPath("$.comments").isArray())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.comments", hasSize(2)));
+        .andExpect(MockMvcResultMatchers.jsonPath("$.comments", hasSize(2)))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.comments[0].commentary").value("Muito bom"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.comments[0].edited").value(false))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.comments[0].username").value("Victor"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.comments[1].commentary").value("Muito bom"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.comments[1].edited").value(false))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.comments[1].username").value("Victo"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.review.*", hasSize(4)))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.review.content").value("Teste"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.review.edited").value(false))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.review.recommended").value(true))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.review.user.*", hasSize(1)))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.review.user.username").value("Victor"))
+        
+        ;
   }
 
   @Test
