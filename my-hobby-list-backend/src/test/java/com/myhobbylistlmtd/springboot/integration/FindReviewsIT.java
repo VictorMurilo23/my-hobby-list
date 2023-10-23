@@ -29,7 +29,7 @@ public class FindReviewsIT {
   private MockMvc mockMvc;
 
   @Test
-  public void findCharactersWithSuccess() throws Exception {
+  public void findReviewsWithSuccess() throws Exception {
     ResultActions response = mockMvc.perform(get("/reviews/find/1"));
 
     response.andExpect(status().isOk())
@@ -46,7 +46,7 @@ public class FindReviewsIT {
   }
 
   @Test
-  public void findCharactersPages() throws Exception {
+  public void findReviewsByPage() throws Exception {
     mockMvc.perform(get("/reviews/find/1?page=0"))
         .andExpect(status().isOk())
         .andExpect(MockMvcResultMatchers.jsonPath("$.*", hasSize(2)))
