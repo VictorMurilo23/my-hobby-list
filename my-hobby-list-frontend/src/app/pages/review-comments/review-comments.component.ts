@@ -30,7 +30,7 @@ export class ReviewCommentsComponent implements OnInit {
       .subscribe({
         next: (data: ReviewDetails) => {
           this.review = data.review;
-          this.comments.concat(data.comments);
+          this.comments.push(...data.comments);
         },
         error: (err) => {
           console.log(err);
