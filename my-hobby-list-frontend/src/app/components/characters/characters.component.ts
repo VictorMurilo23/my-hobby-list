@@ -14,7 +14,7 @@ export class CharactersComponent implements OnInit {
   public characters: char[] = [];
   readonly env = environment;
 
-  constructor(private mediaService: MediaService, private characterService: CharacterService, private router: Router) {}
+  constructor(private mediaService: MediaService, private characterService: CharacterService) {}
 
   ngOnInit(): void {
     const mediaName = this.mediaService.getMediaName();
@@ -23,9 +23,5 @@ export class CharactersComponent implements OnInit {
         this.characters = data.characters;
       }
     })
-  }
-
-  redirect(charId: number): void {
-    this.router.navigate([`/character/${charId}`]);
   }
 }
