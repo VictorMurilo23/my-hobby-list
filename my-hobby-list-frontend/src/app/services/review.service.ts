@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CreateReview, FindReviews, FindUserReviews, Review, ReviewDetails } from '../interfaces/IReviews';
+import { Comment, CreateComment, CreateReview, FindReviews, FindUserReviews, Review, ReviewDetails } from '../interfaces/IReviews';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class ReviewService {
   private baseUrl = `${environment.apiUrl}/reviews`;
+  private baseUrlReviewComments = `${environment.apiUrl}/review-comments`
 
   constructor(private http: HttpClient) {}
 
@@ -95,6 +96,23 @@ export class ReviewService {
    * @returns Um objeto contendo os comentários e a review
    */
   public reviewDetails(username: string, mediaId: string) {
-    return this.http.get<ReviewDetails>(`${environment.apiUrl}/review-comments/find/${username}/${mediaId}`, { observe: "body", responseType: 'json' });
+    return this.http.get<ReviewDetails>(`${this.baseUrlReviewComments}/find/${username}/${mediaId}`, { observe: "body", responseType: 'json' });
+  }
+
+  /**
+   * Cria um comentário em uma review
+   * @param token JWT
+   * @param commentInfo Objeto com as informações do comentário
+   */
+  public createComment(token: string, commentInfo: CreateComment) {
+    const headers = new HttpHeaders({
+      Authorization: token,
+    });
+    const {commentary, mediaId, usernameFromReview} = commentInfo;
+    return this.http.post<Comment>(`${this.baseUrlReviewComments}/create`, { usernameFromReview, mediaId, commentary }, {
+      observe: 'body',
+      responseType: 'json',
+      headers,
+    });
   }
 }

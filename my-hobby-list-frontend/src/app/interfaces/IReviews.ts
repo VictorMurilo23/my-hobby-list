@@ -43,3 +43,9 @@ export interface ReviewDetails {
   review: Review;
   comments: Comment[];
 }
+
+export interface CreateComment {
+  commentary: string,
+  usernameFromReview: string,
+  mediaId: number
+}
