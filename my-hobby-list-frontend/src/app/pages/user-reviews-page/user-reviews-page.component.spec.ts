@@ -27,11 +27,13 @@ describe('UserReviewsPageComponent', () => {
     {
       content: 'df',
       recommended: true,
+      edited: false,
       user: { username: 'Vic' },
       media: { id: 1, image: '/d', name: 'GGGGGGGG' },
     },
     {
       content: 'ffff',
+      edited: false,
       recommended: true,
       user: { username: 'Vic' },
       media: { id: 2, image: '/f', name: 'EEEEEEE' },

@@ -17,7 +17,7 @@ export class ReviewsComponent implements OnInit, SendReview {
   public loading = true;
   private currentPage = 0;
   private totalPages!: number;
-  private userReview: Review = { content: "", recommended: true, user: { username: "" } };
+  private userReview: Review = { content: "", edited: false, recommended: true, user: { username: "" } };
   public showCreateReviewComponent = true;
 
   constructor(
