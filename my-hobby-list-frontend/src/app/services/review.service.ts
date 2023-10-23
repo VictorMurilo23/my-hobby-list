@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CreateReview, FindReviews, FindUserReviews, Review } from '../interfaces/IReviews';
+import { CreateReview, FindReviews, FindUserReviews, Review, ReviewDetails } from '../interfaces/IReviews';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -86,5 +86,15 @@ export class ReviewService {
       responseType: 'json',
       headers,
     })
+  }
+
+  /**
+   * Busca uma review e seus comentários
+   * @param username Nome do usuário que fez a review
+   * @param mediaId Id da media referente a review
+   * @returns Um objeto contendo os comentários e a review
+   */
+  public reviewDetails(username: string, mediaId: number) {
+    return this.http.get<ReviewDetails>(`${this.baseUrl}-comments/find/${username}/${mediaId}`, { observe: "body", responseType: 'json' });
   }
 }
