@@ -1,1 +1,11 @@
-<p>review-comments works!</p>
+<app-page-not-found *ngIf=" getReview() === undefined; else showReview"></app-page-not-found>
+<ng-template #showReview>
+  <app-review-card [reviewInfo]="getReview()"></app-review-card>
+  <div *ngIf="getComments().length > 0">
+    <div *ngFor="let comment of getComments()">
+      <span>{{comment.edited}}</span>
+      <span>{{comment.username}}</span>
+      <p>{{comment.commentary}}</p>
+    </div>
+  </div>
+</ng-template>

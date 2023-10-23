@@ -37,4 +37,12 @@ export class ReviewCommentsComponent implements OnInit {
         }
       });
   }
+
+  public getReview() {
+    return this.review;
+  }
+
+  public getComments() {
+    return this.comments;
+  }
 }
