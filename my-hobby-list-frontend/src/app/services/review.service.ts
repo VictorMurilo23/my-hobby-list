@@ -95,6 +95,6 @@ export class ReviewService {
    * @returns Um objeto contendo os comentários e a review
    */
   public reviewDetails(username: string, mediaId: string) {
-    return this.http.get<ReviewDetails>(`${this.baseUrl}-comments/find/${username}/${mediaId}`, { observe: "body", responseType: 'json' });
+    return this.http.get<ReviewDetails>(`${environment.apiUrl}/review-comments/find/${username}/${mediaId}`, { observe: "body", responseType: 'json' });
   }
 }
