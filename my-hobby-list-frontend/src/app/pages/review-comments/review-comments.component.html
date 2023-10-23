@@ -8,4 +8,13 @@
       <p>{{comment.commentary}}</p>
     </div>
   </div>
+  <div *ngIf="this.tokenUsername !== null">
+    <input
+      value={{this.getUserComment()}}
+      (change)="setUserComment($any($event.target).value)"
+      placeholder="Insira um comentário..."
+      type="text"
+    >
+    <button (click)="sendComment()">Enviar</button>
+  </div>
 </ng-template>
