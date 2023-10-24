@@ -1,27 +1,30 @@
 <app-page-not-found *ngIf=" getReview() === undefined; else showReview"></app-page-not-found>
 <ng-template #showReview>
-  <app-review-card [reviewInfo]="getReview()"></app-review-card>
-  <div *ngIf="getComments().length > 0">
-    <div *ngFor="let comment of getComments()">
-      <div *ngIf="comment.editing !== true; else showEditing">
-        <span *ngIf="comment.edited === true">Editado</span>
-        <span>{{comment.username}}</span>
-        <p>{{comment.commentary}}</p>
-        <button *ngIf="this.tokenUsername === comment.username" (click)="editComment(comment)">Editar</button>
+  <div class="d-flex flex-column gap-3 ms-2">
+    <app-review-card [reviewInfo]="getReview()"></app-review-card>
+    <div class="d-flex flex-column gap-2" *ngIf="getComments().length > 0">
+      <div class="card d-inline comment-card" *ngFor="let comment of getComments()">
+        <div class="card-body" *ngIf="comment.editing !== true; else showEditing">
+          <span *ngIf="comment.edited === true">Editado</span>
+          <span>{{comment.username}}</span>
+          <p>{{comment.commentary}}</p>
+          <button class="btn btn-primary btn-sm" *ngIf="this.tokenUsername === comment.username" (click)="editComment(comment)">Editar</button>
+        </div>
+        <ng-template #showEditing>
+          <input class="form-control" type="text" value={{comment.commentary}} (change)="changeCommentary(comment, $any($event.target).value)">
+          <button class="btn btn-primary" (click)="saveComment(comment)">Salvar</button>
+        </ng-template>
       </div>
-      <ng-template #showEditing>
-        <input type="text" value={{comment.commentary}} (change)="changeCommentary(comment, $any($event.target).value)">
-        <button (click)="saveComment(comment)">Salvar</button>
-      </ng-template>
+      <div class="mb-3" *ngIf="this.tokenUsername !== null">
+        <input
+          value={{this.getUserComment()}}
+          class="form-control input-create-comment"
+          (change)="setUserComment($any($event.target).value)"
+          placeholder="Insira um comentário..."
+          type="text"
+        >
+        <button class="btn btn-primary" (click)="sendComment()">Enviar</button>
+      </div>
     </div>
-  </div>
-  <div *ngIf="this.tokenUsername !== null">
-    <input
-      value={{this.getUserComment()}}
-      (change)="setUserComment($any($event.target).value)"
-      placeholder="Insira um comentário..."
-      type="text"
-    >
-    <button (click)="sendComment()">Enviar</button>
   </div>
 </ng-template>
