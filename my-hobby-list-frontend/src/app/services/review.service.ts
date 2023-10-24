@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Comment, CreateComment, CreateReview, FindReviews, FindUserReviews, Review, ReviewDetails } from '../interfaces/IReviews';
+import { Comment, CreateComment, CreateReview, EditComment, FindReviews, FindUserReviews, Review, ReviewDetails } from '../interfaces/IReviews';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -110,6 +110,23 @@ export class ReviewService {
     });
     const {commentary, mediaId, usernameFromReview} = commentInfo;
     return this.http.post<Comment>(`${this.baseUrlReviewComments}/create`, { usernameFromReview, mediaId, commentary }, {
+      observe: 'body',
+      responseType: 'json',
+      headers,
+    });
+  }
+
+  /**
+   * Edita um comentário em uma review
+   * @param token JWT
+   * @param commentInfo Objeto com as informações do comentário
+   */
+  public editComment(token: string, commentInfo: EditComment) {
+    const headers = new HttpHeaders({
+      Authorization: token,
+    });
+    const {commentary, mediaId, commentId} = commentInfo;
+    return this.http.patch<Comment>(`${this.baseUrlReviewComments}/edit`, { commentId, mediaId, commentary }, {
       observe: 'body',
       responseType: 'json',
       headers,

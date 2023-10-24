@@ -33,6 +33,7 @@ export interface FindUserReviews {
 }
 
 export interface Comment {
+  id: number;
   commentary: string;
   edited: boolean;
   insertionDate: string;
@@ -49,4 +50,10 @@ export interface CreateComment {
   commentary: string,
   usernameFromReview: string,
   mediaId: number
+}
+
+export interface EditComment {
+  commentary: string;
+  commentId: number;
+  mediaId: number;
 }
