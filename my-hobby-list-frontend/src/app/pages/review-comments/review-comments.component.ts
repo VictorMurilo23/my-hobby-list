@@ -88,6 +88,19 @@ export class ReviewCommentsComponent implements OnInit {
   }
 
   public saveComment(comment: Comment) {
-    comment.editing = false;
+    const token = this.localStorage.getToken();
+    if (token === null) {
+      this.userService.logout();
+      return;
+    }
+    const { commentary, commentId } = comment;
+    this.reviewService.editComment(token, { commentary, commentId, mediaId: this.createCommentInfo.mediaId }).subscribe({
+      next: () => {
+        comment.editing = false;
+      },
+      error: () => {
+        ""
+      }
+    });
   }
 }
