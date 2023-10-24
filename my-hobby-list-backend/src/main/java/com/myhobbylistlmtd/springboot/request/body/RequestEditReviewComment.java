@@ -15,6 +15,16 @@ public class RequestEditReviewComment {
   @Positive(message = "mediaId deve ser um número positivo")
   private Long mediaId;
 
+ /**
+   * Id do comentário.
+   * @since 1.0
+   * @author Victor Murilo
+   * @version 1.0
+   */
+  @NotNull(message = "mediaId deve ser um valor válido")
+  @Positive(message = "mediaId deve ser um número positivo")
+  private Long commentId;
+
   /**
    * String sobre o que o autor da review achou sobre a media.
    * @since 1.0
@@ -60,4 +70,21 @@ public class RequestEditReviewComment {
   public void setCommentary(final String commentaryStr) {
     this.commentary = commentaryStr;
   }
+
+  /**
+   * Getter de commentId.
+   * @return Long com o id do comentário
+   */
+  public Long getCommentId() {
+    return commentId;
+  }
+
+  /**
+   * Setter de commentary.
+   * @param commentIdLong Id do comentário
+   */
+  public void setCommentId(final Long commentIdLong) {
+    this.commentId = commentIdLong;
+  }
+
 }
