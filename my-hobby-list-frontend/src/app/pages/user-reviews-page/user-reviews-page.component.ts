@@ -22,7 +22,7 @@ export class UserReviewsPageComponent implements OnInit, SendReview {
   ) {}
   private routeUsernameParam!: string;
   private reviews: UserReviews[] = [];
-  private currentPage = 0;
+  private currentPage = 1;
   public showNotFound = false;
   private totalPages = 1;
   public editErrorMessage = null;
@@ -34,7 +34,7 @@ export class UserReviewsPageComponent implements OnInit, SendReview {
           const username = params.get('username');
           if (username !== null) {
             this.routeUsernameParam = username;
-            return this.reviewService.findAllUserReviews(username, 0);
+            return this.reviewService.findAllUserReviews(username, this.currentPage - 1);
           }
           return EMPTY;
         })
@@ -52,6 +52,14 @@ export class UserReviewsPageComponent implements OnInit, SendReview {
 
   public getTotalPages() {
     return this.totalPages;
+  }
+
+  public getTotalPagesArray() {
+    const arr = [];
+    for (let index = 1; index <= this.totalPages; index += 1) {
+      arr.push(index);
+    }
+    return arr;
   }
 
   public getCurrentPage() {
@@ -104,4 +112,17 @@ export class UserReviewsPageComponent implements OnInit, SendReview {
       }
     });
   };
+
+  public changePage(pageNum: number) {
+    this.reviewService.findAllUserReviews(this.routeUsernameParam, pageNum - 1).subscribe({
+      next: (data) => {
+        this.reviews = data.reviews;
+        this.totalPages = data.totalPages;
+        this.setCurrentPage(pageNum);
+      },
+      error: () => {
+        this.showNotFound = true;
+      },
+    });
+  }
 }
