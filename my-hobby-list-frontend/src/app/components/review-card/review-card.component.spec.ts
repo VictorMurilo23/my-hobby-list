@@ -14,7 +14,7 @@ describe('ReviewCardComponent', () => {
 
     fixture = TestBed.createComponent(ReviewCardComponent);
     component = fixture.componentInstance;
-    component["reviewInfo"] = { content: "f", recommended: true, user: { username: "Victo" } }
+    component["reviewInfo"] = { content: "f", edited: false, recommended: true, user: { username: "Victo" } }
     fixture.detectChanges();
   });
 

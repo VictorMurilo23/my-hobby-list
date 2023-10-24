@@ -22,21 +22,22 @@ describe('ReviewsComponent', () => {
   const reviewsPageOne: FindReviews = {
     totalPages: 2,
     reviews: [
-      { content: "d", recommended: false, user: { username: "victo" } },
-      { content: "adaeadwawa", recommended: true, user: { username: "vito" } }
+      { content: "d", edited: false, recommended: false, user: { username: "victo" } },
+      { content: "adaeadwawa", edited: false, recommended: true, user: { username: "vito" } }
     ]
   }
 
   const reviewsPageTwo: FindReviews = {
     totalPages: 2,
     reviews: [
-      { content: "awdowahfo", recommended: true, user: { username: "Teste" } },
+      { content: "awdowahfo", edited: false, recommended: true, user: { username: "Teste" } },
     ]
   }
 
   const userReview: Review = {
     content: "Muito bom",
     recommended: true,
+    edited: false,
     user: {
       username: "aaaaaaaaaaaaaaaaaaaaa"
     }

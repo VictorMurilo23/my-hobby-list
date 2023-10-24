@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
 import com.myhobbylistlmtd.springboot.request.body.RequestCreateReviewComment;
+import com.myhobbylistlmtd.springboot.request.body.RequestEditReviewComment;
 import com.myhobbylistlmtd.springboot.reviews.Reviews;
 import com.myhobbylistlmtd.springboot.reviews.ReviewsService;
 import com.myhobbylistlmtd.springboot.user.User;
@@ -81,5 +83,45 @@ public class ReviewCommentsService {
   ) {
     return reviewCommentsRepo
       .findReviewsByUsernameAndMediaId(username, mediaId);
+  }
+
+  /**
+   * Encontra um único comentário de uma review.
+   * @param userId Id do usuário que fez a review
+   * @param mediaId Id da media
+   * @param commentId Id do comentário
+   * @return Comentário feito pelo usuário
+   * @throws NotFoundException Ocorre quando o comentário não é encontrado
+   */
+  public ReviewComments findComment(
+    final Long userId,
+    final Long mediaId,
+    final Long commentId
+  ) throws NotFoundException {
+    ReviewComments comment = reviewCommentsRepo
+      .findCommentByUserIdAndMediaIdAndCommentId(userId, mediaId, commentId);
+    if (comment == null) {
+      throw new NotFoundException("Comentário não encontrado");
+    }
+    return comment;
+  }
+
+  /**
+   * Edita o conteúdo de um comentário.
+   * @param userId Id do usuário que fez o comentário
+   * @param body Body com o mediaId e o novo conteúdo do comentário
+   * @return O comentário atualizado
+   */
+  public ReviewComments editReviewComment(
+    final Long userId,
+    final RequestEditReviewComment body
+  ) {
+    ReviewComments comment = this.findComment(
+      userId,
+      body.getMediaId(),
+      body.getCommentId()
+    );
+    comment.setCommentary(body.getCommentary());
+    return reviewCommentsRepo.save(comment);
   }
 }

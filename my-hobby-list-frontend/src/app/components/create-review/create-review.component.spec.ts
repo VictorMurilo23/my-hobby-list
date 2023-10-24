@@ -30,7 +30,7 @@ describe('CreateReviewComponent', () => {
     component = fixture.componentInstance;
     component.mediaId = 1;
     component.sendReview = jasmine.createSpy().and.returnValue(null);
-    component.reviewInfo = { content: "D", recommended: true, user: { username: "Teste" } }
+    component.reviewInfo = { content: "D", edited: false, recommended: true, user: { username: "Teste" } }
     fixture.detectChanges();
   });
 

@@ -21,6 +21,7 @@ public class WebConfig implements WebMvcConfigurer {
     registry.addInterceptor(tokenInterceptor).addPathPatterns("/list/edit");
     registry.addInterceptor(tokenInterceptor).addPathPatterns("/user/profile/change-profile-image");
     registry.addInterceptor(tokenInterceptor).addPathPatterns("/review-comments/create");
+    registry.addInterceptor(tokenInterceptor).addPathPatterns("/review-comments/edit");
     registry.addInterceptor(tokenInterceptor).addPathPatterns("/reviews/**").excludePathPatterns("/reviews/find/**")
     .excludePathPatterns("/reviews/find-all*/**");
   }

@@ -31,7 +31,8 @@ public class ReviewComments {
   @JsonView(
     {
       Views.Public.class, Views.MediaCard.class,
-      Views.ReviewPage.class, Views.UserListItem.class
+      Views.ReviewPage.class, Views.UserListItem.class,
+      Views.Comment.class
     }
   )
   private Long commentId;

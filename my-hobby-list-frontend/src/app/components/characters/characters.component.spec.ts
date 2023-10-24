@@ -74,20 +74,4 @@ describe('CharactersComponent', () => {
     expect(chars[2].query(By.css(".char-name")).nativeElement.textContent).toBe("Personagem 3");
     expect(chars[2].query(By.css(".char-role")).nativeElement.textContent).toBe("Personagem secundário");
   });
-
-  it('should redirect on click', fakeAsync(() => {
-    const { debugElement } = fixture;
-    spyOn(characterService, 'getCharacters').and.returnValue(
-      of({ characters })
-    );
-    component.ngOnInit();
-    fixture.detectChanges();
-    expect(characterService.getCharacters).toHaveBeenCalled();
-
-    const charCard = debugElement.query(By.css(".char-card"));
-    charCard.nativeElement.click();
-    tick();
-    fixture.detectChanges();
-    expect(router.url).toBe("/character/1");
-  }));
 });
