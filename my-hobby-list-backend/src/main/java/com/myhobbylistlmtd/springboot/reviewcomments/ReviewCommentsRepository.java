@@ -33,15 +33,16 @@ public interface ReviewCommentsRepository extends JpaRepository<
    * Encontra um comentário.
    * @param userId Id do usuário que fez a review
    * @param mediaId Id da media
+   * @param commentId Id do comentário
    * @return Um único comentário
    */
   @Query(
     value = "SELECT * FROM review_comments rc LEFT JOIN users us"
-    + " ON rc.review_id_user_id = us.id WHERE rc.review_id_user_id = ?1"
-    + " AND rc.review_id_media_id = ?2",
+    + " ON rc.review_id_user_id = us.id WHERE rc.user_id = ?1"
+    + " AND rc.review_id_media_id = ?2 AND rc.comment_id = ?3",
     nativeQuery = true
   )
-  ReviewComments findCommentByUserIdAndMediaId(
-    Long userId, Long mediaId
+  ReviewComments findCommentByUserIdAndMediaIdAndCommentId(
+    Long userId, Long mediaId, Long commentId
   );
 }
