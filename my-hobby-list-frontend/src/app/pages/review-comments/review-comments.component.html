@@ -3,9 +3,16 @@
   <app-review-card [reviewInfo]="getReview()"></app-review-card>
   <div *ngIf="getComments().length > 0">
     <div *ngFor="let comment of getComments()">
-      <span>{{comment.edited}}</span>
-      <span>{{comment.username}}</span>
-      <p>{{comment.commentary}}</p>
+      <div *ngIf="comment.editing !== true; else showEditing">
+        <span *ngIf="comment.edited === true">Editado</span>
+        <span>{{comment.username}}</span>
+        <p>{{comment.commentary}}</p>
+        <button *ngIf="this.tokenUsername === comment.username" (click)="editComment(comment)">Editar</button>
+      </div>
+      <ng-template #showEditing>
+        <input type="text" value={{comment.commentary}} (change)="changeCommentary(comment, $any($event.target).value)">
+        <button (click)="saveComment(comment)">Salvar</button>
+      </ng-template>
     </div>
   </div>
   <div *ngIf="this.tokenUsername !== null">

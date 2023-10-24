@@ -37,6 +37,7 @@ export interface Comment {
   edited: boolean;
   insertionDate: string;
   username: string;
+  editing?: boolean;
 }
 
 export interface ReviewDetails {
