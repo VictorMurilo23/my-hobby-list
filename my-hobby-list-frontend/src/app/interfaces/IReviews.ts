@@ -33,7 +33,7 @@ export interface FindUserReviews {
 }
 
 export interface Comment {
-  id: number;
+  commentId: number;
   commentary: string;
   edited: boolean;
   insertionDate: string;
