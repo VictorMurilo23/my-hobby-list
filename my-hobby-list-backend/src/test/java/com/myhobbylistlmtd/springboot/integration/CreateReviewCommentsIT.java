@@ -77,7 +77,7 @@ public class CreateReviewCommentsIT {
       .content(json)
       .header("Authorization", token)).andExpect(status().isCreated())
       .andExpect(MockMvcResultMatchers.jsonPath("$.*", hasSize(5)))
-      .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
+      .andExpect(MockMvcResultMatchers.jsonPath("$.commentId").value(1))
       .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("Teste12345"))
       .andExpect(MockMvcResultMatchers.jsonPath("$.commentary").value("dwdad"))
       .andExpect(MockMvcResultMatchers.jsonPath("$.edited").value(false))
