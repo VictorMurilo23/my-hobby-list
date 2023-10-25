@@ -80,7 +80,6 @@ export class ReviewCommentsComponent implements OnInit {
 
   public editComment(comment: Comment) {
     comment.editing = true;
-    console.log(comment)
   }
 
   public changeCommentary(comment: Comment, commentary: string) {
