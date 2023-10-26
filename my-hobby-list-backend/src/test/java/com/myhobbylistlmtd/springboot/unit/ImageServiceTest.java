@@ -36,8 +36,8 @@ public class ImageServiceTest {
     List<String> imagesList = this.imageService.allImagesUrl(folder.getPath(), "images").getImages();
 
     assertThat(imagesList.size(), is(2));
-    assertThat(imagesList.get(0), is("images/default.png"));
-    assertThat(imagesList.get(1), is("images/01.png"));
+    assertThat(imagesList.get(1), is("images/default.png"));
+    assertThat(imagesList.get(0), is("images/01.png"));
   }
 
   @Test
