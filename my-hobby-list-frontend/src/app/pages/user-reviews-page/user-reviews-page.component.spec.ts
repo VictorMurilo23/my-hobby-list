@@ -14,6 +14,7 @@ import { ReviewService } from 'src/app/services/review.service';
 import { of, throwError } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
+import { PaginationComponent } from 'src/app/components/pagination/pagination.component';
 
 describe('UserReviewsPageComponent', () => {
   let component: UserReviewsPageComponent;
@@ -50,12 +51,14 @@ describe('UserReviewsPageComponent', () => {
         ReviewCardComponent,
         CreateReviewComponent,
         PageNotFoundComponent,
+        PaginationComponent
       ],
       providers: [
         {
           provide: ActivatedRoute,
           useValue: {
             paramMap: of(convertToParamMap({ username: 'Teste' })),
+            snapshot: { queryParamMap: convertToParamMap({ page: "wda" }) }
           },
         },
       ],
