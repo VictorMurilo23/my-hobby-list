@@ -122,6 +122,7 @@ public class ReviewCommentsService {
       body.getCommentId()
     );
     comment.setCommentary(body.getCommentary());
+    comment.setEdited(true);
     return reviewCommentsRepo.save(comment);
   }
 }

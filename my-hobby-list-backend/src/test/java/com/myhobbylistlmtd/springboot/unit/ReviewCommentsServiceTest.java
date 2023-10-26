@@ -1,6 +1,7 @@
 package com.myhobbylistlmtd.springboot.unit;
 
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.any;
@@ -17,8 +18,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.myhobbylistlmtd.springboot.exceptions.NotFoundException;
 import com.myhobbylistlmtd.springboot.media.Media;
 import com.myhobbylistlmtd.springboot.request.body.RequestCreateReviewComment;
+import com.myhobbylistlmtd.springboot.request.body.RequestEditReviewComment;
 import com.myhobbylistlmtd.springboot.reviewcomments.ReviewComments;
 import com.myhobbylistlmtd.springboot.reviewcomments.ReviewCommentsRepository;
 import com.myhobbylistlmtd.springboot.reviewcomments.ReviewCommentsService;
@@ -102,5 +105,50 @@ public class ReviewCommentsServiceTest {
     assertThat(serviceReturn.get(0).getUsername(), is("teste"));
     assertThat(serviceReturn.get(1).getCommentary(), is("ffffffff"));
     assertThat(serviceReturn.get(1).getUsername(), is("Victo"));
+  }
+
+  @Test
+  public void editCommentsWithSuccess() {
+    Media media = new Media("Teste1");
+    User user = new User("teste", "teste@gmail.com", "DAWHGDAUWGU");
+    Long mediaId = Long.valueOf(4);
+
+    Reviews review = new Reviews("blablabla", false, media, user);
+
+    ReviewComments comment = new ReviewComments(review, user, "Blablabla");
+
+    when(reviewCommentsRepo.findCommentByUserIdAndMediaIdAndCommentId(anyLong(), anyLong(), anyLong())).thenReturn(comment);
+    when(reviewCommentsRepo.save(any())).thenAnswer(i -> i.getArguments()[0]);
+
+    RequestEditReviewComment body = new RequestEditReviewComment();
+    body.setCommentId(Long.valueOf(1));
+    body.setCommentary("TesteTeste");
+    body.setMediaId(mediaId);
+    ReviewComments serviceReturn = this.reviewCommentsService
+      .editReviewComment(Long.valueOf(1), body);
+
+    verify(reviewCommentsRepo).findCommentByUserIdAndMediaIdAndCommentId(Long.valueOf(1), mediaId, Long.valueOf(1));
+    verify(reviewCommentsRepo).save(any());
+
+    assertThat(serviceReturn.getCommentary(), is("TesteTeste"));
+    assertThat(serviceReturn.getEdited(), is(true));
+    assertThat(serviceReturn.getUsername(), is("teste"));
+  }
+
+  @Test
+  public void editCommentsThrowsErrorIfCommentDoesntExists() {
+    Long mediaId = Long.valueOf(4);
+
+    when(reviewCommentsRepo.findCommentByUserIdAndMediaIdAndCommentId(anyLong(), anyLong(), anyLong())).thenReturn(null);
+
+    RequestEditReviewComment body = new RequestEditReviewComment();
+    body.setCommentId(Long.valueOf(1));
+    body.setCommentary("TesteTeste");
+    body.setMediaId(mediaId);
+
+    assertThrows(NotFoundException.class, () -> this.reviewCommentsService
+      .editReviewComment(Long.valueOf(1), body));
+
+    verify(reviewCommentsRepo).findCommentByUserIdAndMediaIdAndCommentId(Long.valueOf(1), mediaId, Long.valueOf(1));
   }
 }
