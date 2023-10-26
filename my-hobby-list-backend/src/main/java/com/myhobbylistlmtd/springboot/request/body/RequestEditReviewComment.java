@@ -21,8 +21,8 @@ public class RequestEditReviewComment {
    * @author Victor Murilo
    * @version 1.0
    */
-  @NotNull(message = "mediaId deve ser um valor válido")
-  @Positive(message = "mediaId deve ser um número positivo")
+  @NotNull(message = "commentId deve ser um valor válido")
+  @Positive(message = "commentId deve ser um número positivo")
   private Long commentId;
 
   /**
