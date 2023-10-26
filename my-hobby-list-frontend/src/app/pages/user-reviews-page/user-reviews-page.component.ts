@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { EMPTY, concatMap } from 'rxjs';
 import { CreateReview, UserReviews } from 'src/app/interfaces/IReviews';
 import SendReview from 'src/app/interfaces/SendReview';
@@ -16,7 +16,8 @@ import { UserService } from 'src/app/services/user.service';
 export class UserReviewsPageComponent implements OnInit, SendReview {
   constructor(
     private reviewService: ReviewService,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
     private localStorage: LocalStorageService,
     private userService: UserService
   ) {}
@@ -28,13 +29,22 @@ export class UserReviewsPageComponent implements OnInit, SendReview {
   public editErrorMessage = null;
 
   ngOnInit(): void {
-    this.route.paramMap
+    let pageQuery = Number(this.activatedRoute.snapshot.queryParamMap.get('page'));
+    if (pageQuery === 0 || isNaN(pageQuery)) {
+      pageQuery = 1;
+    }
+    this.currentPage = pageQuery;
+    this.getPageContent(pageQuery - 1);
+  }
+
+  public getPageContent(pageNum: number): void {
+    this.activatedRoute.paramMap
       .pipe(
         concatMap((params: ParamMap) => {
           const username = params.get('username');
           if (username !== null) {
             this.routeUsernameParam = username;
-            return this.reviewService.findAllUserReviews(username, this.currentPage - 1);
+            return this.reviewService.findAllUserReviews(username, pageNum);
           }
           return EMPTY;
         })
@@ -113,16 +123,7 @@ export class UserReviewsPageComponent implements OnInit, SendReview {
     });
   };
 
-  public changePage(pageNum: number) {
-    this.reviewService.findAllUserReviews(this.routeUsernameParam, pageNum - 1).subscribe({
-      next: (data) => {
-        this.reviews = data.reviews;
-        this.totalPages = data.totalPages;
-        this.setCurrentPage(pageNum);
-      },
-      error: () => {
-        this.showNotFound = true;
-      },
-    });
+  changePage = (pageNum: number): void => {
+    this.router.navigate([], { queryParams: { page: pageNum } })
   }
 }
