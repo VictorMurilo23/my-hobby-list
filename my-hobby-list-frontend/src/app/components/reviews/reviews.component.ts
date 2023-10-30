@@ -15,7 +15,7 @@ export class ReviewsComponent implements OnInit, SendReview {
   private reviews: Review[] = [];
   private mediaId!: number;
   public loading = true;
-  private currentPage = 0;
+  private currentPage = 1;
   private totalPages!: number;
   private userReview: Review = { content: "", edited: false, recommended: true, user: { username: "" } };
   public showCreateReviewComponent = true;
