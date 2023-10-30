@@ -27,6 +27,8 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.LocalDate;
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = MyHobbyListBackendApplication.class)
 @AutoConfigureMockMvc
@@ -170,6 +172,7 @@ public class EditReviewCommentsIT {
     body.setMediaId(Long.valueOf(1));
     ObjectMapper objectMapper = new ObjectMapper();
     String json = objectMapper.writeValueAsString(body);
+    LocalDate date = LocalDate.now();
 
     mockMvc.perform(patch("/review-comments/edit")
         .contentType(MediaType.APPLICATION_JSON)
@@ -178,7 +181,7 @@ public class EditReviewCommentsIT {
         .andExpect(status().isOk())
         .andExpect(MockMvcResultMatchers.jsonPath("$.*", hasSize(5)))
         .andExpect(MockMvcResultMatchers.jsonPath("$.edited").value(true))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.insertionDate").value("2023-10-26"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.insertionDate").value(date.toString()))
         .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("Victor"))
         .andExpect(MockMvcResultMatchers.jsonPath("$.commentId").value(1))
         .andExpect(MockMvcResultMatchers.jsonPath("$.commentary").value("Comentário aleatório"));
