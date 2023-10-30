@@ -10,9 +10,5 @@
       </div>
     </div>
   </div>
-  <div class="pagination mt-2 mb-2 ms-2">
-    <div class="page-item" (click)="changePage(pageNumber)" *ngFor="let pageNumber of getTotalPagesArray()">
-      <span (click)="changePage(pageNumber)" class="page-link">{{pageNumber}}</span>
-    </div>
-  </div>
+  <app-pagination [totalPages]="getTotalPages()" [getContent]="changePage" [currentPage]="getCurrentPage()"></app-pagination>
 </ng-template>

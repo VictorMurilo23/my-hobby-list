@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CreateReview, Review } from 'src/app/interfaces/IReviews';
 import SendReview from 'src/app/interfaces/SendReview';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -15,25 +15,34 @@ export class ReviewsComponent implements OnInit, SendReview {
   private reviews: Review[] = [];
   private mediaId!: number;
   public loading = true;
-  private currentPage = 0;
+  private currentPage = 1;
   private totalPages!: number;
   private userReview: Review = { content: "", edited: false, recommended: true, user: { username: "" } };
   public showCreateReviewComponent = true;
 
   constructor(
     private reviewService: ReviewService,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private localStorage: LocalStorageService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {
-    this.route.parent?.paramMap.subscribe(({ params: { id } }: any) => {
+    this.activatedRoute.parent?.paramMap.subscribe(({ params: { id } }: any) => {
       this.mediaId = id;
+    }).unsubscribe();
+    this.activatedRoute.queryParams.subscribe(param => { 
+      let pageQuery = Number(param['page']);
+      if (pageQuery === 0 || isNaN(pageQuery)) {
+        pageQuery = 1;
+      }
+      this.currentPage = pageQuery;
+      this.findReviews(pageQuery - 1);
     });
   }
 
-  private findReviews() {
+  private findReviews(pageNumber: number) {
     this.loading = true;
-    this.reviewService.findReviews(this.mediaId, this.currentPage).subscribe({
+    this.reviewService.findReviews(this.mediaId, pageNumber).subscribe({
       next: (data) => {
         this.totalPages = data.totalPages;
         this.reviews = data.reviews;
@@ -59,28 +68,31 @@ export class ReviewsComponent implements OnInit, SendReview {
   }
 
   ngOnInit(): void {
-    this.findReviews();
-    this.findUserReview();
+    this.activatedRoute.queryParams.subscribe(param => { 
+      let pageQuery = Number(param['page']);
+      if (pageQuery === 0 || isNaN(pageQuery)) {
+        pageQuery = 1;
+      }
+      this.currentPage = pageQuery;
+      this.findReviews(pageQuery - 1);
+      this.findUserReview();
+    }).unsubscribe();
   }
 
-  public getPages() {
-    const arr = [];
-    for (let index = 1; index <= this.totalPages; index += 1) {
-      arr.push(index);
-    }
-    return arr;
+  public getTotalPages(): number {
+    return this.totalPages;
   }
 
   public getReviews(): Review[] {
     return this.reviews;
   }
 
-  public changePage(pageNumber: number) {
-    if (pageNumber - 1 === this.currentPage) {
-      return;
-    }
-    this.currentPage = pageNumber - 1;
-    this.findReviews();
+  public getCurrentPage(): number {
+    return this.currentPage;
+  }
+
+  changePage = async (pageNum: number) => {
+    this.router.navigate(['media', this.mediaId, 'reviews'], { queryParams: { page: pageNum } })
   }
 
   public getMediaId() {

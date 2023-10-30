@@ -27,6 +27,7 @@ import { CreateReviewComponent } from './components/create-review/create-review.
 import { ReviewCardComponent } from './components/review-card/review-card.component';
 import { UserReviewsPageComponent } from './pages/user-reviews-page/user-reviews-page.component';
 import { ReviewCommentsComponent } from './pages/review-comments/review-comments.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ReviewCommentsComponent } from './pages/review-comments/review-comments
     CreateReviewComponent,
     ReviewCardComponent,
     UserReviewsPageComponent,
-    ReviewCommentsComponent
+    ReviewCommentsComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,

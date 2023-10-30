@@ -3,7 +3,8 @@ import routes from './app.routes';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: "reload" })],
+  exports: [RouterModule],
+  providers: [],
 })
 export class AppRoutingModule { }
