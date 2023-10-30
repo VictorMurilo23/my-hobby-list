@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestControllerAdvice
 public class ErrorExceptionHandler {
   static class Error {
@@ -59,6 +64,13 @@ public class ErrorExceptionHandler {
   @ExceptionHandler(MethodArgumentNotValidException.class)
   @ResponseBody
   @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ApiResponse(
+    responseCode = "400",
+    description = "Ocorre quando algum dado passado no corpo da requisição"
+    + "está incorreto",
+    content = { @Content(mediaType = "application/json",
+    schema = @Schema(implementation = Error.class)) }
+  )
   public Error handleValidationErrors(
     final MethodArgumentNotValidException ex
   ) {
@@ -81,6 +93,12 @@ public class ErrorExceptionHandler {
   @ExceptionHandler(NotFoundException.class)
   @ResponseBody
   @ResponseStatus(HttpStatus.NOT_FOUND)
+  @ApiResponse(
+    responseCode = "404",
+    description = "Ocorre quando o que é buscado não existe no banco de dados",
+    content = { @Content(mediaType = "application/json",
+    schema = @Schema(implementation = Error.class)) }
+  )
   public Error handleNotFoundErrors(
     final NotFoundException ex
   ) {
@@ -100,6 +118,14 @@ public class ErrorExceptionHandler {
   @ExceptionHandler(AlreadyTakenException.class)
   @ResponseBody
   @ResponseStatus(HttpStatus.CONFLICT)
+  @ApiResponse(
+    responseCode = "409",
+    description = "Ocorre quando se tenta inserir algo que "
+    + "já existe no banco de dados. Por exemplo: tentar fazer registro "
+    + "com um email já em uso por outro usuário.",
+    content = { @Content(mediaType = "application/json",
+    schema = @Schema(implementation = Error.class)) }
+  )
   public Error handleAlreadyTakenErrors(
     final AlreadyTakenException ex
   ) {
@@ -138,6 +164,12 @@ public class ErrorExceptionHandler {
   @ExceptionHandler(InvalidLoginException.class)
   @ResponseBody
   @ResponseStatus(HttpStatus.UNAUTHORIZED)
+  @ApiResponse(
+    responseCode = "401",
+    description = "Ocorre ao tentar fazer login com senha ou email incorretos",
+    content = { @Content(mediaType = "application/json",
+    schema = @Schema(implementation = Error.class)) }
+  )
   public Error handleBadRequestErrors(
     final InvalidLoginException ex
   ) {
@@ -182,6 +214,13 @@ public class ErrorExceptionHandler {
   @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
   @ResponseBody
   @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+  @ApiResponse(
+    responseCode = "405",
+    description = "Ocorre quando o endpoint não"
+    + "permite o método HTTP utilizado",
+    content = { @Content(mediaType = "application/json",
+    schema = @Schema(implementation = Error.class)) }
+  )
   public Error handleMethodNotSupportedErrors(
     final HttpRequestMethodNotSupportedException ex
   ) {
@@ -220,6 +259,15 @@ public class ErrorExceptionHandler {
    * @author Victor Murilo
    */
   @ExceptionHandler(Exception.class)
+  @ApiResponses(value = {
+    @ApiResponse(
+      responseCode = "500",
+      description = "Ocorre quando acontece algum erro não "
+      + "tratado dentro do servidor",
+      content = { @Content(mediaType = "application/json",
+      schema = @Schema(implementation = Error.class)) }
+    )
+  })
   @ResponseBody
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
   public Error handleGeneralErrors(

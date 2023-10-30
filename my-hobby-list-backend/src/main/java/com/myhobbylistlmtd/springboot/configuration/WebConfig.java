@@ -18,7 +18,10 @@ public class WebConfig implements WebMvcConfigurer {
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(tokenInterceptor).addPathPatterns("/list/insert");
+    registry.addInterceptor(tokenInterceptor).addPathPatterns("/list/edit");
     registry.addInterceptor(tokenInterceptor).addPathPatterns("/user/profile/change-profile-image");
+    registry.addInterceptor(tokenInterceptor).addPathPatterns("/review-comments/create");
+    registry.addInterceptor(tokenInterceptor).addPathPatterns("/review-comments/edit");
     registry.addInterceptor(tokenInterceptor).addPathPatterns("/reviews/**").excludePathPatterns("/reviews/find/**")
     .excludePathPatterns("/reviews/find-all*/**");
   }

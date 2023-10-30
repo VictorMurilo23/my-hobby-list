@@ -13,6 +13,7 @@ type User = {
 export interface Review {
   content: string;
   recommended: boolean;
+  edited: boolean;
   user: User;
 }
 
@@ -29,4 +30,30 @@ export interface FindReviews {
 export interface FindUserReviews {
   totalPages: number;
   reviews: UserReviews[]
+}
+
+export interface Comment {
+  commentId: number;
+  commentary: string;
+  edited: boolean;
+  insertionDate: string;
+  username: string;
+  editing?: boolean;
+}
+
+export interface ReviewDetails {
+  review: Review;
+  comments: Comment[];
+}
+
+export interface CreateComment {
+  commentary: string,
+  usernameFromReview: string,
+  mediaId: number
+}
+
+export interface EditComment {
+  commentary: string;
+  commentId: number;
+  mediaId: number;
 }

@@ -1,5 +1,6 @@
 package com.myhobbylistlmtd.springboot.mediacharacters;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.myhobbylistlmtd.springboot.characters.Characters;
 import com.myhobbylistlmtd.springboot.charactersrole.CharactersRole;
@@ -57,7 +58,6 @@ public class MediaCharacters {
    */
   @ManyToOne
   @JoinColumn(name = "role_id", nullable = false, referencedColumnName = "id")
-  @JsonView(Views.Public.class)
   private CharactersRole characterRole;
 
   /**
@@ -161,5 +161,15 @@ public class MediaCharacters {
    */
   public void setMedia(final Media newMedia) {
     this.media = newMedia;
+  }
+
+  /**
+   * Pega o nome do papel feito pelo personagem.
+   * @return Uma string com o nome do papel feito pelo personagem
+   */
+  @JsonView(Views.Public.class)
+  @JsonProperty("characterRole")
+  public String getRoleName() {
+    return this.characterRole.getRoleName();
   }
 }

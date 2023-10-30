@@ -9,6 +9,7 @@
       <span>Não recomendado</span>
     </div>
   </ng-template>
+  <span *ngIf="reviewInfo.edited === true">Editado</span>
   <span class="review-card-username">{{reviewInfo.user.username}}</span>
   <p class="review-card-content">{{reviewInfo.content}}</p>
 </div>

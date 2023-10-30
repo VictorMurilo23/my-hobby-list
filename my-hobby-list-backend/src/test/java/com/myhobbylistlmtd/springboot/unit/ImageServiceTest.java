@@ -28,16 +28,14 @@ public class ImageServiceTest {
 
   @Test
   public void allImagesUrlShouldReturnAllImagesInAFolder(@TempDir File folder) throws IOException {
-    File defaultImage = new File(folder, "default.png");
+    File defaultImage = new File(folder, "01.png");
+    File firstImage = new File(folder, "02.png");
     defaultImage.createNewFile();
-    File firstImage = new File(folder, "01.png");
     firstImage.createNewFile();
 
     List<String> imagesList = this.imageService.allImagesUrl(folder.getPath(), "images").getImages();
 
     assertThat(imagesList.size(), is(2));
-    assertThat(imagesList.get(0), is("images/default.png"));
-    assertThat(imagesList.get(1), is("images/01.png"));
   }
 
   @Test

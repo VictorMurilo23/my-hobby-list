@@ -16,7 +16,6 @@ import com.myhobbylistlmtd.springboot.mediastatus.MediaStatus;
 import com.myhobbylistlmtd.springboot.mediastatus.MediaStatusRepository;
 import com.myhobbylistlmtd.springboot.mediatype.MediaType;
 import com.myhobbylistlmtd.springboot.mediatype.MediaTypeRepository;
-import com.myhobbylistlmtd.springboot.objs.MediaParams;
 
 @TestConfiguration
 @Profile({ "test" })
@@ -47,105 +46,127 @@ public class MediaTestConfiguration {
     MediaType mangaType = typeRepo.findByType("Manga");
 
     List<Media> mediaList = new ArrayList<>();
-    mediaList.add(new Media(
-        new MediaParams("Tessst")
-            .setLength(208)
-            .setVolumes(25)
-            .setStatus(completeStatus)
-            .setType(mangaType)
-            .setImageUrl("capa/capa")
-            .setInsertionDate(
-                LocalDateTime.parse("2023-05-30T09:01:00"))));
-    mediaList.add(new Media(
-        new MediaParams("tsste")
-            .setLength(343)
-            .setVolumes(38)
-            .setStatus(completeStatus)
-            .setType(mangaType)
-            .setImageUrl("capa/capa")
-            .setInsertionDate(
-                LocalDateTime.parse("2023-05-30T08:01:00"))));
-    mediaList.add(new Media(
-        new MediaParams("Tes1")
-            .setLength(57)
-            .setVolumes(3)
-            .setStatus(inProgressStatus)
-            .setType(mangaType)
-            .setImageUrl("capa/capa")
-            .setInsertionDate(
-                LocalDateTime.parse("2023-05-29T08:01:00"))));
-    mediaList.add(new Media(
-        new MediaParams("jjdjjwj")
-            .setLength(57)
-            .setVolumes(3)
-            .setStatus(inProgressStatus)
-            .setType(mangaType)
-            .setImageUrl("capa/capa")
-            .setInsertionDate(
-                LocalDateTime.parse("2023-06-01T08:01:00"))));
-    mediaList.add(new Media(
-        new MediaParams("vbnbvbbvng")
-            .setLength(57)
-            .setVolumes(3)
-            .setStatus(inProgressStatus)
-            .setType(mangaType)
-            .setImageUrl("capa/capa")
-            .setInsertionDate(
-                LocalDateTime.parse("2023-05-03T08:01:00"))));
-    mediaList.add(new Media(
-        new MediaParams("pjdpiwjpoidajhoi")
-            .setLength(57)
-            .setVolumes(3)
-            .setStatus(inProgressStatus)
-            .setType(mangaType)
-            .setImageUrl("capa/capa")
-            .setInsertionDate(
-                LocalDateTime.parse("2023-04-20T08:01:00"))));
-    mediaList.add(new Media(
-        new MediaParams("lṕlpĺḱoḱojkpj")
-            .setLength(57)
-            .setVolumes(3)
-            .setStatus(inProgressStatus)
-            .setType(mangaType)
-            .setImageUrl("capa/capa")
-            .setInsertionDate(
-                LocalDateTime.parse("2022-12-10T08:01:00"))));
-    mediaList.add(new Media(
-        new MediaParams("oiytrcvb")
-            .setLength(57)
-            .setVolumes(3)
-            .setStatus(inProgressStatus)
-            .setType(mangaType)
-            .setImageUrl("capa/capa")
-            .setInsertionDate(
-                LocalDateTime.parse("2023-09-19T08:01:00"))));
-    mediaList.add(new Media(
-        new MediaParams("87dwdawdadw")
-            .setLength(57)
-            .setVolumes(3)
-            .setStatus(inProgressStatus)
-            .setType(mangaType)
-            .setImageUrl("capa/capa")
-            .setInsertionDate(
-                LocalDateTime.parse("2023-01-03T08:01:00"))));
-    mediaList.add(new Media(
-      new MediaParams("45445dwadawd")
-          .setLength(57)
-          .setVolumes(3)
-          .setStatus(inProgressStatus)
-          .setType(mangaType)
-          .setImageUrl("capa/capa")
-          .setInsertionDate(
-              LocalDateTime.parse("2023-05-10T08:05:00"))));
-    mediaList.add(new Media(
-        new MediaParams("8888888899999")
-            .setLength(57)
-            .setVolumes(3)
-            .setStatus(inProgressStatus)
-            .setType(mangaType)
-            .setImageUrl("capa/capa")
-            .setInsertionDate(
-                LocalDateTime.parse("2024-05-29T08:01:00"))));
+    mediaList.add(
+      new Media(
+        "Tessst",
+        208,
+        completeStatus,
+        mangaType,
+        LocalDateTime.parse("2023-05-30T09:01:00"),
+        "capa/capa",
+        25
+      )
+    );
+    mediaList.add(
+      new Media(
+        "tsste",
+        343,
+        completeStatus,
+        mangaType,
+        LocalDateTime.parse("2023-05-30T08:01:00"),
+        "capa/capa",
+        38
+      )
+    );
+    mediaList.add(
+      new Media(
+        "Tes1",
+        57,
+        inProgressStatus,
+        mangaType,
+        LocalDateTime.parse("2023-05-29T08:01:00"),
+        "capa/capa",
+        3
+      )
+    );
+    mediaList.add(
+      new Media(
+        "jjdjjwj",
+        57,
+        inProgressStatus,
+        mangaType,
+        LocalDateTime.parse("2023-06-01T08:01:00"),
+        "capa/capa",
+        3
+      )
+    );
+    mediaList.add(
+      new Media(
+        "vbnbvbbvng",
+        57,
+        inProgressStatus,
+        mangaType,
+        LocalDateTime.parse("2023-05-03T08:01:00"),
+        "capa/capa",
+        3
+      )
+    );
+    mediaList.add(
+      new Media(
+        "pjdpiwjpoidajhoi",
+        57,
+        inProgressStatus,
+        mangaType,
+        LocalDateTime.parse("2023-04-20T08:01:00"),
+        "capa/capa",
+        3
+      )
+    );
+    mediaList.add(
+      new Media(
+        "lṕlpĺḱoḱojkpj",
+        57,
+        inProgressStatus,
+        mangaType,
+        LocalDateTime.parse("2022-12-10T08:01:00"),
+        "capa/capa",
+        3
+      )
+    );
+    mediaList.add(
+      new Media(
+        "oiytrcvb",
+        57,
+        inProgressStatus,
+        mangaType,
+        LocalDateTime.parse("2023-09-19T08:01:00"),
+        "capa/capa",
+        3
+      )
+    );
+    mediaList.add(
+      new Media(
+        "87dwdawdadw",
+        57,
+        inProgressStatus,
+        mangaType,
+        LocalDateTime.parse("2023-01-03T08:01:00"),
+        "capa/capa",
+        3
+      )
+    );
+    mediaList.add(
+      new Media(
+      "45445dwadawd",
+      57,
+      inProgressStatus,
+      mangaType,
+      LocalDateTime.parse("2023-05-10T08:05:00"),
+      "capa/capa",
+      3
+    )
+  );
+    mediaList.add(
+      new Media(
+        "8888888899999",
+        57,
+        inProgressStatus,
+        mangaType,
+        LocalDateTime.parse("2024-05-29T08:01:00"),
+        "capa/capa",
+        3
+      )
+    );
       
     
     mediaRepo.saveAll(mediaList);

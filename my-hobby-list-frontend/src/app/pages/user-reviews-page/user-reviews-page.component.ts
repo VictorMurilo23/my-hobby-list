@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { EMPTY, concatMap } from 'rxjs';
 import { CreateReview, UserReviews } from 'src/app/interfaces/IReviews';
 import SendReview from 'src/app/interfaces/SendReview';
@@ -16,25 +16,46 @@ import { UserService } from 'src/app/services/user.service';
 export class UserReviewsPageComponent implements OnInit, SendReview {
   constructor(
     private reviewService: ReviewService,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
     private localStorage: LocalStorageService,
     private userService: UserService
-  ) {}
+  ) {
+    this.activatedRoute.queryParams.subscribe(param => { 
+      let pageQuery = Number(param['page']);
+      if (pageQuery === 0 || isNaN(pageQuery)) {
+        pageQuery = 1;
+      }
+      this.currentPage = pageQuery;
+      this.getPageContent(pageQuery - 1);
+    });
+  }
   private routeUsernameParam!: string;
   private reviews: UserReviews[] = [];
-  private currentPage = 0;
+  private currentPage = 1;
   public showNotFound = false;
   private totalPages = 1;
   public editErrorMessage = null;
 
   ngOnInit(): void {
-    this.route.paramMap
+    this.activatedRoute.queryParams.subscribe(param => { 
+      let pageQuery = Number(param['page']);
+      if (pageQuery === 0 || isNaN(pageQuery)) {
+        pageQuery = 1;
+      }
+      this.currentPage = pageQuery;
+      this.getPageContent(pageQuery - 1);
+    }).unsubscribe();
+  }
+
+  public getPageContent(pageNum: number): void {
+    this.activatedRoute.paramMap
       .pipe(
         concatMap((params: ParamMap) => {
           const username = params.get('username');
           if (username !== null) {
             this.routeUsernameParam = username;
-            return this.reviewService.findAllUserReviews(username, 0);
+            return this.reviewService.findAllUserReviews(username, pageNum);
           }
           return EMPTY;
         })
@@ -52,6 +73,14 @@ export class UserReviewsPageComponent implements OnInit, SendReview {
 
   public getTotalPages() {
     return this.totalPages;
+  }
+
+  public getTotalPagesArray() {
+    const arr = [];
+    for (let index = 1; index <= this.totalPages; index += 1) {
+      arr.push(index);
+    }
+    return arr;
   }
 
   public getCurrentPage() {
@@ -104,4 +133,8 @@ export class UserReviewsPageComponent implements OnInit, SendReview {
       }
     });
   };
+
+  changePage = async (pageNum: number) => {
+    this.router.navigate(['reviews', this.routeUsernameParam], { queryParams: { page: pageNum } })
+  }
 }

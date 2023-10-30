@@ -21,7 +21,6 @@ import com.myhobbylistlmtd.springboot.mediastatus.MediaStatus;
 import com.myhobbylistlmtd.springboot.mediastatus.MediaStatusRepository;
 import com.myhobbylistlmtd.springboot.mediatype.MediaType;
 import com.myhobbylistlmtd.springboot.mediatype.MediaTypeRepository;
-import com.myhobbylistlmtd.springboot.objs.MediaParams;
 
 @TestConfiguration
 @Profile({ "test" })
@@ -35,35 +34,41 @@ public class CharactersTestConfiguration {
       final MediaTypeRepository typeRepo) {
     MediaStatus completedStatus = statusRepo.save(new MediaStatus("Completo"));
     MediaType movieType = typeRepo.save(new MediaType("Filme"));
-    Media media1 = mediaRepo.save(new Media(
-        new MediaParams("Teste")
-            .setLength(1)
-            .setStatus(completedStatus)
-            .setType(movieType)
-            .setImageUrl("Teste")
-            .setInsertionDate(
-                LocalDateTime.parse("2023-05-30T09:03:00"))));
-    Media media2 = mediaRepo.save(new Media(
-        new MediaParams("Teste2")
-            .setLength(1)
-            .setStatus(completedStatus)
-            .setType(movieType)
-            .setImageUrl("Teste2")
-            .setInsertionDate(
-                LocalDateTime.parse("2023-05-30T09:04:00"))));
-    mediaRepo.save(new Media(
-        new MediaParams("Teste3")
-            .setLength(1)
-            .setStatus(completedStatus)
-            .setType(movieType)
-            .setImageUrl("Teste3")
-            .setInsertionDate(
-                LocalDateTime.parse("2023-05-30T10:03:00"))));
+    Media media1 = mediaRepo.save(
+      new Media(
+        "Teste",
+        1,
+        completedStatus,
+        movieType,
+        LocalDateTime.parse("2023-05-30T09:03:00"),
+        "Teste"
+      )
+    );
+    Media media2 = mediaRepo.save(
+      new Media(
+        "Teste2",
+        1,
+        completedStatus,
+        movieType,
+        LocalDateTime.parse("2023-05-30T09:04:00"),
+        "Teste2"
+      )
+    );
+    mediaRepo.save(
+      new Media(
+        "Teste3",
+        1,
+        completedStatus,
+        movieType,
+        LocalDateTime.parse("2023-05-30T10:03:00"),
+        "Teste3"
+      )
+    );
     
-    Characters character1 = characterRepo.save(new Characters("Personagem1", "dwahd9uwahud"));
-    Characters character2 = characterRepo.save(new Characters("Personagem2", "diaioaw"));
-    Characters character3 = characterRepo.save(new Characters("Personagem3", "dauguwtacfdvyuatgcfuaw"));
-    Characters character4 = characterRepo.save(new Characters("Personagem4", "djahiowgwayfvcfawy"));
+    Characters character1 = characterRepo.save(new Characters("Personagem1", "/teste1"));
+    Characters character2 = characterRepo.save(new Characters("Personagem2", "/teste2"));
+    Characters character3 = characterRepo.save(new Characters("Personagem3", "/teste3"));
+    Characters character4 = characterRepo.save(new Characters("Personagem4", "/teste4"));
 
     CharactersRole mainRole = charRoleRepo.save(new CharactersRole("Personagem principal"));
     

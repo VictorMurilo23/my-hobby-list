@@ -1,0 +1,30 @@
+<app-page-not-found *ngIf=" getReview() === undefined; else showReview"></app-page-not-found>
+<ng-template #showReview>
+  <div class="d-flex flex-column gap-3 ms-2">
+    <app-review-card [reviewInfo]="getReview()"></app-review-card>
+    <div class="d-flex flex-column gap-2" *ngIf="getComments().length > 0">
+      <div class="card d-inline comment-card" *ngFor="let comment of getComments()">
+        <div class="card-body" *ngIf="comment.editing === false || comment.editing === undefined; else showEditing">
+          <span *ngIf="comment.edited === true">Editado</span>
+          <span class="comment-username">{{comment.username}}</span>
+          <p class="comment-commentary">{{comment.commentary}}</p>
+          <button class="btn btn-primary btn-sm edit-comment-btn" *ngIf="this.tokenUsername === comment.username" (click)="editComment(comment)">Editar</button>
+        </div>
+        <ng-template #showEditing>
+          <input class="form-control edit-comment-input" type="text" value={{comment.commentary}} (change)="changeCommentary(comment, $any($event.target).value)">
+          <button class="btn btn-primary send-edit-comment-btn" (click)="saveComment(comment)">Salvar</button>
+        </ng-template>
+      </div>
+      <div class="mb-3" *ngIf="this.tokenUsername !== null">
+        <input
+          value={{this.getUserComment()}}
+          class="form-control input-create-comment"
+          (change)="setUserComment($any($event.target).value)"
+          placeholder="Insira um comentário..."
+          type="text"
+        >
+        <button class="btn btn-primary create-comment-btn" (click)="sendComment()">Enviar</button>
+      </div>
+    </div>
+  </div>
+</ng-template>

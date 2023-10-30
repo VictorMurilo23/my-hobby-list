@@ -13,7 +13,7 @@ public class ResponseUserList {
    * @version 1.0
    * @author Victor Murilo
    */
-  @JsonView(Views.Public.class)
+  @JsonView(Views.UserListItem.class)
   private List<UserList> list;
 
   /**

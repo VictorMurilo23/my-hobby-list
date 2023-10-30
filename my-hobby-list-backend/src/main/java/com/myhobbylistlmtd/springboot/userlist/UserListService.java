@@ -171,4 +171,52 @@ public class UserListService implements FindById<UserList, UserListId> {
     );
     return list;
   }
+
+  /**
+   * Encontra um item na lista do usuário.
+   * @param mediaId Id da media
+   * @param userId Id do usuário
+   * @return Um objeto de UserList com as informações do item da lista
+   */
+  public UserList findListItem(final Long mediaId, final Long userId) {
+    UserList item = this.listRepo.findByUserIdAndMediaId(userId, mediaId);
+    if (item == null) {
+      throw new NotFoundException("Item não encontrado na lista do usuário");
+    }
+    return item;
+  }
+
+  /**
+   * Atualiza um item na lista do usuário.
+   * @param body Corpo da requisição com as informações novas
+   * @param userId Id do usuário
+   * @return Um objeto de UserList com as informações atualizadas
+   */
+  public UserList editListItem(
+    final RequestUserListBody body,
+    final Long userId
+  ) {
+    UserList item = this.findListItem(body.getMediaId(), userId);
+
+    if (body.getStatus() != null) {
+      ListItemStatus status = this.listItemTypeRepo.findByStatusName(
+        body.getStatus()
+      );
+      item.setStatus(status);
+    }
+
+    if (body.getNotes() != null) {
+      item.setNotes(body.getNotes());
+    }
+
+    if (body.getProgress() != null) {
+      item.setProgress(body.getProgress());
+    }
+
+    if (body.getScore() != null) {
+      item.setScore(body.getScore());
+    }
+
+    return this.listRepo.save(item);
+  }
 }

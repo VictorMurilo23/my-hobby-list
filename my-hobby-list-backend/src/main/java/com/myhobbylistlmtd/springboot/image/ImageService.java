@@ -30,7 +30,6 @@ public class ImageService {
     return images;
   }
 
-  // TODO Reaproveitar a função de pegar imagem na rota dos personagens
   /**
    * Procura a imagem baseado no caminho passado por
    parâmetro e, se não achar, joga uma exceção.

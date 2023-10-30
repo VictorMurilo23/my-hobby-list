@@ -11,9 +11,10 @@ import { UserService } from 'src/app/services/user.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
 import { ReviewService } from 'src/app/services/review.service';
-import { of, throwError } from 'rxjs';
+import { BehaviorSubject, of, throwError } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
+import { PaginationComponent } from 'src/app/components/pagination/pagination.component';
 
 describe('UserReviewsPageComponent', () => {
   let component: UserReviewsPageComponent;
@@ -27,11 +28,13 @@ describe('UserReviewsPageComponent', () => {
     {
       content: 'df',
       recommended: true,
+      edited: false,
       user: { username: 'Vic' },
       media: { id: 1, image: '/d', name: 'GGGGGGGG' },
     },
     {
       content: 'ffff',
+      edited: false,
       recommended: true,
       user: { username: 'Vic' },
       media: { id: 2, image: '/f', name: 'EEEEEEE' },
@@ -40,20 +43,26 @@ describe('UserReviewsPageComponent', () => {
 
   let reviews: UserReviews[] = [];
 
+  const paramsSubject = new BehaviorSubject({
+    page: 1
+  });
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule, RouterTestingModule.withRoutes(routes)],
+      imports: [HttpClientModule, RouterTestingModule.withRoutes(routes, { onSameUrlNavigation: "reload",  })],
       declarations: [
         UserReviewsPageComponent,
         ReviewCardComponent,
         CreateReviewComponent,
         PageNotFoundComponent,
+        PaginationComponent
       ],
       providers: [
         {
           provide: ActivatedRoute,
           useValue: {
             paramMap: of(convertToParamMap({ username: 'Teste' })),
+            queryParams: paramsSubject
           },
         },
       ],
@@ -243,5 +252,44 @@ describe('UserReviewsPageComponent', () => {
     firstReviewMediaName.nativeElement.click();
     tick();
     expect(router.url).toBe("/media/1")
+  }));
+
+  it('should change route query on page click', fakeAsync(() => {
+    const { debugElement } = fixture;
+    spyOn(reviewService, 'findAllUserReviews').and.returnValue(
+      of({ totalPages: 2, reviews })
+    );
+    component.ngOnInit()
+    fixture.detectChanges();
+    const pageLinks = debugElement.queryAll(By.css(".page-link"));
+
+    pageLinks[1].nativeElement.click();
+    fixture.detectChanges();
+    tick();
+    expect(router.url).toBe('/reviews/Teste?page=2');
+  }));
+
+  it('should call findAllUserReviews every route query change', fakeAsync(() => {
+    const { debugElement } = fixture;
+    spyOn(reviewService, 'findAllUserReviews').and.returnValue(
+      of({ totalPages: 2, reviews })
+    );
+    component.ngOnInit()
+    fixture.detectChanges();
+    const pageLinks = debugElement.queryAll(By.css(".page-link"));
+
+    pageLinks[1].nativeElement.click();
+    paramsSubject.next({ page: 2 })
+    tick();
+    fixture.detectChanges();
+    expect(router.url).toBe('/reviews/Teste?page=2');
+    expect(reviewService.findAllUserReviews).toHaveBeenCalledTimes(2);
+
+    debugElement.query(By.css(".page-link")).nativeElement.click();
+    paramsSubject.next({ page: 1 })
+    tick();
+    fixture.detectChanges();
+    expect(router.url).toBe('/reviews/Teste?page=1');
+    expect(reviewService.findAllUserReviews).toHaveBeenCalledTimes(3);
   }));
 });

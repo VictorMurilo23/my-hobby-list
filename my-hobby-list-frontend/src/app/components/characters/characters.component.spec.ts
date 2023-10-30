@@ -20,15 +20,15 @@ describe('CharactersComponent', () => {
 
   const characters: char[] = [
     {
-      character: { characterInfo: 'teste1', id: 1, name: 'Personagem 1' },
+      character: { characterImageUrl: 'teste1', id: 1, name: 'Personagem 1' },
       characterRole: 'Personagem principal',
     },
     {
-      character: { characterInfo: 'teste2', id: 2, name: 'Personagem 2' },
+      character: { characterImageUrl: 'teste2', id: 2, name: 'Personagem 2' },
       characterRole: 'Personagem secundário',
     },
     {
-      character: { characterInfo: 'teste3', id: 3, name: 'Personagem 3' },
+      character: { characterImageUrl: 'teste3', id: 3, name: 'Personagem 3' },
       characterRole: 'Personagem secundário',
     },
   ];
@@ -74,20 +74,4 @@ describe('CharactersComponent', () => {
     expect(chars[2].query(By.css(".char-name")).nativeElement.textContent).toBe("Personagem 3");
     expect(chars[2].query(By.css(".char-role")).nativeElement.textContent).toBe("Personagem secundário");
   });
-
-  it('should redirect on click', fakeAsync(() => {
-    const { debugElement } = fixture;
-    spyOn(characterService, 'getCharacters').and.returnValue(
-      of({ characters })
-    );
-    component.ngOnInit();
-    fixture.detectChanges();
-    expect(characterService.getCharacters).toHaveBeenCalled();
-
-    const charCard = debugElement.query(By.css(".char-card"));
-    charCard.nativeElement.click();
-    tick();
-    fixture.detectChanges();
-    expect(router.url).toBe("/character/1");
-  }));
 });

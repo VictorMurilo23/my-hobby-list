@@ -15,7 +15,6 @@ import com.myhobbylistlmtd.springboot.mediastatus.MediaStatus;
 import com.myhobbylistlmtd.springboot.mediastatus.MediaStatusRepository;
 import com.myhobbylistlmtd.springboot.mediatype.MediaType;
 import com.myhobbylistlmtd.springboot.mediatype.MediaTypeRepository;
-import com.myhobbylistlmtd.springboot.objs.MediaParams;
 import com.myhobbylistlmtd.springboot.user.User;
 import com.myhobbylistlmtd.springboot.user.UserRepository;
 import com.myhobbylistlmtd.springboot.userlist.UserList;
@@ -34,24 +33,28 @@ public class FindUserListConfiguration {
     User user = userRepo.save(new User("Teste12345", "email@gmail.com", "123"));
     MediaStatus mediaStatus = statusRepo.save(new MediaStatus("Completo"));
     MediaType mediaType = typeRepo.save(new MediaType("Manga"));
-    Media media1 = mediaRepo.save(new Media(
-        new MediaParams("Tes1")
-            .setLength(57)
-            .setVolumes(3)
-            .setStatus(mediaStatus)
-            .setType(mediaType)
-            .setImageUrl("capa/capa")
-            .setInsertionDate(
-                LocalDateTime.parse("2023-05-29T08:01:00"))));
-    Media media2 = mediaRepo.save(new Media(
-        new MediaParams("Tes2")
-            .setLength(33)
-            .setVolumes(3)
-            .setStatus(mediaStatus)
-            .setType(mediaType)
-            .setImageUrl("capa/capa")
-            .setInsertionDate(
-                LocalDateTime.parse("2023-05-29T08:01:00"))));
+    Media media1 = mediaRepo.save(
+      new Media(
+        "Tes1",
+        57,
+        mediaStatus,
+        mediaType,
+        LocalDateTime.parse("2023-05-29T08:01:00"),
+        "capa/capa",
+        3
+      )
+    );
+    Media media2 = mediaRepo.save(
+      new Media(
+        "Tes2",
+        33,
+        mediaStatus,
+        mediaType,
+        LocalDateTime.parse("2023-05-29T08:01:00"),
+        "capa/capa",
+        3
+      )
+    );
     
     ListItemStatus onGoingItemStatus = listItemStatusRepo.save(new ListItemStatus("Em andamento"));
     ListItemStatus droppedItemStatus = listItemStatusRepo.save(new ListItemStatus("Droppado"));
