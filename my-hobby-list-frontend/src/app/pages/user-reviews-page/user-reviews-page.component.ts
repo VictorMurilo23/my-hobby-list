@@ -20,7 +20,16 @@ export class UserReviewsPageComponent implements OnInit, SendReview {
     private router: Router,
     private localStorage: LocalStorageService,
     private userService: UserService
-  ) {}
+  ) {
+    this.activatedRoute.queryParams.subscribe(param => { 
+      let pageQuery = Number(param['page']);
+      if (pageQuery === 0 || isNaN(pageQuery)) {
+        pageQuery = 1;
+      }
+      this.currentPage = pageQuery;
+      this.getPageContent(pageQuery - 1);
+    });
+  }
   private routeUsernameParam!: string;
   private reviews: UserReviews[] = [];
   private currentPage = 1;
@@ -29,12 +38,14 @@ export class UserReviewsPageComponent implements OnInit, SendReview {
   public editErrorMessage = null;
 
   ngOnInit(): void {
-    let pageQuery = Number(this.activatedRoute.snapshot.queryParamMap.get('page'));
-    if (pageQuery === 0 || isNaN(pageQuery)) {
-      pageQuery = 1;
-    }
-    this.currentPage = pageQuery;
-    this.getPageContent(pageQuery - 1);
+    this.activatedRoute.queryParams.subscribe(param => { 
+      let pageQuery = Number(param['page']);
+      if (pageQuery === 0 || isNaN(pageQuery)) {
+        pageQuery = 1;
+      }
+      this.currentPage = pageQuery;
+      this.getPageContent(pageQuery - 1);
+    }).unsubscribe();
   }
 
   public getPageContent(pageNum: number): void {
@@ -123,7 +134,7 @@ export class UserReviewsPageComponent implements OnInit, SendReview {
     });
   };
 
-  changePage = (pageNum: number): void => {
-    this.router.navigate([], { queryParams: { page: pageNum } })
+  changePage = async (pageNum: number) => {
+    this.router.navigate(['reviews', this.routeUsernameParam], { queryParams: { page: pageNum } })
   }
 }
