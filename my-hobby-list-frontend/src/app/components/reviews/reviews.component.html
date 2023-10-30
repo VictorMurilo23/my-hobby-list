@@ -14,10 +14,6 @@
     <div class="reviews-container">
       <app-review-card [reviewInfo]="review" *ngFor="let review of getReviews()"></app-review-card>
     </div>
-    <div>
-      <div class="pagination pagination-sm" (click)="changePage(pageNumber)" *ngFor="let pageNumber of getPages()">
-        <button class="change-page-button page-link">{{pageNumber}}</button>
-      </div>
-    </div>
+    <app-pagination [totalPages]="getTotalPages()" [getContent]="changePage" [currentPage]="getCurrentPage()"></app-pagination>
   </div>
 </ng-template>
